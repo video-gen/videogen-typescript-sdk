@@ -1,2 +1,2 @@
-export * from "./pets/client/requests/index.js";
-export * as pets from "./pets/index.js";
+export * from "./tools/client/requests/index.js";
+export * as tools from "./tools/index.js";

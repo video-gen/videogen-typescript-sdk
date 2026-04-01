@@ -41,9 +41,9 @@ Instantiate and use the client with the following:
 ```typescript
 import { VideogenApiClient } from "";
 
-const client = new VideogenApiClient({ environment: "YOUR_BASE_URL" });
-await client.pets.createPet({
-    name: "name"
+const client = new VideogenApiClient({ token: "YOUR_TOKEN" });
+await client.tools.generateImage({
+    prompt: "prompt"
 });
 ```
 
@@ -55,7 +55,7 @@ following namespace:
 ```typescript
 import { VideogenApi } from "VideogenApi";
 
-const request: VideogenApi.ListPetsRequest = {
+const request: VideogenApi.GenerateImageRequest = {
     ...
 };
 ```
@@ -69,7 +69,7 @@ will be thrown.
 import { VideogenApiError } from "VideogenApi";
 
 try {
-    await client.pets.createPet(...);
+    await client.tools.generateImage(...);
 } catch (err) {
     if (err instanceof VideogenApiError) {
         console.log(err.statusCode);
@@ -87,9 +87,9 @@ try {
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { PetsClient } from 'VideogenApi/pets';
+import { ToolsClient } from 'VideogenApi/tools';
 
-const client = new PetsClient({...});
+const client = new ToolsClient({...});
 ```
 
 ### Additional Headers
@@ -106,7 +106,7 @@ const client = new VideogenApiClient({
     }
 });
 
-const response = await client.pets.createPet(..., {
+const response = await client.tools.generateImage(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -118,7 +118,7 @@ const response = await client.pets.createPet(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.pets.createPet(..., {
+const response = await client.tools.generateImage(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -140,7 +140,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.pets.createPet(..., {
+const response = await client.tools.generateImage(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -150,7 +150,7 @@ const response = await client.pets.createPet(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.pets.createPet(..., {
+const response = await client.tools.generateImage(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -161,7 +161,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.pets.createPet(..., {
+const response = await client.tools.generateImage(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -173,7 +173,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.pets.createPet(...).withRawResponse();
+const { data, rawResponse } = await client.tools.generateImage(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);
