@@ -8,14 +8,15 @@ import type * as VideogenApi from "../../../../index.js";
  *         prompt: "prompt",
  *         generateAudio: true,
  *         image: {
- *             fileId: "fileId"
+ *             storageFileId: "storageFileId",
+ *             type: "IMAGE"
  *         }
  *     }
  */
 export interface GenerateVideoFromImageRequest {
     prompt: string;
     generateAudio: boolean;
-    image: VideogenApi.AssetRef;
+    image: VideogenApi.StorageFile;
     /** Optional prompt used when the source image was generated. */
     sourceGenerateImagePrompt?: string | null;
 }

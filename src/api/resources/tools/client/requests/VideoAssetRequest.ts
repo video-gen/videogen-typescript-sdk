@@ -6,10 +6,11 @@ import type * as VideogenApi from "../../../../index.js";
  * @example
  *     {
  *         video: {
- *             fileId: "fileId"
+ *             storageFileId: "storageFileId",
+ *             type: "IMAGE"
  *         }
  *     }
  */
 export interface VideoAssetRequest {
-    video: VideogenApi.AssetRef;
+    video: VideogenApi.StorageFile;
 }

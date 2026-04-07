@@ -2,6 +2,6 @@
 
 import type * as VideogenApi from "../index.js";
 
-export interface ImageAssetRequest {
-    image: VideogenApi.StorageFile;
+export interface GetFilesResponse {
+    files: VideogenApi.StorageFile[];
 }

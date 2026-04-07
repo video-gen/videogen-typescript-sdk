@@ -11,7 +11,7 @@ import type * as VideogenApi from "../../../../index.js";
 export interface GenerateAvatarRequest {
     /** Natural-language description of the desired presenter. */
     presenterDescription: string;
-    audio?: VideogenApi.AssetRef;
+    audio?: VideogenApi.StorageFile;
     /** Optional link to a prior TTS execution when chaining. */
     sourceTtsExecutionId?: string | null;
 }

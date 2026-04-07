@@ -1,6 +1,6 @@
 {
     "name": "",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "private": false,
     "repository": {
         "type": "git",
@@ -21,6 +21,28 @@
                 "default": "./dist/cjs/index.js"
             },
             "default": "./dist/cjs/index.js"
+        },
+        "./files": {
+            "import": {
+                "types": "./dist/esm/api/resources/files/exports.d.mts",
+                "default": "./dist/esm/api/resources/files/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/files/exports.d.ts",
+                "default": "./dist/cjs/api/resources/files/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/files/exports.js"
+        },
+        "./webhooks": {
+            "import": {
+                "types": "./dist/esm/api/resources/webhooks/exports.d.mts",
+                "default": "./dist/esm/api/resources/webhooks/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/webhooks/exports.d.ts",
+                "default": "./dist/cjs/api/resources/webhooks/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/webhooks/exports.js"
         },
         "./tools": {
             "import": {

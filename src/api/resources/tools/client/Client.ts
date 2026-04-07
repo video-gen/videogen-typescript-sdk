@@ -166,7 +166,8 @@ export class ToolsClient {
      *         prompt: "prompt",
      *         generateAudio: true,
      *         image: {
-     *             fileId: "fileId"
+     *             storageFileId: "storageFileId",
+     *             type: "IMAGE"
      *         }
      *     })
      */
@@ -430,7 +431,8 @@ export class ToolsClient {
      * @example
      *     await client.tools.vectorizeImage({
      *         image: {
-     *             fileId: "fileId"
+     *             storageFileId: "storageFileId",
+     *             type: "IMAGE"
      *         }
      *     })
      */
@@ -495,7 +497,8 @@ export class ToolsClient {
      * @example
      *     await client.tools.removeImageBackground({
      *         image: {
-     *             fileId: "fileId"
+     *             storageFileId: "storageFileId",
+     *             type: "IMAGE"
      *         }
      *     })
      */
@@ -565,7 +568,8 @@ export class ToolsClient {
      * @example
      *     await client.tools.removeVideoBackground({
      *         video: {
-     *             fileId: "fileId"
+     *             storageFileId: "storageFileId",
+     *             type: "IMAGE"
      *         }
      *     })
      */
@@ -625,6 +629,72 @@ export class ToolsClient {
             _response.rawResponse,
             "POST",
             "/v1/tools/remove-video-background",
+        );
+    }
+
+    /**
+     * @param {VideogenApi.CancelToolExecutionRequest} request
+     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.tools.cancelToolExecution({
+     *         executionId: "executionId"
+     *     })
+     */
+    public cancelToolExecution(
+        request: VideogenApi.CancelToolExecutionRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__cancelToolExecution(request, requestOptions));
+    }
+
+    private async __cancelToolExecution(
+        request: VideogenApi.CancelToolExecutionRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+        const { executionId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideogenApiEnvironment.Production,
+                `v1/tools/executions/${core.url.encodePathParam(executionId)}/cancel`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideogenApiError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/tools/executions/{executionId}/cancel",
         );
     }
 

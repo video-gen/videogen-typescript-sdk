@@ -22,6 +22,4 @@ export interface GenerateTtsRequest {
     autoExpandPronunciationReplacements?: boolean;
     /** Defaults to server voice default when omitted. */
     voiceSpeed?: number;
-    /** Optional ElevenLabs-specific options; shape is provider-defined. */
-    elevenLabsOptions?: Record<string, unknown>;
 }

@@ -2,6 +2,6 @@
 
 /**
  * Tool-specific payload when `status` is `succeeded`. Typical keys include `imageUrl`, `videoUrl`,
- * `fileId`, or `assets`—concrete fields depend on the tool that ran (`toolType`).
+ * `storageFileId`, or `assets`—concrete fields depend on the tool that ran (`toolType`).
  */
 export type ToolSuccessResult = Record<string, unknown>;

@@ -52,7 +52,11 @@ describe("ToolsClient", () => {
     test("generateVideoFromImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "prompt", generateAudio: true, image: { fileId: "fileId" } };
+        const rawRequestBody = {
+            prompt: "prompt",
+            generateAudio: true,
+            image: { storageFileId: "storageFileId", type: "IMAGE" },
+        };
         const rawResponseBody = { executionId: "executionId" };
         server
             .mockEndpoint()
@@ -67,7 +71,8 @@ describe("ToolsClient", () => {
             prompt: "prompt",
             generateAudio: true,
             image: {
-                fileId: "fileId",
+                storageFileId: "storageFileId",
+                type: "IMAGE",
             },
         });
         expect(response).toEqual({
@@ -144,7 +149,7 @@ describe("ToolsClient", () => {
     test("vectorizeImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { image: { fileId: "fileId" } };
+        const rawRequestBody = { image: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { executionId: "executionId" };
         server
             .mockEndpoint()
@@ -157,7 +162,8 @@ describe("ToolsClient", () => {
 
         const response = await client.tools.vectorizeImage({
             image: {
-                fileId: "fileId",
+                storageFileId: "storageFileId",
+                type: "IMAGE",
             },
         });
         expect(response).toEqual({
@@ -168,7 +174,7 @@ describe("ToolsClient", () => {
     test("removeImageBackground", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { image: { fileId: "fileId" } };
+        const rawRequestBody = { image: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { executionId: "executionId" };
         server
             .mockEndpoint()
@@ -181,7 +187,8 @@ describe("ToolsClient", () => {
 
         const response = await client.tools.removeImageBackground({
             image: {
-                fileId: "fileId",
+                storageFileId: "storageFileId",
+                type: "IMAGE",
             },
         });
         expect(response).toEqual({
@@ -192,7 +199,7 @@ describe("ToolsClient", () => {
     test("removeVideoBackground", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { video: { fileId: "fileId" } };
+        const rawRequestBody = { video: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { executionId: "executionId" };
         server
             .mockEndpoint()
@@ -205,8 +212,30 @@ describe("ToolsClient", () => {
 
         const response = await client.tools.removeVideoBackground({
             video: {
-                fileId: "fileId",
+                storageFileId: "storageFileId",
+                type: "IMAGE",
             },
+        });
+        expect(response).toEqual({
+            executionId: "executionId",
+        });
+    });
+
+    test("cancelToolExecution", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { executionId: "executionId" };
+        server
+            .mockEndpoint()
+            .post("/v1/tools/executions/executionId/cancel")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.cancelToolExecution({
+            executionId: "executionId",
         });
         expect(response).toEqual({
             executionId: "executionId",
