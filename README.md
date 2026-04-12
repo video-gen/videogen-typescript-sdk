@@ -1,7 +1,7 @@
 # Videogen TypeScript Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fvideo-gen%2Fvideogen-typescript-sdk)
-[![npm shield](https://img.shields.io/npm/v/)](https://www.npmjs.com/package/)
+[![npm shield](https://img.shields.io/npm/v/@videogen/sdk)](https://www.npmjs.com/package/@videogen/sdk)
 
 The Videogen TypeScript library provides convenient access to the Videogen APIs from TypeScript.
 
@@ -27,7 +27,7 @@ The Videogen TypeScript library provides convenient access to the Videogen APIs 
 ## Installation
 
 ```sh
-npm i -s 
+npm i -s @videogen/sdk
 ```
 
 ## Reference
@@ -39,7 +39,7 @@ A full reference for this library is available [here](https://github.com/video-g
 Instantiate and use the client with the following:
 
 ```typescript
-import { VideogenApiClient } from "";
+import { VideogenApiClient } from "@videogen/sdk";
 
 const client = new VideogenApiClient({ token: "YOUR_TOKEN" });
 await client.webhooks.createWebhookEndpoint({
@@ -54,7 +54,7 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { VideogenApi } from "VideogenApi";
+import { VideogenApi } from "@videogen/sdk";
 
 const request: VideogenApi.GetFileRequest = {
     ...
@@ -67,7 +67,7 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { VideogenApiError } from "VideogenApi";
+import { VideogenApiError } from "@videogen/sdk";
 
 try {
     await client.webhooks.createWebhookEndpoint(...);
@@ -88,7 +88,7 @@ try {
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { FilesClient } from 'VideogenApi/files';
+import { FilesClient } from '@videogen/sdk/files';
 
 const client = new FilesClient({...});
 ```
@@ -98,7 +98,7 @@ const client = new FilesClient({...});
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-import { VideogenApiClient } from "VideogenApi";
+import { VideogenApiClient } from "@videogen/sdk";
 
 const client = new VideogenApiClient({
     ...
@@ -185,7 +185,7 @@ console.log(rawResponse.headers['X-My-Header']);
 The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
 
 ```typescript
-import { VideogenApiClient, logging } from "VideogenApi";
+import { VideogenApiClient, logging } from "@videogen/sdk";
 
 const client = new VideogenApiClient({
     ...
@@ -263,7 +263,7 @@ The SDK provides a way for you to customize the underlying HTTP client / Fetch f
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { VideogenApiClient } from "VideogenApi";
+import { VideogenApiClient } from "@videogen/sdk";
 
 const client = new VideogenApiClient({
     ...
