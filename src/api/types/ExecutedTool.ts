@@ -3,7 +3,8 @@
 import type * as VideogenApi from "../index.js";
 
 export interface ExecutedTool {
-    executionId: string;
+    /** Same opaque execution id returned from `POST /v1/tools/...`. */
+    apiTaskExecutionId: string;
     status: VideogenApi.ExecutedToolStatus;
     /** Logical tool name (e.g. GENERATE_IMAGE, GENERATE_VIDEO_CLIP). */
     toolType?: string | undefined;

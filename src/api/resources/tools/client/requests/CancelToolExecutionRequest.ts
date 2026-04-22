@@ -3,9 +3,9 @@
 /**
  * @example
  *     {
- *         executionId: "executionId"
+ *         apiTaskExecutionId: "apiTaskExecutionId"
  *     }
  */
 export interface CancelToolExecutionRequest {
-    executionId: string;
+    apiTaskExecutionId: string;
 }

@@ -16,7 +16,7 @@ export declare namespace WebhooksClient {
 }
 
 /**
- * Register URLs to receive tool execution lifecycle events.
+ * Subscribe HTTPS endpoints to `tool_execution.*` lifecycle events. Deliveries are signed per the Standard Webhooks spec.
  */
 export class WebhooksClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<WebhooksClient.Options>;

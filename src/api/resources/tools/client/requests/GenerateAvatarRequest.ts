@@ -12,6 +12,6 @@ export interface GenerateAvatarRequest {
     /** Natural-language description of the desired presenter. */
     presenterDescription: string;
     audio?: VideogenApi.StorageFile;
-    /** Optional link to a prior TTS execution when chaining. */
+    /** Optional `apiTaskExecutionId` of a prior `generate-tts` execution; chains the new avatar onto that voiceover. */
     sourceTtsExecutionId?: string | null;
 }

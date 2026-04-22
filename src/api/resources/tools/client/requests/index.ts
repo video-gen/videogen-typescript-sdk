@@ -6,4 +6,3 @@ export type { GenerateTtsRequest } from "./GenerateTtsRequest.js";
 export type { GenerateVideoClipRequest } from "./GenerateVideoClipRequest.js";
 export type { GenerateVideoFromImageRequest } from "./GenerateVideoFromImageRequest.js";
 export type { GetExecutedToolRequest } from "./GetExecutedToolRequest.js";
-export type { VideoAssetRequest } from "./VideoAssetRequest.js";

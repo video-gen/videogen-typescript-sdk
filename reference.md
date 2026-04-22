@@ -712,6 +712,114 @@ await client.tools.removeVideoBackground({
 </dl>
 </details>
 
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">upscaleImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tools.upscaleImage({
+    image: {
+        storageFileId: "storageFileId",
+        type: "IMAGE"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideogenApi.ImageAssetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">upscaleVideo</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tools.upscaleVideo({
+    video: {
+        storageFileId: "storageFileId",
+        type: "IMAGE"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideogenApi.VideoAssetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">cancelToolExecution</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
@@ -726,7 +834,7 @@ await client.tools.removeVideoBackground({
 
 ```typescript
 await client.tools.cancelToolExecution({
-    executionId: "executionId"
+    apiTaskExecutionId: "apiTaskExecutionId"
 });
 
 ```
@@ -777,7 +885,7 @@ await client.tools.cancelToolExecution({
 
 ```typescript
 await client.tools.getExecutedTool({
-    executionId: "executionId"
+    apiTaskExecutionId: "apiTaskExecutionId"
 });
 
 ```

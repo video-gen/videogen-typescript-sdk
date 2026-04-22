@@ -9,5 +9,6 @@ export * from "./StorageFile.js";
 export * from "./ToolExecutionWebhookEventName.js";
 export * from "./ToolExecutionWebhookPayload.js";
 export * from "./ToolSuccessResult.js";
+export * from "./VideoAssetRequest.js";
 export * from "./WebhookEndpoint.js";
 export * from "./WebhookEndpointListResponse.js";

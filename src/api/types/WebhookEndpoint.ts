@@ -8,11 +8,8 @@ export interface WebhookEndpoint {
     events: VideogenApi.ToolExecutionWebhookEventName[];
     description?: (string | null) | undefined;
     createdAt: string;
-    /**
-     * Only present on create (`201`) response. Store securely; used to verify `X-VideoGen-Signature`.
-     * Never returned on list.
-     */
+    /** HMAC secret used to verify Standard Webhooks signatures. **Returned only on the create response**; subsequent list/get calls omit it. Store it securely — it cannot be retrieved again. */
     signingSecret?: string | undefined;
-    /** Last four characters of the signing secret (for display); omitted if not yet provisioned. */
+    /** Last four characters of the signing secret (for display in the developer dashboard); omitted if not yet provisioned. */
     signingSecretLast4?: string | undefined;
 }

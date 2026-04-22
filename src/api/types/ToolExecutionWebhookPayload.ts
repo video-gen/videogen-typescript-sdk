@@ -3,16 +3,16 @@
 import type * as VideogenApi from "../index.js";
 
 /**
- * JSON body VideoGen POSTs to your webhook URL when a subscribed event fires.
- * Verify authenticity with the `X-VideoGen-Signature` header (HMAC-SHA256 hex digest of the raw request body,
- * using the signing secret shown once when the endpoint was created).
+ * Body POSTed to a registered webhook endpoint when a tool execution reaches a terminal state. Use `apiTaskExecutionId` to correlate with the response from `POST /v1/tools/...`. For full error details on failed runs, fetch `GET /v1/tools/executions/{apiTaskExecutionId}`.
  */
 export interface ToolExecutionWebhookPayload {
     event: VideogenApi.ToolExecutionWebhookEventName;
-    executionId: string;
+    /** Same opaque execution id returned from `POST /v1/tools/...`. */
+    apiTaskExecutionId: string;
+    /** ISO-8601 timestamp at which VideoGen observed the terminal state. */
     occurredAt: string;
-    /** Logical tool name (e.g. GENERATE_IMAGE). */
-    toolType?: string | undefined;
+    /** Logical tool name (e.g. GENERATE_IMAGE, GENERATE_VIDEO_CLIP). */
+    toolType: string;
+    /** Present only on `tool_execution.succeeded`. Same shape as `ExecutedTool.result`. */
     result?: VideogenApi.ToolSuccessResult | undefined;
-    error?: VideogenApi.ApiError | undefined;
 }
