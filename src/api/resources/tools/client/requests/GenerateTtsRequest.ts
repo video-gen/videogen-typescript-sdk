@@ -10,10 +10,11 @@ import type * as VideogenApi from "../../../../index.js";
  */
 export interface GenerateTtsRequest {
     ttsText: string;
-    /** Selected voice identifier; server defaults apply when null. */
+    /** From `GET /v1/resources/tts-voices`. Omitted or null uses server defaults. */
     voiceId?: string | null;
     previousTtsText?: string | null;
     nextTtsText?: string | null;
+    /** Optional ISO-639-1 language hint for pronunciation (e.g. `en`, `es`, `zh`). The server validates the value at runtime against the supported set. */
     speechLanguageCode?: string | null;
     /** Defaults to false when omitted. */
     hideCaptions?: boolean;

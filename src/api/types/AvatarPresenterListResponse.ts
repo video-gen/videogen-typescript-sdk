@@ -2,6 +2,6 @@
 
 import type * as VideogenApi from "../index.js";
 
-export interface VideoAssetRequest {
-    video: VideogenApi.StorageFileRef;
+export interface AvatarPresenterListResponse {
+    avatarPresenters: VideogenApi.AvatarPresenter[];
 }

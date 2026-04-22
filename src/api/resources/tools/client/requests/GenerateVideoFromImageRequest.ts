@@ -16,7 +16,7 @@ import type * as VideogenApi from "../../../../index.js";
 export interface GenerateVideoFromImageRequest {
     prompt: string;
     generateAudio: boolean;
-    image: VideogenApi.StorageFile;
+    image: VideogenApi.StorageFileRef;
     /** Optional prompt used when the source image was generated. */
     sourceGenerateImagePrompt?: string | null;
 }

@@ -3,16 +3,16 @@
 import type * as VideogenApi from "../index.js";
 
 /**
- * Body POSTed to a registered webhook endpoint when a tool execution reaches a terminal state. Use `apiTaskExecutionId` to correlate with the response from `POST /v1/tools/...`. For full error details on failed runs, fetch `GET /v1/tools/executions/{apiTaskExecutionId}`.
+ * Body POSTed to your endpoint when a tool run finishes. Match `apiTaskExecutionId` to the tool `POST` response. On `tool_execution.succeeded`, `result` is included; for failures or cancellations, call `GET /v1/tools/executions/{apiTaskExecutionId}` for the full `ExecutedTool` and `error` details.
  */
 export interface ToolExecutionWebhookPayload {
     event: VideogenApi.ToolExecutionWebhookEventName;
-    /** Same opaque execution id returned from `POST /v1/tools/...`. */
+    /** Same id as in the `POST /v1/tools/...` response. */
     apiTaskExecutionId: string;
     /** ISO-8601 timestamp at which VideoGen observed the terminal state. */
     occurredAt: string;
     /** Logical tool name (e.g. GENERATE_IMAGE, GENERATE_VIDEO_CLIP). */
     toolType: string;
-    /** Present only on `tool_execution.succeeded`. Same shape as `ExecutedTool.result`. */
+    /** Present only on `tool_execution.succeeded`. Same shape as `ExecutedTool.result`. For `tool_execution.failed` and `tool_execution.cancelled`, fetch `GET /v1/tools/executions/{apiTaskExecutionId}` for details. */
     result?: VideogenApi.ToolSuccessResult | undefined;
 }

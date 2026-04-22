@@ -9,37 +9,37 @@ import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCode
 import * as errors from "../../../../errors/index.js";
 import type * as VideogenApi from "../../../index.js";
 
-export declare namespace FilesClient {
+export declare namespace ResourcesClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
 /**
- * List and read metadata for your files.
+ * Avatar presenters and TTS voices you can reference from tool requests.
  */
-export class FilesClient {
-    protected readonly _options: NormalizedClientOptionsWithAuth<FilesClient.Options>;
+export class ResourcesClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<ResourcesClient.Options>;
 
-    constructor(options: FilesClient.Options) {
+    constructor(options: ResourcesClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 
     /**
-     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.files.getFiles()
+     *     await client.resources.listAvatarPresenters()
      */
-    public getFiles(
-        requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.GetFilesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getFiles(requestOptions));
+    public listAvatarPresenters(
+        requestOptions?: ResourcesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideogenApi.AvatarPresenterListResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listAvatarPresenters(requestOptions));
     }
 
-    private async __getFiles(
-        requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.GetFilesResponse>> {
+    private async __listAvatarPresenters(
+        requestOptions?: ResourcesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideogenApi.AvatarPresenterListResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -51,7 +51,7 @@ export class FilesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                "v1/files",
+                "v1/resources/avatar-presenters",
             ),
             method: "GET",
             headers: _headers,
@@ -63,7 +63,10 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as VideogenApi.GetFilesResponse, rawResponse: _response.rawResponse };
+            return {
+                data: _response.body as VideogenApi.AvatarPresenterListResponse,
+                rawResponse: _response.rawResponse,
+            };
         }
 
         if (_response.error.reason === "status-code") {
@@ -74,30 +77,29 @@ export class FilesClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/files");
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/resources/avatar-presenters",
+        );
     }
 
     /**
-     * @param {VideogenApi.GetFileRequest} request
-     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.files.getFile({
-     *         storageFileId: "storageFileId"
-     *     })
+     *     await client.resources.listTtsVoices()
      */
-    public getFile(
-        request: VideogenApi.GetFileRequest,
-        requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StorageFile> {
-        return core.HttpResponsePromise.fromPromise(this.__getFile(request, requestOptions));
+    public listTtsVoices(
+        requestOptions?: ResourcesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideogenApi.TtsVoiceListResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listTtsVoices(requestOptions));
     }
 
-    private async __getFile(
-        request: VideogenApi.GetFileRequest,
-        requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StorageFile>> {
-        const { storageFileId } = request;
+    private async __listTtsVoices(
+        requestOptions?: ResourcesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideogenApi.TtsVoiceListResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -109,7 +111,7 @@ export class FilesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                `v1/files/${core.url.encodePathParam(storageFileId)}`,
+                "v1/resources/tts-voices",
             ),
             method: "GET",
             headers: _headers,
@@ -121,7 +123,7 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as VideogenApi.StorageFile, rawResponse: _response.rawResponse };
+            return { data: _response.body as VideogenApi.TtsVoiceListResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
@@ -132,6 +134,6 @@ export class FilesClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/files/{storageFileId}");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/resources/tts-voices");
     }
 }

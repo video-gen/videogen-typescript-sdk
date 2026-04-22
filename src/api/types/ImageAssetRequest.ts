@@ -3,5 +3,5 @@
 import type * as VideogenApi from "../index.js";
 
 export interface ImageAssetRequest {
-    image: VideogenApi.StorageFile;
+    image: VideogenApi.StorageFileRef;
 }

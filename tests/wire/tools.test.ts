@@ -127,7 +127,10 @@ describe("ToolsClient", () => {
     test("generateAvatar", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { presenterDescription: "presenterDescription" };
+        const rawRequestBody = {
+            avatarPresenterId: "avatarPresenterId",
+            audio: { storageFileId: "storageFileId", type: "IMAGE" },
+        };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
         server
             .mockEndpoint()
@@ -139,7 +142,11 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.generateAvatar({
-            presenterDescription: "presenterDescription",
+            avatarPresenterId: "avatarPresenterId",
+            audio: {
+                storageFileId: "storageFileId",
+                type: "IMAGE",
+            },
         });
         expect(response).toEqual({
             apiTaskExecutionId: "apiTaskExecutionId",

@@ -44,6 +44,17 @@
             },
             "default": "./dist/cjs/api/resources/webhooks/exports.js"
         },
+        "./resources": {
+            "import": {
+                "types": "./dist/esm/api/resources/resources/exports.d.mts",
+                "default": "./dist/esm/api/resources/resources/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/resources/exports.d.ts",
+                "default": "./dist/cjs/api/resources/resources/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/resources/exports.js"
+        },
         "./tools": {
             "import": {
                 "types": "./dist/esm/api/resources/tools/exports.d.mts",

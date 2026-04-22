@@ -7,5 +7,6 @@
  *     }
  */
 export interface GetExecutedToolRequest {
+    /** Execution id from a `POST /v1/tools/...` response */
     apiTaskExecutionId: string;
 }

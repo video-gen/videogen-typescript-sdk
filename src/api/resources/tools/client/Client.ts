@@ -16,7 +16,7 @@ export declare namespace ToolsClient {
 }
 
 /**
- * Async AI tools for generating image, video, and audio assets.
+ * Async generation and media tools (image, video, and audio).
  */
 export class ToolsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ToolsClient.Options>;
@@ -367,7 +367,11 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.generateAvatar({
-     *         presenterDescription: "presenterDescription"
+     *         avatarPresenterId: "avatarPresenterId",
+     *         audio: {
+     *             storageFileId: "storageFileId",
+     *             type: "IMAGE"
+     *         }
      *     })
      */
     public generateAvatar(

@@ -4,7 +4,7 @@
  * Payload when `status` is `succeeded`. For most tools the API returns `storageFileId` and `type` (`IMAGE`, `VIDEO`, or `AUDIO`) for the generated asset. Other keys may appear for non-storage outputs.
  */
 export interface ToolSuccessResult {
-    /** Workspace storage file id for the generated asset (when applicable). */
+    /** File id for the generated asset (when applicable). */
     storageFileId?: string | undefined;
     /** Storage file kind when `storageFileId` is set. */
     type?: ToolSuccessResult.Type | undefined;

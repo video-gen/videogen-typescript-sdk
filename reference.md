@@ -1,5 +1,5 @@
 # Reference
-## files
+## Files
 <details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFiles</a>() -> VideogenApi.GetFilesResponse</code></summary>
 <dl>
 <dd>
@@ -92,7 +92,7 @@ await client.files.getFile({
 </dl>
 </details>
 
-## webhooks
+## Webhooks
 <details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">listWebhookEndpoints</a>() -> VideogenApi.WebhookEndpointListResponse</code></summary>
 <dl>
 <dd>
@@ -237,7 +237,90 @@ await client.webhooks.deleteWebhookEndpoint({
 </dl>
 </details>
 
-## tools
+## Resources
+<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listAvatarPresenters</a>() -> VideogenApi.AvatarPresenterListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.resources.listAvatarPresenters();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ResourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listTtsVoices</a>() -> VideogenApi.TtsVoiceListResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.resources.listTtsVoices();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ResourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Tools
 <details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
@@ -513,7 +596,11 @@ await client.tools.generateSoundEffect({
 
 ```typescript
 await client.tools.generateAvatar({
-    presenterDescription: "presenterDescription"
+    avatarPresenterId: "avatarPresenterId",
+    audio: {
+        storageFileId: "storageFileId",
+        type: "IMAGE"
+    }
 });
 
 ```

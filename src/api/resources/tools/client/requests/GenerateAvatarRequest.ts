@@ -5,13 +5,16 @@ import type * as VideogenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         presenterDescription: "presenterDescription"
+ *         avatarPresenterId: "avatarPresenterId",
+ *         audio: {
+ *             storageFileId: "storageFileId",
+ *             type: "IMAGE"
+ *         }
  *     }
  */
 export interface GenerateAvatarRequest {
-    /** Natural-language description of the desired presenter. */
-    presenterDescription: string;
-    audio?: VideogenApi.StorageFile;
-    /** Optional `apiTaskExecutionId` of a prior `generate-tts` execution; chains the new avatar onto that voiceover. */
-    sourceTtsExecutionId?: string | null;
+    /** From `GET /v1/resources/avatar-presenters`. */
+    avatarPresenterId: string;
+    /** Reference to an `AUDIO` file (for example from a prior `generate-tts` result's `storageFileId`). */
+    audio: VideogenApi.StorageFileRef;
 }
