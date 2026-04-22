@@ -10,4 +10,6 @@ export interface GenerateSoundEffectRequest {
     prompt: string;
     durationSeconds?: number | null;
     promptInfluence?: number | null;
+    /** How many file outputs to generate (1–100). */
+    numCandidates?: number;
 }

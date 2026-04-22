@@ -23,4 +23,6 @@ export interface GenerateTtsRequest {
     autoExpandPronunciationReplacements?: boolean;
     /** Defaults to server voice default when omitted. */
     voiceSpeed?: number;
+    /** How many file outputs to generate (1–100). */
+    numCandidates?: number;
 }

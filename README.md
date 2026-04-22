@@ -42,9 +42,9 @@ Instantiate and use the client with the following:
 import { VideogenApiClient } from "@videogen/sdk";
 
 const client = new VideogenApiClient({ token: "YOUR_TOKEN" });
-await client.webhooks.createWebhookEndpoint({
-    url: "url",
-    events: ["tool_execution.succeeded"]
+await client.tools.generateVideoClip({
+    prompt: "prompt",
+    generateAudio: true
 });
 ```
 
@@ -70,7 +70,7 @@ will be thrown.
 import { VideogenApiError } from "@videogen/sdk";
 
 try {
-    await client.webhooks.createWebhookEndpoint(...);
+    await client.tools.generateVideoClip(...);
 } catch (err) {
     if (err instanceof VideogenApiError) {
         console.log(err.statusCode);
@@ -107,7 +107,7 @@ const client = new VideogenApiClient({
     }
 });
 
-const response = await client.webhooks.createWebhookEndpoint(..., {
+const response = await client.tools.generateVideoClip(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -119,7 +119,7 @@ const response = await client.webhooks.createWebhookEndpoint(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.webhooks.createWebhookEndpoint(..., {
+const response = await client.tools.generateVideoClip(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -141,7 +141,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.webhooks.createWebhookEndpoint(..., {
+const response = await client.tools.generateVideoClip(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -151,7 +151,7 @@ const response = await client.webhooks.createWebhookEndpoint(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.webhooks.createWebhookEndpoint(..., {
+const response = await client.tools.generateVideoClip(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -162,7 +162,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.webhooks.createWebhookEndpoint(..., {
+const response = await client.tools.generateVideoClip(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -174,7 +174,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.webhooks.createWebhookEndpoint(...).withRawResponse();
+const { data, rawResponse } = await client.tools.generateVideoClip(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

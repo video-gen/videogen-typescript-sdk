@@ -307,7 +307,7 @@ describe("ToolsClient", () => {
             apiTaskExecutionId: "apiTaskExecutionId",
             status: "pending",
             toolType: "toolType",
-            result: { storageFileId: "storageFileId", type: "IMAGE" },
+            result: { files: [{ storageFileId: "storageFileId", type: "IMAGE" }] },
             error: { message: "message", code: "code" },
         };
         server
@@ -326,8 +326,12 @@ describe("ToolsClient", () => {
             status: "pending",
             toolType: "toolType",
             result: {
-                storageFileId: "storageFileId",
-                type: "IMAGE",
+                files: [
+                    {
+                        storageFileId: "storageFileId",
+                        type: "IMAGE",
+                    },
+                ],
             },
             error: {
                 message: "message",

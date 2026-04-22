@@ -4,4 +4,6 @@ import type * as VideogenApi from "../index.js";
 
 export interface VideoAssetRequest {
     video: VideogenApi.StorageFileRef;
+    /** How many file outputs to generate (1–100). */
+    numCandidates?: number | undefined;
 }

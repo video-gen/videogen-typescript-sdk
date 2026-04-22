@@ -17,4 +17,6 @@ export interface GenerateAvatarRequest {
     avatarPresenterId: string;
     /** Reference to an `AUDIO` file (for example from a prior `generate-tts` result's `storageFileId`). */
     audio: VideogenApi.StorageFileRef;
+    /** How many file outputs to generate (1–100). */
+    numCandidates?: number;
 }

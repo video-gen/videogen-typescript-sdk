@@ -10,4 +10,6 @@
 export interface GenerateVideoClipRequest {
     prompt: string;
     generateAudio: boolean;
+    /** How many file outputs to generate (1–100). */
+    numCandidates?: number;
 }

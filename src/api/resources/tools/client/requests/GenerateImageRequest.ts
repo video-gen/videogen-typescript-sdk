@@ -8,4 +8,6 @@
  */
 export interface GenerateImageRequest {
     prompt: string;
+    /** How many file outputs to generate (1–100). */
+    numCandidates?: number;
 }

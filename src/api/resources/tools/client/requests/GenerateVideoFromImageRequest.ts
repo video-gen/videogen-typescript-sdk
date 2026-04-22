@@ -19,4 +19,6 @@ export interface GenerateVideoFromImageRequest {
     image: VideogenApi.StorageFileRef;
     /** Optional prompt used when the source image was generated. */
     sourceGenerateImagePrompt?: string | null;
+    /** How many file outputs to generate (1–100). */
+    numCandidates?: number;
 }
