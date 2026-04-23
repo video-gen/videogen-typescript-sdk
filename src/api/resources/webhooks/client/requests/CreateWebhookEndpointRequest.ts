@@ -10,7 +10,7 @@ import type * as VideogenApi from "../../../../index.js";
  *     }
  */
 export interface CreateWebhookEndpointRequest {
-    /** HTTPS URL VideoGen will POST to; must be reachable from our servers. */
+    /** HTTPS URL that will receive webhook POST requests. */
     url: string;
     description?: string | null;
     events: VideogenApi.ToolExecutionWebhookEventName[];

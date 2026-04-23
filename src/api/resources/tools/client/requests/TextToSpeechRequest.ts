@@ -10,21 +10,21 @@ import type * as VideogenApi from "../../../../index.js";
  */
 export interface TextToSpeechRequest {
     ttsText: string;
-    /** Opaque voice id from `GET /v1/resources/tts-voices`. Server defaults apply when null. */
+    /** Voice id from `GET /v1/resources/tts-voices`. A default voice is used when null. */
     voiceId?: string | null;
     previousTtsText?: string | null;
     nextTtsText?: string | null;
-    /** Optional ISO-639-1 language hint for pronunciation (e.g. `en`, `es`, `zh`). The server validates the value at runtime against the supported set. */
+    /** ISO-639-1 language hint for pronunciation (e.g. `en`, `es`, `zh`). */
     speechLanguageCode?: string | null;
     /** Defaults to false when omitted. */
     hideCaptions?: boolean;
     pronunciationReplacements?: VideogenApi.PronunciationReplacement[];
     /** Defaults to false when omitted. */
     autoExpandPronunciationReplacements?: boolean;
-    /** Defaults to server voice default when omitted. */
+    /** Speech rate multiplier. Defaults to the voice's default speed. */
     voiceSpeed?: number;
     /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
     /** When true, generated files are scoped as temporary. Defaults to false. */
-    isOutputFileTemporary?: boolean;
+    isOutputTemporary?: boolean;
 }

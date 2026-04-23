@@ -16,7 +16,7 @@ export declare namespace ToolsClient {
 }
 
 /**
- * Async AI tools for generating image, video, and audio assets.
+ * Generate images, videos, audio, and more. All tool endpoints are asynchronous.
  */
 export class ToolsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ToolsClient.Options>;

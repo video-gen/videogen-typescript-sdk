@@ -13,12 +13,12 @@ import type * as VideogenApi from "../../../../index.js";
  *     }
  */
 export interface GenerateAvatarRequest {
-    /** Opaque presenter id from `GET /v1/resources/avatar-presenters`. */
+    /** Presenter id from `GET /v1/resources/avatar-presenters`. */
     avatarPresenterId: string;
-    /** Reference to an `AUDIO` file in your workspace. Typically obtained from a prior `text-to-speech` execution's `result.storageFileId`. */
+    /** Reference to an `AUDIO` file, typically from a prior text-to-speech result. */
     audio: VideogenApi.StorageFileRef;
     /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
     /** When true, generated files are scoped as temporary. Defaults to false. */
-    isOutputFileTemporary?: boolean;
+    isOutputTemporary?: boolean;
 }

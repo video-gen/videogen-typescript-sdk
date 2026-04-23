@@ -22,5 +22,5 @@ export interface ImageToVideoRequest {
     /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
     /** When true, generated files are scoped as temporary. Defaults to false. */
-    isOutputFileTemporary?: boolean;
+    isOutputTemporary?: boolean;
 }

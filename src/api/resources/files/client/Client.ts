@@ -16,7 +16,7 @@ export declare namespace FilesClient {
 }
 
 /**
- * Workspace file metadata for developer integrations.
+ * List and retrieve metadata for generated files.
  */
 export class FilesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FilesClient.Options>;

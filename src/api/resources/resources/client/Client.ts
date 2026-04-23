@@ -16,7 +16,7 @@ export declare namespace ResourcesClient {
 }
 
 /**
- * Static catalogues of ids you can pass to tool requests (avatar presenters, TTS voices).
+ * Discover available avatar presenters and TTS voices to use in tool requests.
  */
 export class ResourcesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ResourcesClient.Options>;
