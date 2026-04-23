@@ -1,5 +1,5 @@
 # Reference
-## tools
+## Tools
 <details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
@@ -103,7 +103,7 @@ await client.tools.promptToVideoClip({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToVideo</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToVideoClip</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
 
@@ -116,7 +116,7 @@ await client.tools.promptToVideoClip({
 <dd>
 
 ```typescript
-await client.tools.imageToVideo({
+await client.tools.imageToVideoClip({
     prompt: "prompt",
     generateAudio: true,
     image: {
@@ -139,7 +139,117 @@ await client.tools.imageToVideo({
 <dl>
 <dd>
 
-**request:** `VideogenApi.ImageToVideoRequest` 
+**request:** `VideogenApi.ImageToVideoClipRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tools.imageToImage({
+    prompt: "prompt",
+    image: {
+        storageFileId: "storageFileId",
+        type: "IMAGE"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideogenApi.ImageToImageRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">videoToVideoClip</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tools.videoToVideoClip({
+    prompt: "prompt",
+    video: {
+        storageFileId: "storageFileId",
+        type: "IMAGE"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideogenApi.VideoToVideoClipRequest` 
     
 </dd>
 </dl>
@@ -688,7 +798,7 @@ await client.tools.getExecutedTool({
 </dl>
 </details>
 
-## files
+## Files
 <details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFiles</a>() -> VideogenApi.GetFilesResponse</code></summary>
 <dl>
 <dd>
@@ -781,7 +891,7 @@ await client.files.getFile({
 </dl>
 </details>
 
-## resources
+## Resources
 <details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listAvatarPresenters</a>() -> VideogenApi.AvatarPresenterListResponse</code></summary>
 <dl>
 <dd>
@@ -864,7 +974,7 @@ await client.resources.listTtsVoices();
 </dl>
 </details>
 
-## webhooks
+## Webhooks
 <details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">listWebhookEndpoints</a>() -> VideogenApi.WebhookEndpointListResponse</code></summary>
 <dl>
 <dd>

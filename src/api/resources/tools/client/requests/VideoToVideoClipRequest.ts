@@ -6,19 +6,16 @@ import type * as VideogenApi from "../../../../index.js";
  * @example
  *     {
  *         prompt: "prompt",
- *         generateAudio: true,
- *         image: {
+ *         video: {
  *             storageFileId: "storageFileId",
  *             type: "IMAGE"
  *         }
  *     }
  */
-export interface ImageToVideoRequest {
+export interface VideoToVideoClipRequest {
+    /** Prompt describing how to transform the input video. */
     prompt: string;
-    generateAudio: boolean;
-    image: VideogenApi.StorageFileRef;
-    /** Optional prompt used when the source image was generated. */
-    sourcePromptToImagePrompt?: string | null;
+    video: VideogenApi.StorageFileRef;
     /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
     /** When true, generated files are scoped as temporary. Defaults to false. */

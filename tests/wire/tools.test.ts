@@ -47,7 +47,7 @@ describe("ToolsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("imageToVideo", async () => {
+    test("imageToVideoClip", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -59,17 +59,67 @@ describe("ToolsClient", () => {
 
         server
             .mockEndpoint()
-            .post("/v1/tools/image-to-video")
+            .post("/v1/tools/image-to-video-clip")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.imageToVideo({
+        const response = await client.tools.imageToVideoClip({
             prompt: "prompt",
             generateAudio: true,
             image: {
+                storageFileId: "storageFileId",
+                type: "IMAGE",
+            },
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("imageToImage", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { prompt: "prompt", image: { storageFileId: "storageFileId", type: "IMAGE" } };
+        const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/tools/image-to-image")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.imageToImage({
+            prompt: "prompt",
+            image: {
+                storageFileId: "storageFileId",
+                type: "IMAGE",
+            },
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("videoToVideoClip", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { prompt: "prompt", video: { storageFileId: "storageFileId", type: "IMAGE" } };
+        const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/tools/video-to-video-clip")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.videoToVideoClip({
+            prompt: "prompt",
+            video: {
                 storageFileId: "storageFileId",
                 type: "IMAGE",
             },

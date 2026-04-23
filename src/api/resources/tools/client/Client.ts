@@ -158,11 +158,11 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.ImageToVideoRequest} request
+     * @param {VideogenApi.ImageToVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.imageToVideo({
+     *     await client.tools.imageToVideoClip({
      *         prompt: "prompt",
      *         generateAudio: true,
      *         image: {
@@ -171,15 +171,15 @@ export class ToolsClient {
      *         }
      *     })
      */
-    public imageToVideo(
-        request: VideogenApi.ImageToVideoRequest,
+    public imageToVideoClip(
+        request: VideogenApi.ImageToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__imageToVideo(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__imageToVideoClip(request, requestOptions));
     }
 
-    private async __imageToVideo(
-        request: VideogenApi.ImageToVideoRequest,
+    private async __imageToVideoClip(
+        request: VideogenApi.ImageToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -193,7 +193,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                "v1/tools/image-to-video",
+                "v1/tools/image-to-video-clip",
             ),
             method: "POST",
             headers: _headers,
@@ -222,7 +222,151 @@ export class ToolsClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/image-to-video");
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/tools/image-to-video-clip",
+        );
+    }
+
+    /**
+     * @param {VideogenApi.ImageToImageRequest} request
+     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.tools.imageToImage({
+     *         prompt: "prompt",
+     *         image: {
+     *             storageFileId: "storageFileId",
+     *             type: "IMAGE"
+     *         }
+     *     })
+     */
+    public imageToImage(
+        request: VideogenApi.ImageToImageRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__imageToImage(request, requestOptions));
+    }
+
+    private async __imageToImage(
+        request: VideogenApi.ImageToImageRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideogenApiEnvironment.Production,
+                "v1/tools/image-to-image",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideogenApiError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/image-to-image");
+    }
+
+    /**
+     * @param {VideogenApi.VideoToVideoClipRequest} request
+     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.tools.videoToVideoClip({
+     *         prompt: "prompt",
+     *         video: {
+     *             storageFileId: "storageFileId",
+     *             type: "IMAGE"
+     *         }
+     *     })
+     */
+    public videoToVideoClip(
+        request: VideogenApi.VideoToVideoClipRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__videoToVideoClip(request, requestOptions));
+    }
+
+    private async __videoToVideoClip(
+        request: VideogenApi.VideoToVideoClipRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideogenApiEnvironment.Production,
+                "v1/tools/video-to-video-clip",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideogenApiError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/tools/video-to-video-clip",
+        );
     }
 
     /**
