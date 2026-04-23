@@ -3,10 +3,10 @@
 import type * as VideogenApi from "../index.js";
 
 export interface ExecutedTool {
-    /** Same id as in the `POST /v1/tools/...` response. */
+    /** Same opaque execution id returned from `POST /v1/tools/...`. */
     apiTaskExecutionId: string;
     status: VideogenApi.ExecutedToolStatus;
-    /** Tool identifier (for example `GENERATE_IMAGE`, `GENERATE_VIDEO_CLIP`). */
+    /** Logical tool name (e.g. PROMPT_TO_IMAGE, PROMPT_TO_VIDEO_CLIP). */
     toolType: string;
     result?: VideogenApi.ToolSuccessResult | undefined;
     error?: VideogenApi.ApiError | undefined;

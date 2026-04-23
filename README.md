@@ -1,15 +1,18 @@
-# Videogen TypeScript Library
+# VideoGen TypeScript Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fvideo-gen%2Fvideogen-typescript-sdk)
 [![npm shield](https://img.shields.io/npm/v/@videogen/sdk)](https://www.npmjs.com/package/@videogen/sdk)
 
-The Videogen TypeScript library provides convenient access to the Videogen APIs from TypeScript.
+Official client for the VideoGen Developer API (`https://api.videogen.io`).
+
 
 ## Table of Contents
 
+- [Documentation](#documentation)
 - [Installation](#installation)
 - [Reference](#reference)
 - [Usage](#usage)
+- [Environments](#environments)
 - [Request and Response Types](#request-and-response-types)
 - [Exception Handling](#exception-handling)
 - [Advanced](#advanced)
@@ -21,8 +24,13 @@ The Videogen TypeScript library provides convenient access to the Videogen APIs 
   - [Aborting Requests](#aborting-requests)
   - [Access Raw Response Data](#access-raw-response-data)
   - [Logging](#logging)
+  - [Custom Fetch](#custom-fetch)
   - [Runtime Compatibility](#runtime-compatibility)
 - [Contributing](#contributing)
+
+## Documentation
+
+API reference documentation is available [here](https://videogen.docs.buildwithfern.com).
 
 ## Installation
 
@@ -42,9 +50,20 @@ Instantiate and use the client with the following:
 import { VideogenApiClient } from "@videogen/sdk";
 
 const client = new VideogenApiClient({ token: "YOUR_TOKEN" });
-await client.tools.generateVideoClip({
-    prompt: "prompt",
-    generateAudio: true
+await client.tools.promptToImage({
+    prompt: "prompt"
+});
+```
+
+## Environments
+
+This SDK allows you to configure different environments for API requests.
+
+```typescript
+import { VideogenApiClient, VideogenApiEnvironment } from "@videogen/sdk";
+
+const client = new VideogenApiClient({
+    environment: VideogenApiEnvironment.Production,
 });
 ```
 
@@ -56,7 +75,7 @@ following namespace:
 ```typescript
 import { VideogenApi } from "@videogen/sdk";
 
-const request: VideogenApi.GetFileRequest = {
+const request: VideogenApi.PromptToImageRequest = {
     ...
 };
 ```
@@ -70,7 +89,7 @@ will be thrown.
 import { VideogenApiError } from "@videogen/sdk";
 
 try {
-    await client.tools.generateVideoClip(...);
+    await client.tools.promptToImage(...);
 } catch (err) {
     if (err instanceof VideogenApiError) {
         console.log(err.statusCode);
@@ -88,9 +107,9 @@ try {
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { FilesClient } from '@videogen/sdk/files';
+import { ToolsClient } from '@videogen/sdk/tools';
 
-const client = new FilesClient({...});
+const client = new ToolsClient({...});
 ```
 
 ### Additional Headers
@@ -107,7 +126,7 @@ const client = new VideogenApiClient({
     }
 });
 
-const response = await client.tools.generateVideoClip(..., {
+const response = await client.tools.promptToImage(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -119,7 +138,7 @@ const response = await client.tools.generateVideoClip(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.tools.generateVideoClip(..., {
+const response = await client.tools.promptToImage(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -141,7 +160,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.tools.generateVideoClip(..., {
+const response = await client.tools.promptToImage(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -151,7 +170,7 @@ const response = await client.tools.generateVideoClip(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.tools.generateVideoClip(..., {
+const response = await client.tools.promptToImage(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -162,7 +181,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.tools.generateVideoClip(..., {
+const response = await client.tools.promptToImage(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -174,7 +193,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.tools.generateVideoClip(...).withRawResponse();
+const { data, rawResponse } = await client.tools.promptToImage(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);
@@ -243,6 +262,26 @@ const logger: logging.ILogger = {
 </details>
 
 
+### Custom Fetch
+
+The SDK provides a low-level `fetch` method for making custom HTTP requests while still
+benefiting from SDK-level configuration like authentication, retries, timeouts, and logging.
+This is useful for calling API endpoints not yet supported in the SDK.
+
+```typescript
+const response = await client.fetch("/v1/custom/endpoint", {
+    method: "GET",
+}, {
+    timeoutInSeconds: 30,
+    maxRetries: 3,
+    headers: {
+        "X-Custom-Header": "custom-value",
+    },
+});
+
+const data = await response.json();
+```
+
 ### Runtime Compatibility
 
 
@@ -257,19 +296,6 @@ The SDK works in the following runtimes:
 - Bun 1.0+
 - React Native
 
-### Customizing Fetch Client
-
-The SDK provides a way for you to customize the underlying HTTP client / Fetch function. If you're running in an
-unsupported environment, this provides a way for you to break glass and ensure the SDK works.
-
-```typescript
-import { VideogenApiClient } from "@videogen/sdk";
-
-const client = new VideogenApiClient({
-    ...
-    fetcher: // provide your implementation here
-});
-```
 
 ## Contributing
 

@@ -8,9 +8,9 @@ import type * as VideogenApi from "../../../../index.js";
  *         ttsText: "ttsText"
  *     }
  */
-export interface GenerateTtsRequest {
+export interface TextToSpeechRequest {
     ttsText: string;
-    /** From `GET /v1/resources/tts-voices`. Omitted or null uses server defaults. */
+    /** Opaque voice id from `GET /v1/resources/tts-voices`. Server defaults apply when null. */
     voiceId?: string | null;
     previousTtsText?: string | null;
     nextTtsText?: string | null;
@@ -23,6 +23,8 @@ export interface GenerateTtsRequest {
     autoExpandPronunciationReplacements?: boolean;
     /** Defaults to server voice default when omitted. */
     voiceSpeed?: number;
-    /** How many file outputs to generate (1–100). */
+    /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
+    /** When true, generated files are scoped as temporary. Defaults to false. */
+    isOutputFileTemporary?: boolean;
 }

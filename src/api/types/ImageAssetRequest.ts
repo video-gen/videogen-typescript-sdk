@@ -4,6 +4,8 @@ import type * as VideogenApi from "../index.js";
 
 export interface ImageAssetRequest {
     image: VideogenApi.StorageFileRef;
-    /** How many file outputs to generate (1–100). */
+    /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number | undefined;
+    /** When true, generated files are scoped as temporary. Defaults to false. */
+    isOutputFileTemporary?: boolean | undefined;
 }

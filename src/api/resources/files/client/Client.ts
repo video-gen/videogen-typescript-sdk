@@ -16,7 +16,7 @@ export declare namespace FilesClient {
 }
 
 /**
- * List and read metadata for your files.
+ * Workspace file metadata for developer integrations.
  */
 export class FilesClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<FilesClient.Options>;

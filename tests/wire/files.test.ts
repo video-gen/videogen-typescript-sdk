@@ -13,24 +13,17 @@ describe("FilesClient", () => {
                 {
                     storageFileId: "storageFileId",
                     type: "IMAGE",
+                    scope: "GLOBAL",
                     displayName: "displayName",
                     description: "description",
                 },
             ],
         };
+
         server.mockEndpoint().get("/v1/files").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.files.getFiles();
-        expect(response).toEqual({
-            files: [
-                {
-                    storageFileId: "storageFileId",
-                    type: "IMAGE",
-                    displayName: "displayName",
-                    description: "description",
-                },
-            ],
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("getFile", async () => {
@@ -40,9 +33,11 @@ describe("FilesClient", () => {
         const rawResponseBody = {
             storageFileId: "storageFileId",
             type: "IMAGE",
+            scope: "GLOBAL",
             displayName: "displayName",
             description: "description",
         };
+
         server
             .mockEndpoint()
             .get("/v1/files/storageFileId")
@@ -54,11 +49,6 @@ describe("FilesClient", () => {
         const response = await client.files.getFile({
             storageFileId: "storageFileId",
         });
-        expect(response).toEqual({
-            storageFileId: "storageFileId",
-            type: "IMAGE",
-            displayName: "displayName",
-            description: "description",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 });

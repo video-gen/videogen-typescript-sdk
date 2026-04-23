@@ -6,6 +6,7 @@ import { ToolsClient } from "./api/resources/tools/client/Client.js";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client.js";
 import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
+import * as core from "./core/index.js";
 
 export declare namespace VideogenApiClient {
     export type Options = BaseClientOptions;
@@ -15,28 +16,59 @@ export declare namespace VideogenApiClient {
 
 export class VideogenApiClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<VideogenApiClient.Options>;
-    protected _files: FilesClient | undefined;
-    protected _webhooks: WebhooksClient | undefined;
-    protected _resources: ResourcesClient | undefined;
     protected _tools: ToolsClient | undefined;
+    protected _files: FilesClient | undefined;
+    protected _resources: ResourcesClient | undefined;
+    protected _webhooks: WebhooksClient | undefined;
 
     constructor(options: VideogenApiClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
+    }
+
+    public get tools(): ToolsClient {
+        return (this._tools ??= new ToolsClient(this._options));
     }
 
     public get files(): FilesClient {
         return (this._files ??= new FilesClient(this._options));
     }
 
-    public get webhooks(): WebhooksClient {
-        return (this._webhooks ??= new WebhooksClient(this._options));
-    }
-
     public get resources(): ResourcesClient {
         return (this._resources ??= new ResourcesClient(this._options));
     }
 
-    public get tools(): ToolsClient {
-        return (this._tools ??= new ToolsClient(this._options));
+    public get webhooks(): WebhooksClient {
+        return (this._webhooks ??= new WebhooksClient(this._options));
+    }
+
+    /**
+     * Make a passthrough request using the SDK's configured auth, retry, logging, etc.
+     * This is useful for making requests to endpoints not yet supported in the SDK.
+     * The input can be a URL string, URL object, or Request object. Relative paths are resolved against the configured base URL.
+     *
+     * @param {Request | string | URL} input - The URL, path, or Request object.
+     * @param {RequestInit} init - Standard fetch RequestInit options.
+     * @param {core.PassthroughRequest.RequestOptions} requestOptions - Per-request overrides (timeout, retries, headers, abort signal).
+     * @returns {Promise<Response>} A standard Response object.
+     */
+    public async fetch(
+        input: Request | string | URL,
+        init?: RequestInit,
+        requestOptions?: core.PassthroughRequest.RequestOptions,
+    ): Promise<Response> {
+        return core.makePassthroughRequest(
+            input,
+            init,
+            {
+                baseUrl: this._options.baseUrl ?? this._options.environment,
+                headers: this._options.headers,
+                timeoutInSeconds: this._options.timeoutInSeconds,
+                maxRetries: this._options.maxRetries,
+                fetch: this._options.fetch,
+                logging: this._options.logging,
+                getAuthHeaders: async () => (await this._options.authProvider.getAuthRequest()).headers,
+            },
+            requestOptions,
+        );
     }
 }

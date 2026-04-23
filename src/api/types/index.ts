@@ -1,4 +1,5 @@
 export * from "./ApiError.js";
+export * from "./AspectRatio.js";
 export * from "./AvatarPresenter.js";
 export * from "./AvatarPresenterListResponse.js";
 export * from "./ExecutedTool.js";

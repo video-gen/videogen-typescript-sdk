@@ -13,12 +13,14 @@ import type * as VideogenApi from "../../../../index.js";
  *         }
  *     }
  */
-export interface GenerateVideoFromImageRequest {
+export interface ImageToVideoRequest {
     prompt: string;
     generateAudio: boolean;
     image: VideogenApi.StorageFileRef;
     /** Optional prompt used when the source image was generated. */
-    sourceGenerateImagePrompt?: string | null;
-    /** How many file outputs to generate (1–100). */
+    sourcePromptToImagePrompt?: string | null;
+    /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
+    /** When true, generated files are scoped as temporary. Defaults to false. */
+    isOutputFileTemporary?: boolean;
 }

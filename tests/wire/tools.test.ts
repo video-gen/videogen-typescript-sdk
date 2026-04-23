@@ -4,52 +4,50 @@ import { VideogenApiClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ToolsClient", () => {
-    test("generateImage", async () => {
+    test("promptToImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt: "prompt" };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
-            .post("/v1/tools/generate-image")
+            .post("/v1/tools/prompt-to-image")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.generateImage({
+        const response = await client.tools.promptToImage({
             prompt: "prompt",
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
-    test("generateVideoClip", async () => {
+    test("promptToVideoClip", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt: "prompt", generateAudio: true };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
-            .post("/v1/tools/generate-video-clip")
+            .post("/v1/tools/prompt-to-video-clip")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.generateVideoClip({
+        const response = await client.tools.promptToVideoClip({
             prompt: "prompt",
             generateAudio: true,
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
-    test("generateVideoFromImage", async () => {
+    test("imageToVideo", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
@@ -58,16 +56,17 @@ describe("ToolsClient", () => {
             image: { storageFileId: "storageFileId", type: "IMAGE" },
         };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
-            .post("/v1/tools/generate-video-from-image")
+            .post("/v1/tools/image-to-video")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.generateVideoFromImage({
+        const response = await client.tools.imageToVideo({
             prompt: "prompt",
             generateAudio: true,
             image: {
@@ -75,53 +74,49 @@ describe("ToolsClient", () => {
                 type: "IMAGE",
             },
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
-    test("generateTts", async () => {
+    test("textToSpeech", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { ttsText: "ttsText" };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
-            .post("/v1/tools/generate-tts")
+            .post("/v1/tools/text-to-speech")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.generateTts({
+        const response = await client.tools.textToSpeech({
             ttsText: "ttsText",
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
-    test("generateSoundEffect", async () => {
+    test("promptToSoundEffect", async () => {
         const server = mockServerPool.createServer();
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt: "prompt" };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
-            .post("/v1/tools/generate-sound-effect")
+            .post("/v1/tools/prompt-to-sound-effect")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.generateSoundEffect({
+        const response = await client.tools.promptToSoundEffect({
             prompt: "prompt",
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("generateAvatar", async () => {
@@ -132,6 +127,7 @@ describe("ToolsClient", () => {
             audio: { storageFileId: "storageFileId", type: "IMAGE" },
         };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
             .post("/v1/tools/generate-avatar")
@@ -148,9 +144,7 @@ describe("ToolsClient", () => {
                 type: "IMAGE",
             },
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("vectorizeImage", async () => {
@@ -158,6 +152,7 @@ describe("ToolsClient", () => {
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { image: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
             .post("/v1/tools/vectorize-image")
@@ -173,9 +168,7 @@ describe("ToolsClient", () => {
                 type: "IMAGE",
             },
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("removeImageBackground", async () => {
@@ -183,6 +176,7 @@ describe("ToolsClient", () => {
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { image: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
             .post("/v1/tools/remove-image-background")
@@ -198,9 +192,7 @@ describe("ToolsClient", () => {
                 type: "IMAGE",
             },
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("removeVideoBackground", async () => {
@@ -208,6 +200,7 @@ describe("ToolsClient", () => {
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { video: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
             .post("/v1/tools/remove-video-background")
@@ -223,9 +216,7 @@ describe("ToolsClient", () => {
                 type: "IMAGE",
             },
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("upscaleImage", async () => {
@@ -233,6 +224,7 @@ describe("ToolsClient", () => {
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { image: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
             .post("/v1/tools/upscale-image")
@@ -248,9 +240,7 @@ describe("ToolsClient", () => {
                 type: "IMAGE",
             },
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("upscaleVideo", async () => {
@@ -258,6 +248,7 @@ describe("ToolsClient", () => {
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { video: { storageFileId: "storageFileId", type: "IMAGE" } };
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
             .post("/v1/tools/upscale-video")
@@ -273,9 +264,7 @@ describe("ToolsClient", () => {
                 type: "IMAGE",
             },
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("cancelToolExecution", async () => {
@@ -283,6 +272,7 @@ describe("ToolsClient", () => {
         const client = new VideogenApiClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = { apiTaskExecutionId: "apiTaskExecutionId" };
+
         server
             .mockEndpoint()
             .post("/v1/tools/executions/apiTaskExecutionId/cancel")
@@ -294,9 +284,7 @@ describe("ToolsClient", () => {
         const response = await client.tools.cancelToolExecution({
             apiTaskExecutionId: "apiTaskExecutionId",
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("getExecutedTool", async () => {
@@ -307,9 +295,10 @@ describe("ToolsClient", () => {
             apiTaskExecutionId: "apiTaskExecutionId",
             status: "pending",
             toolType: "toolType",
-            result: { files: [{ storageFileId: "storageFileId", type: "IMAGE" }] },
+            result: { storageFileId: "storageFileId", type: "IMAGE" },
             error: { message: "message", code: "code" },
         };
+
         server
             .mockEndpoint()
             .get("/v1/tools/executions/apiTaskExecutionId")
@@ -321,22 +310,6 @@ describe("ToolsClient", () => {
         const response = await client.tools.getExecutedTool({
             apiTaskExecutionId: "apiTaskExecutionId",
         });
-        expect(response).toEqual({
-            apiTaskExecutionId: "apiTaskExecutionId",
-            status: "pending",
-            toolType: "toolType",
-            result: {
-                files: [
-                    {
-                        storageFileId: "storageFileId",
-                        type: "IMAGE",
-                    },
-                ],
-            },
-            error: {
-                message: "message",
-                code: "code",
-            },
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 });

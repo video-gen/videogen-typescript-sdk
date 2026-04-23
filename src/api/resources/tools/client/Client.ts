@@ -16,7 +16,7 @@ export declare namespace ToolsClient {
 }
 
 /**
- * Async generation and media tools (image, video, and audio).
+ * Async AI tools for generating image, video, and audio assets.
  */
 export class ToolsClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<ToolsClient.Options>;
@@ -26,23 +26,23 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.GenerateImageRequest} request
+     * @param {VideogenApi.PromptToImageRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.generateImage({
+     *     await client.tools.promptToImage({
      *         prompt: "prompt"
      *     })
      */
-    public generateImage(
-        request: VideogenApi.GenerateImageRequest,
+    public promptToImage(
+        request: VideogenApi.PromptToImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__generateImage(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__promptToImage(request, requestOptions));
     }
 
-    private async __generateImage(
-        request: VideogenApi.GenerateImageRequest,
+    private async __promptToImage(
+        request: VideogenApi.PromptToImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -56,7 +56,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                "v1/tools/generate-image",
+                "v1/tools/prompt-to-image",
             ),
             method: "POST",
             headers: _headers,
@@ -85,28 +85,28 @@ export class ToolsClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/generate-image");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/prompt-to-image");
     }
 
     /**
-     * @param {VideogenApi.GenerateVideoClipRequest} request
+     * @param {VideogenApi.PromptToVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.generateVideoClip({
+     *     await client.tools.promptToVideoClip({
      *         prompt: "prompt",
      *         generateAudio: true
      *     })
      */
-    public generateVideoClip(
-        request: VideogenApi.GenerateVideoClipRequest,
+    public promptToVideoClip(
+        request: VideogenApi.PromptToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__generateVideoClip(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__promptToVideoClip(request, requestOptions));
     }
 
-    private async __generateVideoClip(
-        request: VideogenApi.GenerateVideoClipRequest,
+    private async __promptToVideoClip(
+        request: VideogenApi.PromptToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -120,7 +120,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                "v1/tools/generate-video-clip",
+                "v1/tools/prompt-to-video-clip",
             ),
             method: "POST",
             headers: _headers,
@@ -153,16 +153,16 @@ export class ToolsClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/tools/generate-video-clip",
+            "/v1/tools/prompt-to-video-clip",
         );
     }
 
     /**
-     * @param {VideogenApi.GenerateVideoFromImageRequest} request
+     * @param {VideogenApi.ImageToVideoRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.generateVideoFromImage({
+     *     await client.tools.imageToVideo({
      *         prompt: "prompt",
      *         generateAudio: true,
      *         image: {
@@ -171,15 +171,15 @@ export class ToolsClient {
      *         }
      *     })
      */
-    public generateVideoFromImage(
-        request: VideogenApi.GenerateVideoFromImageRequest,
+    public imageToVideo(
+        request: VideogenApi.ImageToVideoRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__generateVideoFromImage(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__imageToVideo(request, requestOptions));
     }
 
-    private async __generateVideoFromImage(
-        request: VideogenApi.GenerateVideoFromImageRequest,
+    private async __imageToVideo(
+        request: VideogenApi.ImageToVideoRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -193,7 +193,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                "v1/tools/generate-video-from-image",
+                "v1/tools/image-to-video",
             ),
             method: "POST",
             headers: _headers,
@@ -222,32 +222,27 @@ export class ToolsClient {
             });
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/v1/tools/generate-video-from-image",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/image-to-video");
     }
 
     /**
-     * @param {VideogenApi.GenerateTtsRequest} request
+     * @param {VideogenApi.TextToSpeechRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.generateTts({
+     *     await client.tools.textToSpeech({
      *         ttsText: "ttsText"
      *     })
      */
-    public generateTts(
-        request: VideogenApi.GenerateTtsRequest,
+    public textToSpeech(
+        request: VideogenApi.TextToSpeechRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__generateTts(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__textToSpeech(request, requestOptions));
     }
 
-    private async __generateTts(
-        request: VideogenApi.GenerateTtsRequest,
+    private async __textToSpeech(
+        request: VideogenApi.TextToSpeechRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -261,7 +256,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                "v1/tools/generate-tts",
+                "v1/tools/text-to-speech",
             ),
             method: "POST",
             headers: _headers,
@@ -290,27 +285,27 @@ export class ToolsClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/generate-tts");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/text-to-speech");
     }
 
     /**
-     * @param {VideogenApi.GenerateSoundEffectRequest} request
+     * @param {VideogenApi.PromptToSoundEffectRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.generateSoundEffect({
+     *     await client.tools.promptToSoundEffect({
      *         prompt: "prompt"
      *     })
      */
-    public generateSoundEffect(
-        request: VideogenApi.GenerateSoundEffectRequest,
+    public promptToSoundEffect(
+        request: VideogenApi.PromptToSoundEffectRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__generateSoundEffect(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__promptToSoundEffect(request, requestOptions));
     }
 
-    private async __generateSoundEffect(
-        request: VideogenApi.GenerateSoundEffectRequest,
+    private async __promptToSoundEffect(
+        request: VideogenApi.PromptToSoundEffectRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -324,7 +319,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideogenApiEnvironment.Production,
-                "v1/tools/generate-sound-effect",
+                "v1/tools/prompt-to-sound-effect",
             ),
             method: "POST",
             headers: _headers,
@@ -357,7 +352,7 @@ export class ToolsClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/tools/generate-sound-effect",
+            "/v1/tools/prompt-to-sound-effect",
         );
     }
 

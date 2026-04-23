@@ -6,10 +6,12 @@
  *         prompt: "prompt"
  *     }
  */
-export interface GenerateSoundEffectRequest {
+export interface PromptToSoundEffectRequest {
     prompt: string;
     durationSeconds?: number | null;
     promptInfluence?: number | null;
-    /** How many file outputs to generate (1–100). */
+    /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
+    /** When true, generated files are scoped as temporary. Defaults to false. */
+    isOutputFileTemporary?: boolean;
 }

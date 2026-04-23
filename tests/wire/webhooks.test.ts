@@ -21,6 +21,7 @@ describe("WebhooksClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/webhooks/endpoints")
@@ -30,19 +31,7 @@ describe("WebhooksClient", () => {
             .build();
 
         const response = await client.webhooks.listWebhookEndpoints();
-        expect(response).toEqual({
-            endpoints: [
-                {
-                    endpointId: "endpointId",
-                    url: "url",
-                    events: ["tool_execution.succeeded"],
-                    description: "description",
-                    createdAt: "2024-01-15T09:30:00Z",
-                    signingSecret: "signingSecret",
-                    signingSecretLast4: "signingSecretLast4",
-                },
-            ],
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("createWebhookEndpoint", async () => {
@@ -58,6 +47,7 @@ describe("WebhooksClient", () => {
             signingSecret: "signingSecret",
             signingSecretLast4: "signingSecretLast4",
         };
+
         server
             .mockEndpoint()
             .post("/v1/webhooks/endpoints")
@@ -71,15 +61,7 @@ describe("WebhooksClient", () => {
             url: "url",
             events: ["tool_execution.succeeded"],
         });
-        expect(response).toEqual({
-            endpointId: "endpointId",
-            url: "url",
-            events: ["tool_execution.succeeded"],
-            description: "description",
-            createdAt: "2024-01-15T09:30:00Z",
-            signingSecret: "signingSecret",
-            signingSecretLast4: "signingSecretLast4",
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("deleteWebhookEndpoint", async () => {

@@ -19,6 +19,7 @@ describe("ResourcesClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/resources/avatar-presenters")
@@ -28,17 +29,7 @@ describe("ResourcesClient", () => {
             .build();
 
         const response = await client.resources.listAvatarPresenters();
-        expect(response).toEqual({
-            avatarPresenters: [
-                {
-                    avatarPresenterId: "avatarPresenterId",
-                    displayableGender: "MALE",
-                    imageUrl: "imageUrl",
-                    thumbnailUrl: "thumbnailUrl",
-                    previewVideoUrl: "previewVideoUrl",
-                },
-            ],
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 
     test("listTtsVoices", async () => {
@@ -58,6 +49,7 @@ describe("ResourcesClient", () => {
                 },
             ],
         };
+
         server
             .mockEndpoint()
             .get("/v1/resources/tts-voices")
@@ -67,18 +59,6 @@ describe("ResourcesClient", () => {
             .build();
 
         const response = await client.resources.listTtsVoices();
-        expect(response).toEqual({
-            ttsVoices: [
-                {
-                    voiceId: "voiceId",
-                    providerName: "providerName",
-                    languageCode: "languageCode",
-                    displayName: "displayName",
-                    displayGender: "MALE",
-                    accent: "accent",
-                    description: "description",
-                },
-            ],
-        });
+        expect(response).toEqual(rawResponseBody);
     });
 });
