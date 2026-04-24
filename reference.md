@@ -1,8 +1,22 @@
 # Reference
 ## Tools
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate an image from a text prompt. Optionally specify an aspect ratio and number of candidates.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -31,7 +45,7 @@ await client.tools.promptToImage({
 <dl>
 <dd>
 
-**request:** `VideogenApi.PromptToImageRequest` 
+**request:** `VideoGenApi.PromptToImageRequest` 
     
 </dd>
 </dl>
@@ -51,9 +65,23 @@ await client.tools.promptToImage({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToVideoClip</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToVideoClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a video clip from a text prompt, with optional audio. Optionally specify an aspect ratio and number of candidates.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -65,8 +93,7 @@ await client.tools.promptToImage({
 
 ```typescript
 await client.tools.promptToVideoClip({
-    prompt: "prompt",
-    generateAudio: true
+    prompt: "prompt"
 });
 
 ```
@@ -83,7 +110,7 @@ await client.tools.promptToVideoClip({
 <dl>
 <dd>
 
-**request:** `VideogenApi.PromptToVideoClipRequest` 
+**request:** `VideoGenApi.PromptToVideoClipRequest` 
     
 </dd>
 </dl>
@@ -103,9 +130,23 @@ await client.tools.promptToVideoClip({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToVideoClip</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToVideoClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Animate a still image into a video clip using a text prompt. Optionally generate audio alongside the video.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -117,12 +158,7 @@ await client.tools.promptToVideoClip({
 
 ```typescript
 await client.tools.imageToVideoClip({
-    prompt: "prompt",
-    generateAudio: true,
-    image: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    imageStorageFileId: "imageStorageFileId"
 });
 
 ```
@@ -139,7 +175,7 @@ await client.tools.imageToVideoClip({
 <dl>
 <dd>
 
-**request:** `VideogenApi.ImageToVideoClipRequest` 
+**request:** `VideoGenApi.ImageToVideoClipRequest` 
     
 </dd>
 </dl>
@@ -159,9 +195,23 @@ await client.tools.imageToVideoClip({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Transform an existing image using a text prompt. The prompt describes the desired changes to apply.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -173,11 +223,8 @@ await client.tools.imageToVideoClip({
 
 ```typescript
 await client.tools.imageToImage({
-    prompt: "prompt",
-    image: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    imageStorageFileId: "imageStorageFileId",
+    prompt: "prompt"
 });
 
 ```
@@ -194,7 +241,7 @@ await client.tools.imageToImage({
 <dl>
 <dd>
 
-**request:** `VideogenApi.ImageToImageRequest` 
+**request:** `VideoGenApi.ImageToImageRequest` 
     
 </dd>
 </dl>
@@ -214,9 +261,23 @@ await client.tools.imageToImage({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">videoToVideoClip</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">videoToVideoClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Restyle an existing video using a text prompt. The prompt describes the visual transformation to apply.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -228,11 +289,8 @@ await client.tools.imageToImage({
 
 ```typescript
 await client.tools.videoToVideoClip({
-    prompt: "prompt",
-    video: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    videoStorageFileId: "videoStorageFileId",
+    prompt: "prompt"
 });
 
 ```
@@ -249,7 +307,7 @@ await client.tools.videoToVideoClip({
 <dl>
 <dd>
 
-**request:** `VideogenApi.VideoToVideoClipRequest` 
+**request:** `VideoGenApi.VideoToVideoClipRequest` 
     
 </dd>
 </dl>
@@ -269,9 +327,23 @@ await client.tools.videoToVideoClip({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">textToSpeech</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">textToSpeech</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Convert text into a spoken audio file. Only voices with `supportsDirectToolExecution` set to true can be used. Optionally choose a voice, language, speed, and pronunciation overrides.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -300,7 +372,7 @@ await client.tools.textToSpeech({
 <dl>
 <dd>
 
-**request:** `VideogenApi.TextToSpeechRequest` 
+**request:** `VideoGenApi.TextToSpeechRequest` 
     
 </dd>
 </dl>
@@ -320,9 +392,23 @@ await client.tools.textToSpeech({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToSoundEffect</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToSoundEffect</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a sound effect from a text description. Optionally control the duration and prompt influence.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -351,7 +437,7 @@ await client.tools.promptToSoundEffect({
 <dl>
 <dd>
 
-**request:** `VideogenApi.PromptToSoundEffectRequest` 
+**request:** `VideoGenApi.PromptToSoundEffectRequest` 
     
 </dd>
 </dl>
@@ -371,9 +457,23 @@ await client.tools.promptToSoundEffect({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateAvatar</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">audioToAvatarClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate a talking-head avatar video by pairing a presenter with an audio file, typically from a prior text-to-speech result.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -384,12 +484,9 @@ await client.tools.promptToSoundEffect({
 <dd>
 
 ```typescript
-await client.tools.generateAvatar({
+await client.tools.audioToAvatarClip({
     avatarPresenterId: "avatarPresenterId",
-    audio: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    audioStorageFileId: "audioStorageFileId"
 });
 
 ```
@@ -406,7 +503,7 @@ await client.tools.generateAvatar({
 <dl>
 <dd>
 
-**request:** `VideogenApi.GenerateAvatarRequest` 
+**request:** `VideoGenApi.AudioToAvatarClipRequest` 
     
 </dd>
 </dl>
@@ -426,9 +523,23 @@ await client.tools.generateAvatar({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">vectorizeImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">vectorizeImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Convert any raster image into a scalable vector graphic (SVG). The output traces the shapes and colors of the input image.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -440,10 +551,7 @@ await client.tools.generateAvatar({
 
 ```typescript
 await client.tools.vectorizeImage({
-    image: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    imageStorageFileId: "imageStorageFileId"
 });
 
 ```
@@ -460,7 +568,7 @@ await client.tools.vectorizeImage({
 <dl>
 <dd>
 
-**request:** `VideogenApi.ImageAssetRequest` 
+**request:** `VideoGenApi.ImageAssetRequest` 
     
 </dd>
 </dl>
@@ -480,9 +588,23 @@ await client.tools.vectorizeImage({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">removeImageBackground</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">removeImageBackground</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove the background from an image, returning a transparent-background PNG of the foreground subject.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -494,10 +616,7 @@ await client.tools.vectorizeImage({
 
 ```typescript
 await client.tools.removeImageBackground({
-    image: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    imageStorageFileId: "imageStorageFileId"
 });
 
 ```
@@ -514,7 +633,7 @@ await client.tools.removeImageBackground({
 <dl>
 <dd>
 
-**request:** `VideogenApi.ImageAssetRequest` 
+**request:** `VideoGenApi.ImageAssetRequest` 
     
 </dd>
 </dl>
@@ -534,9 +653,23 @@ await client.tools.removeImageBackground({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">removeVideoBackground</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">removeVideoBackground</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove the background from a video, producing a transparent-background video of the foreground subject.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -548,10 +681,7 @@ await client.tools.removeImageBackground({
 
 ```typescript
 await client.tools.removeVideoBackground({
-    video: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    videoStorageFileId: "videoStorageFileId"
 });
 
 ```
@@ -568,7 +698,7 @@ await client.tools.removeVideoBackground({
 <dl>
 <dd>
 
-**request:** `VideogenApi.VideoAssetRequest` 
+**request:** `VideoGenApi.VideoAssetRequest` 
     
 </dd>
 </dl>
@@ -588,9 +718,23 @@ await client.tools.removeVideoBackground({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">upscaleImage</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">upscaleImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Increase the resolution of an image while preserving detail and sharpness.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -602,10 +746,7 @@ await client.tools.removeVideoBackground({
 
 ```typescript
 await client.tools.upscaleImage({
-    image: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    imageStorageFileId: "imageStorageFileId"
 });
 
 ```
@@ -622,7 +763,7 @@ await client.tools.upscaleImage({
 <dl>
 <dd>
 
-**request:** `VideogenApi.ImageAssetRequest` 
+**request:** `VideoGenApi.ImageAssetRequest` 
     
 </dd>
 </dl>
@@ -642,9 +783,23 @@ await client.tools.upscaleImage({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">upscaleVideo</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">upscaleVideo</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Increase the resolution of a video while preserving detail and sharpness.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -656,10 +811,7 @@ await client.tools.upscaleImage({
 
 ```typescript
 await client.tools.upscaleVideo({
-    video: {
-        storageFileId: "storageFileId",
-        type: "IMAGE"
-    }
+    videoStorageFileId: "videoStorageFileId"
 });
 
 ```
@@ -676,7 +828,7 @@ await client.tools.upscaleVideo({
 <dl>
 <dd>
 
-**request:** `VideogenApi.VideoAssetRequest` 
+**request:** `VideoGenApi.VideoAssetRequest` 
     
 </dd>
 </dl>
@@ -696,9 +848,23 @@ await client.tools.upscaleVideo({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">cancelToolExecution</a>({ ...params }) -> VideogenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">cancelToolExecution</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Request cancellation of a running tool execution. The execution transitions to `cancelled` if it has not already completed.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -710,7 +876,7 @@ await client.tools.upscaleVideo({
 
 ```typescript
 await client.tools.cancelToolExecution({
-    apiTaskExecutionId: "apiTaskExecutionId"
+    toolExecutionId: "toolExecutionId"
 });
 
 ```
@@ -727,7 +893,7 @@ await client.tools.cancelToolExecution({
 <dl>
 <dd>
 
-**request:** `VideogenApi.CancelToolExecutionRequest` 
+**request:** `VideoGenApi.CancelToolExecutionRequest` 
     
 </dd>
 </dl>
@@ -747,9 +913,23 @@ await client.tools.cancelToolExecution({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">getExecutedTool</a>({ ...params }) -> VideogenApi.ExecutedTool</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">getToolExecutionInfo</a>({ ...params }) -> VideoGenApi.ExecutedTool</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve the current status and result of a tool execution. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -760,8 +940,8 @@ await client.tools.cancelToolExecution({
 <dd>
 
 ```typescript
-await client.tools.getExecutedTool({
-    apiTaskExecutionId: "apiTaskExecutionId"
+await client.tools.getToolExecutionInfo({
+    toolExecutionId: "toolExecutionId"
 });
 
 ```
@@ -778,7 +958,7 @@ await client.tools.getExecutedTool({
 <dl>
 <dd>
 
-**request:** `VideogenApi.GetExecutedToolRequest` 
+**request:** `VideoGenApi.GetToolExecutionInfoRequest` 
     
 </dd>
 </dl>
@@ -799,9 +979,23 @@ await client.tools.getExecutedTool({
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFiles</a>() -> VideogenApi.GetFilesResponse</code></summary>
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFiles</a>() -> VideoGenApi.GetFilesResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all files in your account, including generated assets and uploads.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -840,9 +1034,23 @@ await client.files.getFiles();
 </dl>
 </details>
 
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFile</a>({ ...params }) -> VideogenApi.StorageFile</code></summary>
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFile</a>({ ...params }) -> VideoGenApi.StorageFile</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Retrieve metadata for a single file by its id.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -871,7 +1079,138 @@ await client.files.getFile({
 <dl>
 <dd>
 
-**request:** `VideogenApi.GetFileRequest` 
+**request:** `VideoGenApi.GetFileRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">createFileUpload</a>({ ...params }) -> VideoGenApi.FileUploadResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{storageFileId}` until the file is ready.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.files.createFileUpload({
+    type: "IMAGE",
+    displayName: "displayName"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.CreateFileUploadRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">hydrateFile</a>({ ...params }) -> VideoGenApi.StorageFile</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate fresh signed URLs for all available renditions of a file. Call this when source URLs are missing or expired. Returns the full file object with populated `thumbnailSource`, `previewSource`, and `downloadSource`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.files.hydrateFile({
+    storageFileId: "storageFileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.HydrateFileRequest` 
     
 </dd>
 </dl>
@@ -892,9 +1231,23 @@ await client.files.getFile({
 </details>
 
 ## Resources
-<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listAvatarPresenters</a>() -> VideogenApi.AvatarPresenterListResponse</code></summary>
+<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listAvatarPresenters</a>() -> VideoGenApi.AvatarPresenterListResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -933,9 +1286,23 @@ await client.resources.listAvatarPresenters();
 </dl>
 </details>
 
-<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listTtsVoices</a>() -> VideogenApi.TtsVoiceListResponse</code></summary>
+<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listTtsVoices</a>({ ...params }) -> VideoGenApi.TtsVoiceListResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -962,6 +1329,14 @@ await client.resources.listTtsVoices();
 <dl>
 <dd>
 
+**request:** `VideoGenApi.ListTtsVoicesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **requestOptions:** `ResourcesClient.RequestOptions` 
     
 </dd>
@@ -975,9 +1350,23 @@ await client.resources.listTtsVoices();
 </details>
 
 ## Webhooks
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">listWebhookEndpoints</a>() -> VideogenApi.WebhookEndpointListResponse</code></summary>
+<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">listWebhookEndpoints</a>() -> VideoGenApi.WebhookEndpointListResponse</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List all configured webhook endpoints for your account.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -1016,9 +1405,23 @@ await client.webhooks.listWebhookEndpoints();
 </dl>
 </details>
 
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">createWebhookEndpoint</a>({ ...params }) -> VideogenApi.WebhookEndpoint</code></summary>
+<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">createWebhookEndpoint</a>({ ...params }) -> VideoGenApi.WebhookEndpoint</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Register a new webhook endpoint to receive `tool_execution.*` events. The signing secret is only returned in this response — store it securely.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -1048,7 +1451,7 @@ await client.webhooks.createWebhookEndpoint({
 <dl>
 <dd>
 
-**request:** `VideogenApi.CreateWebhookEndpointRequest` 
+**request:** `VideoGenApi.CreateWebhookEndpointRequest` 
     
 </dd>
 </dl>
@@ -1071,6 +1474,20 @@ await client.webhooks.createWebhookEndpoint({
 <details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">deleteWebhookEndpoint</a>({ ...params }) -> void</code></summary>
 <dl>
 <dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Remove a webhook endpoint. It will stop receiving events immediately.
+</dd>
+</dl>
+</dd>
+</dl>
 
 #### 🔌 Usage
 
@@ -1099,7 +1516,7 @@ await client.webhooks.deleteWebhookEndpoint({
 <dl>
 <dd>
 
-**request:** `VideogenApi.DeleteWebhookEndpointRequest` 
+**request:** `VideoGenApi.DeleteWebhookEndpointRequest` 
     
 </dd>
 </dl>

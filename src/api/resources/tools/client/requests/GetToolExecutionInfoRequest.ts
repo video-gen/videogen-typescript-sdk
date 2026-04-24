@@ -6,6 +6,6 @@
  *         toolExecutionId: "toolExecutionId"
  *     }
  */
-export interface CancelToolExecutionRequest {
+export interface GetToolExecutionInfoRequest {
     toolExecutionId: string;
 }

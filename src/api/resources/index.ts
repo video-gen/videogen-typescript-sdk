@@ -1,5 +1,6 @@
 export * from "./files/client/requests/index.js";
 export * as files from "./files/index.js";
+export * from "./resources/client/requests/index.js";
 export * as resources from "./resources/index.js";
 export * from "./tools/client/requests/index.js";
 export * as tools from "./tools/index.js";

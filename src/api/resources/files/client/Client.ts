@@ -7,7 +7,7 @@ import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
-import type * as VideogenApi from "../../../index.js";
+import type * as VideoGenApi from "../../../index.js";
 
 export declare namespace FilesClient {
     export type Options = BaseClientOptions;
@@ -26,6 +26,8 @@ export class FilesClient {
     }
 
     /**
+     * List all files in your account, including generated assets and uploads.
+     *
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -33,13 +35,13 @@ export class FilesClient {
      */
     public getFiles(
         requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.GetFilesResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.GetFilesResponse> {
         return core.HttpResponsePromise.fromPromise(this.__getFiles(requestOptions));
     }
 
     private async __getFiles(
         requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.GetFilesResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.GetFilesResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -50,7 +52,7 @@ export class FilesClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/files",
             ),
             method: "GET",
@@ -63,11 +65,11 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as VideogenApi.GetFilesResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as VideoGenApi.GetFilesResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -78,7 +80,9 @@ export class FilesClient {
     }
 
     /**
-     * @param {VideogenApi.GetFileRequest} request
+     * Retrieve metadata for a single file by its id.
+     *
+     * @param {VideoGenApi.GetFileRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -87,16 +91,16 @@ export class FilesClient {
      *     })
      */
     public getFile(
-        request: VideogenApi.GetFileRequest,
+        request: VideoGenApi.GetFileRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StorageFile> {
+    ): core.HttpResponsePromise<VideoGenApi.StorageFile> {
         return core.HttpResponsePromise.fromPromise(this.__getFile(request, requestOptions));
     }
 
     private async __getFile(
-        request: VideogenApi.GetFileRequest,
+        request: VideoGenApi.GetFileRequest,
         requestOptions?: FilesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StorageFile>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
         const { storageFileId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -108,7 +112,7 @@ export class FilesClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 `v1/files/${core.url.encodePathParam(storageFileId)}`,
             ),
             method: "GET",
@@ -121,11 +125,11 @@ export class FilesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as VideogenApi.StorageFile, rawResponse: _response.rawResponse };
+            return { data: _response.body as VideoGenApi.StorageFile, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -133,5 +137,133 @@ export class FilesClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/files/{storageFileId}");
+    }
+
+    /**
+     * Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{storageFileId}` until the file is ready.
+     *
+     * @param {VideoGenApi.CreateFileUploadRequest} request
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.files.createFileUpload({
+     *         type: "IMAGE",
+     *         displayName: "displayName"
+     *     })
+     */
+    public createFileUpload(
+        request: VideoGenApi.CreateFileUploadRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.FileUploadResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__createFileUpload(request, requestOptions));
+    }
+
+    private async __createFileUpload(
+        request: VideoGenApi.CreateFileUploadRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.FileUploadResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/files/upload",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.FileUploadResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/files/upload");
+    }
+
+    /**
+     * Generate fresh signed URLs for all available renditions of a file. Call this when source URLs are missing or expired. Returns the full file object with populated `thumbnailSource`, `previewSource`, and `downloadSource`.
+     *
+     * @param {VideoGenApi.HydrateFileRequest} request
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.files.hydrateFile({
+     *         storageFileId: "storageFileId"
+     *     })
+     */
+    public hydrateFile(
+        request: VideoGenApi.HydrateFileRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StorageFile> {
+        return core.HttpResponsePromise.fromPromise(this.__hydrateFile(request, requestOptions));
+    }
+
+    private async __hydrateFile(
+        request: VideoGenApi.HydrateFileRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
+        const { storageFileId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                `v1/files/${core.url.encodePathParam(storageFileId)}/hydrate`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StorageFile, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/files/{storageFileId}/hydrate",
+        );
     }
 }

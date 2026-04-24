@@ -23,7 +23,7 @@ export class BearerAuthProvider implements core.AuthProvider {
     } = {}): Promise<core.AuthRequest> {
         const token = await core.Supplier.get(this.options[TOKEN_PARAM]);
         if (token == null) {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 message: BearerAuthProvider.AUTH_CONFIG_ERROR_MESSAGE,
             });
         }

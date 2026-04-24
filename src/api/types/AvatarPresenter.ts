@@ -4,7 +4,7 @@
  * An avatar presenter available for video generation.
  */
 export interface AvatarPresenter {
-    /** Presenter id (e.g. `vg_pres_...`). Pass as `avatarPresenterId` to `POST /v1/tools/generate-avatar`. */
+    /** Presenter id (e.g. `vg_pres_...`). Pass as `avatarPresenterId` to `POST /v1/tools/audio-to-avatar-clip`. */
     avatarPresenterId: string;
     /** Presenter gender. */
     displayableGender: AvatarPresenter.DisplayableGender;

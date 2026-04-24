@@ -7,7 +7,7 @@ import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
-import type * as VideogenApi from "../../../index.js";
+import type * as VideoGenApi from "../../../index.js";
 
 export declare namespace ToolsClient {
     export type Options = BaseClientOptions;
@@ -26,7 +26,9 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.PromptToImageRequest} request
+     * Generate an image from a text prompt. Optionally specify an aspect ratio and number of candidates.
+     *
+     * @param {VideoGenApi.PromptToImageRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -35,16 +37,16 @@ export class ToolsClient {
      *     })
      */
     public promptToImage(
-        request: VideogenApi.PromptToImageRequest,
+        request: VideoGenApi.PromptToImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__promptToImage(request, requestOptions));
     }
 
     private async __promptToImage(
-        request: VideogenApi.PromptToImageRequest,
+        request: VideoGenApi.PromptToImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -55,7 +57,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/prompt-to-image",
             ),
             method: "POST",
@@ -72,13 +74,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -89,26 +91,27 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.PromptToVideoClipRequest} request
+     * Generate a video clip from a text prompt, with optional audio. Optionally specify an aspect ratio and number of candidates.
+     *
+     * @param {VideoGenApi.PromptToVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.promptToVideoClip({
-     *         prompt: "prompt",
-     *         generateAudio: true
+     *         prompt: "prompt"
      *     })
      */
     public promptToVideoClip(
-        request: VideogenApi.PromptToVideoClipRequest,
+        request: VideoGenApi.PromptToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__promptToVideoClip(request, requestOptions));
     }
 
     private async __promptToVideoClip(
-        request: VideogenApi.PromptToVideoClipRequest,
+        request: VideoGenApi.PromptToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -119,7 +122,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/prompt-to-video-clip",
             ),
             method: "POST",
@@ -136,13 +139,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -158,30 +161,27 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.ImageToVideoClipRequest} request
+     * Animate a still image into a video clip using a text prompt. Optionally generate audio alongside the video.
+     *
+     * @param {VideoGenApi.ImageToVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.imageToVideoClip({
-     *         prompt: "prompt",
-     *         generateAudio: true,
-     *         image: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         imageStorageFileId: "imageStorageFileId"
      *     })
      */
     public imageToVideoClip(
-        request: VideogenApi.ImageToVideoClipRequest,
+        request: VideoGenApi.ImageToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__imageToVideoClip(request, requestOptions));
     }
 
     private async __imageToVideoClip(
-        request: VideogenApi.ImageToVideoClipRequest,
+        request: VideoGenApi.ImageToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -192,7 +192,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/image-to-video-clip",
             ),
             method: "POST",
@@ -209,13 +209,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -231,29 +231,28 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.ImageToImageRequest} request
+     * Transform an existing image using a text prompt. The prompt describes the desired changes to apply.
+     *
+     * @param {VideoGenApi.ImageToImageRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.imageToImage({
-     *         prompt: "prompt",
-     *         image: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         imageStorageFileId: "imageStorageFileId",
+     *         prompt: "prompt"
      *     })
      */
     public imageToImage(
-        request: VideogenApi.ImageToImageRequest,
+        request: VideoGenApi.ImageToImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__imageToImage(request, requestOptions));
     }
 
     private async __imageToImage(
-        request: VideogenApi.ImageToImageRequest,
+        request: VideoGenApi.ImageToImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -264,7 +263,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/image-to-image",
             ),
             method: "POST",
@@ -281,13 +280,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -298,29 +297,28 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.VideoToVideoClipRequest} request
+     * Restyle an existing video using a text prompt. The prompt describes the visual transformation to apply.
+     *
+     * @param {VideoGenApi.VideoToVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.videoToVideoClip({
-     *         prompt: "prompt",
-     *         video: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         videoStorageFileId: "videoStorageFileId",
+     *         prompt: "prompt"
      *     })
      */
     public videoToVideoClip(
-        request: VideogenApi.VideoToVideoClipRequest,
+        request: VideoGenApi.VideoToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__videoToVideoClip(request, requestOptions));
     }
 
     private async __videoToVideoClip(
-        request: VideogenApi.VideoToVideoClipRequest,
+        request: VideoGenApi.VideoToVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -331,7 +329,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/video-to-video-clip",
             ),
             method: "POST",
@@ -348,13 +346,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -370,7 +368,9 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.TextToSpeechRequest} request
+     * Convert text into a spoken audio file. Only voices with `supportsDirectToolExecution` set to true can be used. Optionally choose a voice, language, speed, and pronunciation overrides.
+     *
+     * @param {VideoGenApi.TextToSpeechRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -379,16 +379,16 @@ export class ToolsClient {
      *     })
      */
     public textToSpeech(
-        request: VideogenApi.TextToSpeechRequest,
+        request: VideoGenApi.TextToSpeechRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__textToSpeech(request, requestOptions));
     }
 
     private async __textToSpeech(
-        request: VideogenApi.TextToSpeechRequest,
+        request: VideoGenApi.TextToSpeechRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -399,7 +399,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/text-to-speech",
             ),
             method: "POST",
@@ -416,13 +416,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -433,7 +433,9 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.PromptToSoundEffectRequest} request
+     * Generate a sound effect from a text description. Optionally control the duration and prompt influence.
+     *
+     * @param {VideoGenApi.PromptToSoundEffectRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -442,16 +444,16 @@ export class ToolsClient {
      *     })
      */
     public promptToSoundEffect(
-        request: VideogenApi.PromptToSoundEffectRequest,
+        request: VideoGenApi.PromptToSoundEffectRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__promptToSoundEffect(request, requestOptions));
     }
 
     private async __promptToSoundEffect(
-        request: VideogenApi.PromptToSoundEffectRequest,
+        request: VideoGenApi.PromptToSoundEffectRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -462,7 +464,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/prompt-to-sound-effect",
             ),
             method: "POST",
@@ -479,13 +481,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -501,29 +503,28 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.GenerateAvatarRequest} request
+     * Generate a talking-head avatar video by pairing a presenter with an audio file, typically from a prior text-to-speech result.
+     *
+     * @param {VideoGenApi.AudioToAvatarClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.generateAvatar({
+     *     await client.tools.audioToAvatarClip({
      *         avatarPresenterId: "avatarPresenterId",
-     *         audio: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         audioStorageFileId: "audioStorageFileId"
      *     })
      */
-    public generateAvatar(
-        request: VideogenApi.GenerateAvatarRequest,
+    public audioToAvatarClip(
+        request: VideoGenApi.AudioToAvatarClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__generateAvatar(request, requestOptions));
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__audioToAvatarClip(request, requestOptions));
     }
 
-    private async __generateAvatar(
-        request: VideogenApi.GenerateAvatarRequest,
+    private async __audioToAvatarClip(
+        request: VideoGenApi.AudioToAvatarClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -534,8 +535,8 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
-                "v1/tools/generate-avatar",
+                    environments.VideoGenEnvironment.Production,
+                "v1/tools/audio-to-avatar-clip",
             ),
             method: "POST",
             headers: _headers,
@@ -551,45 +552,49 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/generate-avatar");
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/tools/audio-to-avatar-clip",
+        );
     }
 
     /**
-     * @param {VideogenApi.ImageAssetRequest} request
+     * Convert any raster image into a scalable vector graphic (SVG). The output traces the shapes and colors of the input image.
+     *
+     * @param {VideoGenApi.ImageAssetRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.vectorizeImage({
-     *         image: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         imageStorageFileId: "imageStorageFileId"
      *     })
      */
     public vectorizeImage(
-        request: VideogenApi.ImageAssetRequest,
+        request: VideoGenApi.ImageAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__vectorizeImage(request, requestOptions));
     }
 
     private async __vectorizeImage(
-        request: VideogenApi.ImageAssetRequest,
+        request: VideoGenApi.ImageAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -600,7 +605,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/vectorize-image",
             ),
             method: "POST",
@@ -617,13 +622,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -634,28 +639,27 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.ImageAssetRequest} request
+     * Remove the background from an image, returning a transparent-background PNG of the foreground subject.
+     *
+     * @param {VideoGenApi.ImageAssetRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.removeImageBackground({
-     *         image: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         imageStorageFileId: "imageStorageFileId"
      *     })
      */
     public removeImageBackground(
-        request: VideogenApi.ImageAssetRequest,
+        request: VideoGenApi.ImageAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__removeImageBackground(request, requestOptions));
     }
 
     private async __removeImageBackground(
-        request: VideogenApi.ImageAssetRequest,
+        request: VideoGenApi.ImageAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -666,7 +670,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/remove-image-background",
             ),
             method: "POST",
@@ -683,13 +687,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -705,28 +709,27 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.VideoAssetRequest} request
+     * Remove the background from a video, producing a transparent-background video of the foreground subject.
+     *
+     * @param {VideoGenApi.VideoAssetRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.removeVideoBackground({
-     *         video: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         videoStorageFileId: "videoStorageFileId"
      *     })
      */
     public removeVideoBackground(
-        request: VideogenApi.VideoAssetRequest,
+        request: VideoGenApi.VideoAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__removeVideoBackground(request, requestOptions));
     }
 
     private async __removeVideoBackground(
-        request: VideogenApi.VideoAssetRequest,
+        request: VideoGenApi.VideoAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -737,7 +740,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/remove-video-background",
             ),
             method: "POST",
@@ -754,13 +757,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -776,28 +779,27 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.ImageAssetRequest} request
+     * Increase the resolution of an image while preserving detail and sharpness.
+     *
+     * @param {VideoGenApi.ImageAssetRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.upscaleImage({
-     *         image: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         imageStorageFileId: "imageStorageFileId"
      *     })
      */
     public upscaleImage(
-        request: VideogenApi.ImageAssetRequest,
+        request: VideoGenApi.ImageAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__upscaleImage(request, requestOptions));
     }
 
     private async __upscaleImage(
-        request: VideogenApi.ImageAssetRequest,
+        request: VideoGenApi.ImageAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -808,7 +810,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/upscale-image",
             ),
             method: "POST",
@@ -825,13 +827,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -842,28 +844,27 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.VideoAssetRequest} request
+     * Increase the resolution of a video while preserving detail and sharpness.
+     *
+     * @param {VideoGenApi.VideoAssetRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.upscaleVideo({
-     *         video: {
-     *             storageFileId: "storageFileId",
-     *             type: "IMAGE"
-     *         }
+     *         videoStorageFileId: "videoStorageFileId"
      *     })
      */
     public upscaleVideo(
-        request: VideogenApi.VideoAssetRequest,
+        request: VideoGenApi.VideoAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__upscaleVideo(request, requestOptions));
     }
 
     private async __upscaleVideo(
-        request: VideogenApi.VideoAssetRequest,
+        request: VideoGenApi.VideoAssetRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -874,7 +875,7 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/tools/upscale-video",
             ),
             method: "POST",
@@ -891,13 +892,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -908,26 +909,28 @@ export class ToolsClient {
     }
 
     /**
-     * @param {VideogenApi.CancelToolExecutionRequest} request
+     * Request cancellation of a running tool execution. The execution transitions to `cancelled` if it has not already completed.
+     *
+     * @param {VideoGenApi.CancelToolExecutionRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.tools.cancelToolExecution({
-     *         apiTaskExecutionId: "apiTaskExecutionId"
+     *         toolExecutionId: "toolExecutionId"
      *     })
      */
     public cancelToolExecution(
-        request: VideogenApi.CancelToolExecutionRequest,
+        request: VideoGenApi.CancelToolExecutionRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.StartToolExecutionResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__cancelToolExecution(request, requestOptions));
     }
 
     private async __cancelToolExecution(
-        request: VideogenApi.CancelToolExecutionRequest,
+        request: VideoGenApi.CancelToolExecutionRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.StartToolExecutionResponse>> {
-        const { apiTaskExecutionId } = request;
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
+        const { toolExecutionId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -938,8 +941,8 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
-                `v1/tools/executions/${core.url.encodePathParam(apiTaskExecutionId)}/cancel`,
+                    environments.VideoGenEnvironment.Production,
+                `v1/tools/executions/${core.url.encodePathParam(toolExecutionId)}/cancel`,
             ),
             method: "POST",
             headers: _headers,
@@ -952,13 +955,13 @@ export class ToolsClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.StartToolExecutionResponse,
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -969,31 +972,33 @@ export class ToolsClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/tools/executions/{apiTaskExecutionId}/cancel",
+            "/v1/tools/executions/{toolExecutionId}/cancel",
         );
     }
 
     /**
-     * @param {VideogenApi.GetExecutedToolRequest} request
+     * Retrieve the current status and result of a tool execution. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`.
+     *
+     * @param {VideoGenApi.GetToolExecutionInfoRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.getExecutedTool({
-     *         apiTaskExecutionId: "apiTaskExecutionId"
+     *     await client.tools.getToolExecutionInfo({
+     *         toolExecutionId: "toolExecutionId"
      *     })
      */
-    public getExecutedTool(
-        request: VideogenApi.GetExecutedToolRequest,
+    public getToolExecutionInfo(
+        request: VideoGenApi.GetToolExecutionInfoRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.ExecutedTool> {
-        return core.HttpResponsePromise.fromPromise(this.__getExecutedTool(request, requestOptions));
+    ): core.HttpResponsePromise<VideoGenApi.ExecutedTool> {
+        return core.HttpResponsePromise.fromPromise(this.__getToolExecutionInfo(request, requestOptions));
     }
 
-    private async __getExecutedTool(
-        request: VideogenApi.GetExecutedToolRequest,
+    private async __getToolExecutionInfo(
+        request: VideoGenApi.GetToolExecutionInfoRequest,
         requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.ExecutedTool>> {
-        const { apiTaskExecutionId } = request;
+    ): Promise<core.WithRawResponse<VideoGenApi.ExecutedTool>> {
+        const { toolExecutionId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -1004,8 +1009,8 @@ export class ToolsClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
-                `v1/tools/executions/${core.url.encodePathParam(apiTaskExecutionId)}`,
+                    environments.VideoGenEnvironment.Production,
+                `v1/tools/executions/${core.url.encodePathParam(toolExecutionId)}`,
             ),
             method: "GET",
             headers: _headers,
@@ -1017,11 +1022,11 @@ export class ToolsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as VideogenApi.ExecutedTool, rawResponse: _response.rawResponse };
+            return { data: _response.body as VideoGenApi.ExecutedTool, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -1032,7 +1037,7 @@ export class ToolsClient {
             _response.error,
             _response.rawResponse,
             "GET",
-            "/v1/tools/executions/{apiTaskExecutionId}",
+            "/v1/tools/executions/{toolExecutionId}",
         );
     }
 }

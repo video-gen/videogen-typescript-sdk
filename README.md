@@ -47,10 +47,10 @@ A full reference for this library is available [here](https://github.com/video-g
 Instantiate and use the client with the following:
 
 ```typescript
-import { VideogenApiClient } from "@videogen/sdk";
+import { VideoGenClient } from "@videogen/sdk";
 
-const client = new VideogenApiClient({ token: "YOUR_TOKEN" });
-await client.tools.promptToImage({
+const client = new VideoGenClient({ token: "YOUR_TOKEN" });
+await client.tools.promptToVideoClip({
     prompt: "prompt"
 });
 ```
@@ -60,10 +60,10 @@ await client.tools.promptToImage({
 This SDK allows you to configure different environments for API requests.
 
 ```typescript
-import { VideogenApiClient, VideogenApiEnvironment } from "@videogen/sdk";
+import { VideoGenClient, VideoGenApiEnvironment } from "@videogen/sdk";
 
-const client = new VideogenApiClient({
-    environment: VideogenApiEnvironment.Production,
+const client = new VideoGenClient({
+    environment: VideoGenApiEnvironment.Production,
 });
 ```
 
@@ -73,9 +73,9 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { VideogenApi } from "@videogen/sdk";
+import { VideoGenApi } from "@videogen/sdk";
 
-const request: VideogenApi.PromptToImageRequest = {
+const request: VideoGenApi.PromptToImageRequest = {
     ...
 };
 ```
@@ -86,12 +86,12 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { VideogenApiError } from "@videogen/sdk";
+import { VideoGenError } from "@videogen/sdk";
 
 try {
-    await client.tools.promptToImage(...);
+    await client.tools.promptToVideoClip(...);
 } catch (err) {
-    if (err instanceof VideogenApiError) {
+    if (err instanceof VideoGenError) {
         console.log(err.statusCode);
         console.log(err.message);
         console.log(err.body);
@@ -117,16 +117,16 @@ const client = new ToolsClient({...});
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-import { VideogenApiClient } from "@videogen/sdk";
+import { VideoGenClient } from "@videogen/sdk";
 
-const client = new VideogenApiClient({
+const client = new VideoGenClient({
     ...
     headers: {
         'X-Custom-Header': 'custom value'
     }
 });
 
-const response = await client.tools.promptToImage(..., {
+const response = await client.tools.promptToVideoClip(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -138,7 +138,7 @@ const response = await client.tools.promptToImage(..., {
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.tools.promptToImage(..., {
+const response = await client.tools.promptToVideoClip(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -160,7 +160,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.tools.promptToImage(..., {
+const response = await client.tools.promptToVideoClip(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -170,7 +170,7 @@ const response = await client.tools.promptToImage(..., {
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.tools.promptToImage(..., {
+const response = await client.tools.promptToVideoClip(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -181,7 +181,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.tools.promptToImage(..., {
+const response = await client.tools.promptToVideoClip(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -193,7 +193,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.tools.promptToImage(...).withRawResponse();
+const { data, rawResponse } = await client.tools.promptToVideoClip(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);
@@ -204,9 +204,9 @@ console.log(rawResponse.headers['X-My-Header']);
 The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
 
 ```typescript
-import { VideogenApiClient, logging } from "@videogen/sdk";
+import { VideoGenClient, logging } from "@videogen/sdk";
 
-const client = new VideogenApiClient({
+const client = new VideoGenClient({
     ...
     logging: {
         level: logging.LogLevel.Debug, // defaults to logging.LogLevel.Info

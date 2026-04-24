@@ -7,7 +7,7 @@ import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
-import type * as VideogenApi from "../../../index.js";
+import type * as VideoGenApi from "../../../index.js";
 
 export declare namespace ResourcesClient {
     export type Options = BaseClientOptions;
@@ -26,6 +26,8 @@ export class ResourcesClient {
     }
 
     /**
+     * List all available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint.
+     *
      * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -33,13 +35,13 @@ export class ResourcesClient {
      */
     public listAvatarPresenters(
         requestOptions?: ResourcesClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.AvatarPresenterListResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.AvatarPresenterListResponse> {
         return core.HttpResponsePromise.fromPromise(this.__listAvatarPresenters(requestOptions));
     }
 
     private async __listAvatarPresenters(
         requestOptions?: ResourcesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.AvatarPresenterListResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.AvatarPresenterListResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -50,7 +52,7 @@ export class ResourcesClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/resources/avatar-presenters",
             ),
             method: "GET",
@@ -64,13 +66,13 @@ export class ResourcesClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.AvatarPresenterListResponse,
+                data: _response.body as VideoGenApi.AvatarPresenterListResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -86,20 +88,29 @@ export class ResourcesClient {
     }
 
     /**
+     * List all available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint.
+     *
+     * @param {VideoGenApi.ListTtsVoicesRequest} request
      * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.resources.listTtsVoices()
      */
     public listTtsVoices(
+        request: VideoGenApi.ListTtsVoicesRequest = {},
         requestOptions?: ResourcesClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.TtsVoiceListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listTtsVoices(requestOptions));
+    ): core.HttpResponsePromise<VideoGenApi.TtsVoiceListResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listTtsVoices(request, requestOptions));
     }
 
     private async __listTtsVoices(
+        request: VideoGenApi.ListTtsVoicesRequest = {},
         requestOptions?: ResourcesClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.TtsVoiceListResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.TtsVoiceListResponse>> {
+        const { includeDeprecatedVoices } = request;
+        const _queryParams: Record<string, unknown> = {
+            includeDeprecatedVoices,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -110,12 +121,17 @@ export class ResourcesClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/resources/tts-voices",
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryParameters: { ..._queryParams, ...requestOptions?.queryParams },
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -123,11 +139,11 @@ export class ResourcesClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as VideogenApi.TtsVoiceListResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as VideoGenApi.TtsVoiceListResponse, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,

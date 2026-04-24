@@ -8,20 +8,20 @@ import type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
 import { type NormalizedClientOptionsWithAuth, normalizeClientOptionsWithAuth } from "./BaseClient.js";
 import * as core from "./core/index.js";
 
-export declare namespace VideogenApiClient {
+export declare namespace VideoGenClient {
     export type Options = BaseClientOptions;
 
     export interface RequestOptions extends BaseRequestOptions {}
 }
 
-export class VideogenApiClient {
-    protected readonly _options: NormalizedClientOptionsWithAuth<VideogenApiClient.Options>;
+export class VideoGenClient {
+    protected readonly _options: NormalizedClientOptionsWithAuth<VideoGenClient.Options>;
     protected _tools: ToolsClient | undefined;
     protected _files: FilesClient | undefined;
     protected _resources: ResourcesClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
 
-    constructor(options: VideogenApiClient.Options) {
+    constructor(options: VideoGenClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
     }
 

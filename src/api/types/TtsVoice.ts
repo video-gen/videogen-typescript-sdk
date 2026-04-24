@@ -6,8 +6,6 @@
 export interface TtsVoice {
     /** Voice id (e.g. `vg_voic_...`). Pass as `voiceId` to `POST /v1/tools/text-to-speech`. */
     voiceId: string;
-    /** TTS provider (e.g. `ELEVEN_LABS`, `GOOGLE`). */
-    providerName: string;
     /** Locale tag for the voice (e.g. `en-US`, `es-ES`). */
     languageCode: string;
     /** Human-readable voice name. */
@@ -18,6 +16,12 @@ export interface TtsVoice {
     accent?: (string | null) | undefined;
     /** Description of the voice. */
     description?: (string | null) | undefined;
+    /** When true, this voice can be used directly with `POST /v1/tools/text-to-speech`. Voices where this is false are returned for discovery purposes but cannot be used through this API. */
+    supportsDirectToolExecution: boolean;
+    /** When true, this voice can synthesize text in any language regardless of its `languageCode`. When false, the voice only supports its listed language. */
+    supportsAllLanguages: boolean;
+    /** When true, this voice is deprecated and may be removed in a future API version. Prefer non-deprecated voices for new integrations. */
+    isDeprecated: boolean;
 }
 
 export namespace TtsVoice {

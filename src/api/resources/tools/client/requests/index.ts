@@ -1,6 +1,6 @@
+export type { AudioToAvatarClipRequest } from "./AudioToAvatarClipRequest.js";
 export type { CancelToolExecutionRequest } from "./CancelToolExecutionRequest.js";
-export type { GenerateAvatarRequest } from "./GenerateAvatarRequest.js";
-export type { GetExecutedToolRequest } from "./GetExecutedToolRequest.js";
+export type { GetToolExecutionInfoRequest } from "./GetToolExecutionInfoRequest.js";
 export type { ImageToImageRequest } from "./ImageToImageRequest.js";
 export type { ImageToVideoClipRequest } from "./ImageToVideoClipRequest.js";
 export type { PromptToImageRequest } from "./PromptToImageRequest.js";

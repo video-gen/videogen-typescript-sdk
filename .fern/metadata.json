@@ -3,13 +3,20 @@
     "generatorName": "fernapi/fern-typescript-sdk",
     "generatorVersion": "3.65.4",
     "generatorConfig": {
+        "naming": {
+            "namespace": "VideoGenApi",
+            "client": "VideoGenClient",
+            "error": "VideoGenError",
+            "timeoutError": "VideoGenTimeoutError",
+            "environment": "VideoGenEnvironment"
+        },
         "packageJson": {
             "homepage": "https://videogen.docs.buildwithfern.com",
             "description": "Official TypeScript SDK for the VideoGen API. Programmatically generate images, videos, voiceovers, sound effects, and avatars."
         }
     },
-    "originGitCommit": "15f6d5959b6cb5c0d4a028b4d20de35cab520bf9",
-    "originGitCommitIsDirty": false,
+    "originGitCommit": "c0e3156ec3c66159b3540740f83dccc2c57c03fa",
+    "originGitCommitIsDirty": true,
     "invokedBy": "manual",
     "requestedVersion": null,
     "ciProvider": null,

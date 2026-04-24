@@ -1,2 +1,2 @@
-export { VideogenApiError } from "./VideogenApiError.js";
-export { VideogenApiTimeoutError } from "./VideogenApiTimeoutError.js";
+export { VideoGenError } from "./VideoGenError.js";
+export { VideoGenTimeoutError } from "./VideoGenTimeoutError.js";

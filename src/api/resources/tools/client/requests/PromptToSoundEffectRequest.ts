@@ -12,6 +12,6 @@ export interface PromptToSoundEffectRequest {
     promptInfluence?: number | null;
     /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
-    /** When true, generated files are scoped as temporary. Defaults to false. */
+    /** When true, generated files are temporary and automatically deleted after 24 hours. Defaults to false. */
     isOutputTemporary?: boolean;
 }

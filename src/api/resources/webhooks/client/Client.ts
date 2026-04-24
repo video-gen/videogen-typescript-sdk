@@ -7,7 +7,7 @@ import * as core from "../../../../core/index.js";
 import * as environments from "../../../../environments.js";
 import { handleNonStatusCodeError } from "../../../../errors/handleNonStatusCodeError.js";
 import * as errors from "../../../../errors/index.js";
-import type * as VideogenApi from "../../../index.js";
+import type * as VideoGenApi from "../../../index.js";
 
 export declare namespace WebhooksClient {
     export type Options = BaseClientOptions;
@@ -26,6 +26,8 @@ export class WebhooksClient {
     }
 
     /**
+     * List all configured webhook endpoints for your account.
+     *
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -33,13 +35,13 @@ export class WebhooksClient {
      */
     public listWebhookEndpoints(
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.WebhookEndpointListResponse> {
+    ): core.HttpResponsePromise<VideoGenApi.WebhookEndpointListResponse> {
         return core.HttpResponsePromise.fromPromise(this.__listWebhookEndpoints(requestOptions));
     }
 
     private async __listWebhookEndpoints(
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.WebhookEndpointListResponse>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.WebhookEndpointListResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -50,7 +52,7 @@ export class WebhooksClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/webhooks/endpoints",
             ),
             method: "GET",
@@ -64,13 +66,13 @@ export class WebhooksClient {
         });
         if (_response.ok) {
             return {
-                data: _response.body as VideogenApi.WebhookEndpointListResponse,
+                data: _response.body as VideoGenApi.WebhookEndpointListResponse,
                 rawResponse: _response.rawResponse,
             };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -81,7 +83,9 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {VideogenApi.CreateWebhookEndpointRequest} request
+     * Register a new webhook endpoint to receive `tool_execution.*` events. The signing secret is only returned in this response — store it securely.
+     *
+     * @param {VideoGenApi.CreateWebhookEndpointRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -91,16 +95,16 @@ export class WebhooksClient {
      *     })
      */
     public createWebhookEndpoint(
-        request: VideogenApi.CreateWebhookEndpointRequest,
+        request: VideoGenApi.CreateWebhookEndpointRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): core.HttpResponsePromise<VideogenApi.WebhookEndpoint> {
+    ): core.HttpResponsePromise<VideoGenApi.WebhookEndpoint> {
         return core.HttpResponsePromise.fromPromise(this.__createWebhookEndpoint(request, requestOptions));
     }
 
     private async __createWebhookEndpoint(
-        request: VideogenApi.CreateWebhookEndpointRequest,
+        request: VideoGenApi.CreateWebhookEndpointRequest,
         requestOptions?: WebhooksClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideogenApi.WebhookEndpoint>> {
+    ): Promise<core.WithRawResponse<VideoGenApi.WebhookEndpoint>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -111,7 +115,7 @@ export class WebhooksClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 "v1/webhooks/endpoints",
             ),
             method: "POST",
@@ -127,11 +131,11 @@ export class WebhooksClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as VideogenApi.WebhookEndpoint, rawResponse: _response.rawResponse };
+            return { data: _response.body as VideoGenApi.WebhookEndpoint, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,
@@ -142,7 +146,9 @@ export class WebhooksClient {
     }
 
     /**
-     * @param {VideogenApi.DeleteWebhookEndpointRequest} request
+     * Remove a webhook endpoint. It will stop receiving events immediately.
+     *
+     * @param {VideoGenApi.DeleteWebhookEndpointRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -151,14 +157,14 @@ export class WebhooksClient {
      *     })
      */
     public deleteWebhookEndpoint(
-        request: VideogenApi.DeleteWebhookEndpointRequest,
+        request: VideoGenApi.DeleteWebhookEndpointRequest,
         requestOptions?: WebhooksClient.RequestOptions,
     ): core.HttpResponsePromise<void> {
         return core.HttpResponsePromise.fromPromise(this.__deleteWebhookEndpoint(request, requestOptions));
     }
 
     private async __deleteWebhookEndpoint(
-        request: VideogenApi.DeleteWebhookEndpointRequest,
+        request: VideoGenApi.DeleteWebhookEndpointRequest,
         requestOptions?: WebhooksClient.RequestOptions,
     ): Promise<core.WithRawResponse<void>> {
         const { endpointId } = request;
@@ -172,7 +178,7 @@ export class WebhooksClient {
             url: core.url.join(
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideogenApiEnvironment.Production,
+                    environments.VideoGenEnvironment.Production,
                 `v1/webhooks/endpoints/${core.url.encodePathParam(endpointId)}`,
             ),
             method: "DELETE",
@@ -189,7 +195,7 @@ export class WebhooksClient {
         }
 
         if (_response.error.reason === "status-code") {
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: _response.error.statusCode,
                 body: _response.error.body,
                 rawResponse: _response.rawResponse,

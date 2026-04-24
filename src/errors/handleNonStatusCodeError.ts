@@ -11,28 +11,28 @@ export function handleNonStatusCodeError(
 ): never {
     switch (error.reason) {
         case "non-json":
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: error.statusCode,
                 body: error.rawBody,
                 rawResponse: rawResponse,
             });
         case "body-is-null":
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 statusCode: error.statusCode,
                 rawResponse: rawResponse,
             });
         case "timeout":
-            throw new errors.VideogenApiTimeoutError(`Timeout exceeded when calling ${method} ${path}.`, {
+            throw new errors.VideoGenTimeoutError(`Timeout exceeded when calling ${method} ${path}.`, {
                 cause: error.cause,
             });
         case "unknown":
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 message: error.errorMessage,
                 rawResponse: rawResponse,
                 cause: error.cause,
             });
         default:
-            throw new errors.VideogenApiError({
+            throw new errors.VideoGenError({
                 message: "Unknown error",
                 rawResponse: rawResponse,
             });

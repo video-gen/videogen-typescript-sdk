@@ -1,6 +1,6 @@
-export * as VideogenApi from "./api/index.js";
+export * as VideoGenApi from "./api/index.js";
 export type { BaseClientOptions, BaseRequestOptions } from "./BaseClient.js";
-export { VideogenApiClient } from "./Client.js";
-export { VideogenApiEnvironment } from "./environments.js";
-export { VideogenApiError, VideogenApiTimeoutError } from "./errors/index.js";
+export { VideoGenClient } from "./Client.js";
+export { VideoGenEnvironment } from "./environments.js";
+export { VideoGenError, VideoGenTimeoutError } from "./errors/index.js";
 export * from "./exports.js";
