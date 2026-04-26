@@ -3,21 +3,20 @@
 /**
  * @example
  *     {
- *         type: "IMAGE",
  *         displayName: "displayName"
  *     }
  */
 export interface CreateFileUploadRequest {
-    /** The type of file to upload. */
-    type: CreateFileUploadRequest.Type;
+    /** The type of file to upload. Optional; when omitted, the type is inferred after upload processing completes. */
+    type?: CreateFileUploadRequest.Type;
     /** Display name for the uploaded file. */
     displayName: string;
-    /** When true, the file is temporary and automatically deleted after 24 hours. Defaults to false. */
+    /** When true, the file is temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Defaults to false. */
     isTemporary?: boolean;
 }
 
 export namespace CreateFileUploadRequest {
-    /** The type of file to upload. */
+    /** The type of file to upload. Optional; when omitted, the type is inferred after upload processing completes. */
     export const Type = {
         Image: "IMAGE",
         Video: "VIDEO",

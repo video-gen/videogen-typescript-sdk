@@ -21,6 +21,9 @@ describe("FilesClient", () => {
                     thumbnailSource: { status: "pending" },
                     previewSource: { status: "pending" },
                     downloadSource: { status: "pending" },
+                    allowsPublicPreview: true,
+                    publicHlsUrl: "publicHlsUrl",
+                    publicPlaybackId: "publicPlaybackId",
                 },
             ],
         };
@@ -28,6 +31,29 @@ describe("FilesClient", () => {
         server.mockEndpoint().get("/v1/files").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
 
         const response = await client.files.getFiles();
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("searchFiles", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { query: "query" };
+        const rawResponseBody = {
+            results: [{ storageFileId: "storageFileId", similarity: 1.1, description: "description" }],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/files/search")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.files.searchFiles({
+            query: "query",
+        });
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -46,6 +72,9 @@ describe("FilesClient", () => {
             thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            allowsPublicPreview: true,
+            publicHlsUrl: "publicHlsUrl",
+            publicPlaybackId: "publicPlaybackId",
         };
 
         server
@@ -65,7 +94,7 @@ describe("FilesClient", () => {
     test("createFileUpload", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { type: "IMAGE", displayName: "displayName" };
+        const rawRequestBody = { displayName: "displayName" };
         const rawResponseBody = { storageFileId: "storageFileId", uploadUrl: "uploadUrl" };
 
         server
@@ -78,7 +107,6 @@ describe("FilesClient", () => {
             .build();
 
         const response = await client.files.createFileUpload({
-            type: "IMAGE",
             displayName: "displayName",
         });
         expect(response).toEqual(rawResponseBody);
@@ -99,6 +127,9 @@ describe("FilesClient", () => {
             thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            allowsPublicPreview: true,
+            publicHlsUrl: "publicHlsUrl",
+            publicPlaybackId: "publicPlaybackId",
         };
 
         server
@@ -110,6 +141,74 @@ describe("FilesClient", () => {
             .build();
 
         const response = await client.files.hydrateFile({
+            storageFileId: "storageFileId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("enablePublicPreview", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            storageFileId: "storageFileId",
+            type: "IMAGE",
+            scope: "GLOBAL",
+            displayName: "displayName",
+            description: "description",
+            durationSeconds: 1.1,
+            transcript: "transcript",
+            thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            allowsPublicPreview: true,
+            publicHlsUrl: "publicHlsUrl",
+            publicPlaybackId: "publicPlaybackId",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/files/storageFileId/enable-public-preview")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.files.enablePublicPreview({
+            storageFileId: "storageFileId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("disablePublicPreview", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            storageFileId: "storageFileId",
+            type: "IMAGE",
+            scope: "GLOBAL",
+            displayName: "displayName",
+            description: "description",
+            durationSeconds: 1.1,
+            transcript: "transcript",
+            thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            allowsPublicPreview: true,
+            publicHlsUrl: "publicHlsUrl",
+            publicPlaybackId: "publicPlaybackId",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/files/storageFileId/disable-public-preview")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.files.disablePublicPreview({
             storageFileId: "storageFileId",
         });
         expect(response).toEqual(rawResponseBody);

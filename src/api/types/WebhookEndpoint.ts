@@ -9,7 +9,7 @@ export interface WebhookEndpoint {
     description?: (string | null) | undefined;
     /** Seconds since epoch (Unix timestamp) when the endpoint was created. */
     createdAt: number;
-    /** HMAC secret for verifying [Standard Webhooks](https://www.standardwebhooks.com/) signatures. **Only returned once** on create — store it securely. */
+    /** HMAC secret for verifying [Standard Webhooks](https://www.standardwebhooks.com/) signatures. Only returned once on create; store it securely. */
     signingSecret?: string | undefined;
     /** Last four characters of the signing secret, for display purposes. */
     signingSecretLast4?: string | undefined;

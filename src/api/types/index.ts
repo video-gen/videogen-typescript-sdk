@@ -9,6 +9,8 @@ export * from "./FileUploadResponse.js";
 export * from "./GetFilesResponse.js";
 export * from "./ImageAssetRequest.js";
 export * from "./PronunciationReplacement.js";
+export * from "./SearchFilesResponse.js";
+export * from "./SearchFilesResult.js";
 export * from "./StartToolExecutionResponse.js";
 export * from "./StorageFile.js";
 export * from "./ToolExecutionWebhookEventName.js";

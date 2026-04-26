@@ -80,6 +80,68 @@ export class FilesClient {
     }
 
     /**
+     * Semantic vector search over your files. Embeds the query text and returns the closest matching files ranked by cosine similarity. Only files with indexed descriptions are searchable.
+     *
+     * @param {VideoGenApi.SearchFilesRequest} request
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.files.searchFiles({
+     *         query: "query"
+     *     })
+     */
+    public searchFiles(
+        request: VideoGenApi.SearchFilesRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.SearchFilesResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__searchFiles(request, requestOptions));
+    }
+
+    private async __searchFiles(
+        request: VideoGenApi.SearchFilesRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.SearchFilesResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/files/search",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryParameters: requestOptions?.queryParams,
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.SearchFilesResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/files/search");
+    }
+
+    /**
      * Retrieve metadata for a single file by its id.
      *
      * @param {VideoGenApi.GetFileRequest} request
@@ -147,7 +209,6 @@ export class FilesClient {
      *
      * @example
      *     await client.files.createFileUpload({
-     *         type: "IMAGE",
      *         displayName: "displayName"
      *     })
      */
@@ -264,6 +325,136 @@ export class FilesClient {
             _response.rawResponse,
             "POST",
             "/v1/files/{storageFileId}/hydrate",
+        );
+    }
+
+    /**
+     * Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `allowsPublicPreview`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
+     *
+     * @param {VideoGenApi.EnablePublicPreviewRequest} request
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.files.enablePublicPreview({
+     *         storageFileId: "storageFileId"
+     *     })
+     */
+    public enablePublicPreview(
+        request: VideoGenApi.EnablePublicPreviewRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StorageFile> {
+        return core.HttpResponsePromise.fromPromise(this.__enablePublicPreview(request, requestOptions));
+    }
+
+    private async __enablePublicPreview(
+        request: VideoGenApi.EnablePublicPreviewRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
+        const { storageFileId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                `v1/files/${core.url.encodePathParam(storageFileId)}/enable-public-preview`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StorageFile, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/files/{storageFileId}/enable-public-preview",
+        );
+    }
+
+    /**
+     * Disable public preview for a file. Deletes the public playback ID from the underlying Mux asset. The file's signed URLs remain functional. Returns the updated file.
+     *
+     * @param {VideoGenApi.DisablePublicPreviewRequest} request
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.files.disablePublicPreview({
+     *         storageFileId: "storageFileId"
+     *     })
+     */
+    public disablePublicPreview(
+        request: VideoGenApi.DisablePublicPreviewRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StorageFile> {
+        return core.HttpResponsePromise.fromPromise(this.__disablePublicPreview(request, requestOptions));
+    }
+
+    private async __disablePublicPreview(
+        request: VideoGenApi.DisablePublicPreviewRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
+        const { storageFileId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                `v1/files/${core.url.encodePathParam(storageFileId)}/disable-public-preview`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryParameters: requestOptions?.queryParams,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StorageFile, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/files/{storageFileId}/disable-public-preview",
         );
     }
 }

@@ -33,7 +33,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.promptToImage({
-     *         prompt: "prompt"
+     *         prompt: "A serene Japanese garden with cherry blossoms at golden hour"
      *     })
      */
     public promptToImage(
@@ -98,7 +98,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.promptToVideoClip({
-     *         prompt: "prompt"
+     *         prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic"
      *     })
      */
     public promptToVideoClip(

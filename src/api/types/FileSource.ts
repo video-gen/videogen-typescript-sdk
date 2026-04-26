@@ -4,7 +4,7 @@
  * A rendition source for a file (e.g. thumbnail, preview, download). Contains a signed URL and metadata.
  */
 export interface FileSource {
-    /** `pending` — asset is still processing or has not been hydrated yet. `ready` — signed URL is available. `failed` — rendition generation failed. `skipped` — rendition does not apply to this file type (e.g. thumbnail for audio). */
+    /** `pending`: asset is still processing or has not been hydrated yet. `ready`: signed URL is available. `failed`: rendition generation failed. `skipped`: rendition does not apply to this file type (e.g. thumbnail for audio). */
     status: FileSource.Status;
     /** Signed URL. Present when status is `ready` and file has been recently hydrated. If missing, call the hydrate endpoint. */
     url?: (string | null) | undefined;
@@ -19,7 +19,7 @@ export interface FileSource {
 }
 
 export namespace FileSource {
-    /** `pending` — asset is still processing or has not been hydrated yet. `ready` — signed URL is available. `failed` — rendition generation failed. `skipped` — rendition does not apply to this file type (e.g. thumbnail for audio). */
+    /** `pending`: asset is still processing or has not been hydrated yet. `ready`: signed URL is available. `failed`: rendition generation failed. `skipped`: rendition does not apply to this file type (e.g. thumbnail for audio). */
     export const Status = {
         Pending: "pending",
         Ready: "ready",

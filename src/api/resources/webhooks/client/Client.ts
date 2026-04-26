@@ -83,7 +83,7 @@ export class WebhooksClient {
     }
 
     /**
-     * Register a new webhook endpoint to receive `tool_execution.*` events. The signing secret is only returned in this response — store it securely.
+     * Register a new webhook endpoint to receive `tool_execution.*` events. The signing secret is only returned in this response. Store it securely.
      *
      * @param {VideoGenApi.CreateWebhookEndpointRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.

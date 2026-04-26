@@ -8,9 +8,9 @@ import type * as VideoGenApi from "../index.js";
 export interface StorageFile {
     /** File id (e.g. `vg_file_...`). */
     storageFileId: string;
-    /** File type. */
-    type: StorageFile.Type;
-    /** File scope. `GLOBAL` — user-uploaded or standalone generated files that persist indefinitely. `PROJECT` — project-specific files (e.g. text-to-speech clips in a generated project). `EXPORT` — project exports. `TEMPORARY` — short-lived files automatically deleted after 24 hours. */
+    /** File type. Null when the file is still being processed and the type has not yet been determined. */
+    type?: (StorageFile.Type | null) | undefined;
+    /** File scope. `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely. `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project). `EXPORT`: project exports. `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. */
     scope: StorageFile.Scope;
     /** Display name for the file. */
     displayName?: string | undefined;
@@ -25,17 +25,23 @@ export interface StorageFile {
     previewSource?: VideoGenApi.FileSource | undefined;
     /** Highest-quality downloadable rendition. Populated after hydration. */
     downloadSource?: VideoGenApi.FileSource | undefined;
+    /** Whether public preview is enabled for this file. When true, `publicHlsUrl` and `publicPlaybackId` are populated. */
+    allowsPublicPreview?: boolean | undefined;
+    /** Public HLS streaming URL. Only present when `allowsPublicPreview` is true. Does not require authentication or signed tokens. */
+    publicHlsUrl?: (string | null) | undefined;
+    /** Encoded public playback id (e.g. `vg_play_...`). Pass this to the `@videogen/player` or `@videogen/player-react` packages. Only present when `allowsPublicPreview` is true. */
+    publicPlaybackId?: (string | null) | undefined;
 }
 
 export namespace StorageFile {
-    /** File type. */
+    /** File type. Null when the file is still being processed and the type has not yet been determined. */
     export const Type = {
         Image: "IMAGE",
         Video: "VIDEO",
         Audio: "AUDIO",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
-    /** File scope. `GLOBAL` — user-uploaded or standalone generated files that persist indefinitely. `PROJECT` — project-specific files (e.g. text-to-speech clips in a generated project). `EXPORT` — project exports. `TEMPORARY` — short-lived files automatically deleted after 24 hours. */
+    /** File scope. `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely. `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project). `EXPORT`: project exports. `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. */
     export const Scope = {
         Global: "GLOBAL",
         Project: "PROJECT",

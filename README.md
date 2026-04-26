@@ -51,7 +51,7 @@ import { VideoGenClient } from "@videogen/sdk";
 
 const client = new VideoGenClient({ token: "YOUR_TOKEN" });
 await client.tools.promptToVideoClip({
-    prompt: "prompt"
+    prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic"
 });
 ```
 

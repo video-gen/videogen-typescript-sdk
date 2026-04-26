@@ -7,7 +7,7 @@ describe("ToolsClient", () => {
     test("promptToImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "prompt" };
+        const rawRequestBody = { prompt: "A serene Japanese garden with cherry blossoms at golden hour" };
         const rawResponseBody = { toolExecutionId: "toolExecutionId" };
 
         server
@@ -20,7 +20,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.promptToImage({
-            prompt: "prompt",
+            prompt: "A serene Japanese garden with cherry blossoms at golden hour",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -28,7 +28,9 @@ describe("ToolsClient", () => {
     test("promptToVideoClip", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "prompt" };
+        const rawRequestBody = {
+            prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic",
+        };
         const rawResponseBody = { toolExecutionId: "toolExecutionId" };
 
         server
@@ -41,7 +43,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.promptToVideoClip({
-            prompt: "prompt",
+            prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -312,7 +314,7 @@ describe("ToolsClient", () => {
                 {
                     storageFileId: "storageFileId",
                     type: "IMAGE",
-                    file: { storageFileId: "storageFileId", type: "IMAGE", scope: "GLOBAL" },
+                    file: { storageFileId: "storageFileId", scope: "GLOBAL" },
                 },
             ],
             error: { message: "message", code: "code" },

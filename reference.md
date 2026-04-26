@@ -28,7 +28,7 @@ Generate an image from a text prompt. Optionally specify an aspect ratio and num
 
 ```typescript
 await client.tools.promptToImage({
-    prompt: "prompt"
+    prompt: "A serene Japanese garden with cherry blossoms at golden hour"
 });
 
 ```
@@ -93,7 +93,7 @@ Generate a video clip from a text prompt, with optional audio. Optionally specif
 
 ```typescript
 await client.tools.promptToVideoClip({
-    prompt: "prompt"
+    prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic"
 });
 
 ```
@@ -1034,6 +1034,71 @@ await client.files.getFiles();
 </dl>
 </details>
 
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">searchFiles</a>({ ...params }) -> VideoGenApi.SearchFilesResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Semantic vector search over your files. Embeds the query text and returns the closest matching files ranked by cosine similarity. Only files with indexed descriptions are searchable.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.files.searchFiles({
+    query: "query"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.SearchFilesRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFile</a>({ ...params }) -> VideoGenApi.StorageFile</code></summary>
 <dl>
 <dd>
@@ -1127,7 +1192,6 @@ Create a new file and receive a pre-signed upload URL. PUT the file bytes to the
 
 ```typescript
 await client.files.createFileUpload({
-    type: "IMAGE",
     displayName: "displayName"
 });
 
@@ -1211,6 +1275,136 @@ await client.files.hydrateFile({
 <dd>
 
 **request:** `VideoGenApi.HydrateFileRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">enablePublicPreview</a>({ ...params }) -> VideoGenApi.StorageFile</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `allowsPublicPreview`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.files.enablePublicPreview({
+    storageFileId: "storageFileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.EnablePublicPreviewRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">disablePublicPreview</a>({ ...params }) -> VideoGenApi.StorageFile</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disable public preview for a file. Deletes the public playback ID from the underlying Mux asset. The file's signed URLs remain functional. Returns the updated file.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.files.disablePublicPreview({
+    storageFileId: "storageFileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.DisablePublicPreviewRequest` 
     
 </dd>
 </dl>
@@ -1417,7 +1611,7 @@ await client.webhooks.listWebhookEndpoints();
 <dl>
 <dd>
 
-Register a new webhook endpoint to receive `tool_execution.*` events. The signing secret is only returned in this response — store it securely.
+Register a new webhook endpoint to receive `tool_execution.*` events. The signing secret is only returned in this response. Store it securely.
 </dd>
 </dl>
 </dd>
