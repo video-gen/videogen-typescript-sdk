@@ -7,10 +7,17 @@ import type * as VideoGenApi from "../index.js";
  */
 export interface StorageFile {
     /** File id (e.g. `vg_file_...`). */
-    storageFileId: string;
+    fileId: string;
     /** File type. Null when the file is still being processed and the type has not yet been determined. */
     type?: (StorageFile.Type | null) | undefined;
-    /** File scope. `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely. `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project). `EXPORT`: project exports. `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. */
+    /**
+     * File scope.
+     *
+     * - `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely.
+     * - `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project).
+     * - `EXPORT`: project exports.
+     * - `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. Not analyzed (no description, transcript, or embedding).
+     */
     scope: StorageFile.Scope;
     /** Display name for the file. */
     displayName?: string | undefined;
@@ -25,12 +32,18 @@ export interface StorageFile {
     previewSource?: VideoGenApi.FileSource | undefined;
     /** Highest-quality downloadable rendition. Populated after hydration. */
     downloadSource?: VideoGenApi.FileSource | undefined;
+    /** Private HLS streaming source. Populated for video and audio files once Mux playback is ready. Uses a signed token; treat like other signed sources. */
+    hlsSource?: VideoGenApi.FileSource | undefined;
     /** Whether public preview is enabled for this file. When true, `publicHlsUrl` and `publicPlaybackId` are populated. */
-    allowsPublicPreview?: boolean | undefined;
-    /** Public HLS streaming URL. Only present when `allowsPublicPreview` is true. Does not require authentication or signed tokens. */
+    isPublicPreviewEnabled?: boolean | undefined;
+    /** Public HLS streaming URL. Only present when `isPublicPreviewEnabled` is true. Does not require authentication or signed tokens. */
     publicHlsUrl?: (string | null) | undefined;
-    /** Encoded public playback id (e.g. `vg_play_...`). Pass this to the `@videogen/player` or `@videogen/player-react` packages. Only present when `allowsPublicPreview` is true. */
+    /** Encoded public playback id (e.g. `vg_play_...`). Pass this to the `@videogen/player` or `@videogen/player-react` packages. Only present when `isPublicPreviewEnabled` is true. */
     publicPlaybackId?: (string | null) | undefined;
+    /** Tool type that generated this file (e.g. `PROMPT_TO_IMAGE`, `TEXT_TO_SPEECH`). Only present when the file was created by a tool execution. */
+    sourceToolType?: string | undefined;
+    /** Execution id of the tool call that generated this file (e.g. `vg_exec_...`). Only present when the file was created by a tool execution. */
+    sourceToolExecutionId?: string | undefined;
 }
 
 export namespace StorageFile {
@@ -41,7 +54,14 @@ export namespace StorageFile {
         Audio: "AUDIO",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
-    /** File scope. `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely. `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project). `EXPORT`: project exports. `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. */
+    /**
+     * File scope.
+     *
+     * - `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely.
+     * - `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project).
+     * - `EXPORT`: project exports.
+     * - `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. Not analyzed (no description, transcript, or embedding).
+     */
     export const Scope = {
         Global: "GLOBAL",
         Project: "PROJECT",

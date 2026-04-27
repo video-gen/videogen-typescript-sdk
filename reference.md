@@ -1127,7 +1127,7 @@ Retrieve metadata for a single file by its id.
 
 ```typescript
 await client.files.getFile({
-    storageFileId: "storageFileId"
+    fileId: "fileId"
 });
 
 ```
@@ -1176,7 +1176,7 @@ await client.files.getFile({
 <dl>
 <dd>
 
-Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{storageFileId}` until the file is ready.
+Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{fileId}` until the file is ready.
 </dd>
 </dl>
 </dd>
@@ -1257,7 +1257,7 @@ Generate fresh signed URLs for all available renditions of a file. Call this whe
 
 ```typescript
 await client.files.hydrateFile({
-    storageFileId: "storageFileId"
+    fileId: "fileId"
 });
 
 ```
@@ -1306,7 +1306,7 @@ await client.files.hydrateFile({
 <dl>
 <dd>
 
-Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `allowsPublicPreview`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
+Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `isPublicPreviewEnabled`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
 </dd>
 </dl>
 </dd>
@@ -1322,7 +1322,7 @@ Enable public preview for a file. Creates a public playback ID on the underlying
 
 ```typescript
 await client.files.enablePublicPreview({
-    storageFileId: "storageFileId"
+    fileId: "fileId"
 });
 
 ```
@@ -1387,7 +1387,7 @@ Disable public preview for a file. Deletes the public playback ID from the under
 
 ```typescript
 await client.files.disablePublicPreview({
-    storageFileId: "storageFileId"
+    fileId: "fileId"
 });
 
 ```
@@ -1611,7 +1611,7 @@ await client.webhooks.listWebhookEndpoints();
 <dl>
 <dd>
 
-Register a new webhook endpoint to receive `tool_execution.*` events. The signing secret is only returned in this response. Store it securely.
+Register a new webhook endpoint to receive `tool_execution.*` and `file.*` events. The signing secret is only returned in this response. Store it securely.
 </dd>
 </dl>
 </dd>

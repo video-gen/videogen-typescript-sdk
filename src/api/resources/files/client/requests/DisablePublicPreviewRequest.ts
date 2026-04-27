@@ -3,9 +3,9 @@
 /**
  * @example
  *     {
- *         storageFileId: "storageFileId"
+ *         fileId: "fileId"
  *     }
  */
 export interface DisablePublicPreviewRequest {
-    storageFileId: string;
+    fileId: string;
 }

@@ -14,6 +14,6 @@ export interface PromptToImageRequest {
     aspectRatio?: VideoGenApi.AspectRatio;
     /** Number of output candidates to generate. Defaults to 1. */
     numCandidates?: number;
-    /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Defaults to false. */
+    /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */
     isOutputTemporary?: boolean;
 }

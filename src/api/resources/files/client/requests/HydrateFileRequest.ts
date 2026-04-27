@@ -3,9 +3,9 @@
 /**
  * @example
  *     {
- *         storageFileId: "storageFileId"
+ *         fileId: "fileId"
  *     }
  */
 export interface HydrateFileRequest {
-    storageFileId: string;
+    fileId: string;
 }

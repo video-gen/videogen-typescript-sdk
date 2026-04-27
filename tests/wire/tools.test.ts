@@ -310,13 +310,7 @@ describe("ToolsClient", () => {
             toolExecutionId: "toolExecutionId",
             status: "pending",
             toolType: "toolType",
-            results: [
-                {
-                    storageFileId: "storageFileId",
-                    type: "IMAGE",
-                    file: { storageFileId: "storageFileId", scope: "GLOBAL" },
-                },
-            ],
+            results: [{ fileId: "fileId", type: "IMAGE", file: { fileId: "fileId", scope: "GLOBAL" } }],
             error: { message: "message", code: "code" },
         };
 

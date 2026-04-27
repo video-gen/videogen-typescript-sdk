@@ -13,5 +13,5 @@ export interface CreateWebhookEndpointRequest {
     /** HTTPS URL that will receive webhook POST requests. */
     url: string;
     description?: string | null;
-    events: VideoGenApi.ToolExecutionWebhookEventName[];
+    events: VideoGenApi.WebhookEventName[];
 }

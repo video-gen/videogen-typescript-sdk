@@ -5,7 +5,7 @@ import type * as VideoGenApi from "../index.js";
 export interface WebhookEndpoint {
     endpointId: string;
     url: string;
-    events: VideoGenApi.ToolExecutionWebhookEventName[];
+    events: VideoGenApi.WebhookEventName[];
     description?: (string | null) | undefined;
     /** Seconds since epoch (Unix timestamp) when the endpoint was created. */
     createdAt: number;

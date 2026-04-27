@@ -57,7 +57,7 @@ export class FilesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -117,7 +117,7 @@ export class FilesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
@@ -149,7 +149,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.getFile({
-     *         storageFileId: "storageFileId"
+     *         fileId: "fileId"
      *     })
      */
     public getFile(
@@ -163,7 +163,7 @@ export class FilesClient {
         request: VideoGenApi.GetFileRequest,
         requestOptions?: FilesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
-        const { storageFileId } = request;
+        const { fileId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -175,11 +175,11 @@ export class FilesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                `v1/files/${core.url.encodePathParam(storageFileId)}`,
+                `v1/files/${core.url.encodePathParam(fileId)}`,
             ),
             method: "GET",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -198,11 +198,11 @@ export class FilesClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/files/{storageFileId}");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/files/{fileId}");
     }
 
     /**
-     * Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{storageFileId}` until the file is ready.
+     * Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{fileId}` until the file is ready.
      *
      * @param {VideoGenApi.CreateFileUploadRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -239,7 +239,7 @@ export class FilesClient {
             method: "POST",
             headers: _headers,
             contentType: "application/json",
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             requestType: "json",
             body: request,
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
@@ -271,7 +271,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.hydrateFile({
-     *         storageFileId: "storageFileId"
+     *         fileId: "fileId"
      *     })
      */
     public hydrateFile(
@@ -285,7 +285,7 @@ export class FilesClient {
         request: VideoGenApi.HydrateFileRequest,
         requestOptions?: FilesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
-        const { storageFileId } = request;
+        const { fileId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -297,11 +297,11 @@ export class FilesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                `v1/files/${core.url.encodePathParam(storageFileId)}/hydrate`,
+                `v1/files/${core.url.encodePathParam(fileId)}/hydrate`,
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -320,23 +320,18 @@ export class FilesClient {
             });
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/v1/files/{storageFileId}/hydrate",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/files/{fileId}/hydrate");
     }
 
     /**
-     * Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `allowsPublicPreview`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
+     * Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `isPublicPreviewEnabled`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
      *
      * @param {VideoGenApi.EnablePublicPreviewRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.files.enablePublicPreview({
-     *         storageFileId: "storageFileId"
+     *         fileId: "fileId"
      *     })
      */
     public enablePublicPreview(
@@ -350,7 +345,7 @@ export class FilesClient {
         request: VideoGenApi.EnablePublicPreviewRequest,
         requestOptions?: FilesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
-        const { storageFileId } = request;
+        const { fileId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -362,11 +357,11 @@ export class FilesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                `v1/files/${core.url.encodePathParam(storageFileId)}/enable-public-preview`,
+                `v1/files/${core.url.encodePathParam(fileId)}/enable-public-preview`,
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -389,7 +384,7 @@ export class FilesClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/files/{storageFileId}/enable-public-preview",
+            "/v1/files/{fileId}/enable-public-preview",
         );
     }
 
@@ -401,7 +396,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.disablePublicPreview({
-     *         storageFileId: "storageFileId"
+     *         fileId: "fileId"
      *     })
      */
     public disablePublicPreview(
@@ -415,7 +410,7 @@ export class FilesClient {
         request: VideoGenApi.DisablePublicPreviewRequest,
         requestOptions?: FilesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
-        const { storageFileId } = request;
+        const { fileId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -427,11 +422,11 @@ export class FilesClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                `v1/files/${core.url.encodePathParam(storageFileId)}/disable-public-preview`,
+                `v1/files/${core.url.encodePathParam(fileId)}/disable-public-preview`,
             ),
             method: "POST",
             headers: _headers,
-            queryParameters: requestOptions?.queryParams,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -454,7 +449,7 @@ export class FilesClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/files/{storageFileId}/disable-public-preview",
+            "/v1/files/{fileId}/disable-public-preview",
         );
     }
 }

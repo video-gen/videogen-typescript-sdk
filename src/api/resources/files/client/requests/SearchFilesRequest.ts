@@ -11,4 +11,6 @@ export interface SearchFilesRequest {
     query: string;
     /** Number of results to return (1–100). Defaults to 10. */
     numResults?: number;
+    /** When true, only files created by the calling API key's user are returned. When false (default), all files accessible to the team are included. */
+    selfOnly?: boolean;
 }

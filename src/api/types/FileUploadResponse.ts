@@ -2,7 +2,7 @@
 
 export interface FileUploadResponse {
     /** The file id to use in subsequent API calls (e.g. `vg_file_...`). */
-    storageFileId: string;
+    fileId: string;
     /** Pre-signed URL. PUT the raw file bytes to this URL to complete the upload. */
     uploadUrl: string;
 }

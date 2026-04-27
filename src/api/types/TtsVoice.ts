@@ -16,7 +16,7 @@ export interface TtsVoice {
     accent?: (string | null) | undefined;
     /** Description of the voice. */
     description?: (string | null) | undefined;
-    /** When true, this voice can be used directly with `POST /v1/tools/text-to-speech`. Voices where this is false are returned for discovery purposes but cannot be used through this API. */
+    /** When false, this voice cannot be used directly with `POST /v1/tools/text-to-speech`. All voices, regardless of this field, can be used in full video generation workflows such as script-to-video. */
     supportsDirectToolExecution: boolean;
     /** When true, this voice can synthesize text in any language regardless of its `languageCode`. When false, the voice only supports its listed language. */
     supportsAllLanguages: boolean;

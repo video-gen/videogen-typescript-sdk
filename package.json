@@ -1,6 +1,6 @@
 {
     "name": "@videogen/sdk",
-    "version": "0.0.15",
+    "version": "0.0.16",
     "private": false,
     "repository": {
         "type": "git",
@@ -111,5 +111,18 @@
     },
     "sideEffects": false,
     "homepage": "https://videogen.io",
-    "description": "Official TypeScript SDK for the VideoGen API. Programmatically generate images, videos, voiceovers, sound effects, and avatars."
+    "description": "Official TypeScript SDK for the VideoGen API. Programmatically generate images, videos, voiceovers, sound effects, and avatars.",
+    "keywords": [
+        "videogen",
+        "video",
+        "ai",
+        "generative",
+        "api",
+        "sdk",
+        "text-to-video",
+        "text-to-speech",
+        "image-generation",
+        "video-generation",
+        "avatar"
+    ]
 }

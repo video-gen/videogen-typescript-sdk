@@ -11,7 +11,7 @@ export interface CreateFileUploadRequest {
     type?: CreateFileUploadRequest.Type;
     /** Display name for the uploaded file. */
     displayName: string;
-    /** When true, the file is temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Defaults to false. */
+    /** When true, the file is temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */
     isTemporary?: boolean;
 }
 

@@ -7,7 +7,7 @@ import type * as VideoGenApi from "../index.js";
  */
 export interface ToolSuccessResult {
     /** File id for the generated asset. */
-    storageFileId: string;
+    fileId: string;
     /** File type. */
     type: ToolSuccessResult.Type;
     /** Hydrated file metadata with signed download URLs. Populated when returned from a webhook or after hydration. */
