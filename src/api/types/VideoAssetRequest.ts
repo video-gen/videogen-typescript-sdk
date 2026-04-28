@@ -3,8 +3,8 @@
 export interface VideoAssetRequest {
     /** File id of the source video (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. */
     videoStorageFileId: string;
-    /** Number of output candidates to generate. Defaults to 1. */
-    numCandidates?: number | undefined;
+    /** Number of output results to generate. Defaults to 1. */
+    numResults?: number | undefined;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */
     isOutputTemporary?: boolean | undefined;
 }

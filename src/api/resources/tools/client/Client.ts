@@ -238,7 +238,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.imageToImage({
-     *         imageStorageFileId: "imageStorageFileId",
+     *         imageStorageFileIds: ["imageStorageFileIds"],
      *         prompt: "prompt"
      *     })
      */

@@ -223,7 +223,7 @@ Transform an existing image using a text prompt. The prompt describes the desire
 
 ```typescript
 await client.tools.imageToImage({
-    imageStorageFileId: "imageStorageFileId",
+    imageStorageFileIds: ["imageStorageFileIds"],
     prompt: "prompt"
 });
 

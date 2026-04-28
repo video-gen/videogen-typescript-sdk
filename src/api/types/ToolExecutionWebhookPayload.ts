@@ -13,7 +13,7 @@ export interface ToolExecutionWebhookPayload {
     occurredAt: number;
     /** Tool name (e.g. `PROMPT_TO_IMAGE`, `TEXT_TO_SPEECH`). */
     toolType: string;
-    /** One entry per generated candidate, each with a hydrated `file`. Present only on `tool_execution.succeeded`. */
+    /** One entry per generated result, each with a hydrated `file`. Present only on `tool_execution.succeeded`. */
     results?: VideoGenApi.ToolSuccessResult[] | undefined;
     /** Present only on `tool_execution.failed`. */
     error?: VideoGenApi.ApiError | undefined;

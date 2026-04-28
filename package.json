@@ -1,6 +1,6 @@
 {
     "name": "@videogen/sdk",
-    "version": "0.0.19",
+    "version": "0.0.20",
     "private": false,
     "repository": {
         "type": "git",
@@ -110,6 +110,7 @@
         "node": ">=18.0.0"
     },
     "sideEffects": false,
+    "license": "MIT",
     "homepage": "https://videogen.io",
     "description": "Official TypeScript SDK for the VideoGen API. Programmatically generate images, videos, voiceovers, sound effects, and avatars.",
     "keywords": [

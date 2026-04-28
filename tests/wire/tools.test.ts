@@ -72,7 +72,7 @@ describe("ToolsClient", () => {
     test("imageToImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { imageStorageFileId: "imageStorageFileId", prompt: "prompt" };
+        const rawRequestBody = { imageStorageFileIds: ["imageStorageFileIds"], prompt: "prompt" };
         const rawResponseBody = { toolExecutionId: "toolExecutionId" };
 
         server
@@ -85,7 +85,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.imageToImage({
-            imageStorageFileId: "imageStorageFileId",
+            imageStorageFileIds: ["imageStorageFileIds"],
             prompt: "prompt",
         });
         expect(response).toEqual(rawResponseBody);
@@ -311,7 +311,7 @@ describe("ToolsClient", () => {
             status: "pending",
             toolType: "toolType",
             results: [{ fileId: "fileId", type: "IMAGE", file: { fileId: "fileId", scope: "GLOBAL" } }],
-            error: { message: "message", code: "code" },
+            error: { message: "message", code: "code", internalErrorCode: "internalErrorCode" },
         };
 
         server

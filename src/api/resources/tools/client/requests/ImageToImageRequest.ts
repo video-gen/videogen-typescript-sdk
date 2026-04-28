@@ -3,17 +3,17 @@
 /**
  * @example
  *     {
- *         imageStorageFileId: "imageStorageFileId",
+ *         imageStorageFileIds: ["imageStorageFileIds"],
  *         prompt: "prompt"
  *     }
  */
 export interface ImageToImageRequest {
-    /** File id of the source image (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. */
-    imageStorageFileId: string;
+    /** File ids of the source images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
+    imageStorageFileIds: string[];
     /** Prompt describing how to transform the input image. */
     prompt: string;
-    /** Number of output candidates to generate. Defaults to 1. */
-    numCandidates?: number;
+    /** Number of output results to generate. Defaults to 1. */
+    numResults?: number;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */
     isOutputTemporary?: boolean;
 }
