@@ -8,7 +8,7 @@
  *     }
  */
 export interface ImageToImageRequest {
-    /** File ids of the source images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
+    /** File ids of the source images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. Maximum 4 images. */
     imageStorageFileIds: string[];
     /** Prompt describing how to transform the input image. */
     prompt: string;

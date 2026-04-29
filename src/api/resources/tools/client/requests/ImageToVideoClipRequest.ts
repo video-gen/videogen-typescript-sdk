@@ -11,7 +11,7 @@ export interface ImageToVideoClipRequest {
     imageStorageFileId: string;
     /** Optional text prompt to guide the animation. When omitted the model infers motion from the image. */
     prompt?: string;
-    /** Whether to generate audio alongside the video. Defaults to false. */
+    /** When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false. */
     generateAudio?: boolean;
     /** Optional prompt used when the source image was generated. */
     sourcePromptToImagePrompt?: string | null;

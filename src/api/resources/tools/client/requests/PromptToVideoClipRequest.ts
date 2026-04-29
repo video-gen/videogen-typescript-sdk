@@ -10,7 +10,7 @@ import type * as VideoGenApi from "../../../../index.js";
  */
 export interface PromptToVideoClipRequest {
     prompt: string;
-    /** Whether to generate audio alongside the video. Defaults to false. */
+    /** When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false. */
     generateAudio?: boolean;
     /** Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
     aspectRatio?: VideoGenApi.AspectRatio;
