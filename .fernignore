@@ -1,1 +1,5 @@
-# Specify files that shouldn't be modified by Fern
+src/downloadFile.ts
+src/getHydratedFile.ts
+src/pollExecutedTool.ts
+src/uploadFile.ts
+src/verifyWebhookSignature.ts
