@@ -4,3 +4,4 @@ src/getHydratedFile.ts
 src/downloadFile.ts
 src/uploadFile.ts
 src/verifyWebhookSignature.ts
+src/index.ts
