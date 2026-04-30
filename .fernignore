@@ -1,1 +1,6 @@
-# Specify files that shouldn't be modified by Fern
+# Custom SDK helpers — preserved across Fern regeneration.
+src/pollExecutedTool.ts
+src/getHydratedFile.ts
+src/downloadFile.ts
+src/uploadFile.ts
+src/verifyWebhookSignature.ts
