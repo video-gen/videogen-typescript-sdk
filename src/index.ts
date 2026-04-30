@@ -4,3 +4,8 @@ export { VideoGenClient } from "./Client.js";
 export { VideoGenEnvironment } from "./environments.js";
 export { VideoGenError, VideoGenTimeoutError } from "./errors/index.js";
 export * from "./exports.js";
+export * from "./pollExecutedTool.js";
+export * from "./getHydratedFile.js";
+export * from "./downloadFile.js";
+export * from "./uploadFile.js";
+export * from "./verifyWebhookSignature.js";
