@@ -1,10 +1,7 @@
-export type { AudioToAvatarClipRequest } from "./AudioToAvatarClipRequest.js";
 export type { CancelToolExecutionRequest } from "./CancelToolExecutionRequest.js";
+export type { GenerateAvatarRequest } from "./GenerateAvatarRequest.js";
+export type { GenerateImageRequest } from "./GenerateImageRequest.js";
+export type { GenerateSoundEffectRequest } from "./GenerateSoundEffectRequest.js";
+export type { GenerateVideoClipRequest } from "./GenerateVideoClipRequest.js";
 export type { GetToolExecutionInfoRequest } from "./GetToolExecutionInfoRequest.js";
-export type { ImageToImageRequest } from "./ImageToImageRequest.js";
-export type { ImageToVideoClipRequest } from "./ImageToVideoClipRequest.js";
-export type { PromptToImageRequest } from "./PromptToImageRequest.js";
-export type { PromptToSoundEffectRequest } from "./PromptToSoundEffectRequest.js";
-export type { PromptToVideoClipRequest } from "./PromptToVideoClipRequest.js";
 export type { TextToSpeechRequest } from "./TextToSpeechRequest.js";
-export type { VideoToVideoClipRequest } from "./VideoToVideoClipRequest.js";

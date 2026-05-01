@@ -5,6 +5,20 @@ export interface ApiError {
     message: string;
     /** Machine-readable error code in snake_case (e.g. `invalid_api_key`, `insufficient_credits`). Not always present. */
     code?: string | undefined;
+    /** What is needed to resolve the error. Present when the error can be fixed by fulfilling a specific requirement (e.g. purchasing an add-on). */
+    requirement?: (ApiError.Requirement | null) | undefined;
     /** Opaque internal error code for debugging. Include this when contacting support. */
     internalErrorCode?: string | undefined;
+}
+
+export namespace ApiError {
+    /**
+     * What is needed to resolve the error. Present when the error can be fixed by fulfilling a specific requirement (e.g. purchasing an add-on).
+     */
+    export interface Requirement {
+        /** Requirement type (e.g. `purchase_add_on`, `upgrade_plan`). */
+        type: string;
+        /** Key-value pairs with requirement-specific context. */
+        details?: Record<string, string> | undefined;
+    }
 }

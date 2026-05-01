@@ -1,6 +1,6 @@
 # Reference
 ## Tools
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
 
@@ -12,7 +12,7 @@
 <dl>
 <dd>
 
-Generate an image from a text prompt. Optionally specify an aspect ratio and number of candidates.
+Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation.
 </dd>
 </dl>
 </dd>
@@ -27,7 +27,7 @@ Generate an image from a text prompt. Optionally specify an aspect ratio and num
 <dd>
 
 ```typescript
-await client.tools.promptToImage({
+await client.tools.generateImage({
     prompt: "A serene Japanese garden with cherry blossoms at golden hour"
 });
 
@@ -45,7 +45,7 @@ await client.tools.promptToImage({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.PromptToImageRequest` 
+**request:** `VideoGenApi.GenerateImageRequest` 
     
 </dd>
 </dl>
@@ -65,7 +65,7 @@ await client.tools.promptToImage({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToVideoClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateVideoClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
 
@@ -77,7 +77,7 @@ await client.tools.promptToImage({
 <dl>
 <dd>
 
-Generate a video clip from a text prompt, with optional audio. Optionally specify an aspect ratio and number of candidates.
+Generate a video clip from a text prompt, optionally guided by reference images or an input video. At least one of `prompt`, `imageFileIds`, or `videoFileId` must be provided.
 </dd>
 </dl>
 </dd>
@@ -92,9 +92,7 @@ Generate a video clip from a text prompt, with optional audio. Optionally specif
 <dd>
 
 ```typescript
-await client.tools.promptToVideoClip({
-    prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic"
-});
+await client.tools.generateVideoClip();
 
 ```
 </dd>
@@ -110,204 +108,7 @@ await client.tools.promptToVideoClip({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.PromptToVideoClipRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToVideoClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Animate a still image into a video clip using a text prompt. Optionally generate audio alongside the video.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.tools.imageToVideoClip({
-    imageStorageFileId: "imageStorageFileId"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `VideoGenApi.ImageToVideoClipRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">imageToImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Transform an existing image using a text prompt. The prompt describes the desired changes to apply.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.tools.imageToImage({
-    imageStorageFileIds: ["imageStorageFileIds"],
-    prompt: "prompt"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `VideoGenApi.ImageToImageRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `ToolsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">videoToVideoClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Restyle an existing video using a text prompt. The prompt describes the visual transformation to apply.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.tools.videoToVideoClip({
-    videoStorageFileId: "videoStorageFileId",
-    prompt: "prompt"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `VideoGenApi.VideoToVideoClipRequest` 
+**request:** `VideoGenApi.GenerateVideoClipRequest` 
     
 </dd>
 </dl>
@@ -392,7 +193,7 @@ await client.tools.textToSpeech({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">promptToSoundEffect</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateSoundEffect</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
 
@@ -419,7 +220,7 @@ Generate a sound effect from a text description. Optionally control the duration
 <dd>
 
 ```typescript
-await client.tools.promptToSoundEffect({
+await client.tools.generateSoundEffect({
     prompt: "prompt"
 });
 
@@ -437,7 +238,7 @@ await client.tools.promptToSoundEffect({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.PromptToSoundEffectRequest` 
+**request:** `VideoGenApi.GenerateSoundEffectRequest` 
     
 </dd>
 </dl>
@@ -457,7 +258,7 @@ await client.tools.promptToSoundEffect({
 </dl>
 </details>
 
-<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">audioToAvatarClip</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateAvatar</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
 
@@ -484,7 +285,7 @@ Generate a talking-head avatar video by pairing a presenter with an audio file, 
 <dd>
 
 ```typescript
-await client.tools.audioToAvatarClip({
+await client.tools.generateAvatar({
     avatarPresenterId: "avatarPresenterId",
     audioStorageFileId: "audioStorageFileId"
 });
@@ -503,7 +304,7 @@ await client.tools.audioToAvatarClip({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.AudioToAvatarClipRequest` 
+**request:** `VideoGenApi.GenerateAvatarRequest` 
     
 </dd>
 </dl>

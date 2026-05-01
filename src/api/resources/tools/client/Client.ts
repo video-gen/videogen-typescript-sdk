@@ -26,25 +26,25 @@ export class ToolsClient {
     }
 
     /**
-     * Generate an image from a text prompt. Optionally specify an aspect ratio and number of candidates.
+     * Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation.
      *
-     * @param {VideoGenApi.PromptToImageRequest} request
+     * @param {VideoGenApi.GenerateImageRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.promptToImage({
+     *     await client.tools.generateImage({
      *         prompt: "A serene Japanese garden with cherry blossoms at golden hour"
      *     })
      */
-    public promptToImage(
-        request: VideoGenApi.PromptToImageRequest,
+    public generateImage(
+        request: VideoGenApi.GenerateImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__promptToImage(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__generateImage(request, requestOptions));
     }
 
-    private async __promptToImage(
-        request: VideoGenApi.PromptToImageRequest,
+    private async __generateImage(
+        request: VideoGenApi.GenerateImageRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -58,7 +58,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                "v1/tools/prompt-to-image",
+                "v1/tools/generate-image",
             ),
             method: "POST",
             headers: _headers,
@@ -87,29 +87,27 @@ export class ToolsClient {
             });
         }
 
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/prompt-to-image");
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/generate-image");
     }
 
     /**
-     * Generate a video clip from a text prompt, with optional audio. Optionally specify an aspect ratio and number of candidates.
+     * Generate a video clip from a text prompt, optionally guided by reference images or an input video. At least one of `prompt`, `imageFileIds`, or `videoFileId` must be provided.
      *
-     * @param {VideoGenApi.PromptToVideoClipRequest} request
+     * @param {VideoGenApi.GenerateVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.promptToVideoClip({
-     *         prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic"
-     *     })
+     *     await client.tools.generateVideoClip()
      */
-    public promptToVideoClip(
-        request: VideoGenApi.PromptToVideoClipRequest,
+    public generateVideoClip(
+        request: VideoGenApi.GenerateVideoClipRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__promptToVideoClip(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__generateVideoClip(request, requestOptions));
     }
 
-    private async __promptToVideoClip(
-        request: VideoGenApi.PromptToVideoClipRequest,
+    private async __generateVideoClip(
+        request: VideoGenApi.GenerateVideoClipRequest = {},
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -123,7 +121,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                "v1/tools/prompt-to-video-clip",
+                "v1/tools/generate-video-clip",
             ),
             method: "POST",
             headers: _headers,
@@ -156,214 +154,7 @@ export class ToolsClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/tools/prompt-to-video-clip",
-        );
-    }
-
-    /**
-     * Animate a still image into a video clip using a text prompt. Optionally generate audio alongside the video.
-     *
-     * @param {VideoGenApi.ImageToVideoClipRequest} request
-     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.tools.imageToVideoClip({
-     *         imageStorageFileId: "imageStorageFileId"
-     *     })
-     */
-    public imageToVideoClip(
-        request: VideoGenApi.ImageToVideoClipRequest,
-        requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__imageToVideoClip(request, requestOptions));
-    }
-
-    private async __imageToVideoClip(
-        request: VideoGenApi.ImageToVideoClipRequest,
-        requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideoGenEnvironment.Production,
-                "v1/tools/image-to-video-clip",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: request,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as VideoGenApi.StartToolExecutionResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.VideoGenError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/v1/tools/image-to-video-clip",
-        );
-    }
-
-    /**
-     * Transform an existing image using a text prompt. The prompt describes the desired changes to apply.
-     *
-     * @param {VideoGenApi.ImageToImageRequest} request
-     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.tools.imageToImage({
-     *         imageStorageFileIds: ["imageStorageFileIds"],
-     *         prompt: "prompt"
-     *     })
-     */
-    public imageToImage(
-        request: VideoGenApi.ImageToImageRequest,
-        requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__imageToImage(request, requestOptions));
-    }
-
-    private async __imageToImage(
-        request: VideoGenApi.ImageToImageRequest,
-        requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideoGenEnvironment.Production,
-                "v1/tools/image-to-image",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: request,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as VideoGenApi.StartToolExecutionResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.VideoGenError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/image-to-image");
-    }
-
-    /**
-     * Restyle an existing video using a text prompt. The prompt describes the visual transformation to apply.
-     *
-     * @param {VideoGenApi.VideoToVideoClipRequest} request
-     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.tools.videoToVideoClip({
-     *         videoStorageFileId: "videoStorageFileId",
-     *         prompt: "prompt"
-     *     })
-     */
-    public videoToVideoClip(
-        request: VideoGenApi.VideoToVideoClipRequest,
-        requestOptions?: ToolsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__videoToVideoClip(request, requestOptions));
-    }
-
-    private async __videoToVideoClip(
-        request: VideoGenApi.VideoToVideoClipRequest,
-        requestOptions?: ToolsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideoGenEnvironment.Production,
-                "v1/tools/video-to-video-clip",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: request,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return {
-                data: _response.body as VideoGenApi.StartToolExecutionResponse,
-                rawResponse: _response.rawResponse,
-            };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.VideoGenError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/v1/tools/video-to-video-clip",
+            "/v1/tools/generate-video-clip",
         );
     }
 
@@ -435,23 +226,23 @@ export class ToolsClient {
     /**
      * Generate a sound effect from a text description. Optionally control the duration and prompt influence.
      *
-     * @param {VideoGenApi.PromptToSoundEffectRequest} request
+     * @param {VideoGenApi.GenerateSoundEffectRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.promptToSoundEffect({
+     *     await client.tools.generateSoundEffect({
      *         prompt: "prompt"
      *     })
      */
-    public promptToSoundEffect(
-        request: VideoGenApi.PromptToSoundEffectRequest,
+    public generateSoundEffect(
+        request: VideoGenApi.GenerateSoundEffectRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__promptToSoundEffect(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__generateSoundEffect(request, requestOptions));
     }
 
-    private async __promptToSoundEffect(
-        request: VideoGenApi.PromptToSoundEffectRequest,
+    private async __generateSoundEffect(
+        request: VideoGenApi.GenerateSoundEffectRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -465,7 +256,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                "v1/tools/prompt-to-sound-effect",
+                "v1/tools/generate-sound-effect",
             ),
             method: "POST",
             headers: _headers,
@@ -498,31 +289,31 @@ export class ToolsClient {
             _response.error,
             _response.rawResponse,
             "POST",
-            "/v1/tools/prompt-to-sound-effect",
+            "/v1/tools/generate-sound-effect",
         );
     }
 
     /**
      * Generate a talking-head avatar video by pairing a presenter with an audio file, typically from a prior text-to-speech result.
      *
-     * @param {VideoGenApi.AudioToAvatarClipRequest} request
+     * @param {VideoGenApi.GenerateAvatarRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.audioToAvatarClip({
+     *     await client.tools.generateAvatar({
      *         avatarPresenterId: "avatarPresenterId",
      *         audioStorageFileId: "audioStorageFileId"
      *     })
      */
-    public audioToAvatarClip(
-        request: VideoGenApi.AudioToAvatarClipRequest,
+    public generateAvatar(
+        request: VideoGenApi.GenerateAvatarRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__audioToAvatarClip(request, requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__generateAvatar(request, requestOptions));
     }
 
-    private async __audioToAvatarClip(
-        request: VideoGenApi.AudioToAvatarClipRequest,
+    private async __generateAvatar(
+        request: VideoGenApi.GenerateAvatarRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -536,7 +327,7 @@ export class ToolsClient {
                 (await core.Supplier.get(this._options.baseUrl)) ??
                     (await core.Supplier.get(this._options.environment)) ??
                     environments.VideoGenEnvironment.Production,
-                "v1/tools/audio-to-avatar-clip",
+                "v1/tools/generate-avatar",
             ),
             method: "POST",
             headers: _headers,
@@ -565,12 +356,7 @@ export class ToolsClient {
             });
         }
 
-        return handleNonStatusCodeError(
-            _response.error,
-            _response.rawResponse,
-            "POST",
-            "/v1/tools/audio-to-avatar-clip",
-        );
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/generate-avatar");
     }
 
     /**

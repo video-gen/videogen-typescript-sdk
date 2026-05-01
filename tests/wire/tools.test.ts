@@ -4,7 +4,7 @@ import { VideoGenClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ToolsClient", () => {
-    test("promptToImage", async () => {
+    test("generateImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt: "A serene Japanese garden with cherry blossoms at golden hour" };
@@ -12,104 +12,35 @@ describe("ToolsClient", () => {
 
         server
             .mockEndpoint()
-            .post("/v1/tools/prompt-to-image")
+            .post("/v1/tools/generate-image")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.promptToImage({
+        const response = await client.tools.generateImage({
             prompt: "A serene Japanese garden with cherry blossoms at golden hour",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("promptToVideoClip", async () => {
+    test("generateVideoClip", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {
-            prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic",
-        };
+        const rawRequestBody = {};
         const rawResponseBody = { toolExecutionId: "toolExecutionId" };
 
         server
             .mockEndpoint()
-            .post("/v1/tools/prompt-to-video-clip")
+            .post("/v1/tools/generate-video-clip")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.promptToVideoClip({
-            prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("imageToVideoClip", async () => {
-        const server = mockServerPool.createServer();
-        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { imageStorageFileId: "imageStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
-
-        server
-            .mockEndpoint()
-            .post("/v1/tools/image-to-video-clip")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.tools.imageToVideoClip({
-            imageStorageFileId: "imageStorageFileId",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("imageToImage", async () => {
-        const server = mockServerPool.createServer();
-        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { imageStorageFileIds: ["imageStorageFileIds"], prompt: "prompt" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
-
-        server
-            .mockEndpoint()
-            .post("/v1/tools/image-to-image")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.tools.imageToImage({
-            imageStorageFileIds: ["imageStorageFileIds"],
-            prompt: "prompt",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("videoToVideoClip", async () => {
-        const server = mockServerPool.createServer();
-        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { videoStorageFileId: "videoStorageFileId", prompt: "prompt" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
-
-        server
-            .mockEndpoint()
-            .post("/v1/tools/video-to-video-clip")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.tools.videoToVideoClip({
-            videoStorageFileId: "videoStorageFileId",
-            prompt: "prompt",
-        });
+        const response = await client.tools.generateVideoClip();
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -134,7 +65,7 @@ describe("ToolsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("promptToSoundEffect", async () => {
+    test("generateSoundEffect", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { prompt: "prompt" };
@@ -142,20 +73,20 @@ describe("ToolsClient", () => {
 
         server
             .mockEndpoint()
-            .post("/v1/tools/prompt-to-sound-effect")
+            .post("/v1/tools/generate-sound-effect")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.promptToSoundEffect({
+        const response = await client.tools.generateSoundEffect({
             prompt: "prompt",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("audioToAvatarClip", async () => {
+    test("generateAvatar", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { avatarPresenterId: "avatarPresenterId", audioStorageFileId: "audioStorageFileId" };
@@ -163,14 +94,14 @@ describe("ToolsClient", () => {
 
         server
             .mockEndpoint()
-            .post("/v1/tools/audio-to-avatar-clip")
+            .post("/v1/tools/generate-avatar")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.audioToAvatarClip({
+        const response = await client.tools.generateAvatar({
             avatarPresenterId: "avatarPresenterId",
             audioStorageFileId: "audioStorageFileId",
         });
@@ -311,7 +242,12 @@ describe("ToolsClient", () => {
             status: "pending",
             toolType: "toolType",
             results: [{ fileId: "fileId", type: "IMAGE", file: { fileId: "fileId", scope: "GLOBAL" } }],
-            error: { message: "message", code: "code", internalErrorCode: "internalErrorCode" },
+            error: {
+                message: "message",
+                code: "code",
+                requirement: { type: "type", details: { key: "value" } },
+                internalErrorCode: "internalErrorCode",
+            },
         };
 
         server

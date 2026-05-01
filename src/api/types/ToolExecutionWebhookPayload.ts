@@ -11,7 +11,7 @@ export interface ToolExecutionWebhookPayload {
     toolExecutionId: string;
     /** Seconds since epoch (Unix timestamp) when the execution reached a terminal state. */
     occurredAt: number;
-    /** Tool name (e.g. `PROMPT_TO_IMAGE`, `TEXT_TO_SPEECH`). */
+    /** Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
     toolType: string;
     /** One entry per generated result, each with a hydrated `file`. Present only on `tool_execution.succeeded`. */
     results?: VideoGenApi.ToolSuccessResult[] | undefined;

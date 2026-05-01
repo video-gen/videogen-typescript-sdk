@@ -5,13 +5,16 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         prompt: "A serene Japanese garden with cherry blossoms at golden hour"
+ *         avatarPresenterId: "avatarPresenterId",
+ *         audioStorageFileId: "audioStorageFileId"
  *     }
  */
-export interface PromptToImageRequest {
-    prompt: string;
-    /** Aspect ratio for the generated image. Defaults to 16:9 when omitted. */
-    aspectRatio?: VideoGenApi.AspectRatio;
+export interface GenerateAvatarRequest {
+    /** Presenter id from `GET /v1/resources/avatar-presenters`. */
+    avatarPresenterId: string;
+    /** File id of an AUDIO file (e.g. `vg_file_...`), typically from a prior text-to-speech result. Upload a file first via `POST /v1/files/upload` or generate one with `POST /v1/tools/text-to-speech`, then pass the returned id here. */
+    audioStorageFileId: string;
+    watermarkMode?: VideoGenApi.WatermarkMode;
     /** Number of output results to generate. Defaults to 1. */
     numResults?: number;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */

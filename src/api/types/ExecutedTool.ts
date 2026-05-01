@@ -6,7 +6,7 @@ export interface ExecutedTool {
     /** Execution id matching the original request. */
     toolExecutionId: string;
     status: VideoGenApi.ExecutedToolStatus;
-    /** Tool name (e.g. `PROMPT_TO_IMAGE`, `TEXT_TO_SPEECH`). */
+    /** Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
     toolType: string;
     /** One entry per generated result. Present when `status` is `succeeded`. */
     results?: VideoGenApi.ToolSuccessResult[] | undefined;

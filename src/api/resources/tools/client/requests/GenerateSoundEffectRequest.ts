@@ -3,15 +3,13 @@
 /**
  * @example
  *     {
- *         avatarPresenterId: "avatarPresenterId",
- *         audioStorageFileId: "audioStorageFileId"
+ *         prompt: "prompt"
  *     }
  */
-export interface AudioToAvatarClipRequest {
-    /** Presenter id from `GET /v1/resources/avatar-presenters`. */
-    avatarPresenterId: string;
-    /** File id of an AUDIO file (e.g. `vg_file_...`), typically from a prior text-to-speech result. Upload a file first via `POST /v1/files/upload` or generate one with `POST /v1/tools/text-to-speech`, then pass the returned id here. */
-    audioStorageFileId: string;
+export interface GenerateSoundEffectRequest {
+    prompt: string;
+    durationSeconds?: number | null;
+    promptInfluence?: number | null;
     /** Number of output results to generate. Defaults to 1. */
     numResults?: number;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */

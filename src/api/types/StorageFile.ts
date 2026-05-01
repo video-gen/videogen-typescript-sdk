@@ -40,7 +40,7 @@ export interface StorageFile {
     publicHlsUrl?: (string | null) | undefined;
     /** Encoded public playback id (e.g. `vg_play_...`). Pass this to the `@videogen/player` or `@videogen/player-react` packages. Only present when `isPublicPreviewEnabled` is true. */
     publicPlaybackId?: (string | null) | undefined;
-    /** Tool type that generated this file (e.g. `PROMPT_TO_IMAGE`, `TEXT_TO_SPEECH`). Only present when the file was created by a tool execution. */
+    /** Tool type that generated this file (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). Only present when the file was created by a tool execution. */
     sourceToolType?: string | undefined;
     /** Execution id of the tool call that generated this file (e.g. `vg_exec_...`). Only present when the file was created by a tool execution. */
     sourceToolExecutionId?: string | undefined;

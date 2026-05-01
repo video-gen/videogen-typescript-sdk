@@ -21,6 +21,7 @@ export * from "./ToolSuccessResult.js";
 export * from "./TtsVoice.js";
 export * from "./TtsVoiceListResponse.js";
 export * from "./VideoAssetRequest.js";
+export * from "./WatermarkMode.js";
 export * from "./WebhookEndpoint.js";
 export * from "./WebhookEndpointListResponse.js";
 export * from "./WebhookEventName.js";

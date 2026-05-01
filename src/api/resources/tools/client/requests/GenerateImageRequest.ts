@@ -5,15 +5,17 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         prompt: "A golden retriever running through a sunlit meadow in slow motion, cinematic"
+ *         prompt: "A serene Japanese garden with cherry blossoms at golden hour"
  *     }
  */
-export interface PromptToVideoClipRequest {
+export interface GenerateImageRequest {
+    /** Text prompt describing the image to generate. When reference images are provided, the prompt describes the desired transformation. */
     prompt: string;
-    /** When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false. */
-    generateAudio?: boolean;
-    /** Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
+    /** Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. Maximum 4 images. When provided, the model uses these as guidance for generation. */
+    imageFileIds?: string[];
+    /** Aspect ratio for the generated image. Defaults to 16:9 when omitted. */
     aspectRatio?: VideoGenApi.AspectRatio;
+    watermarkMode?: VideoGenApi.WatermarkMode;
     /** Number of output results to generate. Defaults to 1. */
     numResults?: number;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */
