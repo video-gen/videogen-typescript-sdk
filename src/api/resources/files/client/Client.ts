@@ -324,6 +324,66 @@ export class FilesClient {
     }
 
     /**
+     * Archive a file by setting its archived timestamp. Archived files are excluded from list results. Returns the updated file object.
+     *
+     * @param {VideoGenApi.ArchiveFileRequest} request
+     * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.files.archiveFile({
+     *         fileId: "fileId"
+     *     })
+     */
+    public archiveFile(
+        request: VideoGenApi.ArchiveFileRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StorageFile> {
+        return core.HttpResponsePromise.fromPromise(this.__archiveFile(request, requestOptions));
+    }
+
+    private async __archiveFile(
+        request: VideoGenApi.ArchiveFileRequest,
+        requestOptions?: FilesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StorageFile>> {
+        const { fileId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                `v1/files/${core.url.encodePathParam(fileId)}/archive`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StorageFile, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/files/{fileId}/archive");
+    }
+
+    /**
      * Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `isPublicPreviewEnabled`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
      *
      * @param {VideoGenApi.EnablePublicPreviewRequest} request

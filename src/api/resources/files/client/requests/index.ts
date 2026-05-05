@@ -1,3 +1,4 @@
+export type { ArchiveFileRequest } from "./ArchiveFileRequest.js";
 export { CreateFileUploadRequest } from "./CreateFileUploadRequest.js";
 export type { DisablePublicPreviewRequest } from "./DisablePublicPreviewRequest.js";
 export type { EnablePublicPreviewRequest } from "./EnablePublicPreviewRequest.js";

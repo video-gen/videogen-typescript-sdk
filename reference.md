@@ -1095,6 +1095,71 @@ await client.files.hydrateFile({
 </dl>
 </details>
 
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">archiveFile</a>({ ...params }) -> VideoGenApi.StorageFile</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Archive a file by setting its archived timestamp. Archived files are excluded from list results. Returns the updated file object.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.files.archiveFile({
+    fileId: "fileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ArchiveFileRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `FilesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">enablePublicPreview</a>({ ...params }) -> VideoGenApi.StorageFile</code></summary>
 <dl>
 <dd>
