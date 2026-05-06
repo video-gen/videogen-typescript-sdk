@@ -32,7 +32,7 @@
     "originGitCommit": "af6706cc613d53df6fa37a840063f542a06cf4c2",
     "originGitCommitIsDirty": true,
     "invokedBy": "manual",
-    "requestedVersion": "0.0.37",
+    "requestedVersion": "0.0.38",
     "ciProvider": null,
-    "sdkVersion": "0.0.37"
+    "sdkVersion": "0.0.38"
 }
