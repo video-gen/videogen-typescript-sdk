@@ -384,7 +384,7 @@ export class FilesClient {
     }
 
     /**
-     * Enable public preview for a file. Creates a public playback ID on the underlying Mux asset so the file can be streamed without authentication. Returns the updated file with `isPublicPreviewEnabled`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
+     * Enable public preview for a file. Registers a public playback id so the file can be streamed without authentication. Returns the updated file with `isPublicPreviewEnabled`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
      *
      * @param {VideoGenApi.EnablePublicPreviewRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -449,7 +449,7 @@ export class FilesClient {
     }
 
     /**
-     * Disable public preview for a file. Deletes the public playback ID from the underlying Mux asset. The file's signed URLs remain functional. Returns the updated file.
+     * Disable public preview for a file. Revokes unauthenticated streaming access. The file's signed URLs for authenticated access remain functional. Returns the updated file.
      *
      * @param {VideoGenApi.DisablePublicPreviewRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.

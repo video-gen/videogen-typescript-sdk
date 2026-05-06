@@ -32,7 +32,7 @@ export interface StorageFile {
     previewSource?: VideoGenApi.FileSource | undefined;
     /** Highest-quality downloadable rendition. Populated after hydration. */
     downloadSource?: VideoGenApi.FileSource | undefined;
-    /** Private HLS streaming source. Populated for video and audio files once Mux playback is ready. Uses a signed token; treat like other signed sources. */
+    /** Private HLS streaming source. Populated for video and audio files once streaming renditions are ready. Uses a signed token; treat like other signed sources. */
     hlsSource?: VideoGenApi.FileSource | undefined;
     /** Whether public preview is enabled for this file. When true, `publicHlsUrl` and `publicPlaybackId` are populated. */
     isPublicPreviewEnabled?: boolean | undefined;
