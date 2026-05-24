@@ -1,5 +1,7 @@
 # Custom SDK helpers — preserved across Fern regeneration.
 src/pollExecutedTool.ts
+src/pollWorkflowRun.ts
+src/pollProjectExport.ts
 src/getHydratedFile.ts
 src/downloadFile.ts
 src/uploadFile.ts
