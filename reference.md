@@ -1,4 +1,627 @@
 # Reference
+## Workflows
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">addVisualsNarrationsAndCaptionsToScript</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a project and generates a narrated video from a prompt or script. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.addVisualsNarrationsAndCaptionsToScript({
+    prompt: "prompt"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.AddVisualsNarrationsAndCaptionsToScriptRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">addVisualsAndCaptionsToVoiceover</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a project from an uploaded voiceover file and generates a video with matching b-roll. Upload the voiceover via the files API first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.addVisualsAndCaptionsToVoiceover({
+    fileId: "fileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.AddVisualsAndCaptionsToVoiceoverRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">addNarrationTransitionsAndCaptionsToSlideshow</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a project from an uploaded PDF or PowerPoint file and generates an AI-narrated video walking through each slide. Upload the file via `POST /v1/files/upload` first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.addNarrationTransitionsAndCaptionsToSlideshow({
+    fileId: "fileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.AddNarrationTransitionsAndCaptionsToSlideshowRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">startAiVideoClip</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generates a short AI video clip from a text prompt and optional image.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.startAiVideoClip({
+    prompt: "prompt"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.AiVideoClipRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">getWorkflowRun</a>({ ...params }) -> VideoGenApi.WorkflowRun</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.getWorkflowRun({
+    workflowRunId: "workflowRunId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.GetWorkflowRunRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">cancelWorkflowRun</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.cancelWorkflowRun({
+    workflowRunId: "workflowRunId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.CancelWorkflowRunRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Projects
+<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">listProjects</a>({ ...params }) -> VideoGenApi.ListProjectsResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns API-created projects, most recently updated first. Dashboard projects are excluded. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all API-created projects for the team are returned. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.projects.listProjects();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ListProjectsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">getProject</a>({ ...params }) -> VideoGenApi.ProjectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns a simplified view of a project including its title, aspect ratio, status, and URL.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.projects.getProject({
+    projectId: "projectId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.GetProjectRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">exportProject</a>({ ...params }) -> VideoGenApi.ExportProjectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Starts an export of a project to MP4. Returns immediately with an export id; the file becomes available when the export task completes.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.projects.exportProject({
+    projectId: "projectId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ExportProjectRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.projects.<a href="/src/api/resources/projects/client/Client.ts">getProjectExport</a>({ ...params }) -> VideoGenApi.ProjectExport</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Returns the current status of a project export started via `POST /v1/projects/{projectId}/export`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.projects.getProjectExport({
+    projectId: "projectId",
+    exportId: "exportId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.GetProjectExportRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ProjectsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Tools
 <details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateImage</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
@@ -28,7 +651,8 @@ Generate an image from a text prompt, optionally guided by one or more reference
 
 ```typescript
 await client.tools.generateImage({
-    prompt: "A serene Japanese garden with cherry blossoms at golden hour"
+    prompt: "A serene Japanese garden with cherry blossoms at golden hour",
+    quality: "LOW"
 });
 
 ```
@@ -92,7 +716,9 @@ Generate a video clip from a text prompt, optionally guided by reference images 
 <dd>
 
 ```typescript
-await client.tools.generateVideoClip();
+await client.tools.generateVideoClip({
+    quality: "STANDARD"
+});
 
 ```
 </dd>
@@ -239,6 +865,71 @@ await client.tools.generateSoundEffect({
 <dd>
 
 **request:** `VideoGenApi.GenerateSoundEffectRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">generateMusic</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tools.generateMusic({
+    prompt: "prompt"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.GenerateMusicRequest` 
     
 </dd>
 </dl>
@@ -649,6 +1340,71 @@ await client.tools.upscaleVideo({
 </dl>
 </details>
 
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">image3DEffect</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Turn a still image into a short video clip with a 3D parallax motion effect, simulating camera movement through the scene.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tools.image3DEffect({
+    imageStorageFileId: "imageStorageFileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ImageAssetRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">cancelToolExecution</a>({ ...params }) -> VideoGenApi.StartToolExecutionResponse</code></summary>
 <dl>
 <dd>
@@ -780,7 +1536,7 @@ await client.tools.getToolExecutionInfo({
 </details>
 
 ## Files
-<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFiles</a>() -> VideoGenApi.GetFilesResponse</code></summary>
+<details><summary><code>client.files.<a href="/src/api/resources/files/client/Client.ts">getFiles</a>({ ...params }) -> VideoGenApi.GetFilesResponse</code></summary>
 <dl>
 <dd>
 
@@ -792,7 +1548,7 @@ await client.tools.getToolExecutionInfo({
 <dl>
 <dd>
 
-List all files in your account, including generated assets and uploads.
+List files in your account, including generated assets and uploads. Files are returned most recently updated first. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
 </dd>
 </dl>
 </dd>
@@ -819,6 +1575,14 @@ await client.files.getFiles();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.GetFilesRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>
@@ -1172,7 +1936,7 @@ await client.files.archiveFile({
 <dl>
 <dd>
 
-Enable public preview for a file. Registers a public playback id so the file can be streamed without authentication. Returns the updated file with `isPublicPreviewEnabled`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
+Enable public preview for a file. Works for any file type. Copies the file to a permanent public URL (`staticPublicPreviewSource`) and, for video and audio, registers a public embed playback id (`publicPlaybackId`) for use with `@videogen/player`. If the file is not yet on the streaming provider, the endpoint starts the upload and polls briefly; otherwise the Mux asset-ready webhook finishes creating the embed playback id. Returns the updated file.
 </dd>
 </dl>
 </dd>
@@ -1237,7 +2001,7 @@ await client.files.enablePublicPreview({
 <dl>
 <dd>
 
-Disable public preview for a file. Revokes unauthenticated streaming access. The file's signed URLs for authenticated access remain functional. Returns the updated file.
+Disable public preview for a file. Removes the permanent public URL copy and revokes unauthenticated embed streaming access. Authenticated signed URLs remain functional. Returns the updated file.
 </dd>
 </dl>
 </dd>
@@ -1291,7 +2055,7 @@ await client.files.disablePublicPreview({
 </details>
 
 ## Resources
-<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listAvatarPresenters</a>() -> VideoGenApi.AvatarPresenterListResponse</code></summary>
+<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listAvatarPresenters</a>({ ...params }) -> VideoGenApi.AvatarPresenterListResponse</code></summary>
 <dl>
 <dd>
 
@@ -1303,7 +2067,7 @@ await client.files.disablePublicPreview({
 <dl>
 <dd>
 
-List all available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint.
+List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
 </dd>
 </dl>
 </dd>
@@ -1334,6 +2098,14 @@ await client.resources.listAvatarPresenters();
 <dl>
 <dd>
 
+**request:** `VideoGenApi.ListAvatarPresentersRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
 **requestOptions:** `ResourcesClient.RequestOptions` 
     
 </dd>
@@ -1358,7 +2130,7 @@ await client.resources.listAvatarPresenters();
 <dl>
 <dd>
 
-List all available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint.
+List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
 </dd>
 </dl>
 </dd>
@@ -1410,7 +2182,7 @@ await client.resources.listTtsVoices();
 </details>
 
 ## Webhooks
-<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">listWebhookEndpoints</a>() -> VideoGenApi.WebhookEndpointListResponse</code></summary>
+<details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">listWebhookEndpoints</a>({ ...params }) -> VideoGenApi.WebhookEndpointListResponse</code></summary>
 <dl>
 <dd>
 
@@ -1422,7 +2194,7 @@ await client.resources.listTtsVoices();
 <dl>
 <dd>
 
-List all configured webhook endpoints for your account.
+List configured webhook endpoints for your account. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
 </dd>
 </dl>
 </dd>
@@ -1449,6 +2221,14 @@ await client.webhooks.listWebhookEndpoints();
 
 <dl>
 <dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ListWebhookEndpointsRequest` 
+    
+</dd>
+</dl>
 
 <dl>
 <dd>

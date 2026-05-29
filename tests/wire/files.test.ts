@@ -23,12 +23,16 @@ describe("FilesClient", () => {
                     downloadSource: { status: "pending" },
                     hlsSource: { status: "pending" },
                     isPublicPreviewEnabled: true,
+                    staticPublicPreviewSource: { status: "pending" },
                     publicHlsUrl: "publicHlsUrl",
                     publicPlaybackId: "publicPlaybackId",
                     sourceToolType: "sourceToolType",
                     sourceToolExecutionId: "sourceToolExecutionId",
+                    fileAnalysisMetadata: { analysisLoadingState: "UNATTEMPTED", analysisProgressPercentage: 1.1 },
                 },
             ],
+            hasMore: true,
+            nextCursor: "nextCursor",
         };
 
         server.mockEndpoint().get("/v1/files").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -75,10 +79,23 @@ describe("FilesClient", () => {
             downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             isPublicPreviewEnabled: true,
+            staticPublicPreviewSource: {
+                status: "pending",
+                url: "url",
+                expiresAt: 1.1,
+                width: 1,
+                height: 1,
+                fileBytes: 1,
+            },
             publicHlsUrl: "publicHlsUrl",
             publicPlaybackId: "publicPlaybackId",
             sourceToolType: "sourceToolType",
             sourceToolExecutionId: "sourceToolExecutionId",
+            fileAnalysisMetadata: {
+                analysisLoadingState: "UNATTEMPTED",
+                analysisProgressPercentage: 1.1,
+                analysisAttemptIndex: 1,
+            },
         };
 
         server.mockEndpoint().get("/v1/files/fileId").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -127,10 +144,23 @@ describe("FilesClient", () => {
             downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             isPublicPreviewEnabled: true,
+            staticPublicPreviewSource: {
+                status: "pending",
+                url: "url",
+                expiresAt: 1.1,
+                width: 1,
+                height: 1,
+                fileBytes: 1,
+            },
             publicHlsUrl: "publicHlsUrl",
             publicPlaybackId: "publicPlaybackId",
             sourceToolType: "sourceToolType",
             sourceToolExecutionId: "sourceToolExecutionId",
+            fileAnalysisMetadata: {
+                analysisLoadingState: "UNATTEMPTED",
+                analysisProgressPercentage: 1.1,
+                analysisAttemptIndex: 1,
+            },
         };
 
         server
@@ -164,10 +194,23 @@ describe("FilesClient", () => {
             downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             isPublicPreviewEnabled: true,
+            staticPublicPreviewSource: {
+                status: "pending",
+                url: "url",
+                expiresAt: 1.1,
+                width: 1,
+                height: 1,
+                fileBytes: 1,
+            },
             publicHlsUrl: "publicHlsUrl",
             publicPlaybackId: "publicPlaybackId",
             sourceToolType: "sourceToolType",
             sourceToolExecutionId: "sourceToolExecutionId",
+            fileAnalysisMetadata: {
+                analysisLoadingState: "UNATTEMPTED",
+                analysisProgressPercentage: 1.1,
+                analysisAttemptIndex: 1,
+            },
         };
 
         server
@@ -201,10 +244,23 @@ describe("FilesClient", () => {
             downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             isPublicPreviewEnabled: true,
+            staticPublicPreviewSource: {
+                status: "pending",
+                url: "url",
+                expiresAt: 1.1,
+                width: 1,
+                height: 1,
+                fileBytes: 1,
+            },
             publicHlsUrl: "publicHlsUrl",
             publicPlaybackId: "publicPlaybackId",
             sourceToolType: "sourceToolType",
             sourceToolExecutionId: "sourceToolExecutionId",
+            fileAnalysisMetadata: {
+                analysisLoadingState: "UNATTEMPTED",
+                analysisProgressPercentage: 1.1,
+                analysisAttemptIndex: 1,
+            },
         };
 
         server
@@ -238,10 +294,23 @@ describe("FilesClient", () => {
             downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
             isPublicPreviewEnabled: true,
+            staticPublicPreviewSource: {
+                status: "pending",
+                url: "url",
+                expiresAt: 1.1,
+                width: 1,
+                height: 1,
+                fileBytes: 1,
+            },
             publicHlsUrl: "publicHlsUrl",
             publicPlaybackId: "publicPlaybackId",
             sourceToolType: "sourceToolType",
             sourceToolExecutionId: "sourceToolExecutionId",
+            fileAnalysisMetadata: {
+                analysisLoadingState: "UNATTEMPTED",
+                analysisProgressPercentage: 1.1,
+                analysisAttemptIndex: 1,
+            },
         };
 
         server

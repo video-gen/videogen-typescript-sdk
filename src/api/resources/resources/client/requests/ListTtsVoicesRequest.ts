@@ -5,6 +5,10 @@
  *     {}
  */
 export interface ListTtsVoicesRequest {
-    /** When true, includes deprecated voices in the response. Defaults to false. */
+    /** Maximum number of items to return in the page. Defaults to 50; capped at 200. */
+    limit?: number;
+    /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. */
+    cursor?: string;
+    /** When true, includes voices that are deprecated but still callable. Defaults to false. */
     includeDeprecatedVoices?: boolean;
 }

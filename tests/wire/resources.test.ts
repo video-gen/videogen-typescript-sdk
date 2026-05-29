@@ -18,6 +18,8 @@ describe("ResourcesClient", () => {
                     previewVideoUrl: "previewVideoUrl",
                 },
             ],
+            hasMore: true,
+            nextCursor: "nextCursor",
         };
 
         server
@@ -50,6 +52,8 @@ describe("ResourcesClient", () => {
                     isDeprecated: true,
                 },
             ],
+            hasMore: true,
+            nextCursor: "nextCursor",
         };
 
         server

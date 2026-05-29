@@ -3,7 +3,7 @@
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Fvideo-gen%2Fvideogen-typescript-sdk)
 [![npm shield](https://img.shields.io/npm/v/@videogen/sdk)](https://www.npmjs.com/package/@videogen/sdk)
 
-Official client for the VideoGen Developer API (`https://api.videogen.io`).
+Official client for the VideoGen API (`https://api.videogen.io`).
 
 
 ## Table of Contents
@@ -30,7 +30,7 @@ Official client for the VideoGen Developer API (`https://api.videogen.io`).
 
 ## Documentation
 
-API reference documentation is available [here](https://videogen.docs.buildwithfern.com).
+API reference documentation is available [here](https://docs.videogen.io).
 
 ## Installation
 
@@ -50,7 +50,9 @@ Instantiate and use the client with the following:
 import { VideoGenClient } from "@videogen/sdk";
 
 const client = new VideoGenClient({ token: "YOUR_TOKEN" });
-await client.tools.generateVideoClip();
+await client.tools.generateVideoClip({
+    quality: "STANDARD"
+});
 ```
 
 ## Environments
@@ -73,7 +75,7 @@ following namespace:
 ```typescript
 import { VideoGenApi } from "@videogen/sdk";
 
-const request: VideoGenApi.GenerateImageRequest = {
+const request: VideoGenApi.AddVisualsNarrationsAndCaptionsToScriptRequest = {
     ...
 };
 ```
@@ -105,9 +107,9 @@ try {
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { ToolsClient } from '@videogen/sdk/tools';
+import { WorkflowsClient } from '@videogen/sdk/workflows';
 
-const client = new ToolsClient({...});
+const client = new WorkflowsClient({...});
 ```
 
 ### Additional Headers

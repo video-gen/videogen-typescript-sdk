@@ -7,5 +7,6 @@
  *     }
  */
 export interface HydrateFileRequest {
+    /** The file id (e.g. `vg_file_...`). */
     fileId: string;
 }

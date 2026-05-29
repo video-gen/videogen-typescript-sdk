@@ -4,4 +4,8 @@ import type * as VideoGenApi from "../index.js";
 
 export interface WebhookEndpointListResponse {
     endpoints: VideoGenApi.WebhookEndpoint[];
+    /** When true, there are more endpoints available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+    hasMore: boolean;
+    /** Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+    nextCursor: string | null;
 }

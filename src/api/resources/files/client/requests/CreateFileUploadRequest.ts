@@ -21,6 +21,8 @@ export namespace CreateFileUploadRequest {
         Image: "IMAGE",
         Video: "VIDEO",
         Audio: "AUDIO",
+        Pdf: "PDF",
+        Slideshow: "SLIDESHOW",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
 }

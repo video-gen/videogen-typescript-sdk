@@ -7,7 +7,10 @@ describe("ToolsClient", () => {
     test("generateImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "A serene Japanese garden with cherry blossoms at golden hour" };
+        const rawRequestBody = {
+            prompt: "A serene Japanese garden with cherry blossoms at golden hour",
+            quality: "LOW",
+        };
         const rawResponseBody = { toolExecutionId: "toolExecutionId" };
 
         server
@@ -21,6 +24,7 @@ describe("ToolsClient", () => {
 
         const response = await client.tools.generateImage({
             prompt: "A serene Japanese garden with cherry blossoms at golden hour",
+            quality: "LOW",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -28,7 +32,7 @@ describe("ToolsClient", () => {
     test("generateVideoClip", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = { quality: "STANDARD" };
         const rawResponseBody = { toolExecutionId: "toolExecutionId" };
 
         server
@@ -40,7 +44,9 @@ describe("ToolsClient", () => {
             .jsonBody(rawResponseBody)
             .build();
 
-        const response = await client.tools.generateVideoClip();
+        const response = await client.tools.generateVideoClip({
+            quality: "STANDARD",
+        });
         expect(response).toEqual(rawResponseBody);
     });
 
@@ -81,6 +87,27 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.generateSoundEffect({
+            prompt: "prompt",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generateMusic", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { prompt: "prompt" };
+        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/tools/generate-music")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.generateMusic({
             prompt: "prompt",
         });
         expect(response).toEqual(rawResponseBody);
@@ -213,6 +240,27 @@ describe("ToolsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
+    test("image3dEffect", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { imageStorageFileId: "imageStorageFileId" };
+        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/tools/image-3d-effect")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.image3DEffect({
+            imageStorageFileId: "imageStorageFileId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
     test("cancelToolExecution", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -241,6 +289,8 @@ describe("ToolsClient", () => {
             toolExecutionId: "toolExecutionId",
             status: "pending",
             toolType: "toolType",
+            progressPercentage: 1.1,
+            attemptIndex: 1,
             results: [{ fileId: "fileId", type: "IMAGE", file: { fileId: "fileId", scope: "GLOBAL" } }],
             error: {
                 message: "message",

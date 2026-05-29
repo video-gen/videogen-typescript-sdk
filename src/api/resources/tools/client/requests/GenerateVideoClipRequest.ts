@@ -4,7 +4,9 @@ import type * as VideoGenApi from "../../../../index.js";
 
 /**
  * @example
- *     {}
+ *     {
+ *         quality: "STANDARD"
+ *     }
  */
 export interface GenerateVideoClipRequest {
     /** Text prompt describing the video to generate. Optional when reference images or a video are provided. */
@@ -17,9 +19,20 @@ export interface GenerateVideoClipRequest {
     generateAudio?: boolean;
     /** Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
     aspectRatio?: VideoGenApi.AspectRatio;
+    /** Video generation quality tier. STANDARD is fastest; HIGH is slowest and highest quality. */
+    quality: GenerateVideoClipRequest.Quality;
     watermarkMode?: VideoGenApi.WatermarkMode;
     /** Number of output results to generate. Defaults to 1. */
     numResults?: number;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */
     isOutputTemporary?: boolean;
+}
+
+export namespace GenerateVideoClipRequest {
+    /** Video generation quality tier. STANDARD is fastest; HIGH is slowest and highest quality. */
+    export const Quality = {
+        Standard: "STANDARD",
+        High: "HIGH",
+    } as const;
+    export type Quality = (typeof Quality)[keyof typeof Quality];
 }

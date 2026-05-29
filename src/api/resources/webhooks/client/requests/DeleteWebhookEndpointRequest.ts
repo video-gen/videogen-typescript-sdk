@@ -7,5 +7,6 @@
  *     }
  */
 export interface DeleteWebhookEndpointRequest {
+    /** The webhook endpoint id returned by `POST /v1/webhooks/endpoints`. */
     endpointId: string;
 }

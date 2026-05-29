@@ -34,16 +34,20 @@ export interface StorageFile {
     downloadSource?: VideoGenApi.FileSource | undefined;
     /** Private HLS streaming source. Populated for video and audio files once streaming renditions are ready. Uses a signed token; treat like other signed sources. */
     hlsSource?: VideoGenApi.FileSource | undefined;
-    /** Whether public preview is enabled for this file. When true, `publicHlsUrl` and `publicPlaybackId` are populated. */
+    /** Whether public preview is enabled for this file. When true, `staticPublicPreviewSource` is populated for all file types. For video and audio, `publicHlsUrl` and `publicPlaybackId` are also populated once embed streaming is ready. */
     isPublicPreviewEnabled?: boolean | undefined;
-    /** Public HLS streaming URL. Only present when `isPublicPreviewEnabled` is true. Does not require authentication or signed tokens. */
+    /** Permanent public URL for the file's highest-quality rendition. Populated when `isPublicPreviewEnabled` is true. Does not expire (`expiresAt` is null). Use for direct links to images, downloads, or any file type. For embedded video or audio players, prefer `publicPlaybackId`. */
+    staticPublicPreviewSource?: VideoGenApi.FileSource | undefined;
+    /** Public HLS streaming URL for video and audio. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. Prefer `publicPlaybackId` with `@videogen/player` for embeds. */
     publicHlsUrl?: (string | null) | undefined;
-    /** Encoded public playback id (e.g. `vg_play_...`). Pass this to the `@videogen/player` or `@videogen/player-react` packages. Only present when `isPublicPreviewEnabled` is true. */
+    /** Encoded public playback id (e.g. `vg_play_...`) for video and audio embeds. Pass this to `@videogen/player` or `@videogen/player-react`. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. For a permanent direct file URL (any type), use `staticPublicPreviewSource` instead. */
     publicPlaybackId?: (string | null) | undefined;
     /** Tool type that generated this file (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). Only present when the file was created by a tool execution. */
     sourceToolType?: string | undefined;
-    /** Execution id of the tool call that generated this file (e.g. `vg_exec_...`). Only present when the file was created by a tool execution. */
+    /** Execution id of the tool call that generated this file (e.g. `vg_tool_...`). Only present when the file was created by a tool execution. */
     sourceToolExecutionId?: string | undefined;
+    /** Background analysis state for the file (used to populate `description`, `transcript`, `durationSeconds`, and the search embedding). Omitted when the file was returned via a path that does not check analysis progress (e.g. tool-result inline files and webhook payloads). */
+    fileAnalysisMetadata?: VideoGenApi.FileAnalysisMetadata | undefined;
 }
 
 export namespace StorageFile {
@@ -52,6 +56,8 @@ export namespace StorageFile {
         Image: "IMAGE",
         Video: "VIDEO",
         Audio: "AUDIO",
+        Pdf: "PDF",
+        Slideshow: "SLIDESHOW",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
     /**

@@ -33,7 +33,8 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.generateImage({
-     *         prompt: "A serene Japanese garden with cherry blossoms at golden hour"
+     *         prompt: "A serene Japanese garden with cherry blossoms at golden hour",
+     *         quality: "LOW"
      *     })
      */
     public generateImage(
@@ -97,17 +98,19 @@ export class ToolsClient {
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
-     *     await client.tools.generateVideoClip()
+     *     await client.tools.generateVideoClip({
+     *         quality: "STANDARD"
+     *     })
      */
     public generateVideoClip(
-        request: VideoGenApi.GenerateVideoClipRequest = {},
+        request: VideoGenApi.GenerateVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
         return core.HttpResponsePromise.fromPromise(this.__generateVideoClip(request, requestOptions));
     }
 
     private async __generateVideoClip(
-        request: VideoGenApi.GenerateVideoClipRequest = {},
+        request: VideoGenApi.GenerateVideoClipRequest,
         requestOptions?: ToolsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -291,6 +294,71 @@ export class ToolsClient {
             "POST",
             "/v1/tools/generate-sound-effect",
         );
+    }
+
+    /**
+     * Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long.
+     *
+     * @param {VideoGenApi.GenerateMusicRequest} request
+     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.tools.generateMusic({
+     *         prompt: "prompt"
+     *     })
+     */
+    public generateMusic(
+        request: VideoGenApi.GenerateMusicRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__generateMusic(request, requestOptions));
+    }
+
+    private async __generateMusic(
+        request: VideoGenApi.GenerateMusicRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/tools/generate-music",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/generate-music");
     }
 
     /**
@@ -692,6 +760,71 @@ export class ToolsClient {
         }
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/upscale-video");
+    }
+
+    /**
+     * Turn a still image into a short video clip with a 3D parallax motion effect, simulating camera movement through the scene.
+     *
+     * @param {VideoGenApi.ImageAssetRequest} request
+     * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.tools.image3DEffect({
+     *         imageStorageFileId: "imageStorageFileId"
+     *     })
+     */
+    public image3DEffect(
+        request: VideoGenApi.ImageAssetRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StartToolExecutionResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__image3DEffect(request, requestOptions));
+    }
+
+    private async __image3DEffect(
+        request: VideoGenApi.ImageAssetRequest,
+        requestOptions?: ToolsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StartToolExecutionResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/tools/image-3d-effect",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return {
+                data: _response.body as VideoGenApi.StartToolExecutionResponse,
+                rawResponse: _response.rawResponse,
+            };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/tools/image-3d-effect");
     }
 
     /**

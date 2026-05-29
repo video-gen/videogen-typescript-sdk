@@ -8,6 +8,10 @@ export interface ExecutedTool {
     status: VideoGenApi.ExecutedToolStatus;
     /** Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
     toolType: string;
+    /** Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+    progressPercentage: number;
+    /** Zero-based index of the current or most recent execution attempt. */
+    attemptIndex: number;
     /** One entry per generated result. Present when `status` is `succeeded`. */
     results?: VideoGenApi.ToolSuccessResult[] | undefined;
     error?: VideoGenApi.ApiError | undefined;

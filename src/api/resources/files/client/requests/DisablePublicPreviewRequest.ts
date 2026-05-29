@@ -7,5 +7,6 @@
  *     }
  */
 export interface DisablePublicPreviewRequest {
+    /** The file id (e.g. `vg_file_...`). */
     fileId: string;
 }

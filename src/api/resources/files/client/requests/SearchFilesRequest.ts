@@ -9,7 +9,7 @@
 export interface SearchFilesRequest {
     /** Natural-language search query. The text is embedded and compared against file description vectors using cosine similarity. */
     query: string;
-    /** Number of results to return (1–100). Defaults to 10. */
+    /** Number of results to return (1-100). Defaults to 10. */
     numResults?: number;
     /** When true, only files created by the calling API key's user are returned. When false (default), all files accessible to the team are included. */
     selfOnly?: boolean;

@@ -20,6 +20,8 @@ describe("WebhooksClient", () => {
                     signingSecretLast4: "signingSecretLast4",
                 },
             ],
+            hasMore: true,
+            nextCursor: "nextCursor",
         };
 
         server

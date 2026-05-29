@@ -4,4 +4,8 @@ import type * as VideoGenApi from "../index.js";
 
 export interface GetFilesResponse {
     files: VideoGenApi.StorageFile[];
+    /** When true, there are more files available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+    hasMore: boolean;
+    /** Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+    nextCursor: string | null;
 }

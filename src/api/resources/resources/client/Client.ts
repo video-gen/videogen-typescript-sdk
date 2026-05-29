@@ -26,22 +26,30 @@ export class ResourcesClient {
     }
 
     /**
-     * List all available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint.
+     * List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
      *
+     * @param {VideoGenApi.ListAvatarPresentersRequest} request
      * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.resources.listAvatarPresenters()
      */
     public listAvatarPresenters(
+        request: VideoGenApi.ListAvatarPresentersRequest = {},
         requestOptions?: ResourcesClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.AvatarPresenterListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listAvatarPresenters(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__listAvatarPresenters(request, requestOptions));
     }
 
     private async __listAvatarPresenters(
+        request: VideoGenApi.ListAvatarPresentersRequest = {},
         requestOptions?: ResourcesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.AvatarPresenterListResponse>> {
+        const { limit, cursor } = request;
+        const _queryParams: Record<string, unknown> = {
+            limit,
+            cursor,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -57,7 +65,11 @@ export class ResourcesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -88,7 +100,7 @@ export class ResourcesClient {
     }
 
     /**
-     * List all available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint.
+     * List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
      *
      * @param {VideoGenApi.ListTtsVoicesRequest} request
      * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -107,8 +119,10 @@ export class ResourcesClient {
         request: VideoGenApi.ListTtsVoicesRequest = {},
         requestOptions?: ResourcesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.TtsVoiceListResponse>> {
-        const { includeDeprecatedVoices } = request;
+        const { limit, cursor, includeDeprecatedVoices } = request;
         const _queryParams: Record<string, unknown> = {
+            limit,
+            cursor,
             includeDeprecatedVoices,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();

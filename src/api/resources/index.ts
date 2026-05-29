@@ -1,5 +1,7 @@
 export * from "./files/client/requests/index.js";
 export * as files from "./files/index.js";
+export * from "./projects/client/requests/index.js";
+export * as projects from "./projects/index.js";
 export * from "./resources/client/requests/index.js";
 export * as resources from "./resources/index.js";
 export * from "./tools/client/requests/index.js";
@@ -7,3 +9,5 @@ export * as tools from "./tools/index.js";
 export * as webhookEvents from "./webhookEvents/index.js";
 export * from "./webhooks/client/requests/index.js";
 export * as webhooks from "./webhooks/index.js";
+export * from "./workflows/client/requests/index.js";
+export * as workflows from "./workflows/index.js";

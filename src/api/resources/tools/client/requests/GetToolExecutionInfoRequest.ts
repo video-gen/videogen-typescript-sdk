@@ -7,5 +7,6 @@
  *     }
  */
 export interface GetToolExecutionInfoRequest {
+    /** The tool execution id returned when the tool was started. */
     toolExecutionId: string;
 }

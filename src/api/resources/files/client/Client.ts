@@ -26,22 +26,30 @@ export class FilesClient {
     }
 
     /**
-     * List all files in your account, including generated assets and uploads.
+     * List files in your account, including generated assets and uploads. Files are returned most recently updated first. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
      *
+     * @param {VideoGenApi.GetFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.files.getFiles()
      */
     public getFiles(
+        request: VideoGenApi.GetFilesRequest = {},
         requestOptions?: FilesClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.GetFilesResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__getFiles(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__getFiles(request, requestOptions));
     }
 
     private async __getFiles(
+        request: VideoGenApi.GetFilesRequest = {},
         requestOptions?: FilesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.GetFilesResponse>> {
+        const { limit, cursor } = request;
+        const _queryParams: Record<string, unknown> = {
+            limit,
+            cursor,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -57,7 +65,11 @@ export class FilesClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,
@@ -384,7 +396,7 @@ export class FilesClient {
     }
 
     /**
-     * Enable public preview for a file. Registers a public playback id so the file can be streamed without authentication. Returns the updated file with `isPublicPreviewEnabled`, `publicHlsUrl`, and `publicPlaybackId` populated. Only works for video and audio files.
+     * Enable public preview for a file. Works for any file type. Copies the file to a permanent public URL (`staticPublicPreviewSource`) and, for video and audio, registers a public embed playback id (`publicPlaybackId`) for use with `@videogen/player`. If the file is not yet on the streaming provider, the endpoint starts the upload and polls briefly; otherwise the Mux asset-ready webhook finishes creating the embed playback id. Returns the updated file.
      *
      * @param {VideoGenApi.EnablePublicPreviewRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -449,7 +461,7 @@ export class FilesClient {
     }
 
     /**
-     * Disable public preview for a file. Revokes unauthenticated streaming access. The file's signed URLs for authenticated access remain functional. Returns the updated file.
+     * Disable public preview for a file. Removes the permanent public URL copy and revokes unauthenticated embed streaming access. Authenticated signed URLs remain functional. Returns the updated file.
      *
      * @param {VideoGenApi.DisablePublicPreviewRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.

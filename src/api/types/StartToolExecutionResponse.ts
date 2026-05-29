@@ -4,6 +4,6 @@
  * Returned when a tool execution is started. Use `toolExecutionId` to poll for results or cancel.
  */
 export interface StartToolExecutionResponse {
-    /** Execution id (e.g. `vg_exec_...`). */
+    /** Execution id (e.g. `vg_tool_...`). */
     toolExecutionId: string;
 }

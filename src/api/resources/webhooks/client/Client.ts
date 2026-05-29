@@ -16,7 +16,7 @@ export declare namespace WebhooksClient {
 }
 
 /**
- * Register endpoints to receive `tool_execution.*` events instead of polling.
+ * Register endpoints to receive `tool_execution.*` and `workflow_run.*` events instead of polling.
  */
 export class WebhooksClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<WebhooksClient.Options>;
@@ -26,22 +26,30 @@ export class WebhooksClient {
     }
 
     /**
-     * List all configured webhook endpoints for your account.
+     * List configured webhook endpoints for your account. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
      *
+     * @param {VideoGenApi.ListWebhookEndpointsRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.webhooks.listWebhookEndpoints()
      */
     public listWebhookEndpoints(
+        request: VideoGenApi.ListWebhookEndpointsRequest = {},
         requestOptions?: WebhooksClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.WebhookEndpointListResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__listWebhookEndpoints(requestOptions));
+        return core.HttpResponsePromise.fromPromise(this.__listWebhookEndpoints(request, requestOptions));
     }
 
     private async __listWebhookEndpoints(
+        request: VideoGenApi.ListWebhookEndpointsRequest = {},
         requestOptions?: WebhooksClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.WebhookEndpointListResponse>> {
+        const { limit, cursor } = request;
+        const _queryParams: Record<string, unknown> = {
+            limit,
+            cursor,
+        };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
             _authRequest.headers,
@@ -57,7 +65,11 @@ export class WebhooksClient {
             ),
             method: "GET",
             headers: _headers,
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
             timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
             maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
             abortSignal: requestOptions?.abortSignal,

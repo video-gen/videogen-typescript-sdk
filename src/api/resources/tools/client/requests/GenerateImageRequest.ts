@@ -5,7 +5,8 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         prompt: "A serene Japanese garden with cherry blossoms at golden hour"
+ *         prompt: "A serene Japanese garden with cherry blossoms at golden hour",
+ *         quality: "LOW"
  *     }
  */
 export interface GenerateImageRequest {
@@ -15,9 +16,21 @@ export interface GenerateImageRequest {
     imageFileIds?: string[];
     /** Aspect ratio for the generated image. Defaults to 16:9 when omitted. */
     aspectRatio?: VideoGenApi.AspectRatio;
+    /** Image generation quality tier. LOW is fastest; HIGH is slowest and highest quality. */
+    quality: GenerateImageRequest.Quality;
     watermarkMode?: VideoGenApi.WatermarkMode;
     /** Number of output results to generate. Defaults to 1. */
     numResults?: number;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */
     isOutputTemporary?: boolean;
+}
+
+export namespace GenerateImageRequest {
+    /** Image generation quality tier. LOW is fastest; HIGH is slowest and highest quality. */
+    export const Quality = {
+        Low: "LOW",
+        Standard: "STANDARD",
+        High: "HIGH",
+    } as const;
+    export type Quality = (typeof Quality)[keyof typeof Quality];
 }
