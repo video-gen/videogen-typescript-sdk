@@ -8,6 +8,10 @@ export interface ProjectExport {
     /** Id of the exported project. */
     projectId: string;
     status: VideoGenApi.ProjectExportStatus;
+    /** Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+    progressPercentage: number;
+    /** Zero-based index of the current or most recent export attempt. */
+    attemptIndex: number;
     /** Signed MP4 download URL. Present when `status` is `succeeded`. */
     downloadUrl?: (string | null) | undefined;
     /** Signed thumbnail URL. Present when `status` is `succeeded` and a thumbnail is available. */

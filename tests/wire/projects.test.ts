@@ -87,6 +87,8 @@ describe("ProjectsClient", () => {
             exportId: "exportId",
             projectId: "projectId",
             status: "pending",
+            progressPercentage: 1.1,
+            attemptIndex: 1,
             downloadUrl: "downloadUrl",
             thumbnailUrl: "thumbnailUrl",
             error: {
