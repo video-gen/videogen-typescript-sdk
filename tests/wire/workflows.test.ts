@@ -7,7 +7,7 @@ describe("WorkflowsClient", () => {
     test("addVisualsNarrationsAndCaptionsToScript", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "prompt" };
+        const rawRequestBody = { script: "script" };
         const rawResponseBody = { workflowRunId: "workflowRunId", projectId: "projectId", projectUrl: "projectUrl" };
 
         server
@@ -20,7 +20,7 @@ describe("WorkflowsClient", () => {
             .build();
 
         const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript({
-            prompt: "prompt",
+            script: "script",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -63,27 +63,6 @@ describe("WorkflowsClient", () => {
 
         const response = await client.workflows.addNarrationTransitionsAndCaptionsToSlideshow({
             fileId: "fileId",
-        });
-        expect(response).toEqual(rawResponseBody);
-    });
-
-    test("startAiVideoClip", async () => {
-        const server = mockServerPool.createServer();
-        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "prompt" };
-        const rawResponseBody = { workflowRunId: "workflowRunId", projectId: "projectId", projectUrl: "projectUrl" };
-
-        server
-            .mockEndpoint()
-            .post("/v1/workflows/ai-video-clip")
-            .jsonBody(rawRequestBody)
-            .respondWith()
-            .statusCode(200)
-            .jsonBody(rawResponseBody)
-            .build();
-
-        const response = await client.workflows.startAiVideoClip({
-            prompt: "prompt",
         });
         expect(response).toEqual(rawResponseBody);
     });

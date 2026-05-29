@@ -28,7 +28,7 @@ Creates a project and generates a narrated video from a prompt or script. Return
 
 ```typescript
 await client.workflows.addVisualsNarrationsAndCaptionsToScript({
-    prompt: "prompt"
+    script: "script"
 });
 
 ```
@@ -176,71 +176,6 @@ await client.workflows.addNarrationTransitionsAndCaptionsToSlideshow({
 <dd>
 
 **request:** `VideoGenApi.AddNarrationTransitionsAndCaptionsToSlideshowRequest` 
-    
-</dd>
-</dl>
-
-<dl>
-<dd>
-
-**requestOptions:** `WorkflowsClient.RequestOptions` 
-    
-</dd>
-</dl>
-</dd>
-</dl>
-
-
-</dd>
-</dl>
-</details>
-
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">startAiVideoClip</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
-<dl>
-<dd>
-
-#### 📝 Description
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-Generates a short AI video clip from a text prompt and optional image.
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### 🔌 Usage
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-```typescript
-await client.workflows.startAiVideoClip({
-    prompt: "prompt"
-});
-
-```
-</dd>
-</dl>
-</dd>
-</dl>
-
-#### ⚙️ Parameters
-
-<dl>
-<dd>
-
-<dl>
-<dd>
-
-**request:** `VideoGenApi.AiVideoClipRequest` 
     
 </dd>
 </dl>

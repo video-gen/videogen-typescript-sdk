@@ -33,7 +33,7 @@ export class WorkflowsClient {
      *
      * @example
      *     await client.workflows.addVisualsNarrationsAndCaptionsToScript({
-     *         prompt: "prompt"
+     *         script: "script"
      *     })
      */
     public addVisualsNarrationsAndCaptionsToScript(
@@ -228,68 +228,6 @@ export class WorkflowsClient {
             "POST",
             "/v1/workflows/add-narration-transitions-and-captions-to-slideshow",
         );
-    }
-
-    /**
-     * Generates a short AI video clip from a text prompt and optional image.
-     *
-     * @param {VideoGenApi.AiVideoClipRequest} request
-     * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
-     *
-     * @example
-     *     await client.workflows.startAiVideoClip({
-     *         prompt: "prompt"
-     *     })
-     */
-    public startAiVideoClip(
-        request: VideoGenApi.AiVideoClipRequest,
-        requestOptions?: WorkflowsClient.RequestOptions,
-    ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
-        return core.HttpResponsePromise.fromPromise(this.__startAiVideoClip(request, requestOptions));
-    }
-
-    private async __startAiVideoClip(
-        request: VideoGenApi.AiVideoClipRequest,
-        requestOptions?: WorkflowsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
-        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
-        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
-            _authRequest.headers,
-            this._options?.headers,
-            requestOptions?.headers,
-        );
-        const _response = await core.fetcher({
-            url: core.url.join(
-                (await core.Supplier.get(this._options.baseUrl)) ??
-                    (await core.Supplier.get(this._options.environment)) ??
-                    environments.VideoGenEnvironment.Production,
-                "v1/workflows/ai-video-clip",
-            ),
-            method: "POST",
-            headers: _headers,
-            contentType: "application/json",
-            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
-            requestType: "json",
-            body: request,
-            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
-            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
-            abortSignal: requestOptions?.abortSignal,
-            fetchFn: this._options?.fetch,
-            logging: this._options.logging,
-        });
-        if (_response.ok) {
-            return { data: _response.body as VideoGenApi.StartWorkflowRunResponse, rawResponse: _response.rawResponse };
-        }
-
-        if (_response.error.reason === "status-code") {
-            throw new errors.VideoGenError({
-                statusCode: _response.error.statusCode,
-                body: _response.error.body,
-                rawResponse: _response.rawResponse,
-            });
-        }
-
-        return handleNonStatusCodeError(_response.error, _response.rawResponse, "POST", "/v1/workflows/ai-video-clip");
     }
 
     /**

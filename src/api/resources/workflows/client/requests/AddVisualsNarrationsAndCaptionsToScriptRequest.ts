@@ -5,11 +5,11 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         prompt: "prompt"
+ *         script: "script"
  *     }
  */
 export interface AddVisualsNarrationsAndCaptionsToScriptRequest {
-    /** A topic, idea, or full script to turn into a video. */
-    prompt: string;
+    /** The narration script, used verbatim. This exact text is narrated and turned into a video — it is not rewritten or expanded. */
+    script: string;
     aspectRatio?: VideoGenApi.AspectRatio;
 }

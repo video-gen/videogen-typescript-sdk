@@ -51,7 +51,7 @@ import { VideoGenClient } from "@videogen/sdk";
 
 const client = new VideoGenClient({ token: "YOUR_TOKEN" });
 await client.workflows.addVisualsNarrationsAndCaptionsToScript({
-    prompt: "prompt"
+    script: "script"
 });
 ```
 

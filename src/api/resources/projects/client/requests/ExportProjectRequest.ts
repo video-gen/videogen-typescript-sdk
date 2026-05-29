@@ -12,6 +12,4 @@ export interface ExportProjectRequest {
     /** The project id (e.g. `vg_proj_...`). */
     projectId: string;
     quality?: VideoGenApi.ExportProjectQuality;
-    /** When true, the rendered MP4 is exposed at a public shareable URL. */
-    isPublic?: boolean;
 }
