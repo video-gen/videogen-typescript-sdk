@@ -14,5 +14,5 @@ export interface ExecutedTool {
     attemptIndex: number;
     /** One entry per generated result. Present when `status` is `succeeded`. */
     results?: VideoGenApi.ToolSuccessResult[] | undefined;
-    error?: VideoGenApi.ApiError | undefined;
+    error?: (VideoGenApi.ApiError | null) | undefined;
 }

@@ -27,17 +27,17 @@ export interface StorageFile {
     /** Transcript text for video and audio files, when available. Null for images or when no transcript has been generated. */
     transcript?: (string | null) | undefined;
     /** Thumbnail image source. Populated after hydration. */
-    thumbnailSource?: VideoGenApi.FileSource | undefined;
+    thumbnailSource?: (VideoGenApi.FileSource | null) | undefined;
     /** Preview rendition source (720p for video, resized for images). Populated after hydration. */
-    previewSource?: VideoGenApi.FileSource | undefined;
+    previewSource?: (VideoGenApi.FileSource | null) | undefined;
     /** Highest-quality downloadable rendition. Populated after hydration. */
-    downloadSource?: VideoGenApi.FileSource | undefined;
+    downloadSource?: (VideoGenApi.FileSource | null) | undefined;
     /** Private HLS streaming source. Populated for video and audio files once streaming renditions are ready. Uses a signed token; treat like other signed sources. */
-    hlsSource?: VideoGenApi.FileSource | undefined;
+    hlsSource?: (VideoGenApi.FileSource | null) | undefined;
     /** Whether public preview is enabled for this file. When true, `staticPublicPreviewSource` is populated for all file types. For video and audio, `publicHlsUrl` and `publicPlaybackId` are also populated once embed streaming is ready. */
     isPublicPreviewEnabled?: boolean | undefined;
     /** Permanent public URL for the file's highest-quality rendition. Populated when `isPublicPreviewEnabled` is true. Does not expire (`expiresAt` is null). Use for direct links to images, downloads, or any file type. For embedded video or audio players, prefer `publicPlaybackId`. */
-    staticPublicPreviewSource?: VideoGenApi.FileSource | undefined;
+    staticPublicPreviewSource?: (VideoGenApi.FileSource | null) | undefined;
     /** Public HLS streaming URL for video and audio. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. Prefer `publicPlaybackId` with `@videogen/player` for embeds. */
     publicHlsUrl?: (string | null) | undefined;
     /** Encoded public playback id (e.g. `vg_play_...`) for video and audio embeds. Pass this to `@videogen/player` or `@videogen/player-react`. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. For a permanent direct file URL (any type), use `staticPublicPreviewSource` instead. */

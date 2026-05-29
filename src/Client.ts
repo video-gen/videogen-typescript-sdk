@@ -3,6 +3,7 @@
 import { FilesClient } from "./api/resources/files/client/Client.js";
 import { ProjectsClient } from "./api/resources/projects/client/Client.js";
 import { ResourcesClient } from "./api/resources/resources/client/Client.js";
+import { TextClient } from "./api/resources/text/client/Client.js";
 import { ToolsClient } from "./api/resources/tools/client/Client.js";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client.js";
 import { WorkflowsClient } from "./api/resources/workflows/client/Client.js";
@@ -22,6 +23,7 @@ export class VideoGenClient {
     protected _projects: ProjectsClient | undefined;
     protected _tools: ToolsClient | undefined;
     protected _files: FilesClient | undefined;
+    protected _text: TextClient | undefined;
     protected _resources: ResourcesClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
 
@@ -43,6 +45,10 @@ export class VideoGenClient {
 
     public get files(): FilesClient {
         return (this._files ??= new FilesClient(this._options));
+    }
+
+    public get text(): TextClient {
+        return (this._text ??= new TextClient(this._options));
     }
 
     public get resources(): ResourcesClient {

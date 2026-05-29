@@ -4,6 +4,8 @@ export * from "./projects/client/requests/index.js";
 export * as projects from "./projects/index.js";
 export * from "./resources/client/requests/index.js";
 export * as resources from "./resources/index.js";
+export * from "./text/client/requests/index.js";
+export * as text from "./text/index.js";
 export * from "./tools/client/requests/index.js";
 export * as tools from "./tools/index.js";
 export * as webhookEvents from "./webhookEvents/index.js";

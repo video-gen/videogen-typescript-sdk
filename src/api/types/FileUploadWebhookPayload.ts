@@ -14,5 +14,5 @@ export interface FileUploadWebhookPayload {
     /** Hydrated file object with the latest state at the time of the event. */
     file: VideoGenApi.StorageFile;
     /** Error details. Present only on `file.upload.failed` and `file.analysis_failed`. */
-    error?: VideoGenApi.ApiError | undefined;
+    error?: (VideoGenApi.ApiError | null) | undefined;
 }

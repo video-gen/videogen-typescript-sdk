@@ -12,5 +12,5 @@ export interface ProjectExport {
     downloadUrl?: (string | null) | undefined;
     /** Signed thumbnail URL. Present when `status` is `succeeded` and a thumbnail is available. */
     thumbnailUrl?: (string | null) | undefined;
-    error?: VideoGenApi.ApiError | undefined;
+    error?: (VideoGenApi.ApiError | null) | undefined;
 }

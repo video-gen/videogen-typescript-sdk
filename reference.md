@@ -2054,6 +2054,72 @@ await client.files.disablePublicPreview({
 </dl>
 </details>
 
+## Text
+<details><summary><code>client.text.<a href="/src/api/resources/text/client/Client.ts">generateText</a>({ ...params }) -> VideoGenApi.GenerateTextResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Generate text from a prompt using a fast, general-purpose language model. Synchronous — the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.text.generateText({
+    prompt: "Write a 30-second upbeat video script about why the sky is blue."
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.GenerateTextRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `TextClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Resources
 <details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listAvatarPresenters</a>({ ...params }) -> VideoGenApi.AvatarPresenterListResponse</code></summary>
 <dl>

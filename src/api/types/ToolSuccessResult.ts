@@ -11,7 +11,7 @@ export interface ToolSuccessResult {
     /** File type. */
     type: ToolSuccessResult.Type;
     /** Hydrated file metadata with signed download URLs. Populated when returned from a webhook or after hydration. */
-    file?: VideoGenApi.StorageFile | undefined;
+    file?: (VideoGenApi.StorageFile | null) | undefined;
 }
 
 export namespace ToolSuccessResult {

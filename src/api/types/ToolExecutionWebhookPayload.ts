@@ -16,5 +16,5 @@ export interface ToolExecutionWebhookPayload {
     /** One entry per generated result, each with a hydrated `file`. Present only on `tool_execution.succeeded`. */
     results?: VideoGenApi.ToolSuccessResult[] | undefined;
     /** Present only on `tool_execution.failed`. */
-    error?: VideoGenApi.ApiError | undefined;
+    error?: (VideoGenApi.ApiError | null) | undefined;
 }

@@ -11,6 +11,7 @@ export * from "./FileSource.js";
 export * from "./FileUploadResponse.js";
 export * from "./FileUploadWebhookEventName.js";
 export * from "./FileUploadWebhookPayload.js";
+export * from "./GenerateTextResponse.js";
 export * from "./GetFilesResponse.js";
 export * from "./ImageAssetRequest.js";
 export * from "./ImageModelMode.js";

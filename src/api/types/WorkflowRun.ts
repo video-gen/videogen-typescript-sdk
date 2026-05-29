@@ -15,5 +15,5 @@ export interface WorkflowRun {
     projectId: string;
     /** URL to view the project in the VideoGen app. */
     projectUrl: string;
-    error?: VideoGenApi.ApiError | undefined;
+    error?: (VideoGenApi.ApiError | null) | undefined;
 }
