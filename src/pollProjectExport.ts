@@ -1,6 +1,3 @@
-import { ProjectExportStatus } from "./api/types/ProjectExportStatus.js";
-import type { VideoGenApi, VideoGenClient } from "./index.js";
-
 export type PollProjectExportOptions = {
   pollIntervalMs?: number;
   /** Maximum time in ms to wait for the export to reach a terminal state. Defaults to 3_600_000 (1 hour). */
@@ -8,10 +5,26 @@ export type PollProjectExportOptions = {
   signal?: AbortSignal;
 };
 
-function getIsTerminalStatus(status: VideoGenApi.ProjectExportStatus): boolean {
-  return (
-    status === ProjectExportStatus.Succeeded || status === ProjectExportStatus.Failed
-  );
+export type PolledProjectExport = {
+  exportId: string;
+  status: string;
+  projectId: string;
+  downloadUrl?: string | null;
+};
+
+export type ProjectExportPollerClient = {
+  projects: {
+    getProjectExport: (args: {
+      projectId: string;
+      exportId: string;
+    }) => Promise<PolledProjectExport>;
+  };
+};
+
+const TERMINAL_PROJECT_EXPORT_STATUSES = new Set(["succeeded", "failed"]);
+
+function getIsTerminalStatus(status: string): boolean {
+  return TERMINAL_PROJECT_EXPORT_STATUSES.has(status);
 }
 
 function sleep(ms: number, signal?: AbortSignal): Promise<void> {
@@ -45,11 +58,11 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
 
 /** Polls `getProjectExport` until status is `succeeded` or `failed`. */
 export async function pollProjectExport(
-  client: Pick<VideoGenClient, "projects">,
+  client: ProjectExportPollerClient,
   projectId: string,
   exportId: string,
   options?: PollProjectExportOptions,
-): Promise<VideoGenApi.ProjectExport> {
+): Promise<PolledProjectExport> {
   const pollIntervalMs = options?.pollIntervalMs ?? 1500;
   const timeoutMs = options?.timeoutMs ?? 3_600_000;
   const signal = options?.signal;

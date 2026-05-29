@@ -11,3 +11,4 @@ export * from "./getHydratedFile.js";
 export * from "./downloadFile.js";
 export * from "./uploadFile.js";
 export * from "./verifyWebhookSignature.js";
+export * from "./pollPublicPreview.js";

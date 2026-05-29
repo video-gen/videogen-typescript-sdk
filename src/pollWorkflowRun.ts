@@ -1,6 +1,3 @@
-import { WorkflowRunStatus } from "./api/types/WorkflowRunStatus.js";
-import type { VideoGenApi, VideoGenClient } from "./index.js";
-
 export type PollWorkflowRunOptions = {
   pollIntervalMs?: number;
   /** Maximum time in ms to wait for the workflow run to reach a terminal state. Defaults to 3_600_000 (1 hour). */
@@ -8,12 +5,25 @@ export type PollWorkflowRunOptions = {
   signal?: AbortSignal;
 };
 
-function getIsTerminalStatus(status: VideoGenApi.WorkflowRunStatus): boolean {
-  return (
-    status === WorkflowRunStatus.Succeeded ||
-    status === WorkflowRunStatus.Failed ||
-    status === WorkflowRunStatus.Cancelled
-  );
+export type PolledWorkflowRun = {
+  workflowRunId: string;
+  status: string;
+  workflowType: string;
+  projectId: string;
+  projectUrl: string;
+  error?: { message: string };
+};
+
+export type WorkflowRunPollerClient = {
+  workflows: {
+    getWorkflowRun: (args: { workflowRunId: string }) => Promise<PolledWorkflowRun>;
+  };
+};
+
+const TERMINAL_WORKFLOW_RUN_STATUSES = new Set(["succeeded", "failed", "cancelled"]);
+
+function getIsTerminalStatus(status: string): boolean {
+  return TERMINAL_WORKFLOW_RUN_STATUSES.has(status);
 }
 
 function sleep(ms: number, signal?: AbortSignal): Promise<void> {
@@ -47,10 +57,10 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
 
 /** Polls `getWorkflowRun` until status is `succeeded`, `failed`, or `cancelled`. */
 export async function pollWorkflowRun(
-  client: Pick<VideoGenClient, "workflows">,
+  client: WorkflowRunPollerClient,
   workflowRunId: string,
   options?: PollWorkflowRunOptions,
-): Promise<VideoGenApi.WorkflowRun> {
+): Promise<PolledWorkflowRun> {
   const pollIntervalMs = options?.pollIntervalMs ?? 1500;
   const timeoutMs = options?.timeoutMs ?? 3_600_000;
   const signal = options?.signal;

@@ -6,5 +6,6 @@ src/getHydratedFile.ts
 src/downloadFile.ts
 src/uploadFile.ts
 src/verifyWebhookSignature.ts
+src/pollPublicPreview.ts
 src/index.ts
 src/package-ext.json
