@@ -26,7 +26,7 @@ export class ResourcesClient {
     }
 
     /**
-     * List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+     * List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint or to a script/slideshow workflow. Pass a reference `voiceId` to return presenters sorted by best match for that voice. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
      *
      * @param {VideoGenApi.ListAvatarPresentersRequest} request
      * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -45,10 +45,11 @@ export class ResourcesClient {
         request: VideoGenApi.ListAvatarPresentersRequest = {},
         requestOptions?: ResourcesClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.AvatarPresenterListResponse>> {
-        const { limit, cursor } = request;
+        const { limit, cursor, voiceId } = request;
         const _queryParams: Record<string, unknown> = {
             limit,
             cursor,
+            voiceId,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

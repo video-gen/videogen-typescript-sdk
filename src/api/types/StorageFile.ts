@@ -17,6 +17,7 @@ export interface StorageFile {
      * - `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project).
      * - `EXPORT`: project exports.
      * - `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. Not analyzed (no description, transcript, or embedding).
+     * - `ENTITY`: files attached to a reusable entity (e.g. a voice sample for an actor), shared across your team.
      */
     scope: StorageFile.Scope;
     /** Display name for the file. */
@@ -67,12 +68,14 @@ export namespace StorageFile {
      * - `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project).
      * - `EXPORT`: project exports.
      * - `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. Not analyzed (no description, transcript, or embedding).
+     * - `ENTITY`: files attached to a reusable entity (e.g. a voice sample for an actor), shared across your team.
      */
     export const Scope = {
         Global: "GLOBAL",
         Project: "PROJECT",
         Export: "EXPORT",
         Temporary: "TEMPORARY",
+        Entity: "ENTITY",
     } as const;
     export type Scope = (typeof Scope)[keyof typeof Scope];
 }

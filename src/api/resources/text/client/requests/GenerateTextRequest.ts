@@ -11,7 +11,7 @@ export interface GenerateTextRequest {
     prompt: string;
     /** Optional system instructions that steer the model's role, tone, and constraints. */
     system?: string | null;
-    /** Model tier. `fast` is quickest and cheapest; `smart` is higher quality. Defaults to `fast`. */
+    /** Model quality tier. `LOW` is fastest and cheapest; `STANDARD` balances quality and cost; `HIGH` is highest quality. Defaults to `STANDARD`. */
     model?: GenerateTextRequest.Model;
     /** Sampling temperature. Higher values produce more varied output. Defaults to the model's default. */
     temperature?: number;
@@ -20,10 +20,11 @@ export interface GenerateTextRequest {
 }
 
 export namespace GenerateTextRequest {
-    /** Model tier. `fast` is quickest and cheapest; `smart` is higher quality. Defaults to `fast`. */
+    /** Model quality tier. `LOW` is fastest and cheapest; `STANDARD` balances quality and cost; `HIGH` is highest quality. Defaults to `STANDARD`. */
     export const Model = {
-        Fast: "fast",
-        Smart: "smart",
+        Low: "LOW",
+        Standard: "STANDARD",
+        High: "HIGH",
     } as const;
     export type Model = (typeof Model)[keyof typeof Model];
 }

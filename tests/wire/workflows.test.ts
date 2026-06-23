@@ -7,8 +7,13 @@ describe("WorkflowsClient", () => {
     test("addVisualsNarrationsAndCaptionsToScript", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { script: "script" };
-        const rawResponseBody = { workflowRunId: "workflowRunId", projectId: "projectId", projectUrl: "projectUrl" };
+        const rawRequestBody = { script: "script", visualStyle: { type: "STOCK" } };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
 
         server
             .mockEndpoint()
@@ -21,6 +26,9 @@ describe("WorkflowsClient", () => {
 
         const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript({
             script: "script",
+            visualStyle: {
+                type: "STOCK",
+            },
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -28,8 +36,13 @@ describe("WorkflowsClient", () => {
     test("addVisualsAndCaptionsToVoiceover", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { fileId: "fileId" };
-        const rawResponseBody = { workflowRunId: "workflowRunId", projectId: "projectId", projectUrl: "projectUrl" };
+        const rawRequestBody = { fileId: "fileId", visualStyle: { type: "STOCK" } };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
 
         server
             .mockEndpoint()
@@ -42,6 +55,9 @@ describe("WorkflowsClient", () => {
 
         const response = await client.workflows.addVisualsAndCaptionsToVoiceover({
             fileId: "fileId",
+            visualStyle: {
+                type: "STOCK",
+            },
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -50,7 +66,12 @@ describe("WorkflowsClient", () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { fileId: "fileId" };
-        const rawResponseBody = { workflowRunId: "workflowRunId", projectId: "projectId", projectUrl: "projectUrl" };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
 
         server
             .mockEndpoint()
@@ -63,6 +84,36 @@ describe("WorkflowsClient", () => {
 
         const response = await client.workflows.addNarrationTransitionsAndCaptionsToSlideshow({
             fileId: "fileId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generateScenesFromStoryboard", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { scenes: [{ prompt: "prompt" }] };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workflows/generate-scenes-from-storyboard")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workflows.generateScenesFromStoryboard({
+            scenes: [
+                {
+                    prompt: "prompt",
+                },
+            ],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -105,7 +156,12 @@ describe("WorkflowsClient", () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { workflowRunId: "workflowRunId", projectId: "projectId", projectUrl: "projectUrl" };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
 
         server
             .mockEndpoint()

@@ -9,4 +9,6 @@ export interface ListAvatarPresentersRequest {
     limit?: number;
     /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. */
     cursor?: string;
+    /** Optional reference voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). When provided, avatar presenters are returned sorted by best match for that voice (best first). Omit to return presenters in the default catalogue order. */
+    voiceId?: string;
 }

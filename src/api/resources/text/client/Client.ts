@@ -16,7 +16,7 @@ export declare namespace TextClient {
 }
 
 /**
- * Generate text with a fast, general-purpose language model. Synchronous — the response includes the generated text.
+ * Generate text with a general-purpose language model. Synchronous — the response includes the generated text.
  */
 export class TextClient {
     protected readonly _options: NormalizedClientOptionsWithAuth<TextClient.Options>;
@@ -26,7 +26,7 @@ export class TextClient {
     }
 
     /**
-     * Generate text from a prompt using a fast, general-purpose language model. Synchronous — the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
+     * Generate text from a prompt using a general-purpose language model. Choose a quality tier with `model` (`LOW`, `STANDARD`, or `HIGH`). Synchronous — the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
      *
      * @param {VideoGenApi.GenerateTextRequest} request
      * @param {TextClient.RequestOptions} requestOptions - Request-specific configuration.

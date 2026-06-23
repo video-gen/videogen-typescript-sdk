@@ -5,5 +5,6 @@ export const WorkflowType = {
     AddVisualsNarrationsAndCaptionsToScript: "ADD_VISUALS_NARRATIONS_AND_CAPTIONS_TO_SCRIPT",
     AddVisualsAndCaptionsToVoiceover: "ADD_VISUALS_AND_CAPTIONS_TO_VOICEOVER",
     AddNarrationTransitionsAndCaptionsToSlideshow: "ADD_NARRATION_TRANSITIONS_AND_CAPTIONS_TO_SLIDESHOW",
+    GenerateScenesFromStoryboard: "GENERATE_SCENES_FROM_STORYBOARD",
 } as const;
 export type WorkflowType = (typeof WorkflowType)[keyof typeof WorkflowType];

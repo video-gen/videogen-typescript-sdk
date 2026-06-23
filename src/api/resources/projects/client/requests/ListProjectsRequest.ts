@@ -9,6 +9,6 @@ export interface ListProjectsRequest {
     limit?: number;
     /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. */
     cursor?: string;
-    /** When true, returns only projects created by the API key's owner workspace. When false (default), returns all projects accessible to the team. */
+    /** When true, returns only projects created by the API key's owner. When false (default), returns all projects accessible to the team. */
     selfOnly?: boolean;
 }

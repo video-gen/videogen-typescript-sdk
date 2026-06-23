@@ -1,3 +1,6 @@
+export * from "./entities/client/requests/index.js";
+export * as entities from "./entities/index.js";
+export * from "./entities/types/index.js";
 export * from "./files/client/requests/index.js";
 export * as files from "./files/index.js";
 export * from "./projects/client/requests/index.js";

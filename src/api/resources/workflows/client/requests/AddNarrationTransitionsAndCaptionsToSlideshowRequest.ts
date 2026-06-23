@@ -11,5 +11,21 @@ import type * as VideoGenApi from "../../../../index.js";
 export interface AddNarrationTransitionsAndCaptionsToSlideshowRequest {
     /** Opaque file id of an uploaded PDF or PowerPoint file (e.g. `vg_file_...`). Upload the file first via `POST /v1/files/upload`. */
     fileId: string;
+    /** Optional per-slide narration, in slide order, applied by index: each slide uses its matching entry, and an empty string makes that slide silent. If you provide fewer entries than slides, the remaining slides are silent; extra entries are ignored. Omit this field entirely to narrate each slide from its speaker notes in the uploaded file. To guarantee no narration on any slide, pass an empty array. */
+    slideScripts?: string[];
     aspectRatio?: VideoGenApi.AspectRatio;
+    /** Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
+    language?: string;
+    /** Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). A default voice is used when omitted. Any voice may be used here, including voices where `supportsDirectToolExecution` is false. */
+    voiceId?: string | null;
+    /** Speech rate multiplier. Defaults to the voice's default speed. */
+    voiceSpeed?: number;
+    /** Optional avatar presenter id from `GET /v1/resources/avatar-presenters` (e.g. `vg_pres_...`). When set, the narration is delivered by a talking-head presenter avatar. Pass your `voiceId` to that endpoint to list presenters sorted by best match for the voice. Omit for a standard voiceover with no presenter. */
+    avatarPresenterId?: string | null;
+    /** Caption styling. Omit to use the default style with captions shown. Pass an object to override individual style fields (any omitted field uses the default). Pass `null` to hide captions entirely. */
+    captionStyle?: VideoGenApi.WorkflowCaptionStyle | null;
+    /** Optional file id of an uploaded logo image to overlay on the video (e.g. `vg_file_...`). Upload the image first via `POST /v1/files/upload`. Only image files are accepted. */
+    logoFileId?: string | null;
+    /** Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Use this for background music, logo overlays, or caption changes beyond `captionStyle`. */
+    remixActions?: VideoGenApi.RemixAction[];
 }

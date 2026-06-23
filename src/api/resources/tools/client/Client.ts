@@ -92,7 +92,7 @@ export class ToolsClient {
     }
 
     /**
-     * Generate a video clip from a text prompt, optionally guided by reference images or an input video. At least one of `prompt`, `imageFileIds`, or `videoFileId` must be provided.
+     * Generate a video clip from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided.
      *
      * @param {VideoGenApi.GenerateVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.

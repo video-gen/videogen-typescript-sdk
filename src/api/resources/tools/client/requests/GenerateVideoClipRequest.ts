@@ -9,12 +9,14 @@ import type * as VideoGenApi from "../../../../index.js";
  *     }
  */
 export interface GenerateVideoClipRequest {
-    /** Text prompt describing the video to generate. Optional when reference images or a video are provided. */
+    /** Text prompt describing the video to generate. Optional when reference media is provided. Describe the video in plain language; any reference media you provide is incorporated automatically. */
     prompt?: string;
-    /** Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the model animates or uses these images as guidance. */
+    /** Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the images are animated or used as visual guidance for the generated video. */
     imageFileIds?: string[];
-    /** Optional file id of a source video (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. When provided, the model restyles or transforms the input video. */
-    videoFileId?: string;
+    /** Optional file ids of reference videos (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. They are used as motion or style guidance for the generated video. */
+    videoFileIds?: string[];
+    /** Optional file ids of reference audio clips (e.g. `["vg_file_..."]`) used for native lip-sync and soundtrack. Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
+    audioFileIds?: string[];
     /** When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false. */
     generateAudio?: boolean;
     /** Aspect ratio for the generated video. Defaults to 16:9 when omitted. */

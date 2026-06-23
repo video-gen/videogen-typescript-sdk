@@ -10,4 +10,6 @@ export interface StartWorkflowRunResponse {
     projectId: string;
     /** URL to view the project in the VideoGen app. */
     projectUrl: string;
+    /** Opaque remix action ids (e.g. `vg_rmix_...`), one per `remixActions` entry in request order. Empty when no remix actions were requested. Each runs after the video is built; poll `GET /v1/projects/{projectId}/remix-actions`. */
+    remixActionIds: string[];
 }

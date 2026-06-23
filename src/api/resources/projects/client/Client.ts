@@ -285,4 +285,140 @@ export class ProjectsClient {
             "/v1/projects/{projectId}/exports/{exportId}",
         );
     }
+
+    /**
+     * Applies an ordered list of edits (background music, logo overlay, caption visibility/style) to a project. Each action runs asynchronously as its own remix action; the response returns one remix action id per action in order. Set `saveAsNewProject` to apply the edits to a copy and leave the original untouched. Poll `GET /v1/projects/{projectId}/remix-actions` for status.
+     *
+     * @param {VideoGenApi.RemixProjectRequest} request
+     * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.projects.remixProject({
+     *         projectId: "projectId",
+     *         remixActions: [{
+     *                 type: "SET_BACKGROUND_MUSIC"
+     *             }]
+     *     })
+     */
+    public remixProject(
+        request: VideoGenApi.RemixProjectRequest,
+        requestOptions?: ProjectsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.RemixProjectResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__remixProject(request, requestOptions));
+    }
+
+    private async __remixProject(
+        request: VideoGenApi.RemixProjectRequest,
+        requestOptions?: ProjectsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.RemixProjectResponse>> {
+        const { projectId, ..._body } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                `v1/projects/${core.url.encodePathParam(projectId)}/remix`,
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: _body,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.RemixProjectResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/projects/{projectId}/remix",
+        );
+    }
+
+    /**
+     * Returns every remix action applied to a project (via `POST /v1/projects/{projectId}/remix` or as a post-workflow step), most recent first, with each action's status and progress.
+     *
+     * @param {VideoGenApi.ListProjectRemixActionsRequest} request
+     * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.projects.listProjectRemixActions({
+     *         projectId: "projectId"
+     *     })
+     */
+    public listProjectRemixActions(
+        request: VideoGenApi.ListProjectRemixActionsRequest,
+        requestOptions?: ProjectsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.ListRemixActionsResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listProjectRemixActions(request, requestOptions));
+    }
+
+    private async __listProjectRemixActions(
+        request: VideoGenApi.ListProjectRemixActionsRequest,
+        requestOptions?: ProjectsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.ListRemixActionsResponse>> {
+        const { projectId } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                `v1/projects/${core.url.encodePathParam(projectId)}/remix-actions`,
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.ListRemixActionsResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "GET",
+            "/v1/projects/{projectId}/remix-actions",
+        );
+    }
 }

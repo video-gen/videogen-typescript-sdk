@@ -113,4 +113,67 @@ describe("ProjectsClient", () => {
         });
         expect(response).toEqual(rawResponseBody);
     });
+
+    test("remixProject", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { remixActions: [{ type: "SET_BACKGROUND_MUSIC" }] };
+        const rawResponseBody = {
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/projects/projectId/remix")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.projects.remixProject({
+            projectId: "projectId",
+            remixActions: [
+                {
+                    type: "SET_BACKGROUND_MUSIC",
+                },
+            ],
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("listProjectRemixActions", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            remixActions: [
+                {
+                    remixActionId: "remixActionId",
+                    type: "SET_BACKGROUND_MUSIC",
+                    status: "pending",
+                    projectId: "projectId",
+                    projectUrl: "projectUrl",
+                    progressPercentage: 1.1,
+                    attemptIndex: 1,
+                    error: { message: "message" },
+                },
+            ],
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/projects/projectId/remix-actions")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.projects.listProjectRemixActions({
+            projectId: "projectId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
 });
