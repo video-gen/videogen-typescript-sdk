@@ -3,6 +3,13 @@ import type { VideoGenApi, VideoGenClient } from "./index.js";
 export const PUBLIC_PREVIEW_NOT_ENABLED_ERROR_MESSAGE =
   "Public preview is not enabled for this file. Call enablePublicPreview before polling.";
 
+export class PublicPreviewPollingError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = "PublicPreviewPollingError";
+  }
+}
+
 export type PollPublicPreviewOptions = {
   pollIntervalMs?: number;
   /** Maximum time in ms to wait. Defaults to 120_000 (2 minutes). */
@@ -55,17 +62,13 @@ function sleep(ms: number, signal?: AbortSignal): Promise<void> {
 
 function assertPublicPreviewEnabled(file: VideoGenApi.StorageFile): void {
   if (!file.isPublicPreviewEnabled) {
-    throw new Error(PUBLIC_PREVIEW_NOT_ENABLED_ERROR_MESSAGE);
+    throw new PublicPreviewPollingError(PUBLIC_PREVIEW_NOT_ENABLED_ERROR_MESSAGE);
   }
 }
 
 function getIsStaticPublicPreviewReady(file: VideoGenApi.StorageFile): boolean {
   const source = file.staticPublicPreviewSource;
-  return (
-    source?.status === "ready" &&
-    source.url != null &&
-    source.url.length > 0
-  );
+  return source?.status === "ready" && source.url != null && source.url.length > 0;
 }
 
 function getShouldWaitForEmbedPlaybackId({
@@ -151,7 +154,7 @@ export async function pollPublicEmbedPlaybackId(
     assertPublicPreviewEnabled(file);
 
     if (file.type !== "VIDEO" && file.type !== "AUDIO") {
-      throw new Error(
+      throw new PublicPreviewPollingError(
         "Embed playback ids are only available for video and audio files.",
       );
     }
@@ -166,7 +169,7 @@ export async function pollPublicEmbedPlaybackId(
     await sleep(pollIntervalMs, signal);
   }
 
-  throw new Error(
+  throw new PublicPreviewPollingError(
     `Public embed playback id for file ${fileId} was not ready within ${timeoutMs}ms.`,
   );
 }
@@ -200,7 +203,7 @@ export async function pollPublicPreview(
     await sleep(pollIntervalMs, signal);
   }
 
-  throw new Error(
+  throw new PublicPreviewPollingError(
     `Public preview for file ${fileId} was not ready within ${timeoutMs}ms.`,
   );
 }
