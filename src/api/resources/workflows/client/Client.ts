@@ -28,7 +28,79 @@ export class WorkflowsClient {
     /**
      * Creates a project and generates a narrated video from a prompt or script. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
      *
-     * @param {VideoGenApi.AddVisualsNarrationsAndCaptionsToScriptRequest} request
+     * @param {VideoGenApi.ScriptToVideoRequest} request
+     * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.workflows.scriptToVideo({
+     *         script: "script",
+     *         visualStyle: {
+     *             type: "STOCK"
+     *         }
+     *     })
+     */
+    public scriptToVideo(
+        request: VideoGenApi.ScriptToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__scriptToVideo(request, requestOptions));
+    }
+
+    private async __scriptToVideo(
+        request: VideoGenApi.ScriptToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/workflows/script-to-video",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StartWorkflowRunResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/workflows/script-to-video",
+        );
+    }
+
+    /**
+     * @deprecated
+     *
+     * Legacy alias for `POST /v1/workflows/script-to-video`. Use that endpoint instead.
+     *
+     * @param {VideoGenApi.ScriptToVideoRequest} request
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -40,7 +112,7 @@ export class WorkflowsClient {
      *     })
      */
     public addVisualsNarrationsAndCaptionsToScript(
-        request: VideoGenApi.AddVisualsNarrationsAndCaptionsToScriptRequest,
+        request: VideoGenApi.ScriptToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
         return core.HttpResponsePromise.fromPromise(
@@ -49,7 +121,7 @@ export class WorkflowsClient {
     }
 
     private async __addVisualsNarrationsAndCaptionsToScript(
-        request: VideoGenApi.AddVisualsNarrationsAndCaptionsToScriptRequest,
+        request: VideoGenApi.ScriptToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -100,7 +172,79 @@ export class WorkflowsClient {
     /**
      * Creates a project from an uploaded voiceover file and generates a video with matching b-roll. Upload the voiceover via the files API first.
      *
-     * @param {VideoGenApi.AddVisualsAndCaptionsToVoiceoverRequest} request
+     * @param {VideoGenApi.VoiceoverToVideoRequest} request
+     * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.workflows.voiceoverToVideo({
+     *         fileId: "fileId",
+     *         visualStyle: {
+     *             type: "STOCK"
+     *         }
+     *     })
+     */
+    public voiceoverToVideo(
+        request: VideoGenApi.VoiceoverToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__voiceoverToVideo(request, requestOptions));
+    }
+
+    private async __voiceoverToVideo(
+        request: VideoGenApi.VoiceoverToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/workflows/voiceover-to-video",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StartWorkflowRunResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/workflows/voiceover-to-video",
+        );
+    }
+
+    /**
+     * @deprecated
+     *
+     * Legacy alias for `POST /v1/workflows/voiceover-to-video`. Use that endpoint instead.
+     *
+     * @param {VideoGenApi.VoiceoverToVideoRequest} request
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -112,14 +256,14 @@ export class WorkflowsClient {
      *     })
      */
     public addVisualsAndCaptionsToVoiceover(
-        request: VideoGenApi.AddVisualsAndCaptionsToVoiceoverRequest,
+        request: VideoGenApi.VoiceoverToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
         return core.HttpResponsePromise.fromPromise(this.__addVisualsAndCaptionsToVoiceover(request, requestOptions));
     }
 
     private async __addVisualsAndCaptionsToVoiceover(
-        request: VideoGenApi.AddVisualsAndCaptionsToVoiceoverRequest,
+        request: VideoGenApi.VoiceoverToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -170,7 +314,76 @@ export class WorkflowsClient {
     /**
      * Creates a project from an uploaded PDF or PowerPoint file and generates an AI-narrated video walking through each slide. Upload the file via `POST /v1/files/upload` first.
      *
-     * @param {VideoGenApi.AddNarrationTransitionsAndCaptionsToSlideshowRequest} request
+     * @param {VideoGenApi.SlideshowToVideoRequest} request
+     * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.workflows.slideshowToVideo({
+     *         fileId: "fileId"
+     *     })
+     */
+    public slideshowToVideo(
+        request: VideoGenApi.SlideshowToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__slideshowToVideo(request, requestOptions));
+    }
+
+    private async __slideshowToVideo(
+        request: VideoGenApi.SlideshowToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/workflows/slideshow-to-video",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StartWorkflowRunResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/workflows/slideshow-to-video",
+        );
+    }
+
+    /**
+     * @deprecated
+     *
+     * Legacy alias for `POST /v1/workflows/slideshow-to-video`. Use that endpoint instead.
+     *
+     * @param {VideoGenApi.SlideshowToVideoRequest} request
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -179,7 +392,7 @@ export class WorkflowsClient {
      *     })
      */
     public addNarrationTransitionsAndCaptionsToSlideshow(
-        request: VideoGenApi.AddNarrationTransitionsAndCaptionsToSlideshowRequest,
+        request: VideoGenApi.SlideshowToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
         return core.HttpResponsePromise.fromPromise(
@@ -188,7 +401,7 @@ export class WorkflowsClient {
     }
 
     private async __addNarrationTransitionsAndCaptionsToSlideshow(
-        request: VideoGenApi.AddNarrationTransitionsAndCaptionsToSlideshowRequest,
+        request: VideoGenApi.SlideshowToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
@@ -239,7 +452,78 @@ export class WorkflowsClient {
     /**
      * Creates a project from an ordered list of scenes and generates one section per scene. Each scene is generated from its prompt as either a still image or a video clip; the scenes are then assembled into a single video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
      *
-     * @param {VideoGenApi.GenerateScenesFromStoryboardRequest} request
+     * @param {VideoGenApi.StoryboardToVideoRequest} request
+     * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.workflows.storyboardToVideo({
+     *         scenes: [{
+     *                 prompt: "prompt"
+     *             }]
+     *     })
+     */
+    public storyboardToVideo(
+        request: VideoGenApi.StoryboardToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__storyboardToVideo(request, requestOptions));
+    }
+
+    private async __storyboardToVideo(
+        request: VideoGenApi.StoryboardToVideoRequest,
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/workflows/storyboard-to-video",
+            ),
+            method: "POST",
+            headers: _headers,
+            contentType: "application/json",
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            requestType: "json",
+            body: request,
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.StartWorkflowRunResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/workflows/storyboard-to-video",
+        );
+    }
+
+    /**
+     * @deprecated
+     *
+     * Legacy alias for `POST /v1/workflows/storyboard-to-video`. Use that endpoint instead.
+     *
+     * @param {VideoGenApi.StoryboardToVideoRequest} request
      * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
@@ -250,14 +534,14 @@ export class WorkflowsClient {
      *     })
      */
     public generateScenesFromStoryboard(
-        request: VideoGenApi.GenerateScenesFromStoryboardRequest,
+        request: VideoGenApi.StoryboardToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): core.HttpResponsePromise<VideoGenApi.StartWorkflowRunResponse> {
         return core.HttpResponsePromise.fromPromise(this.__generateScenesFromStoryboard(request, requestOptions));
     }
 
     private async __generateScenesFromStoryboard(
-        request: VideoGenApi.GenerateScenesFromStoryboardRequest,
+        request: VideoGenApi.StoryboardToVideoRequest,
         requestOptions?: WorkflowsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.StartWorkflowRunResponse>> {
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();

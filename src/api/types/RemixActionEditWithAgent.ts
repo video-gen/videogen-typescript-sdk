@@ -3,16 +3,16 @@
 /**
  * Apply an open-ended, natural-language edit to the project. An editing agent interprets the prompt, makes the changes, validates them, and visually checks the result. Well suited to tasks like replacing placeholder copy with your own text.
  */
-export interface RemixActionVideoEditorAgent {
+export interface RemixActionEditWithAgent {
     /** A natural-language description of the edit to make (e.g. "Replace the headline with 'Summer Sale - 40% off' and update the subtitle to match"). */
     prompt: string;
     /** Editing strategy. `MINOR_EDIT` (default) makes targeted changes while keeping the structure. `RETHINK` re-storyboards the video: it selects which scenes to keep and their order, then edits each in parallel. */
-    mode?: RemixActionVideoEditorAgent.Mode | undefined;
+    mode?: RemixActionEditWithAgent.Mode | undefined;
     /** Optional soft ceiling on the rebuilt video's duration, in seconds. Only used when `mode` is `RETHINK`. */
     targetDurationSeconds?: (number | null) | undefined;
 }
 
-export namespace RemixActionVideoEditorAgent {
+export namespace RemixActionEditWithAgent {
     /** Editing strategy. `MINOR_EDIT` (default) makes targeted changes while keeping the structure. `RETHINK` re-storyboards the video: it selects which scenes to keep and their order, then edits each in parallel. */
     export const Mode = {
         MinorEdit: "MINOR_EDIT",

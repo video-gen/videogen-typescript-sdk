@@ -9,8 +9,8 @@ import type * as VideoGenApi from "../../../../index.js";
 export interface ListEntitiesRequest {
     /** When provided, returns only entities of this type. Omit to return all entities. */
     entityType?: VideoGenApi.ListEntitiesRequestEntityType;
-    /** Maximum number of items to return in the page. Defaults to 50; capped at 200. */
+    /** Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
     limit?: number;
-    /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. */
+    /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
     cursor?: string;
 }

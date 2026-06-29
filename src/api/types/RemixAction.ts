@@ -3,14 +3,15 @@
 import type * as VideoGenApi from "../index.js";
 
 /**
- * A single edit applied to a project. Discriminated by `type`.
+ * A single edit applied to a project. Each array entry is exactly one of the six action types below, chosen by its `type` field; the variants are mutually-exclusive options, not fields you must all provide. Include only the actions you want.
  */
 export type RemixAction =
     | VideoGenApi.RemixAction.SetBackgroundMusic
     | VideoGenApi.RemixAction.SetLogo
     | VideoGenApi.RemixAction.EnableCaptions
     | VideoGenApi.RemixAction.DisableCaptions
-    | VideoGenApi.RemixAction.VideoEditorAgent;
+    | VideoGenApi.RemixAction.AddTransitions
+    | VideoGenApi.RemixAction.EditWithAgent;
 
 export namespace RemixAction {
     export interface SetBackgroundMusic extends VideoGenApi.RemixActionSetBackgroundMusic {
@@ -29,7 +30,11 @@ export namespace RemixAction {
         type: "DISABLE_CAPTIONS";
     }
 
-    export interface VideoEditorAgent extends VideoGenApi.RemixActionVideoEditorAgent {
-        type: "VIDEO_EDITOR_AGENT";
+    export interface AddTransitions extends VideoGenApi.RemixActionAddTransitions {
+        type: "ADD_TRANSITIONS";
+    }
+
+    export interface EditWithAgent extends VideoGenApi.RemixActionEditWithAgent {
+        type: "EDIT_WITH_AGENT";
     }
 }

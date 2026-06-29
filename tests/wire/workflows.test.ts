@@ -4,6 +4,35 @@ import { VideoGenClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("WorkflowsClient", () => {
+    test("scriptToVideo", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { script: "script", visualStyle: { type: "STOCK" } };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workflows/script-to-video")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workflows.scriptToVideo({
+            script: "script",
+            visualStyle: {
+                type: "STOCK",
+            },
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
     test("addVisualsNarrationsAndCaptionsToScript", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -26,6 +55,35 @@ describe("WorkflowsClient", () => {
 
         const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript({
             script: "script",
+            visualStyle: {
+                type: "STOCK",
+            },
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("voiceoverToVideo", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { fileId: "fileId", visualStyle: { type: "STOCK" } };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workflows/voiceover-to-video")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workflows.voiceoverToVideo({
+            fileId: "fileId",
             visualStyle: {
                 type: "STOCK",
             },
@@ -62,6 +120,32 @@ describe("WorkflowsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
+    test("slideshowToVideo", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { fileId: "fileId" };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workflows/slideshow-to-video")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workflows.slideshowToVideo({
+            fileId: "fileId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
     test("addNarrationTransitionsAndCaptionsToSlideshow", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -84,6 +168,36 @@ describe("WorkflowsClient", () => {
 
         const response = await client.workflows.addNarrationTransitionsAndCaptionsToSlideshow({
             fileId: "fileId",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("storyboardToVideo", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = { scenes: [{ prompt: "prompt" }] };
+        const rawResponseBody = {
+            workflowRunId: "workflowRunId",
+            projectId: "projectId",
+            projectUrl: "projectUrl",
+            remixActionIds: ["remixActionIds"],
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/workflows/storyboard-to-video")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workflows.storyboardToVideo({
+            scenes: [
+                {
+                    prompt: "prompt",
+                },
+            ],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -125,7 +239,7 @@ describe("WorkflowsClient", () => {
         const rawResponseBody = {
             workflowRunId: "workflowRunId",
             status: "pending",
-            workflowType: "ADD_VISUALS_NARRATIONS_AND_CAPTIONS_TO_SCRIPT",
+            workflowType: "SCRIPT_TO_VIDEO",
             progressPercentage: 1.1,
             attemptIndex: 1,
             projectId: "projectId",

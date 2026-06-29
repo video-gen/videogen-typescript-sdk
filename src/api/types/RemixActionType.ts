@@ -6,6 +6,7 @@ export const RemixActionType = {
     SetLogo: "SET_LOGO",
     EnableCaptions: "ENABLE_CAPTIONS",
     DisableCaptions: "DISABLE_CAPTIONS",
-    VideoEditorAgent: "VIDEO_EDITOR_AGENT",
+    AddTransitions: "ADD_TRANSITIONS",
+    EditWithAgent: "EDIT_WITH_AGENT",
 } as const;
 export type RemixActionType = (typeof RemixActionType)[keyof typeof RemixActionType];

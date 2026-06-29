@@ -3,7 +3,7 @@
 import type * as VideoGenApi from "../index.js";
 
 /**
- * Paginated list of API-created projects, most recently updated first.
+ * Paginated list of projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` on the request to also include dashboard-created projects.
  */
 export interface ListProjectsResponse {
     projects: VideoGenApi.ProjectResponse[];

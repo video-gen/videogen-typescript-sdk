@@ -26,7 +26,7 @@ export class FilesClient {
     }
 
     /**
-     * List files in your account, including generated assets and uploads. Files are returned most recently updated first. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+     * List files in your account, including generated assets and uploads. Files are returned most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
      *
      * @param {VideoGenApi.GetFilesRequest} request
      * @param {FilesClient.RequestOptions} requestOptions - Request-specific configuration.

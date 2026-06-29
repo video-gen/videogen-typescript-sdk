@@ -2,9 +2,9 @@
 
 /** Workflow type identifier. */
 export const WorkflowType = {
-    AddVisualsNarrationsAndCaptionsToScript: "ADD_VISUALS_NARRATIONS_AND_CAPTIONS_TO_SCRIPT",
-    AddVisualsAndCaptionsToVoiceover: "ADD_VISUALS_AND_CAPTIONS_TO_VOICEOVER",
-    AddNarrationTransitionsAndCaptionsToSlideshow: "ADD_NARRATION_TRANSITIONS_AND_CAPTIONS_TO_SLIDESHOW",
-    GenerateScenesFromStoryboard: "GENERATE_SCENES_FROM_STORYBOARD",
+    ScriptToVideo: "SCRIPT_TO_VIDEO",
+    VoiceoverToVideo: "VOICEOVER_TO_VIDEO",
+    SlideshowToVideo: "SLIDESHOW_TO_VIDEO",
+    StoryboardToVideo: "STORYBOARD_TO_VIDEO",
 } as const;
 export type WorkflowType = (typeof WorkflowType)[keyof typeof WorkflowType];

@@ -5,9 +5,9 @@
  *     {}
  */
 export interface ListAvatarPresentersRequest {
-    /** Maximum number of items to return in the page. Defaults to 50; capped at 200. */
+    /** Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
     limit?: number;
-    /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. */
+    /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
     cursor?: string;
     /** Optional reference voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). When provided, avatar presenters are returned sorted by best match for that voice (best first). Omit to return presenters in the default catalogue order. */
     voiceId?: string;

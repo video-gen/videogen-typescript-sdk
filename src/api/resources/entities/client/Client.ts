@@ -26,7 +26,7 @@ export class EntitiesClient {
     }
 
     /**
-     * List the actors and visual styles available to your team, most recently updated first. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+     * List the actors and visual styles available to your team, most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
      *
      * @param {VideoGenApi.ListEntitiesRequest} request
      * @param {EntitiesClient.RequestOptions} requestOptions - Request-specific configuration.

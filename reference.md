@@ -1,6 +1,6 @@
 # Reference
 ## Workflows
-<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">addVisualsNarrationsAndCaptionsToScript</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">scriptToVideo</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
 <dl>
 <dd>
 
@@ -13,6 +13,74 @@
 <dd>
 
 Creates a project and generates a narrated video from a prompt or script. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.scriptToVideo({
+    script: "script",
+    visualStyle: {
+        type: "STOCK"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ScriptToVideoRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">addVisualsNarrationsAndCaptionsToScript</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Legacy alias for `POST /v1/workflows/script-to-video`. Use that endpoint instead.
 </dd>
 </dl>
 </dd>
@@ -48,7 +116,75 @@ await client.workflows.addVisualsNarrationsAndCaptionsToScript({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.AddVisualsNarrationsAndCaptionsToScriptRequest` 
+**request:** `VideoGenApi.ScriptToVideoRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">voiceoverToVideo</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a project from an uploaded voiceover file and generates a video with matching b-roll. Upload the voiceover via the files API first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.voiceoverToVideo({
+    fileId: "fileId",
+    visualStyle: {
+        type: "STOCK"
+    }
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.VoiceoverToVideoRequest` 
     
 </dd>
 </dl>
@@ -80,7 +216,7 @@ await client.workflows.addVisualsNarrationsAndCaptionsToScript({
 <dl>
 <dd>
 
-Creates a project from an uploaded voiceover file and generates a video with matching b-roll. Upload the voiceover via the files API first.
+Legacy alias for `POST /v1/workflows/voiceover-to-video`. Use that endpoint instead.
 </dd>
 </dl>
 </dd>
@@ -116,7 +252,72 @@ await client.workflows.addVisualsAndCaptionsToVoiceover({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.AddVisualsAndCaptionsToVoiceoverRequest` 
+**request:** `VideoGenApi.VoiceoverToVideoRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">slideshowToVideo</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a project from an uploaded PDF or PowerPoint file and generates an AI-narrated video walking through each slide. Upload the file via `POST /v1/files/upload` first.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.slideshowToVideo({
+    fileId: "fileId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.SlideshowToVideoRequest` 
     
 </dd>
 </dl>
@@ -148,7 +349,7 @@ await client.workflows.addVisualsAndCaptionsToVoiceover({
 <dl>
 <dd>
 
-Creates a project from an uploaded PDF or PowerPoint file and generates an AI-narrated video walking through each slide. Upload the file via `POST /v1/files/upload` first.
+Legacy alias for `POST /v1/workflows/slideshow-to-video`. Use that endpoint instead.
 </dd>
 </dl>
 </dd>
@@ -181,7 +382,74 @@ await client.workflows.addNarrationTransitionsAndCaptionsToSlideshow({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.AddNarrationTransitionsAndCaptionsToSlideshowRequest` 
+**request:** `VideoGenApi.SlideshowToVideoRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">storyboardToVideo</a>({ ...params }) -> VideoGenApi.StartWorkflowRunResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a project from an ordered list of scenes and generates one section per scene. Each scene is generated from its prompt as either a still image or a video clip; the scenes are then assembled into a single video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.storyboardToVideo({
+    scenes: [{
+            prompt: "prompt"
+        }]
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.StoryboardToVideoRequest` 
     
 </dd>
 </dl>
@@ -213,7 +481,7 @@ await client.workflows.addNarrationTransitionsAndCaptionsToSlideshow({
 <dl>
 <dd>
 
-Creates a project from an ordered list of scenes and generates one section per scene. Each scene is generated from its prompt as either a still image or a video clip; the scenes are then assembled into a single video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+Legacy alias for `POST /v1/workflows/storyboard-to-video`. Use that endpoint instead.
 </dd>
 </dl>
 </dd>
@@ -248,7 +516,7 @@ await client.workflows.generateScenesFromStoryboard({
 <dl>
 <dd>
 
-**request:** `VideoGenApi.GenerateScenesFromStoryboardRequest` 
+**request:** `VideoGenApi.StoryboardToVideoRequest` 
     
 </dd>
 </dl>
@@ -383,7 +651,7 @@ await client.workflows.cancelWorkflowRun({
 <dl>
 <dd>
 
-Returns API-created projects, most recently updated first. Dashboard projects are excluded. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all API-created projects for the team are returned. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+Returns projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` to also include dashboard-created projects. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all matching projects for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
 </dd>
 </dl>
 </dd>
@@ -776,7 +1044,7 @@ await client.projects.listProjectRemixActions({
 <dl>
 <dd>
 
-Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation.
+Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation. VideoGen automatically routes each request to the most effective state-of-the-art image model for your prompt, reference images, and quality tier, so you don't pick a model.
 </dd>
 </dl>
 </dd>
@@ -842,7 +1110,7 @@ await client.tools.generateImage({
 <dl>
 <dd>
 
-Generate a video clip from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided.
+Generate a single short video clip (up to 15 seconds) from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. VideoGen automatically routes each request to the most effective state-of-the-art video model for your inputs and settings, so you don't pick a model. This endpoint returns one standalone clip. For longer, higher-quality, professionally edited videos with narration, captions, music, and multiple scenes, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
 </dd>
 </dl>
 </dd>
@@ -972,7 +1240,7 @@ await client.tools.textToSpeech({
 <dl>
 <dd>
 
-Generate a sound effect from a text description. Optionally control the duration and prompt influence.
+Generate a sound effect from a text description. Optionally control the duration and prompt influence. VideoGen automatically routes each request to the most effective state-of-the-art sound effect model for your prompt and settings, so you don't pick a model.
 </dd>
 </dl>
 </dd>
@@ -1037,7 +1305,7 @@ await client.tools.generateSoundEffect({
 <dl>
 <dd>
 
-Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long.
+Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long. VideoGen automatically routes each request to the most effective state-of-the-art music model for your prompt, so you don't pick a model.
 </dd>
 </dl>
 </dd>
@@ -1689,7 +1957,7 @@ await client.tools.getToolExecutionInfo({
 <dl>
 <dd>
 
-List files in your account, including generated assets and uploads. Files are returned most recently updated first. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+List files in your account, including generated assets and uploads. Files are returned most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
 </dd>
 </dl>
 </dd>
@@ -2208,7 +2476,7 @@ await client.files.disablePublicPreview({
 <dl>
 <dd>
 
-List the actors and visual styles available to your team, most recently updated first. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+List the actors and visual styles available to your team, most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
 </dd>
 </dl>
 </dd>
@@ -2731,7 +2999,7 @@ await client.text.generateText({
 <dl>
 <dd>
 
-List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint or to a script/slideshow workflow. Pass a reference `voiceId` to return presenters sorted by best match for that voice. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint or to a script/slideshow workflow. Pass a reference `voiceId` to return presenters sorted by best match for that voice. Cursor-paginated; see the [Pagination](/pagination) guide.
 </dd>
 </dl>
 </dd>
@@ -2794,7 +3062,7 @@ await client.resources.listAvatarPresenters();
 <dl>
 <dd>
 
-List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Cursor-paginated; see the [Pagination](/pagination) guide.
 </dd>
 </dl>
 </dd>
@@ -2858,7 +3126,7 @@ await client.resources.listTtsVoices();
 <dl>
 <dd>
 
-List configured webhook endpoints for your account. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+List configured webhook endpoints for your account. Cursor-paginated; see the [Pagination](/pagination) guide.
 </dd>
 </dl>
 </dd>
@@ -2921,7 +3189,7 @@ await client.webhooks.listWebhookEndpoints();
 <dl>
 <dd>
 
-Register a new webhook endpoint to receive `tool_execution.*` and `file.*` events. The signing secret is only returned in this response. Store it securely.
+Register a new webhook endpoint to receive `tool_execution.*`, `workflow_run.*`, and `file.*` events. The signing secret is only returned in this response. Store it securely.
 </dd>
 </dl>
 </dd>

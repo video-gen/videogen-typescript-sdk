@@ -19,6 +19,8 @@ export interface GenerateVideoClipRequest {
     audioFileIds?: string[];
     /** When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false. */
     generateAudio?: boolean;
+    /** Desired clip length in seconds. A whole number between 1 and 15. Defaults to 6 when omitted. This endpoint produces a single short clip. For longer, multi-scene, professionally edited videos, use a video workflow such as `POST /v1/workflows/script-to-video`. */
+    durationSeconds?: number | null;
     /** Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
     aspectRatio?: VideoGenApi.AspectRatio;
     /** Video generation quality tier. STANDARD is fastest; HIGH is slowest and highest quality. */

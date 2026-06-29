@@ -26,7 +26,7 @@ export class ProjectsClient {
     }
 
     /**
-     * Returns API-created projects, most recently updated first. Dashboard projects are excluded. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all API-created projects for the team are returned. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+     * Returns projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` to also include dashboard-created projects. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all matching projects for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
      *
      * @param {VideoGenApi.ListProjectsRequest} request
      * @param {ProjectsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -45,11 +45,12 @@ export class ProjectsClient {
         request: VideoGenApi.ListProjectsRequest = {},
         requestOptions?: ProjectsClient.RequestOptions,
     ): Promise<core.WithRawResponse<VideoGenApi.ListProjectsResponse>> {
-        const { limit, cursor, selfOnly } = request;
+        const { limit, cursor, selfOnly, includeUiProjects } = request;
         const _queryParams: Record<string, unknown> = {
             limit,
             cursor,
             selfOnly,
+            includeUiProjects,
         };
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(

@@ -7,7 +7,9 @@
  *     }
  */
 export interface GenerateSoundEffectRequest {
+    /** A text description of the sound effect to generate. */
     prompt: string;
+    /** Desired length of the sound effect in seconds, between 1 and 30. Defaults to about 10 seconds when omitted. */
     durationSeconds?: number | null;
     promptInfluence?: number | null;
     /** Number of output results to generate. Defaults to 1. */

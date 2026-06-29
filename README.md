@@ -50,7 +50,7 @@ Instantiate and use the client with the following:
 import { VideoGenClient } from "@videogen/sdk";
 
 const client = new VideoGenClient({ token: "YOUR_TOKEN" });
-await client.workflows.addVisualsNarrationsAndCaptionsToScript({
+await client.workflows.scriptToVideo({
     script: "script",
     visualStyle: {
         type: "STOCK"
@@ -78,7 +78,7 @@ following namespace:
 ```typescript
 import { VideoGenApi } from "@videogen/sdk";
 
-const request: VideoGenApi.AddVisualsNarrationsAndCaptionsToScriptRequest = {
+const request: VideoGenApi.GetWorkflowRunRequest = {
     ...
 };
 ```
@@ -92,7 +92,7 @@ will be thrown.
 import { VideoGenError } from "@videogen/sdk";
 
 try {
-    await client.workflows.addVisualsNarrationsAndCaptionsToScript(...);
+    await client.workflows.scriptToVideo(...);
 } catch (err) {
     if (err instanceof VideoGenError) {
         console.log(err.statusCode);
@@ -129,7 +129,7 @@ const client = new VideoGenClient({
     }
 });
 
-const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript(..., {
+const response = await client.workflows.scriptToVideo(..., {
     headers: {
         'X-Custom-Header': 'custom value'
     }
@@ -141,7 +141,7 @@ const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript(
 If you would like to send additional query string parameters as part of the request, use the `queryParams` request option.
 
 ```typescript
-const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript(..., {
+const response = await client.workflows.scriptToVideo(..., {
     queryParams: {
         'customQueryParamKey': 'custom query param value'
     }
@@ -163,7 +163,7 @@ A request is deemed retryable when any of the following HTTP status codes is ret
 Use the `maxRetries` request option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript(..., {
+const response = await client.workflows.scriptToVideo(..., {
     maxRetries: 0 // override maxRetries at the request level
 });
 ```
@@ -173,7 +173,7 @@ const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript(
 The SDK defaults to a 60 second timeout. Use the `timeoutInSeconds` option to configure this behavior.
 
 ```typescript
-const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript(..., {
+const response = await client.workflows.scriptToVideo(..., {
     timeoutInSeconds: 30 // override timeout to 30s
 });
 ```
@@ -184,7 +184,7 @@ The SDK allows users to abort requests at any point by passing in an abort signa
 
 ```typescript
 const controller = new AbortController();
-const response = await client.workflows.addVisualsNarrationsAndCaptionsToScript(..., {
+const response = await client.workflows.scriptToVideo(..., {
     abortSignal: controller.signal
 });
 controller.abort(); // aborts the request
@@ -196,7 +196,7 @@ The SDK provides access to raw response data, including headers, through the `.w
 The `.withRawResponse()` method returns a promise that results to an object with a `data` and a `rawResponse` property.
 
 ```typescript
-const { data, rawResponse } = await client.workflows.addVisualsNarrationsAndCaptionsToScript(...).withRawResponse();
+const { data, rawResponse } = await client.workflows.scriptToVideo(...).withRawResponse();
 
 console.log(data);
 console.log(rawResponse.headers['X-My-Header']);

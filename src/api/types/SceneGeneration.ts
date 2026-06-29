@@ -6,8 +6,8 @@
 export interface SceneGeneration {
     /** AI_IMAGE generates a still image. AI_VIDEO generates a video clip. */
     type: SceneGeneration.Type;
-    /** Either a style id from the AI styles reference (e.g. `WATERCOLOR`) or free-form text describing a custom style, appended to the scene prompt. No extra style is applied when omitted. */
-    style?: (string | null) | undefined;
+    /** A free-form description of the look, appended to the scene prompt (e.g. `loose watercolor illustration with visible brushstrokes`). See the AI styles reference for example descriptions of the app's default styles. No extra style is applied when omitted. */
+    aiStyle?: (string | null) | undefined;
 }
 
 export namespace SceneGeneration {

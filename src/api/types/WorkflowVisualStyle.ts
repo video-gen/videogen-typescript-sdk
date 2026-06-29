@@ -6,7 +6,7 @@
 export interface WorkflowVisualStyle {
     /** STOCK pulls stock footage and images. AI_IMAGE generates a styled image for each section. ENTITY generates images that match a visual-style entity's reference images for a consistent look. */
     type: WorkflowVisualStyle.Type;
-    /** Only applies when type is AI_IMAGE. Either a style id from the AI styles reference (e.g. `PHOTO`) or free-form text describing a custom style. Required when type is AI_IMAGE. */
+    /** Only applies when type is AI_IMAGE. A free-form description of the look applied to every generated image (e.g. `vintage 1970s film photography, warm grain`). See the AI styles reference for example descriptions of the app's default styles. Required when type is AI_IMAGE. */
     aiStyle?: string | undefined;
     /** Only applies when type is ENTITY. The id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide every generated image. Required when type is ENTITY. */
     entityId?: string | undefined;

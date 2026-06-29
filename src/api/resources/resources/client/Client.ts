@@ -26,7 +26,7 @@ export class ResourcesClient {
     }
 
     /**
-     * List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint or to a script/slideshow workflow. Pass a reference `voiceId` to return presenters sorted by best match for that voice. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+     * List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint or to a script/slideshow workflow. Pass a reference `voiceId` to return presenters sorted by best match for that voice. Cursor-paginated; see the [Pagination](/pagination) guide.
      *
      * @param {VideoGenApi.ListAvatarPresentersRequest} request
      * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -101,7 +101,7 @@ export class ResourcesClient {
     }
 
     /**
-     * List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+     * List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Cursor-paginated; see the [Pagination](/pagination) guide.
      *
      * @param {VideoGenApi.ListTtsVoicesRequest} request
      * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.

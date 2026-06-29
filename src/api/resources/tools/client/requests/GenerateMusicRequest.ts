@@ -9,8 +9,6 @@
 export interface GenerateMusicRequest {
     /** A text description of the music to generate. Include genre, mood, instrumentation, and tempo for best results. */
     prompt: string;
-    /** Desired track length in seconds. Currently informational — output tracks are approximately 30 seconds regardless of this value. */
-    durationSeconds?: number | null;
     /** Number of output results to generate. Defaults to 1. */
     numResults?: number;
     /** When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false. */

@@ -26,7 +26,7 @@ export class WebhooksClient {
     }
 
     /**
-     * List configured webhook endpoints for your account. Paginated; pass `nextCursor` from the previous response as `cursor` to fetch the next page.
+     * List configured webhook endpoints for your account. Cursor-paginated; see the [Pagination](/pagination) guide.
      *
      * @param {VideoGenApi.ListWebhookEndpointsRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -95,7 +95,7 @@ export class WebhooksClient {
     }
 
     /**
-     * Register a new webhook endpoint to receive `tool_execution.*` and `file.*` events. The signing secret is only returned in this response. Store it securely.
+     * Register a new webhook endpoint to receive `tool_execution.*`, `workflow_run.*`, and `file.*` events. The signing secret is only returned in this response. Store it securely.
      *
      * @param {VideoGenApi.CreateWebhookEndpointRequest} request
      * @param {WebhooksClient.RequestOptions} requestOptions - Request-specific configuration.

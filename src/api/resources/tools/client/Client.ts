@@ -26,7 +26,7 @@ export class ToolsClient {
     }
 
     /**
-     * Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation.
+     * Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation. VideoGen automatically routes each request to the most effective state-of-the-art image model for your prompt, reference images, and quality tier, so you don't pick a model.
      *
      * @param {VideoGenApi.GenerateImageRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -92,7 +92,7 @@ export class ToolsClient {
     }
 
     /**
-     * Generate a video clip from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided.
+     * Generate a single short video clip (up to 15 seconds) from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. VideoGen automatically routes each request to the most effective state-of-the-art video model for your inputs and settings, so you don't pick a model. This endpoint returns one standalone clip. For longer, higher-quality, professionally edited videos with narration, captions, music, and multiple scenes, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
      *
      * @param {VideoGenApi.GenerateVideoClipRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -227,7 +227,7 @@ export class ToolsClient {
     }
 
     /**
-     * Generate a sound effect from a text description. Optionally control the duration and prompt influence.
+     * Generate a sound effect from a text description. Optionally control the duration and prompt influence. VideoGen automatically routes each request to the most effective state-of-the-art sound effect model for your prompt and settings, so you don't pick a model.
      *
      * @param {VideoGenApi.GenerateSoundEffectRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -297,7 +297,7 @@ export class ToolsClient {
     }
 
     /**
-     * Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long.
+     * Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long. VideoGen automatically routes each request to the most effective state-of-the-art music model for your prompt, so you don't pick a model.
      *
      * @param {VideoGenApi.GenerateMusicRequest} request
      * @param {ToolsClient.RequestOptions} requestOptions - Request-specific configuration.
