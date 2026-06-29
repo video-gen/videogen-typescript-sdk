@@ -51,8 +51,8 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
         {
             "X-Fern-Language": "JavaScript",
             "X-Fern-SDK-Name": "@videogen/sdk",
-            "X-Fern-SDK-Version": "1.0.0",
-            "User-Agent": "@videogen/sdk/1.0.0",
+            "X-Fern-SDK-Version": "1.1.0",
+            "User-Agent": "@videogen/sdk/1.1.0",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
         },
