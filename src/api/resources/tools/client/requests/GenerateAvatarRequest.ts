@@ -5,8 +5,8 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         avatarPresenterId: "avatarPresenterId",
- *         audioStorageFileId: "audioStorageFileId"
+ *         avatarPresenterId: "vg_pres_a1ua8slxzfi",
+ *         audioStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
  *     }
  */
 export interface GenerateAvatarRequest {

@@ -5,7 +5,25 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         quality: "STANDARD"
+ *         prompt: "A serene mountain landscape at sunrise with a flowing river and birds flying",
+ *         quality: "STANDARD",
+ *         generateAudio: true,
+ *         durationSeconds: 6
+ *     }
+ *
+ * @example
+ *     {
+ *         prompt: "Apply a cinematic color grade with enhanced contrast and film grain",
+ *         quality: "STANDARD",
+ *         videoFileIds: ["vg_file_jzosm31OGi-bPE1eb3qLnA"]
+ *     }
+ *
+ * @example
+ *     {
+ *         prompt: "Create a dynamic video animation from this serene mountain landscape image, adding subtle cloud movements and ambient nature sounds.",
+ *         quality: "STANDARD",
+ *         generateAudio: true,
+ *         imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"]
  *     }
  */
 export interface GenerateVideoClipRequest {

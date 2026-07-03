@@ -101,7 +101,7 @@ export class ProjectsClient {
      *
      * @example
      *     await client.projects.getProject({
-     *         projectId: "projectId"
+     *         projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890"
      *     })
      */
     public getProject(
@@ -161,7 +161,8 @@ export class ProjectsClient {
      *
      * @example
      *     await client.projects.exportProject({
-     *         projectId: "projectId"
+     *         projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+     *         quality: "FULL_HIGH"
      *     })
      */
     public exportProject(
@@ -229,8 +230,8 @@ export class ProjectsClient {
      *
      * @example
      *     await client.projects.getProjectExport({
-     *         projectId: "projectId",
-     *         exportId: "exportId"
+     *         projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+     *         exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890"
      *     })
      */
     public getProjectExport(

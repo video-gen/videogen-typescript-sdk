@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         projectId: "projectId"
+ *         projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890"
  *     }
  */
 export interface GetProjectRequest {

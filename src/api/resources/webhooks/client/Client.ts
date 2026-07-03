@@ -102,8 +102,8 @@ export class WebhooksClient {
      *
      * @example
      *     await client.webhooks.createWebhookEndpoint({
-     *         url: "url",
-     *         events: ["tool_execution.succeeded"]
+     *         url: "https://webhooks.myapp.com/videogen",
+     *         events: ["tool_execution.succeeded", "tool_execution.failed"]
      *     })
      */
     public createWebhookEndpoint(

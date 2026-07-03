@@ -33,8 +33,15 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.generateImage({
-     *         prompt: "A serene Japanese garden with cherry blossoms at golden hour",
-     *         quality: "LOW"
+     *         prompt: "A serene mountain landscape at sunrise with vibrant colors and mist",
+     *         quality: "STANDARD"
+     *     })
+     *
+     * @example
+     *     await client.tools.generateImage({
+     *         prompt: "Transform this photo into an oil painting style with warm autumn tones",
+     *         quality: "STANDARD",
+     *         imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"]
      *     })
      */
     public generateImage(
@@ -99,7 +106,25 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.generateVideoClip({
-     *         quality: "STANDARD"
+     *         prompt: "A serene mountain landscape at sunrise with a flowing river and birds flying",
+     *         quality: "STANDARD",
+     *         generateAudio: true,
+     *         durationSeconds: 6
+     *     })
+     *
+     * @example
+     *     await client.tools.generateVideoClip({
+     *         prompt: "Apply a cinematic color grade with enhanced contrast and film grain",
+     *         quality: "STANDARD",
+     *         videoFileIds: ["vg_file_jzosm31OGi-bPE1eb3qLnA"]
+     *     })
+     *
+     * @example
+     *     await client.tools.generateVideoClip({
+     *         prompt: "Create a dynamic video animation from this serene mountain landscape image, adding subtle cloud movements and ambient nature sounds.",
+     *         quality: "STANDARD",
+     *         generateAudio: true,
+     *         imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"]
      *     })
      */
     public generateVideoClip(
@@ -169,7 +194,8 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.textToSpeech({
-     *         ttsText: "ttsText"
+     *         ttsText: "Welcome to VideoGen, your AI-powered video creation assistant.",
+     *         voiceId: "vg_voic_7t1wdka3tmk"
      *     })
      */
     public textToSpeech(
@@ -234,7 +260,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.generateSoundEffect({
-     *         prompt: "prompt"
+     *         prompt: "Create a short, high-quality thunderclap sound effect with a deep rumble and sharp crack"
      *     })
      */
     public generateSoundEffect(
@@ -304,7 +330,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.generateMusic({
-     *         prompt: "prompt"
+     *         prompt: "Calm ambient piano with soft pads for a product demo intro"
      *     })
      */
     public generateMusic(
@@ -369,8 +395,8 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.generateAvatar({
-     *         avatarPresenterId: "avatarPresenterId",
-     *         audioStorageFileId: "audioStorageFileId"
+     *         avatarPresenterId: "vg_pres_a1ua8slxzfi",
+     *         audioStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public generateAvatar(
@@ -435,7 +461,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.vectorizeImage({
-     *         imageStorageFileId: "imageStorageFileId"
+     *         imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public vectorizeImage(
@@ -500,7 +526,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.removeImageBackground({
-     *         imageStorageFileId: "imageStorageFileId"
+     *         imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public removeImageBackground(
@@ -570,7 +596,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.removeVideoBackground({
-     *         videoStorageFileId: "videoStorageFileId"
+     *         videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA"
      *     })
      */
     public removeVideoBackground(
@@ -640,7 +666,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.upscaleImage({
-     *         imageStorageFileId: "imageStorageFileId"
+     *         imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public upscaleImage(
@@ -705,7 +731,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.upscaleVideo({
-     *         videoStorageFileId: "videoStorageFileId"
+     *         videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA"
      *     })
      */
     public upscaleVideo(
@@ -770,7 +796,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.image3DEffect({
-     *         imageStorageFileId: "imageStorageFileId"
+     *         imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public image3DEffect(
@@ -835,7 +861,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.cancelToolExecution({
-     *         toolExecutionId: "toolExecutionId"
+     *         toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi"
      *     })
      */
     public cancelToolExecution(
@@ -903,7 +929,7 @@ export class ToolsClient {
      *
      * @example
      *     await client.tools.getToolExecutionInfo({
-     *         toolExecutionId: "toolExecutionId"
+     *         toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi"
      *     })
      */
     public getToolExecutionInfo(

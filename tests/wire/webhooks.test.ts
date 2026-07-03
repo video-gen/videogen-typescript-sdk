@@ -11,17 +11,16 @@ describe("WebhooksClient", () => {
         const rawResponseBody = {
             endpoints: [
                 {
-                    endpointId: "endpointId",
-                    url: "url",
-                    events: ["tool_execution.succeeded"],
-                    description: "description",
-                    createdAt: 1.1,
-                    signingSecret: "signingSecret",
-                    signingSecretLast4: "signingSecretLast4",
+                    endpointId: "a1b2c3d4-e5f6-7890-ab12-cdef34567890",
+                    url: "https://webhooks.example.com/videogen",
+                    events: ["tool_execution.succeeded", "tool_execution.failed", "tool_execution.cancelled"],
+                    description: "Primary webhook endpoint for tool execution notifications",
+                    createdAt: 1705308600,
+                    signingSecretLast4: "9f3d",
                 },
             ],
-            hasMore: true,
-            nextCursor: "nextCursor",
+            hasMore: false,
+            nextCursor: null,
         };
 
         server
@@ -39,15 +38,18 @@ describe("WebhooksClient", () => {
     test("createWebhookEndpoint", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { url: "url", events: ["tool_execution.succeeded"] };
+        const rawRequestBody = {
+            url: "https://webhooks.myapp.com/videogen",
+            events: ["tool_execution.succeeded", "tool_execution.failed"],
+        };
         const rawResponseBody = {
-            endpointId: "endpointId",
-            url: "url",
-            events: ["tool_execution.succeeded"],
-            description: "description",
-            createdAt: 1.1,
-            signingSecret: "signingSecret",
-            signingSecretLast4: "signingSecretLast4",
+            endpointId: "we_9f8b7c6d5a4e3f2b1c0d",
+            url: "https://webhooks.myapp.com/videogen",
+            events: ["tool_execution.succeeded", "tool_execution.failed"],
+            description: "Webhook endpoint for receiving VideoGen tool execution results",
+            createdAt: 1705308600,
+            signingSecret: "a1b2c3d4e5f67890abcdef1234567890",
+            signingSecretLast4: "7890",
         };
 
         server
@@ -60,8 +62,8 @@ describe("WebhooksClient", () => {
             .build();
 
         const response = await client.webhooks.createWebhookEndpoint({
-            url: "url",
-            events: ["tool_execution.succeeded"],
+            url: "https://webhooks.myapp.com/videogen",
+            events: ["tool_execution.succeeded", "tool_execution.failed"],
         });
         expect(response).toEqual(rawResponseBody);
     });

@@ -11,17 +11,17 @@ describe("ProjectsClient", () => {
         const rawResponseBody = {
             projects: [
                 {
-                    projectId: "projectId",
-                    title: "title",
-                    aspectRatio: { width: 1, height: 1 },
-                    status: "generating",
-                    createdAt: "2024-01-15T09:30:00Z",
-                    updatedAt: "2024-01-15T09:30:00Z",
-                    projectUrl: "projectUrl",
+                    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+                    title: "Staying hydrated",
+                    aspectRatio: { width: 16, height: 9 },
+                    status: "ready",
+                    createdAt: "2026-05-23T12:00:00Z",
+                    updatedAt: "2026-05-23T12:04:30Z",
+                    projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
                 },
             ],
-            hasMore: true,
-            nextCursor: "nextCursor",
+            hasMore: false,
+            nextCursor: null,
         };
 
         server.mockEndpoint().get("/v1/projects").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -35,25 +35,25 @@ describe("ProjectsClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            projectId: "projectId",
-            title: "title",
-            aspectRatio: { width: 1, height: 1 },
-            status: "generating",
-            createdAt: "2024-01-15T09:30:00Z",
-            updatedAt: "2024-01-15T09:30:00Z",
-            projectUrl: "projectUrl",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            title: "Staying hydrated",
+            aspectRatio: { width: 16, height: 9 },
+            status: "ready",
+            createdAt: "2026-05-23T12:00:00Z",
+            updatedAt: "2026-05-23T12:04:30Z",
+            projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
         };
 
         server
             .mockEndpoint()
-            .get("/v1/projects/projectId")
+            .get("/v1/projects/1f0a2b3c-4d5e-6789-ab12-cdef34567890")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.projects.getProject({
-            projectId: "projectId",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -61,12 +61,12 @@ describe("ProjectsClient", () => {
     test("exportProject", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
-        const rawResponseBody = { exportId: "exportId" };
+        const rawRequestBody = { quality: "FULL_HIGH" };
+        const rawResponseBody = { exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890" };
 
         server
             .mockEndpoint()
-            .post("/v1/projects/projectId/export")
+            .post("/v1/projects/1f0a2b3c-4d5e-6789-ab12-cdef34567890/export")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -74,7 +74,8 @@ describe("ProjectsClient", () => {
             .build();
 
         const response = await client.projects.exportProject({
-            projectId: "projectId",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            quality: "FULL_HIGH",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -84,32 +85,26 @@ describe("ProjectsClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            exportId: "exportId",
-            projectId: "projectId",
-            status: "pending",
-            progressPercentage: 1.1,
-            attemptIndex: 1,
-            downloadUrl: "downloadUrl",
-            thumbnailUrl: "thumbnailUrl",
-            error: {
-                message: "message",
-                code: "code",
-                requirement: { type: "type", details: { key: "value" } },
-                internalErrorCode: "internalErrorCode",
-            },
+            exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            status: "succeeded",
+            progressPercentage: 100,
+            attemptIndex: 0,
+            downloadUrl: "https://stream.media.videogen.io/example/1080p.mp4?token=abc&download=Staying%20hydrated.mp4",
+            thumbnailUrl: "https://image.media.videogen.io/example/thumbnail.jpg?token=abc",
         };
 
         server
             .mockEndpoint()
-            .get("/v1/projects/projectId/exports/exportId")
+            .get("/v1/projects/1f0a2b3c-4d5e-6789-ab12-cdef34567890/exports/2a1b3c4d-5e6f-7890-ab12-cdef34567890")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.projects.getProjectExport({
-            projectId: "projectId",
-            exportId: "exportId",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890",
         });
         expect(response).toEqual(rawResponseBody);
     });

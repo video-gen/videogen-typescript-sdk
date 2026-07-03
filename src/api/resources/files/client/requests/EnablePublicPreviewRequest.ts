@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         fileId: "fileId"
+ *         fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
  *     }
  */
 export interface EnablePublicPreviewRequest {

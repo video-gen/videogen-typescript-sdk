@@ -11,15 +11,15 @@ describe("ResourcesClient", () => {
         const rawResponseBody = {
             avatarPresenters: [
                 {
-                    avatarPresenterId: "avatarPresenterId",
-                    displayableGender: "MALE",
-                    imageUrl: "imageUrl",
-                    thumbnailUrl: "thumbnailUrl",
-                    previewVideoUrl: "previewVideoUrl",
+                    avatarPresenterId: "vg_pres_a1ua8slxzfi",
+                    displayableGender: "FEMALE",
+                    imageUrl: "https://clips-presenters.d-id.com/mary/26F6sVe7Yg/ujy8kGzgSJ/image.png",
+                    thumbnailUrl: "https://clips-presenters.d-id.com/mary/26F6sVe7Yg/ujy8kGzgSJ/thumbnail.png",
+                    previewVideoUrl: "https://clips-presenters.d-id.com/mary/26F6sVe7Yg/ujy8kGzgSJ/preview.mp4",
                 },
             ],
-            hasMore: true,
-            nextCursor: "nextCursor",
+            hasMore: false,
+            nextCursor: null,
         };
 
         server
@@ -41,19 +41,19 @@ describe("ResourcesClient", () => {
         const rawResponseBody = {
             ttsVoices: [
                 {
-                    voiceId: "voiceId",
-                    languageCode: "languageCode",
-                    displayName: "displayName",
-                    displayGender: "MALE",
-                    accent: "accent",
-                    description: "description",
-                    supportsDirectToolExecution: true,
+                    voiceId: "vg_voic_7t1wdka3tmk",
+                    languageCode: "en-US",
+                    displayName: "Matilda",
+                    displayGender: "FEMALE",
+                    accent: "american",
+                    description: "A professional woman with a pleasing alto pitch.",
+                    supportsDirectToolExecution: false,
                     supportsAllLanguages: true,
-                    isDeprecated: true,
+                    isDeprecated: false,
                 },
             ],
-            hasMore: true,
-            nextCursor: "nextCursor",
+            hasMore: false,
+            nextCursor: null,
         };
 
         server

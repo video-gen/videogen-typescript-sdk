@@ -3,8 +3,10 @@
 /**
  * @example
  *     {
- *         entityId: "entityId",
- *         fileId: "fileId"
+ *         entityId: "vg_enti_a1b2c3d4e5f6",
+ *         fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+ *         description: "Side profile, studio lighting.",
+ *         isDefault: false
  *     }
  */
 export interface AddEntityReferenceRequest {

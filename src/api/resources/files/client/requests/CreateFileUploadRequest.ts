@@ -3,7 +3,8 @@
 /**
  * @example
  *     {
- *         displayName: "displayName"
+ *         type: "VIDEO",
+ *         displayName: "My Campaign Video"
  *     }
  */
 export interface CreateFileUploadRequest {

@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         query: "query"
+ *         query: "sunset over mountains"
  *     }
  */
 export interface SearchFilesRequest {

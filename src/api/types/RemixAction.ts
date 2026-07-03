@@ -3,7 +3,7 @@
 import type * as VideoGenApi from "../index.js";
 
 /**
- * A single edit applied to a project. Each array entry is exactly one of the six action types below, chosen by its `type` field; the variants are mutually-exclusive options, not fields you must all provide. Include only the actions you want.
+ * A single edit applied to a project. Each array entry is exactly one of the action types below, chosen by its `type` field; the variants are mutually-exclusive options, not fields you must all provide. Include only the actions you want.
  */
 export type RemixAction =
     | VideoGenApi.RemixAction.SetBackgroundMusic
@@ -11,6 +11,9 @@ export type RemixAction =
     | VideoGenApi.RemixAction.EnableCaptions
     | VideoGenApi.RemixAction.DisableCaptions
     | VideoGenApi.RemixAction.AddTransitions
+    | VideoGenApi.RemixAction.ResizeProject
+    | VideoGenApi.RemixAction.CleanUpTranscript
+    | VideoGenApi.RemixAction.ConvertImagesToVideos
     | VideoGenApi.RemixAction.EditWithAgent;
 
 export namespace RemixAction {
@@ -32,6 +35,18 @@ export namespace RemixAction {
 
     export interface AddTransitions extends VideoGenApi.RemixActionAddTransitions {
         type: "ADD_TRANSITIONS";
+    }
+
+    export interface ResizeProject extends VideoGenApi.RemixActionResizeProject {
+        type: "RESIZE_PROJECT";
+    }
+
+    export interface CleanUpTranscript extends VideoGenApi.RemixActionCleanUpTranscript {
+        type: "CLEAN_UP_TRANSCRIPT";
+    }
+
+    export interface ConvertImagesToVideos extends VideoGenApi.RemixActionConvertImagesToVideos {
+        type: "CONVERT_IMAGES_TO_VIDEOS";
     }
 
     export interface EditWithAgent extends VideoGenApi.RemixActionEditWithAgent {

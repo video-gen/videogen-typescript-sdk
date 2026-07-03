@@ -5,8 +5,15 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         prompt: "A serene Japanese garden with cherry blossoms at golden hour",
- *         quality: "LOW"
+ *         prompt: "A serene mountain landscape at sunrise with vibrant colors and mist",
+ *         quality: "STANDARD"
+ *     }
+ *
+ * @example
+ *     {
+ *         prompt: "Transform this photo into an oil painting style with warm autumn tones",
+ *         quality: "STANDARD",
+ *         imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"]
  *     }
  */
 export interface GenerateImageRequest {

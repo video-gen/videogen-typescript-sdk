@@ -3,8 +3,8 @@
 /**
  * @example
  *     {
- *         projectId: "projectId",
- *         exportId: "exportId"
+ *         projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+ *         exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890"
  *     }
  */
 export interface GetProjectExportRequest {

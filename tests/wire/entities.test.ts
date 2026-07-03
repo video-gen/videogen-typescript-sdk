@@ -11,18 +11,33 @@ describe("EntitiesClient", () => {
         const rawResponseBody = {
             entities: [
                 {
-                    entityId: "entityId",
+                    entityId: "vg_enti_a1b2c3d4e5f6",
                     entityType: "ACTOR",
-                    name: "name",
-                    description: "description",
-                    actorConfig: { hasVoice: true, hasAvatarPresenter: true },
-                    references: [{ fileId: "fileId", description: "description", isDefault: true }],
-                    createdAt: "2024-01-15T09:30:00Z",
-                    updatedAt: "2024-01-15T09:30:00Z",
+                    name: "Maya the host",
+                    description: "Friendly on-camera host for product explainers.",
+                    actorConfig: { voiceDisplayName: "Matilda", hasVoice: true, hasAvatarPresenter: true },
+                    references: [
+                        {
+                            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+                            description: "Front-facing headshot, neutral background.",
+                            isDefault: true,
+                        },
+                    ],
+                    createdAt: "2026-05-23T12:00:00Z",
+                    updatedAt: "2026-05-23T12:04:30Z",
+                },
+                {
+                    entityId: "vg_enti_f6e5d4c3b2a1",
+                    entityType: "VISUAL_STYLE",
+                    name: "Pastel watercolor",
+                    description: "Soft pastel watercolor look for lifestyle clips.",
+                    references: [{ fileId: "vg_file_jzosm31OGi-bPE1eb3qLnA", description: "", isDefault: true }],
+                    createdAt: "2026-05-20T09:15:00Z",
+                    updatedAt: "2026-05-20T09:15:00Z",
                 },
             ],
-            hasMore: true,
-            nextCursor: "nextCursor",
+            hasMore: false,
+            nextCursor: null,
         };
 
         server.mockEndpoint().get("/v1/entities").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -34,16 +49,19 @@ describe("EntitiesClient", () => {
     test("createEntity", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { entityType: "ACTOR", name: "name" };
+        const rawRequestBody = {
+            entityType: "VISUAL_STYLE",
+            name: "Pastel watercolor",
+            description: "Soft pastel watercolor look for lifestyle clips.",
+        };
         const rawResponseBody = {
-            entityId: "entityId",
-            entityType: "ACTOR",
-            name: "name",
-            description: "description",
-            actorConfig: { voiceDisplayName: "voiceDisplayName", hasVoice: true, hasAvatarPresenter: true },
-            references: [{ fileId: "fileId", description: "description", isDefault: true }],
-            createdAt: "2024-01-15T09:30:00Z",
-            updatedAt: "2024-01-15T09:30:00Z",
+            entityId: "vg_enti_f6e5d4c3b2a1",
+            entityType: "VISUAL_STYLE",
+            name: "Pastel watercolor",
+            description: "Soft pastel watercolor look for lifestyle clips.",
+            references: [],
+            createdAt: "2026-05-20T09:15:00Z",
+            updatedAt: "2026-05-20T09:15:00Z",
         };
 
         server
@@ -56,8 +74,9 @@ describe("EntitiesClient", () => {
             .build();
 
         const response = await client.entities.createEntity({
-            entityType: "ACTOR",
-            name: "name",
+            entityType: "VISUAL_STYLE",
+            name: "Pastel watercolor",
+            description: "Soft pastel watercolor look for lifestyle clips.",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -67,26 +86,32 @@ describe("EntitiesClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            entityId: "entityId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
             entityType: "ACTOR",
-            name: "name",
-            description: "description",
-            actorConfig: { voiceDisplayName: "voiceDisplayName", hasVoice: true, hasAvatarPresenter: true },
-            references: [{ fileId: "fileId", description: "description", isDefault: true }],
-            createdAt: "2024-01-15T09:30:00Z",
-            updatedAt: "2024-01-15T09:30:00Z",
+            name: "Maya the host",
+            description: "Friendly on-camera host for product explainers.",
+            actorConfig: { voiceDisplayName: "Matilda", hasVoice: true, hasAvatarPresenter: true },
+            references: [
+                {
+                    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+                    description: "Front-facing headshot, neutral background.",
+                    isDefault: true,
+                },
+            ],
+            createdAt: "2026-05-23T12:00:00Z",
+            updatedAt: "2026-05-23T12:04:30Z",
         };
 
         server
             .mockEndpoint()
-            .get("/v1/entities/entityId")
+            .get("/v1/entities/vg_enti_a1b2c3d4e5f6")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.entities.getEntity({
-            entityId: "entityId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -94,21 +119,30 @@ describe("EntitiesClient", () => {
     test("updateEntity", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = {};
+        const rawRequestBody = {
+            name: "Maya the presenter",
+            description: "Friendly on-camera host for product explainers and demos.",
+        };
         const rawResponseBody = {
-            entityId: "entityId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
             entityType: "ACTOR",
-            name: "name",
-            description: "description",
-            actorConfig: { voiceDisplayName: "voiceDisplayName", hasVoice: true, hasAvatarPresenter: true },
-            references: [{ fileId: "fileId", description: "description", isDefault: true }],
-            createdAt: "2024-01-15T09:30:00Z",
-            updatedAt: "2024-01-15T09:30:00Z",
+            name: "Maya the presenter",
+            description: "Friendly on-camera host for product explainers and demos.",
+            actorConfig: { voiceDisplayName: "Matilda", hasVoice: true, hasAvatarPresenter: true },
+            references: [
+                {
+                    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+                    description: "Front-facing headshot, neutral background.",
+                    isDefault: true,
+                },
+            ],
+            createdAt: "2026-05-23T12:00:00Z",
+            updatedAt: "2026-05-23T13:10:00Z",
         };
 
         server
             .mockEndpoint()
-            .post("/v1/entities/entityId/update")
+            .post("/v1/entities/vg_enti_a1b2c3d4e5f6/update")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -116,7 +150,9 @@ describe("EntitiesClient", () => {
             .build();
 
         const response = await client.entities.updateEntity({
-            entityId: "entityId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
+            name: "Maya the presenter",
+            description: "Friendly on-camera host for product explainers and demos.",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -125,18 +161,18 @@ describe("EntitiesClient", () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { entityId: "entityId", archived: true };
+        const rawResponseBody = { entityId: "vg_enti_a1b2c3d4e5f6", archived: true };
 
         server
             .mockEndpoint()
-            .post("/v1/entities/entityId/archive")
+            .post("/v1/entities/vg_enti_a1b2c3d4e5f6/archive")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.entities.archiveEntity({
-            entityId: "entityId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -144,21 +180,36 @@ describe("EntitiesClient", () => {
     test("addEntityReference", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { fileId: "fileId" };
+        const rawRequestBody = {
+            fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+            description: "Side profile, studio lighting.",
+            isDefault: false,
+        };
         const rawResponseBody = {
-            entityId: "entityId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
             entityType: "ACTOR",
-            name: "name",
-            description: "description",
-            actorConfig: { voiceDisplayName: "voiceDisplayName", hasVoice: true, hasAvatarPresenter: true },
-            references: [{ fileId: "fileId", description: "description", isDefault: true }],
-            createdAt: "2024-01-15T09:30:00Z",
-            updatedAt: "2024-01-15T09:30:00Z",
+            name: "Maya the host",
+            description: "Friendly on-camera host for product explainers.",
+            actorConfig: { voiceDisplayName: "Matilda", hasVoice: true, hasAvatarPresenter: true },
+            references: [
+                {
+                    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+                    description: "Front-facing headshot, neutral background.",
+                    isDefault: true,
+                },
+                {
+                    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+                    description: "Side profile, studio lighting.",
+                    isDefault: false,
+                },
+            ],
+            createdAt: "2026-05-23T12:00:00Z",
+            updatedAt: "2026-05-23T14:22:00Z",
         };
 
         server
             .mockEndpoint()
-            .post("/v1/entities/entityId/references")
+            .post("/v1/entities/vg_enti_a1b2c3d4e5f6/references")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -166,8 +217,10 @@ describe("EntitiesClient", () => {
             .build();
 
         const response = await client.entities.addEntityReference({
-            entityId: "entityId",
-            fileId: "fileId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
+            fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+            description: "Side profile, studio lighting.",
+            isDefault: false,
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -175,21 +228,27 @@ describe("EntitiesClient", () => {
     test("removeEntityReference", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { fileId: "fileId" };
+        const rawRequestBody = { fileId: "vg_file_mot8bV5POiscDeHyo7TF1g" };
         const rawResponseBody = {
-            entityId: "entityId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
             entityType: "ACTOR",
-            name: "name",
-            description: "description",
-            actorConfig: { voiceDisplayName: "voiceDisplayName", hasVoice: true, hasAvatarPresenter: true },
-            references: [{ fileId: "fileId", description: "description", isDefault: true }],
-            createdAt: "2024-01-15T09:30:00Z",
-            updatedAt: "2024-01-15T09:30:00Z",
+            name: "Maya the host",
+            description: "Friendly on-camera host for product explainers.",
+            actorConfig: { voiceDisplayName: "Matilda", hasVoice: true, hasAvatarPresenter: true },
+            references: [
+                {
+                    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+                    description: "Front-facing headshot, neutral background.",
+                    isDefault: true,
+                },
+            ],
+            createdAt: "2026-05-23T12:00:00Z",
+            updatedAt: "2026-05-23T14:25:00Z",
         };
 
         server
             .mockEndpoint()
-            .post("/v1/entities/entityId/references/remove")
+            .post("/v1/entities/vg_enti_a1b2c3d4e5f6/references/remove")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -197,8 +256,8 @@ describe("EntitiesClient", () => {
             .build();
 
         const response = await client.entities.removeEntityReference({
-            entityId: "entityId",
-            fileId: "fileId",
+            entityId: "vg_enti_a1b2c3d4e5f6",
+            fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
         });
         expect(response).toEqual(rawResponseBody);
     });

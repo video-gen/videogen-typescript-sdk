@@ -7,6 +7,9 @@ export const RemixActionType = {
     EnableCaptions: "ENABLE_CAPTIONS",
     DisableCaptions: "DISABLE_CAPTIONS",
     AddTransitions: "ADD_TRANSITIONS",
+    ResizeProject: "RESIZE_PROJECT",
+    CleanUpTranscript: "CLEAN_UP_TRANSCRIPT",
+    ConvertImagesToVideos: "CONVERT_IMAGES_TO_VIDEOS",
     EditWithAgent: "EDIT_WITH_AGENT",
 } as const;
 export type RemixActionType = (typeof RemixActionType)[keyof typeof RemixActionType];

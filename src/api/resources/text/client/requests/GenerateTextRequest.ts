@@ -3,7 +3,9 @@
 /**
  * @example
  *     {
- *         prompt: "Write a 30-second upbeat video script about why the sky is blue."
+ *         prompt: "Write a concise title for a video about staying hydrated.",
+ *         quality: "STANDARD",
+ *         maxOutputTokens: 32
  *     }
  */
 export interface GenerateTextRequest {
@@ -11,8 +13,8 @@ export interface GenerateTextRequest {
     prompt: string;
     /** Optional system instructions that steer the model's role, tone, and constraints. */
     system?: string | null;
-    /** Model quality tier. `LOW` is fastest and cheapest; `STANDARD` balances quality and cost; `HIGH` is highest quality. Defaults to `STANDARD`. */
-    model?: GenerateTextRequest.Model;
+    /** Generation quality tier. `LOW` is fastest and cheapest; `STANDARD` balances quality and cost; `HIGH` is higher quality; `MAX` is highest quality. Defaults to `STANDARD`. */
+    quality?: GenerateTextRequest.Quality;
     /** Sampling temperature. Higher values produce more varied output. Defaults to the model's default. */
     temperature?: number;
     /** Maximum number of tokens to generate. Defaults to 512. */
@@ -20,11 +22,12 @@ export interface GenerateTextRequest {
 }
 
 export namespace GenerateTextRequest {
-    /** Model quality tier. `LOW` is fastest and cheapest; `STANDARD` balances quality and cost; `HIGH` is highest quality. Defaults to `STANDARD`. */
-    export const Model = {
+    /** Generation quality tier. `LOW` is fastest and cheapest; `STANDARD` balances quality and cost; `HIGH` is higher quality; `MAX` is highest quality. Defaults to `STANDARD`. */
+    export const Quality = {
         Low: "LOW",
         Standard: "STANDARD",
         High: "HIGH",
+        Max: "MAX",
     } as const;
-    export type Model = (typeof Model)[keyof typeof Model];
+    export type Quality = (typeof Quality)[keyof typeof Quality];
 }

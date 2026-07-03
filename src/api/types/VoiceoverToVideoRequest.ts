@@ -8,6 +8,8 @@ export interface VoiceoverToVideoRequest {
     aspectRatio?: VideoGenApi.AspectRatio | undefined;
     visualStyle: VideoGenApi.WorkflowVisualStyle;
     visualPacing?: VideoGenApi.VisualPacing | undefined;
+    /** Image generation quality tier for AI-generated visuals. LOW is fastest and cheapest; STANDARD balances quality and cost; HIGH is highest quality. Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. Defaults to STANDARD. */
+    quality?: VoiceoverToVideoRequest.Quality | undefined;
     /** Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
     language?: string | undefined;
     /** Caption styling. Omit to use the default style with captions shown. Pass an object to override individual style fields (any omitted field uses the default). Pass `null` to hide captions entirely. */
@@ -18,4 +20,14 @@ export interface VoiceoverToVideoRequest {
     workflowAgentContext?: string | undefined;
     /** Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Captions and a logo are set with the `captionStyle` and `logoFileId` request fields above; recommended remix actions here are `SET_BACKGROUND_MUSIC` for a music bed, `ADD_TRANSITIONS` to stamp transitions between sections and assets, and `EDIT_WITH_AGENT` for open-ended natural-language edits. See the [Remix actions](/remix-actions) guide. */
     remixActions?: VideoGenApi.RemixAction[] | undefined;
+}
+
+export namespace VoiceoverToVideoRequest {
+    /** Image generation quality tier for AI-generated visuals. LOW is fastest and cheapest; STANDARD balances quality and cost; HIGH is highest quality. Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. Defaults to STANDARD. */
+    export const Quality = {
+        Low: "LOW",
+        Standard: "STANDARD",
+        High: "HIGH",
+    } as const;
+    export type Quality = (typeof Quality)[keyof typeof Quality];
 }

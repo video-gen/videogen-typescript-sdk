@@ -8,6 +8,8 @@ export interface ScriptToVideoRequest {
     aspectRatio?: VideoGenApi.AspectRatio | undefined;
     visualStyle: VideoGenApi.WorkflowVisualStyle;
     visualPacing?: VideoGenApi.VisualPacing | undefined;
+    /** Image generation quality tier for AI-generated visuals. LOW is fastest and cheapest; STANDARD balances quality and cost; HIGH is highest quality. Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. Defaults to STANDARD. */
+    quality?: ScriptToVideoRequest.Quality | undefined;
     /** Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
     language?: string | undefined;
     /** Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). A default voice is used when omitted. Any voice may be used here, including voices where `supportsDirectToolExecution` is false. */
@@ -22,4 +24,14 @@ export interface ScriptToVideoRequest {
     workflowAgentContext?: string | undefined;
     /** Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Recommended for script-to-video: `ENABLE_CAPTIONS` to show and style captions, `SET_BACKGROUND_MUSIC` to add a music bed, `ADD_TRANSITIONS` to stamp transitions between sections, and `SET_LOGO` to overlay a logo (this workflow has no native caption-style or logo fields). `EDIT_WITH_AGENT` applies open-ended natural-language edits. See the [Remix actions](/remix-actions) guide. */
     remixActions?: VideoGenApi.RemixAction[] | undefined;
+}
+
+export namespace ScriptToVideoRequest {
+    /** Image generation quality tier for AI-generated visuals. LOW is fastest and cheapest; STANDARD balances quality and cost; HIGH is highest quality. Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. Defaults to STANDARD. */
+    export const Quality = {
+        Low: "LOW",
+        Standard: "STANDARD",
+        High: "HIGH",
+    } as const;
+    export type Quality = (typeof Quality)[keyof typeof Quality];
 }

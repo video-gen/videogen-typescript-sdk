@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         workflowRunId: "workflowRunId"
+ *         workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi"
  *     }
  */
 export interface GetWorkflowRunRequest {

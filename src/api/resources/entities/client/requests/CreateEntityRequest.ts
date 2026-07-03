@@ -3,8 +3,9 @@
 /**
  * @example
  *     {
- *         entityType: "ACTOR",
- *         name: "name"
+ *         entityType: "VISUAL_STYLE",
+ *         name: "Pastel watercolor",
+ *         description: "Soft pastel watercolor look for lifestyle clips."
  *     }
  */
 export interface CreateEntityRequest {

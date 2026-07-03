@@ -3,7 +3,9 @@
 /**
  * @example
  *     {
- *         entityId: "entityId"
+ *         entityId: "vg_enti_a1b2c3d4e5f6",
+ *         name: "Maya the presenter",
+ *         description: "Friendly on-camera host for product explainers and demos."
  *     }
  */
 export interface UpdateEntityRequest {

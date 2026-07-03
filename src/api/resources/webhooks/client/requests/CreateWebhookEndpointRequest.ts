@@ -5,8 +5,8 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         url: "url",
- *         events: ["tool_execution.succeeded"]
+ *         url: "https://webhooks.myapp.com/videogen",
+ *         events: ["tool_execution.succeeded", "tool_execution.failed"]
  *     }
  */
 export interface CreateWebhookEndpointRequest {

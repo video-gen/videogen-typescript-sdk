@@ -4,14 +4,14 @@ import { VideoGenClient } from "../../src/Client";
 import { mockServerPool } from "../mock-server/MockServerPool";
 
 describe("ToolsClient", () => {
-    test("generateImage", async () => {
+    test("generateImage (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = {
-            prompt: "A serene Japanese garden with cherry blossoms at golden hour",
-            quality: "LOW",
+            prompt: "A serene mountain landscape at sunrise with vibrant colors and mist",
+            quality: "STANDARD",
         };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -23,17 +23,49 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.generateImage({
-            prompt: "A serene Japanese garden with cherry blossoms at golden hour",
-            quality: "LOW",
+            prompt: "A serene mountain landscape at sunrise with vibrant colors and mist",
+            quality: "STANDARD",
         });
         expect(response).toEqual(rawResponseBody);
     });
 
-    test("generateVideoClip", async () => {
+    test("generateImage (2)", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { quality: "STANDARD" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = {
+            prompt: "Transform this photo into an oil painting style with warm autumn tones",
+            quality: "STANDARD",
+            imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"],
+        };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/tools/generate-image")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.generateImage({
+            prompt: "Transform this photo into an oil painting style with warm autumn tones",
+            quality: "STANDARD",
+            imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"],
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generateVideoClip (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            prompt: "A serene mountain landscape at sunrise with a flowing river and birds flying",
+            quality: "STANDARD",
+            generateAudio: true,
+            durationSeconds: 6,
+        };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -45,7 +77,66 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.generateVideoClip({
+            prompt: "A serene mountain landscape at sunrise with a flowing river and birds flying",
             quality: "STANDARD",
+            generateAudio: true,
+            durationSeconds: 6,
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generateVideoClip (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            prompt: "Apply a cinematic color grade with enhanced contrast and film grain",
+            quality: "STANDARD",
+            videoFileIds: ["vg_file_jzosm31OGi-bPE1eb3qLnA"],
+        };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/tools/generate-video-clip")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.generateVideoClip({
+            prompt: "Apply a cinematic color grade with enhanced contrast and film grain",
+            quality: "STANDARD",
+            videoFileIds: ["vg_file_jzosm31OGi-bPE1eb3qLnA"],
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("generateVideoClip (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+        const rawRequestBody = {
+            prompt: "Create a dynamic video animation from this serene mountain landscape image, adding subtle cloud movements and ambient nature sounds.",
+            quality: "STANDARD",
+            generateAudio: true,
+            imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"],
+        };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/tools/generate-video-clip")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.generateVideoClip({
+            prompt: "Create a dynamic video animation from this serene mountain landscape image, adding subtle cloud movements and ambient nature sounds.",
+            quality: "STANDARD",
+            generateAudio: true,
+            imageFileIds: ["vg_file_obLD1OX2eJCrEs0071Z4kA"],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -53,8 +144,11 @@ describe("ToolsClient", () => {
     test("textToSpeech", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { ttsText: "ttsText" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = {
+            ttsText: "Welcome to VideoGen, your AI-powered video creation assistant.",
+            voiceId: "vg_voic_7t1wdka3tmk",
+        };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -66,7 +160,8 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.textToSpeech({
-            ttsText: "ttsText",
+            ttsText: "Welcome to VideoGen, your AI-powered video creation assistant.",
+            voiceId: "vg_voic_7t1wdka3tmk",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -74,8 +169,10 @@ describe("ToolsClient", () => {
     test("generateSoundEffect", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "prompt" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = {
+            prompt: "Create a short, high-quality thunderclap sound effect with a deep rumble and sharp crack",
+        };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -87,7 +184,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.generateSoundEffect({
-            prompt: "prompt",
+            prompt: "Create a short, high-quality thunderclap sound effect with a deep rumble and sharp crack",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -95,8 +192,8 @@ describe("ToolsClient", () => {
     test("generateMusic", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "prompt" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = { prompt: "Calm ambient piano with soft pads for a product demo intro" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -108,7 +205,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.generateMusic({
-            prompt: "prompt",
+            prompt: "Calm ambient piano with soft pads for a product demo intro",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -116,8 +213,11 @@ describe("ToolsClient", () => {
     test("generateAvatar", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { avatarPresenterId: "avatarPresenterId", audioStorageFileId: "audioStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = {
+            avatarPresenterId: "vg_pres_a1ua8slxzfi",
+            audioStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+        };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -129,8 +229,8 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.generateAvatar({
-            avatarPresenterId: "avatarPresenterId",
-            audioStorageFileId: "audioStorageFileId",
+            avatarPresenterId: "vg_pres_a1ua8slxzfi",
+            audioStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -138,8 +238,8 @@ describe("ToolsClient", () => {
     test("vectorizeImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { imageStorageFileId: "imageStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = { imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -151,7 +251,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.vectorizeImage({
-            imageStorageFileId: "imageStorageFileId",
+            imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -159,8 +259,8 @@ describe("ToolsClient", () => {
     test("removeImageBackground", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { imageStorageFileId: "imageStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = { imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -172,7 +272,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.removeImageBackground({
-            imageStorageFileId: "imageStorageFileId",
+            imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -180,8 +280,8 @@ describe("ToolsClient", () => {
     test("removeVideoBackground", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { videoStorageFileId: "videoStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = { videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -193,7 +293,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.removeVideoBackground({
-            videoStorageFileId: "videoStorageFileId",
+            videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -201,8 +301,8 @@ describe("ToolsClient", () => {
     test("upscaleImage", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { imageStorageFileId: "imageStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = { imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -214,7 +314,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.upscaleImage({
-            imageStorageFileId: "imageStorageFileId",
+            imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -222,8 +322,8 @@ describe("ToolsClient", () => {
     test("upscaleVideo", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { videoStorageFileId: "videoStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = { videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -235,7 +335,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.upscaleVideo({
-            videoStorageFileId: "videoStorageFileId",
+            videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -243,8 +343,8 @@ describe("ToolsClient", () => {
     test("image3dEffect", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { imageStorageFileId: "imageStorageFileId" };
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawRequestBody = { imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
@@ -256,7 +356,7 @@ describe("ToolsClient", () => {
             .build();
 
         const response = await client.tools.image3DEffect({
-            imageStorageFileId: "imageStorageFileId",
+            imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -265,18 +365,18 @@ describe("ToolsClient", () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        const rawResponseBody = { toolExecutionId: "toolExecutionId" };
+        const rawResponseBody = { toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi" };
 
         server
             .mockEndpoint()
-            .post("/v1/tools/executions/toolExecutionId/cancel")
+            .post("/v1/tools/executions/vg_tool_ccm3abc123defcm3xyz789ghi/cancel")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.tools.cancelToolExecution({
-            toolExecutionId: "toolExecutionId",
+            toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -286,30 +386,24 @@ describe("ToolsClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            toolExecutionId: "toolExecutionId",
-            status: "pending",
-            toolType: "toolType",
-            progressPercentage: 1.1,
-            attemptIndex: 1,
-            results: [{ fileId: "fileId", type: "IMAGE", file: { fileId: "fileId", scope: "GLOBAL" } }],
-            error: {
-                message: "message",
-                code: "code",
-                requirement: { type: "type", details: { key: "value" } },
-                internalErrorCode: "internalErrorCode",
-            },
+            toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi",
+            status: "succeeded",
+            toolType: "GENERATE_VIDEO_CLIP",
+            progressPercentage: 100,
+            attemptIndex: 0,
+            results: [{ fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA", type: "VIDEO" }],
         };
 
         server
             .mockEndpoint()
-            .get("/v1/tools/executions/toolExecutionId")
+            .get("/v1/tools/executions/vg_tool_ccm3abc123defcm3xyz789ghi")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.tools.getToolExecutionInfo({
-            toolExecutionId: "toolExecutionId",
+            toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi",
         });
         expect(response).toEqual(rawResponseBody);
     });

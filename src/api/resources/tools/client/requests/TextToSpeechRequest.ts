@@ -5,13 +5,14 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         ttsText: "ttsText"
+ *         ttsText: "Welcome to VideoGen, your AI-powered video creation assistant.",
+ *         voiceId: "vg_voic_7t1wdka3tmk"
  *     }
  */
 export interface TextToSpeechRequest {
     ttsText: string;
-    /** Voice id from `GET /v1/resources/tts-voices`. A default voice is used when null. Only voices with `supportsDirectToolExecution` set to true are accepted. */
-    voiceId?: string | null;
+    /** Voice id from `GET /v1/resources/tts-voices`. Only voices with `supportsDirectToolExecution` set to true are accepted. */
+    voiceId: string;
     /** ISO-639-1 language hint for pronunciation (e.g. `en`, `es`, `zh`). */
     speechLanguageCode?: string | null;
     pronunciationReplacements?: VideoGenApi.PronunciationReplacement[];

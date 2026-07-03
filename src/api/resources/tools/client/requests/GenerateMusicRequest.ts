@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         prompt: "prompt"
+ *         prompt: "Calm ambient piano with soft pads for a product demo intro"
  *     }
  */
 export interface GenerateMusicRequest {

@@ -99,7 +99,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.searchFiles({
-     *         query: "query"
+     *         query: "sunset over mountains"
      *     })
      */
     public searchFiles(
@@ -161,7 +161,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.getFile({
-     *         fileId: "fileId"
+     *         fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public getFile(
@@ -221,7 +221,8 @@ export class FilesClient {
      *
      * @example
      *     await client.files.createFileUpload({
-     *         displayName: "displayName"
+     *         type: "VIDEO",
+     *         displayName: "My Campaign Video"
      *     })
      */
     public createFileUpload(
@@ -283,7 +284,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.hydrateFile({
-     *         fileId: "fileId"
+     *         fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public hydrateFile(
@@ -403,7 +404,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.enablePublicPreview({
-     *         fileId: "fileId"
+     *         fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public enablePublicPreview(
@@ -468,7 +469,7 @@ export class FilesClient {
      *
      * @example
      *     await client.files.disablePublicPreview({
-     *         fileId: "fileId"
+     *         fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
      *     })
      */
     public disablePublicPreview(

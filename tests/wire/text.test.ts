@@ -7,8 +7,12 @@ describe("TextClient", () => {
     test("generateText", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { prompt: "Write a 30-second upbeat video script about why the sky is blue." };
-        const rawResponseBody = { text: "text" };
+        const rawRequestBody = {
+            prompt: "Write a concise title for a video about staying hydrated.",
+            quality: "STANDARD",
+            maxOutputTokens: 32,
+        };
+        const rawResponseBody = { text: "Stay Hydrated, Stay Energized" };
 
         server
             .mockEndpoint()
@@ -20,7 +24,9 @@ describe("TextClient", () => {
             .build();
 
         const response = await client.text.generateText({
-            prompt: "Write a 30-second upbeat video script about why the sky is blue.",
+            prompt: "Write a concise title for a video about staying hydrated.",
+            quality: "STANDARD",
+            maxOutputTokens: 32,
         });
         expect(response).toEqual(rawResponseBody);
     });

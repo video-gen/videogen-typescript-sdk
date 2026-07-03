@@ -7,12 +7,32 @@ describe("WorkflowsClient", () => {
     test("scriptToVideo", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { script: "script", visualStyle: { type: "STOCK" } };
+        const rawRequestBody = {
+            script: "Staying hydrated keeps your body and mind running at their best. Drinking enough water boosts your energy, focus, and mood. Keep a water bottle nearby and sip throughout the day.",
+            visualStyle: {
+                type: "AI_IMAGE",
+                aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds",
+            },
+            visualPacing: "MEDIUM",
+            quality: "HIGH",
+            remixActions: [
+                {
+                    type: "ENABLE_CAPTIONS",
+                    captionStyle: {
+                        fontName: "Inter",
+                        fontWeight: 700,
+                        textColor: { red: 255, green: 255, blue: 255 },
+                        verticalAlignment: "BOTTOM",
+                    },
+                },
+                { type: "SET_BACKGROUND_MUSIC", fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA", volume: 0.25 },
+            ],
+        };
         const rawResponseBody = {
-            workflowRunId: "workflowRunId",
-            projectId: "projectId",
-            projectUrl: "projectUrl",
-            remixActionIds: ["remixActionIds"],
+            workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            remixActionIds: ["vg_rmix_ka9d2mZq7vTb1n0847PceR", "vg_rmix_pQ0s6xLm4dWc9r2318YgHt"],
         };
 
         server
@@ -25,10 +45,33 @@ describe("WorkflowsClient", () => {
             .build();
 
         const response = await client.workflows.scriptToVideo({
-            script: "script",
+            script: "Staying hydrated keeps your body and mind running at their best. Drinking enough water boosts your energy, focus, and mood. Keep a water bottle nearby and sip throughout the day.",
             visualStyle: {
-                type: "STOCK",
+                type: "AI_IMAGE",
+                aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds",
             },
+            visualPacing: "MEDIUM",
+            quality: "HIGH",
+            remixActions: [
+                {
+                    type: "ENABLE_CAPTIONS",
+                    captionStyle: {
+                        fontName: "Inter",
+                        fontWeight: 700,
+                        textColor: {
+                            red: 255,
+                            green: 255,
+                            blue: 255,
+                        },
+                        verticalAlignment: "BOTTOM",
+                    },
+                },
+                {
+                    type: "SET_BACKGROUND_MUSIC",
+                    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+                    volume: 0.25,
+                },
+            ],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -65,12 +108,23 @@ describe("WorkflowsClient", () => {
     test("voiceoverToVideo", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { fileId: "fileId", visualStyle: { type: "STOCK" } };
+        const rawRequestBody = {
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            visualStyle: {
+                type: "AI_IMAGE",
+                aiStyle: "warm cinematic photography with soft natural lighting and shallow depth of field",
+            },
+            quality: "HIGH",
+            remixActions: [
+                { type: "SET_BACKGROUND_MUSIC", fileId: "vg_file_mot8bV5POiscDeHyo7TF1g", volume: 0.2 },
+                { type: "EDIT_WITH_AGENT", prompt: 'Replace the closing title card with "Book a demo today"' },
+            ],
+        };
         const rawResponseBody = {
-            workflowRunId: "workflowRunId",
-            projectId: "projectId",
-            projectUrl: "projectUrl",
-            remixActionIds: ["remixActionIds"],
+            workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            remixActionIds: ["vg_rmix_ka9d2mZq7vTb1n0847PceR", "vg_rmix_pQ0s6xLm4dWc9r2318YgHt"],
         };
 
         server
@@ -83,10 +137,23 @@ describe("WorkflowsClient", () => {
             .build();
 
         const response = await client.workflows.voiceoverToVideo({
-            fileId: "fileId",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
             visualStyle: {
-                type: "STOCK",
+                type: "AI_IMAGE",
+                aiStyle: "warm cinematic photography with soft natural lighting and shallow depth of field",
             },
+            quality: "HIGH",
+            remixActions: [
+                {
+                    type: "SET_BACKGROUND_MUSIC",
+                    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+                    volume: 0.2,
+                },
+                {
+                    type: "EDIT_WITH_AGENT",
+                    prompt: 'Replace the closing title card with "Book a demo today"',
+                },
+            ],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -123,12 +190,18 @@ describe("WorkflowsClient", () => {
     test("slideshowToVideo", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { fileId: "fileId" };
+        const rawRequestBody = {
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            remixActions: [
+                { type: "ADD_TRANSITIONS", sectionTransition: "DYNAMIC", assetTransition: "FADE" },
+                { type: "SET_BACKGROUND_MUSIC", fileId: "vg_file_mot8bV5POiscDeHyo7TF1g", volume: 0.2 },
+            ],
+        };
         const rawResponseBody = {
-            workflowRunId: "workflowRunId",
-            projectId: "projectId",
-            projectUrl: "projectUrl",
-            remixActionIds: ["remixActionIds"],
+            workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            remixActionIds: ["vg_rmix_ka9d2mZq7vTb1n0847PceR", "vg_rmix_pQ0s6xLm4dWc9r2318YgHt"],
         };
 
         server
@@ -141,7 +214,19 @@ describe("WorkflowsClient", () => {
             .build();
 
         const response = await client.workflows.slideshowToVideo({
-            fileId: "fileId",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            remixActions: [
+                {
+                    type: "ADD_TRANSITIONS",
+                    sectionTransition: "DYNAMIC",
+                    assetTransition: "FADE",
+                },
+                {
+                    type: "SET_BACKGROUND_MUSIC",
+                    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+                    volume: 0.2,
+                },
+            ],
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -175,12 +260,29 @@ describe("WorkflowsClient", () => {
     test("storyboardToVideo", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { scenes: [{ prompt: "prompt" }] };
+        const rawRequestBody = {
+            defaultGeneration: {
+                type: "AI_IMAGE",
+                aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds",
+            },
+            defaultDurationSeconds: 5,
+            scenes: [
+                { prompt: "A sunrise over a calm mountain lake, mist on the water." },
+                {
+                    prompt: "A hiker reaching the summit, arms raised in triumph.",
+                    generation: {
+                        type: "AI_VIDEO",
+                        aiStyle: "cinematic film look with dramatic lighting and shallow depth of field",
+                    },
+                    durationSeconds: 6,
+                },
+            ],
+        };
         const rawResponseBody = {
-            workflowRunId: "workflowRunId",
-            projectId: "projectId",
-            projectUrl: "projectUrl",
-            remixActionIds: ["remixActionIds"],
+            workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            remixActionIds: [],
         };
 
         server
@@ -193,9 +295,22 @@ describe("WorkflowsClient", () => {
             .build();
 
         const response = await client.workflows.storyboardToVideo({
+            defaultGeneration: {
+                type: "AI_IMAGE",
+                aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds",
+            },
+            defaultDurationSeconds: 5,
             scenes: [
                 {
-                    prompt: "prompt",
+                    prompt: "A sunrise over a calm mountain lake, mist on the water.",
+                },
+                {
+                    prompt: "A hiker reaching the summit, arms raised in triumph.",
+                    generation: {
+                        type: "AI_VIDEO",
+                        aiStyle: "cinematic film look with dramatic lighting and shallow depth of field",
+                    },
+                    durationSeconds: 6,
                 },
             ],
         });
@@ -237,31 +352,25 @@ describe("WorkflowsClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            workflowRunId: "workflowRunId",
-            status: "pending",
+            workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
+            status: "succeeded",
             workflowType: "SCRIPT_TO_VIDEO",
-            progressPercentage: 1.1,
-            attemptIndex: 1,
-            projectId: "projectId",
-            projectUrl: "projectUrl",
-            error: {
-                message: "message",
-                code: "code",
-                requirement: { type: "type", details: { key: "value" } },
-                internalErrorCode: "internalErrorCode",
-            },
+            progressPercentage: 100,
+            attemptIndex: 0,
+            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
         };
 
         server
             .mockEndpoint()
-            .get("/v1/workflows/runs/workflowRunId")
+            .get("/v1/workflows/runs/vg_work_ccm3abc123defcm3xyz789ghi")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.workflows.getWorkflowRun({
-            workflowRunId: "workflowRunId",
+            workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
         });
         expect(response).toEqual(rawResponseBody);
     });

@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         prompt: "prompt"
+ *         prompt: "Create a short, high-quality thunderclap sound effect with a deep rumble and sharp crack"
  *     }
  */
 export interface GenerateSoundEffectRequest {

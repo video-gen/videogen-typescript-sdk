@@ -26,14 +26,16 @@ export class TextClient {
     }
 
     /**
-     * Generate text from a prompt using a general-purpose language model. Choose a quality tier with `model` (`LOW`, `STANDARD`, or `HIGH`). Synchronous — the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
+     * Generate text from a prompt using a general-purpose language model. Choose a quality tier with `quality` (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Synchronous: the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
      *
      * @param {VideoGenApi.GenerateTextRequest} request
      * @param {TextClient.RequestOptions} requestOptions - Request-specific configuration.
      *
      * @example
      *     await client.text.generateText({
-     *         prompt: "Write a 30-second upbeat video script about why the sky is blue."
+     *         prompt: "Write a concise title for a video about staying hydrated.",
+     *         quality: "STANDARD",
+     *         maxOutputTokens: 32
      *     })
      */
     public generateText(

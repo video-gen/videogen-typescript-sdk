@@ -5,7 +5,8 @@ import type * as VideoGenApi from "../../../../index.js";
 /**
  * @example
  *     {
- *         projectId: "projectId"
+ *         projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+ *         quality: "FULL_HIGH"
  *     }
  */
 export interface ExportProjectRequest {

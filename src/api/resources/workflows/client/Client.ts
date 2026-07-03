@@ -33,10 +33,30 @@ export class WorkflowsClient {
      *
      * @example
      *     await client.workflows.scriptToVideo({
-     *         script: "script",
+     *         script: "Staying hydrated keeps your body and mind running at their best. Drinking enough water boosts your energy, focus, and mood. Keep a water bottle nearby and sip throughout the day.",
      *         visualStyle: {
-     *             type: "STOCK"
-     *         }
+     *             type: "AI_IMAGE",
+     *             aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds"
+     *         },
+     *         visualPacing: "MEDIUM",
+     *         quality: "HIGH",
+     *         remixActions: [{
+     *                 type: "ENABLE_CAPTIONS",
+     *                 captionStyle: {
+     *                     fontName: "Inter",
+     *                     fontWeight: 700,
+     *                     textColor: {
+     *                         red: 255,
+     *                         green: 255,
+     *                         blue: 255
+     *                     },
+     *                     verticalAlignment: "BOTTOM"
+     *                 }
+     *             }, {
+     *                 type: "SET_BACKGROUND_MUSIC",
+     *                 fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+     *                 volume: 0.25
+     *             }]
      *     })
      */
     public scriptToVideo(
@@ -177,10 +197,20 @@ export class WorkflowsClient {
      *
      * @example
      *     await client.workflows.voiceoverToVideo({
-     *         fileId: "fileId",
+     *         fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
      *         visualStyle: {
-     *             type: "STOCK"
-     *         }
+     *             type: "AI_IMAGE",
+     *             aiStyle: "warm cinematic photography with soft natural lighting and shallow depth of field"
+     *         },
+     *         quality: "HIGH",
+     *         remixActions: [{
+     *                 type: "SET_BACKGROUND_MUSIC",
+     *                 fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+     *                 volume: 0.2
+     *             }, {
+     *                 type: "EDIT_WITH_AGENT",
+     *                 prompt: "Replace the closing title card with \"Book a demo today\""
+     *             }]
      *     })
      */
     public voiceoverToVideo(
@@ -319,7 +349,16 @@ export class WorkflowsClient {
      *
      * @example
      *     await client.workflows.slideshowToVideo({
-     *         fileId: "fileId"
+     *         fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+     *         remixActions: [{
+     *                 type: "ADD_TRANSITIONS",
+     *                 sectionTransition: "DYNAMIC",
+     *                 assetTransition: "FADE"
+     *             }, {
+     *                 type: "SET_BACKGROUND_MUSIC",
+     *                 fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+     *                 volume: 0.2
+     *             }]
      *     })
      */
     public slideshowToVideo(
@@ -457,8 +496,20 @@ export class WorkflowsClient {
      *
      * @example
      *     await client.workflows.storyboardToVideo({
+     *         defaultGeneration: {
+     *             type: "AI_IMAGE",
+     *             aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds"
+     *         },
+     *         defaultDurationSeconds: 5,
      *         scenes: [{
-     *                 prompt: "prompt"
+     *                 prompt: "A sunrise over a calm mountain lake, mist on the water."
+     *             }, {
+     *                 prompt: "A hiker reaching the summit, arms raised in triumph.",
+     *                 generation: {
+     *                     type: "AI_VIDEO",
+     *                     aiStyle: "cinematic film look with dramatic lighting and shallow depth of field"
+     *                 },
+     *                 durationSeconds: 6
      *             }]
      *     })
      */
@@ -595,7 +646,7 @@ export class WorkflowsClient {
      *
      * @example
      *     await client.workflows.getWorkflowRun({
-     *         workflowRunId: "workflowRunId"
+     *         workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi"
      *     })
      */
     public getWorkflowRun(

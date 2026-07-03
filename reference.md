@@ -28,10 +28,30 @@ Creates a project and generates a narrated video from a prompt or script. Return
 
 ```typescript
 await client.workflows.scriptToVideo({
-    script: "script",
+    script: "Staying hydrated keeps your body and mind running at their best. Drinking enough water boosts your energy, focus, and mood. Keep a water bottle nearby and sip throughout the day.",
     visualStyle: {
-        type: "STOCK"
-    }
+        type: "AI_IMAGE",
+        aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds"
+    },
+    visualPacing: "MEDIUM",
+    quality: "HIGH",
+    remixActions: [{
+            type: "ENABLE_CAPTIONS",
+            captionStyle: {
+                fontName: "Inter",
+                fontWeight: 700,
+                textColor: {
+                    red: 255,
+                    green: 255,
+                    blue: 255
+                },
+                verticalAlignment: "BOTTOM"
+            }
+        }, {
+            type: "SET_BACKGROUND_MUSIC",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            volume: 0.25
+        }]
 });
 
 ```
@@ -164,10 +184,20 @@ Creates a project from an uploaded voiceover file and generates a video with mat
 
 ```typescript
 await client.workflows.voiceoverToVideo({
-    fileId: "fileId",
+    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
     visualStyle: {
-        type: "STOCK"
-    }
+        type: "AI_IMAGE",
+        aiStyle: "warm cinematic photography with soft natural lighting and shallow depth of field"
+    },
+    quality: "HIGH",
+    remixActions: [{
+            type: "SET_BACKGROUND_MUSIC",
+            fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+            volume: 0.2
+        }, {
+            type: "EDIT_WITH_AGENT",
+            prompt: "Replace the closing title card with \"Book a demo today\""
+        }]
 });
 
 ```
@@ -300,7 +330,16 @@ Creates a project from an uploaded PDF or PowerPoint file and generates an AI-na
 
 ```typescript
 await client.workflows.slideshowToVideo({
-    fileId: "fileId"
+    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+    remixActions: [{
+            type: "ADD_TRANSITIONS",
+            sectionTransition: "DYNAMIC",
+            assetTransition: "FADE"
+        }, {
+            type: "SET_BACKGROUND_MUSIC",
+            fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+            volume: 0.2
+        }]
 });
 
 ```
@@ -430,8 +469,20 @@ Creates a project from an ordered list of scenes and generates one section per s
 
 ```typescript
 await client.workflows.storyboardToVideo({
+    defaultGeneration: {
+        type: "AI_IMAGE",
+        aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds"
+    },
+    defaultDurationSeconds: 5,
     scenes: [{
-            prompt: "prompt"
+            prompt: "A sunrise over a calm mountain lake, mist on the water."
+        }, {
+            prompt: "A hiker reaching the summit, arms raised in triumph.",
+            generation: {
+                type: "AI_VIDEO",
+                aiStyle: "cinematic film look with dramatic lighting and shallow depth of field"
+            },
+            durationSeconds: 6
         }]
 });
 
@@ -550,7 +601,7 @@ await client.workflows.generateScenesFromStoryboard({
 
 ```typescript
 await client.workflows.getWorkflowRun({
-    workflowRunId: "workflowRunId"
+    workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi"
 });
 
 ```
@@ -730,7 +781,7 @@ Returns a simplified view of a project including its title, aspect ratio, status
 
 ```typescript
 await client.projects.getProject({
-    projectId: "projectId"
+    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890"
 });
 
 ```
@@ -795,7 +846,8 @@ Starts an export of a project to MP4. Returns immediately with an export id; the
 
 ```typescript
 await client.projects.exportProject({
-    projectId: "projectId"
+    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+    quality: "FULL_HIGH"
 });
 
 ```
@@ -860,8 +912,8 @@ Returns the current status of a project export started via `POST /v1/projects/{p
 
 ```typescript
 await client.projects.getProjectExport({
-    projectId: "projectId",
-    exportId: "exportId"
+    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+    exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890"
 });
 
 ```
@@ -1060,8 +1112,8 @@ Generate an image from a text prompt, optionally guided by one or more reference
 
 ```typescript
 await client.tools.generateImage({
-    prompt: "A serene Japanese garden with cherry blossoms at golden hour",
-    quality: "LOW"
+    prompt: "A serene mountain landscape at sunrise with vibrant colors and mist",
+    quality: "STANDARD"
 });
 
 ```
@@ -1126,7 +1178,10 @@ Generate a single short video clip (up to 15 seconds) from a text prompt, option
 
 ```typescript
 await client.tools.generateVideoClip({
-    quality: "STANDARD"
+    prompt: "A serene mountain landscape at sunrise with a flowing river and birds flying",
+    quality: "STANDARD",
+    generateAudio: true,
+    durationSeconds: 6
 });
 
 ```
@@ -1191,7 +1246,8 @@ Convert text into a spoken audio file. Only voices with `supportsDirectToolExecu
 
 ```typescript
 await client.tools.textToSpeech({
-    ttsText: "ttsText"
+    ttsText: "Welcome to VideoGen, your AI-powered video creation assistant.",
+    voiceId: "vg_voic_7t1wdka3tmk"
 });
 
 ```
@@ -1256,7 +1312,7 @@ Generate a sound effect from a text description. Optionally control the duration
 
 ```typescript
 await client.tools.generateSoundEffect({
-    prompt: "prompt"
+    prompt: "Create a short, high-quality thunderclap sound effect with a deep rumble and sharp crack"
 });
 
 ```
@@ -1321,7 +1377,7 @@ Generate an instrumental music track from a text description. The returned track
 
 ```typescript
 await client.tools.generateMusic({
-    prompt: "prompt"
+    prompt: "Calm ambient piano with soft pads for a product demo intro"
 });
 
 ```
@@ -1386,8 +1442,8 @@ Generate a talking-head avatar video by pairing a presenter with an audio file, 
 
 ```typescript
 await client.tools.generateAvatar({
-    avatarPresenterId: "avatarPresenterId",
-    audioStorageFileId: "audioStorageFileId"
+    avatarPresenterId: "vg_pres_a1ua8slxzfi",
+    audioStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -1452,7 +1508,7 @@ Convert any raster image into a scalable vector graphic (SVG). The output traces
 
 ```typescript
 await client.tools.vectorizeImage({
-    imageStorageFileId: "imageStorageFileId"
+    imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -1517,7 +1573,7 @@ Remove the background from an image, returning a transparent-background PNG of t
 
 ```typescript
 await client.tools.removeImageBackground({
-    imageStorageFileId: "imageStorageFileId"
+    imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -1582,7 +1638,7 @@ Remove the background from a video, producing a transparent-background video of 
 
 ```typescript
 await client.tools.removeVideoBackground({
-    videoStorageFileId: "videoStorageFileId"
+    videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA"
 });
 
 ```
@@ -1647,7 +1703,7 @@ Increase the resolution of an image while preserving detail and sharpness.
 
 ```typescript
 await client.tools.upscaleImage({
-    imageStorageFileId: "imageStorageFileId"
+    imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -1712,7 +1768,7 @@ Increase the resolution of a video while preserving detail and sharpness.
 
 ```typescript
 await client.tools.upscaleVideo({
-    videoStorageFileId: "videoStorageFileId"
+    videoStorageFileId: "vg_file_jzosm31OGi-bPE1eb3qLnA"
 });
 
 ```
@@ -1777,7 +1833,7 @@ Turn a still image into a short video clip with a 3D parallax motion effect, sim
 
 ```typescript
 await client.tools.image3DEffect({
-    imageStorageFileId: "imageStorageFileId"
+    imageStorageFileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -1842,7 +1898,7 @@ Request cancellation of a running tool execution. The execution transitions to `
 
 ```typescript
 await client.tools.cancelToolExecution({
-    toolExecutionId: "toolExecutionId"
+    toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi"
 });
 
 ```
@@ -1907,7 +1963,7 @@ Retrieve the current status and result of a tool execution. Poll this endpoint u
 
 ```typescript
 await client.tools.getToolExecutionInfo({
-    toolExecutionId: "toolExecutionId"
+    toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi"
 });
 
 ```
@@ -2036,7 +2092,7 @@ Semantic vector search over your files. Embeds the query text and returns the cl
 
 ```typescript
 await client.files.searchFiles({
-    query: "query"
+    query: "sunset over mountains"
 });
 
 ```
@@ -2101,7 +2157,7 @@ Retrieve metadata for a single file by its id.
 
 ```typescript
 await client.files.getFile({
-    fileId: "fileId"
+    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -2166,7 +2222,8 @@ Create a new file and receive a pre-signed upload URL. PUT the file bytes to the
 
 ```typescript
 await client.files.createFileUpload({
-    displayName: "displayName"
+    type: "VIDEO",
+    displayName: "My Campaign Video"
 });
 
 ```
@@ -2231,7 +2288,7 @@ Generate fresh signed URLs for all available renditions of a file. Call this whe
 
 ```typescript
 await client.files.hydrateFile({
-    fileId: "fileId"
+    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -2361,7 +2418,7 @@ Enable public preview for a file. Works for any file type. Copies the file to a 
 
 ```typescript
 await client.files.enablePublicPreview({
-    fileId: "fileId"
+    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -2426,7 +2483,7 @@ Disable public preview for a file. Removes the permanent public URL copy and rev
 
 ```typescript
 await client.files.disablePublicPreview({
-    fileId: "fileId"
+    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA"
 });
 
 ```
@@ -2555,8 +2612,9 @@ Create a new actor or visual style. Attach reference images with `POST /v1/entit
 
 ```typescript
 await client.entities.createEntity({
-    entityType: "ACTOR",
-    name: "name"
+    entityType: "VISUAL_STYLE",
+    name: "Pastel watercolor",
+    description: "Soft pastel watercolor look for lifestyle clips."
 });
 
 ```
@@ -2621,7 +2679,7 @@ Retrieve a single entity by its id, including its reference images.
 
 ```typescript
 await client.entities.getEntity({
-    entityId: "entityId"
+    entityId: "vg_enti_a1b2c3d4e5f6"
 });
 
 ```
@@ -2686,7 +2744,9 @@ Update an entity's name or description. Provide at least one field.
 
 ```typescript
 await client.entities.updateEntity({
-    entityId: "entityId"
+    entityId: "vg_enti_a1b2c3d4e5f6",
+    name: "Maya the presenter",
+    description: "Friendly on-camera host for product explainers and demos."
 });
 
 ```
@@ -2751,7 +2811,7 @@ Archive an entity. Archived entities no longer appear in `GET /v1/entities` and 
 
 ```typescript
 await client.entities.archiveEntity({
-    entityId: "entityId"
+    entityId: "vg_enti_a1b2c3d4e5f6"
 });
 
 ```
@@ -2816,8 +2876,10 @@ Attach an image file as a reference for the entity. Upload the image first via `
 
 ```typescript
 await client.entities.addEntityReference({
-    entityId: "entityId",
-    fileId: "fileId"
+    entityId: "vg_enti_a1b2c3d4e5f6",
+    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+    description: "Side profile, studio lighting.",
+    isDefault: false
 });
 
 ```
@@ -2882,8 +2944,8 @@ Detach a reference image from the entity. Returns the updated entity.
 
 ```typescript
 await client.entities.removeEntityReference({
-    entityId: "entityId",
-    fileId: "fileId"
+    entityId: "vg_enti_a1b2c3d4e5f6",
+    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g"
 });
 
 ```
@@ -2933,7 +2995,7 @@ await client.entities.removeEntityReference({
 <dl>
 <dd>
 
-Generate text from a prompt using a general-purpose language model. Choose a quality tier with `model` (`LOW`, `STANDARD`, or `HIGH`). Synchronous — the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
+Generate text from a prompt using a general-purpose language model. Choose a quality tier with `quality` (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Synchronous: the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
 </dd>
 </dl>
 </dd>
@@ -2949,7 +3011,9 @@ Generate text from a prompt using a general-purpose language model. Choose a qua
 
 ```typescript
 await client.text.generateText({
-    prompt: "Write a 30-second upbeat video script about why the sky is blue."
+    prompt: "Write a concise title for a video about staying hydrated.",
+    quality: "STANDARD",
+    maxOutputTokens: 32
 });
 
 ```
@@ -3205,8 +3269,8 @@ Register a new webhook endpoint to receive `tool_execution.*`, `workflow_run.*`,
 
 ```typescript
 await client.webhooks.createWebhookEndpoint({
-    url: "url",
-    events: ["tool_execution.succeeded"]
+    url: "https://webhooks.myapp.com/videogen",
+    events: ["tool_execution.succeeded", "tool_execution.failed"]
 });
 
 ```

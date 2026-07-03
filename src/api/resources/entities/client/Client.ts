@@ -100,8 +100,9 @@ export class EntitiesClient {
      *
      * @example
      *     await client.entities.createEntity({
-     *         entityType: "ACTOR",
-     *         name: "name"
+     *         entityType: "VISUAL_STYLE",
+     *         name: "Pastel watercolor",
+     *         description: "Soft pastel watercolor look for lifestyle clips."
      *     })
      */
     public createEntity(
@@ -163,7 +164,7 @@ export class EntitiesClient {
      *
      * @example
      *     await client.entities.getEntity({
-     *         entityId: "entityId"
+     *         entityId: "vg_enti_a1b2c3d4e5f6"
      *     })
      */
     public getEntity(
@@ -223,7 +224,9 @@ export class EntitiesClient {
      *
      * @example
      *     await client.entities.updateEntity({
-     *         entityId: "entityId"
+     *         entityId: "vg_enti_a1b2c3d4e5f6",
+     *         name: "Maya the presenter",
+     *         description: "Friendly on-camera host for product explainers and demos."
      *     })
      */
     public updateEntity(
@@ -291,7 +294,7 @@ export class EntitiesClient {
      *
      * @example
      *     await client.entities.archiveEntity({
-     *         entityId: "entityId"
+     *         entityId: "vg_enti_a1b2c3d4e5f6"
      *     })
      */
     public archiveEntity(
@@ -356,8 +359,10 @@ export class EntitiesClient {
      *
      * @example
      *     await client.entities.addEntityReference({
-     *         entityId: "entityId",
-     *         fileId: "fileId"
+     *         entityId: "vg_enti_a1b2c3d4e5f6",
+     *         fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
+     *         description: "Side profile, studio lighting.",
+     *         isDefault: false
      *     })
      */
     public addEntityReference(
@@ -425,8 +430,8 @@ export class EntitiesClient {
      *
      * @example
      *     await client.entities.removeEntityReference({
-     *         entityId: "entityId",
-     *         fileId: "fileId"
+     *         entityId: "vg_enti_a1b2c3d4e5f6",
+     *         fileId: "vg_file_mot8bV5POiscDeHyo7TF1g"
      *     })
      */
     public removeEntityReference(

@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         entityId: "entityId"
+ *         entityId: "vg_enti_a1b2c3d4e5f6"
  *     }
  */
 export interface GetEntityRequest {

@@ -11,28 +11,15 @@ describe("FilesClient", () => {
         const rawResponseBody = {
             files: [
                 {
-                    fileId: "fileId",
+                    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
                     type: "IMAGE",
                     scope: "GLOBAL",
-                    displayName: "displayName",
-                    description: "description",
-                    durationSeconds: 1.1,
-                    transcript: "transcript",
-                    thumbnailSource: { status: "pending" },
-                    previewSource: { status: "pending" },
-                    downloadSource: { status: "pending" },
-                    hlsSource: { status: "pending" },
-                    isPublicPreviewEnabled: true,
-                    staticPublicPreviewSource: { status: "pending" },
-                    publicHlsUrl: "publicHlsUrl",
-                    publicPlaybackId: "publicPlaybackId",
-                    sourceToolType: "sourceToolType",
-                    sourceToolExecutionId: "sourceToolExecutionId",
-                    fileAnalysisMetadata: { analysisLoadingState: "UNATTEMPTED", analysisProgressPercentage: 1.1 },
+                    displayName: "Project Logo",
+                    description: "High-resolution logo for the main project branding",
                 },
             ],
-            hasMore: true,
-            nextCursor: "nextCursor",
+            hasMore: false,
+            nextCursor: null,
         };
 
         server.mockEndpoint().get("/v1/files").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
@@ -44,8 +31,53 @@ describe("FilesClient", () => {
     test("searchFiles", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { query: "query" };
-        const rawResponseBody = { results: [{ similarity: 0.82, file: { fileId: "fileId", scope: "GLOBAL" } }] };
+        const rawRequestBody = { query: "sunset over mountains" };
+        const rawResponseBody = {
+            results: [
+                {
+                    similarity: 0.87,
+                    file: {
+                        fileId: "vg_file_EjRWeKvN7wEjRWeJq83vAQ",
+                        type: "IMAGE",
+                        scope: "GLOBAL",
+                        displayName: "Mountain Sunset",
+                        description: "A high-resolution image capturing a vibrant sunset over the Rocky Mountains.",
+                        durationSeconds: 0,
+                        transcript: "",
+                        thumbnailSource: {
+                            status: "ready",
+                            url: "https://cdn.videogen.io/thumbnails/vg_file_EjRWeKvN7wEjRWeJq83vAQ.jpg?token=abc123",
+                            expiresAt: 1710000000,
+                            width: 320,
+                            height: 180,
+                            fileBytes: 45000,
+                        },
+                        previewSource: {
+                            status: "ready",
+                            url: "https://cdn.videogen.io/previews/vg_file_EjRWeKvN7wEjRWeJq83vAQ_720p.mp4?token=def456",
+                            expiresAt: 1710000000,
+                            width: 1280,
+                            height: 720,
+                            fileBytes: 2500000,
+                        },
+                        downloadSource: {
+                            status: "ready",
+                            url: "https://cdn.videogen.io/downloads/vg_file_EjRWeKvN7wEjRWeJq83vAQ_fullres.jpg?token=ghi789",
+                            expiresAt: 1710000000,
+                            width: 3840,
+                            height: 2160,
+                            fileBytes: 8500000,
+                        },
+                        hlsSource: { status: "skipped", url: "", expiresAt: 0, width: 0, height: 0, fileBytes: 0 },
+                        isPublicPreviewEnabled: true,
+                        publicHlsUrl: "",
+                        publicPlaybackId: "",
+                        sourceToolType: "GENERATE_IMAGE",
+                        sourceToolExecutionId: "vg_tool_9abc789xyzxyz123abc",
+                    },
+                },
+            ],
+        };
 
         server
             .mockEndpoint()
@@ -57,7 +89,7 @@ describe("FilesClient", () => {
             .build();
 
         const response = await client.files.searchFiles({
-            query: "query",
+            query: "sunset over mountains",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -67,41 +99,23 @@ describe("FilesClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            fileId: "fileId",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
             type: "IMAGE",
             scope: "GLOBAL",
-            displayName: "displayName",
-            description: "description",
-            durationSeconds: 1.1,
-            transcript: "transcript",
-            thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            isPublicPreviewEnabled: true,
-            staticPublicPreviewSource: {
-                status: "pending",
-                url: "url",
-                expiresAt: 1.1,
-                width: 1,
-                height: 1,
-                fileBytes: 1,
-            },
-            publicHlsUrl: "publicHlsUrl",
-            publicPlaybackId: "publicPlaybackId",
-            sourceToolType: "sourceToolType",
-            sourceToolExecutionId: "sourceToolExecutionId",
-            fileAnalysisMetadata: {
-                analysisLoadingState: "UNATTEMPTED",
-                analysisProgressPercentage: 1.1,
-                analysisAttemptIndex: 1,
-            },
+            displayName: "Sunset Beach Photo",
+            description: "High-resolution image of a sunset over the beach with vibrant colors.",
         };
 
-        server.mockEndpoint().get("/v1/files/fileId").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+        server
+            .mockEndpoint()
+            .get("/v1/files/vg_file_obLD1OX2eJCrEs0071Z4kA")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
 
         const response = await client.files.getFile({
-            fileId: "fileId",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -109,8 +123,12 @@ describe("FilesClient", () => {
     test("createFileUpload", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
-        const rawRequestBody = { displayName: "displayName" };
-        const rawResponseBody = { fileId: "fileId", uploadUrl: "uploadUrl" };
+        const rawRequestBody = { type: "VIDEO", displayName: "My Campaign Video" };
+        const rawResponseBody = {
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            uploadUrl:
+                "https://9f3a7c1e8b4d6a0f2c5e9b1d7a8c3f60.r2.cloudflarestorage.com/storage-files-prod/vg_file_obLD1OX2eJCrEs0071Z4kA/primary-source?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=example%2F20260505%2Fwnam%2Fs3%2Faws4_request&X-Amz-Date=20260505T120000Z&X-Amz-Expires=900&X-Amz-SignedHeaders=host&X-Amz-Signature=exampleSignatureValue",
+        };
 
         server
             .mockEndpoint()
@@ -122,7 +140,8 @@ describe("FilesClient", () => {
             .build();
 
         const response = await client.files.createFileUpload({
-            displayName: "displayName",
+            type: "VIDEO",
+            displayName: "My Campaign Video",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -132,47 +151,43 @@ describe("FilesClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            fileId: "fileId",
-            type: "IMAGE",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            type: "VIDEO",
             scope: "GLOBAL",
-            displayName: "displayName",
-            description: "description",
-            durationSeconds: 1.1,
-            transcript: "transcript",
-            thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            isPublicPreviewEnabled: true,
-            staticPublicPreviewSource: {
-                status: "pending",
-                url: "url",
-                expiresAt: 1.1,
-                width: 1,
-                height: 1,
-                fileBytes: 1,
+            displayName: "My Campaign Video",
+            durationSeconds: 12.5,
+            thumbnailSource: {
+                status: "ready",
+                url: "https://image.media.videogen.io/example/thumbnail.jpg?token=abc",
+                width: 426,
+                height: 240,
             },
-            publicHlsUrl: "publicHlsUrl",
-            publicPlaybackId: "publicPlaybackId",
-            sourceToolType: "sourceToolType",
-            sourceToolExecutionId: "sourceToolExecutionId",
-            fileAnalysisMetadata: {
-                analysisLoadingState: "UNATTEMPTED",
-                analysisProgressPercentage: 1.1,
-                analysisAttemptIndex: 1,
+            previewSource: {
+                status: "ready",
+                url: "https://stream.media.videogen.io/example/720p.mp4?token=abc",
+                width: 1280,
+                height: 720,
             },
+            downloadSource: {
+                status: "ready",
+                url: "https://stream.media.videogen.io/example/1080p.mp4?token=abc&download=My%20Campaign%20Video.mp4",
+                width: 1920,
+                height: 1080,
+            },
+            hlsSource: { status: "ready", url: "https://stream.media.videogen.io/example.m3u8?token=abc" },
+            isPublicPreviewEnabled: false,
         };
 
         server
             .mockEndpoint()
-            .post("/v1/files/fileId/hydrate")
+            .post("/v1/files/vg_file_obLD1OX2eJCrEs0071Z4kA/hydrate")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.files.hydrateFile({
-            fileId: "fileId",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -182,35 +197,39 @@ describe("FilesClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            fileId: "fileId",
+            fileId: "vg_file_123abc456def",
             type: "IMAGE",
             scope: "GLOBAL",
-            displayName: "displayName",
-            description: "description",
-            durationSeconds: 1.1,
-            transcript: "transcript",
-            thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            displayName: "Sunset Over Mountains",
+            description: "High-resolution image of a sunset over the Rocky Mountains.",
+            thumbnailSource: {
+                status: "ready",
+                url: "https://cdn.videogen.io/thumbnails/vg_file_123abc456def.jpg?token=abc123",
+                expiresAt: 1712000000,
+                width: 320,
+                height: 180,
+                fileBytes: 45000,
+            },
+            previewSource: {
+                status: "ready",
+                url: "https://cdn.videogen.io/previews/vg_file_123abc456def_720p.jpg?token=def456",
+                expiresAt: 1712000000,
+                width: 1280,
+                height: 720,
+                fileBytes: 350000,
+            },
+            downloadSource: {
+                status: "ready",
+                url: "https://cdn.videogen.io/downloads/vg_file_123abc456def.png?token=ghi789",
+                expiresAt: 1712000000,
+                width: 3840,
+                height: 2160,
+                fileBytes: 4500000,
+            },
+            hlsSource: { status: "skipped" },
             isPublicPreviewEnabled: true,
-            staticPublicPreviewSource: {
-                status: "pending",
-                url: "url",
-                expiresAt: 1.1,
-                width: 1,
-                height: 1,
-                fileBytes: 1,
-            },
-            publicHlsUrl: "publicHlsUrl",
-            publicPlaybackId: "publicPlaybackId",
-            sourceToolType: "sourceToolType",
-            sourceToolExecutionId: "sourceToolExecutionId",
-            fileAnalysisMetadata: {
-                analysisLoadingState: "UNATTEMPTED",
-                analysisProgressPercentage: 1.1,
-                analysisAttemptIndex: 1,
-            },
+            sourceToolType: "GENERATE_IMAGE",
+            sourceToolExecutionId: "vg_tool_789xyz123abc",
         };
 
         server
@@ -232,47 +251,33 @@ describe("FilesClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            fileId: "fileId",
-            type: "IMAGE",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            type: "VIDEO",
             scope: "GLOBAL",
-            displayName: "displayName",
-            description: "description",
-            durationSeconds: 1.1,
-            transcript: "transcript",
-            thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
+            displayName: "My Campaign Video",
+            durationSeconds: 12.5,
             isPublicPreviewEnabled: true,
             staticPublicPreviewSource: {
-                status: "pending",
-                url: "url",
-                expiresAt: 1.1,
-                width: 1,
-                height: 1,
-                fileBytes: 1,
+                status: "ready",
+                url: "https://public-previews.videogen.io/vg_file_obLD1OX2eJCrEs0071Z4kA.mp4",
+                width: 1280,
+                height: 720,
+                fileBytes: 2500000,
             },
-            publicHlsUrl: "publicHlsUrl",
-            publicPlaybackId: "publicPlaybackId",
-            sourceToolType: "sourceToolType",
-            sourceToolExecutionId: "sourceToolExecutionId",
-            fileAnalysisMetadata: {
-                analysisLoadingState: "UNATTEMPTED",
-                analysisProgressPercentage: 1.1,
-                analysisAttemptIndex: 1,
-            },
+            publicHlsUrl: "https://stream.media.videogen.io/abc123def.m3u8",
+            publicPlaybackId: "vg_play_abc123def",
         };
 
         server
             .mockEndpoint()
-            .post("/v1/files/fileId/enable-public-preview")
+            .post("/v1/files/vg_file_obLD1OX2eJCrEs0071Z4kA/enable-public-preview")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.files.enablePublicPreview({
-            fileId: "fileId",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -282,47 +287,24 @@ describe("FilesClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            fileId: "fileId",
-            type: "IMAGE",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
+            type: "VIDEO",
             scope: "GLOBAL",
-            displayName: "displayName",
-            description: "description",
-            durationSeconds: 1.1,
-            transcript: "transcript",
-            thumbnailSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            previewSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            downloadSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            hlsSource: { status: "pending", url: "url", expiresAt: 1.1, width: 1, height: 1, fileBytes: 1 },
-            isPublicPreviewEnabled: true,
-            staticPublicPreviewSource: {
-                status: "pending",
-                url: "url",
-                expiresAt: 1.1,
-                width: 1,
-                height: 1,
-                fileBytes: 1,
-            },
-            publicHlsUrl: "publicHlsUrl",
-            publicPlaybackId: "publicPlaybackId",
-            sourceToolType: "sourceToolType",
-            sourceToolExecutionId: "sourceToolExecutionId",
-            fileAnalysisMetadata: {
-                analysisLoadingState: "UNATTEMPTED",
-                analysisProgressPercentage: 1.1,
-                analysisAttemptIndex: 1,
-            },
+            displayName: "My Campaign Video",
+            durationSeconds: 12.5,
+            isPublicPreviewEnabled: false,
         };
 
         server
             .mockEndpoint()
-            .post("/v1/files/fileId/disable-public-preview")
+            .post("/v1/files/vg_file_obLD1OX2eJCrEs0071Z4kA/disable-public-preview")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.files.disablePublicPreview({
-            fileId: "fileId",
+            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
         });
         expect(response).toEqual(rawResponseBody);
     });

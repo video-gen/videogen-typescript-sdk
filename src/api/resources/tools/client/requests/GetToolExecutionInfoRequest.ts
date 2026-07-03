@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         toolExecutionId: "toolExecutionId"
+ *         toolExecutionId: "vg_tool_ccm3abc123defcm3xyz789ghi"
  *     }
  */
 export interface GetToolExecutionInfoRequest {
