@@ -51,30 +51,23 @@ import { VideoGenClient } from "@videogen/sdk";
 
 const client = new VideoGenClient({ token: "YOUR_TOKEN" });
 await client.workflows.scriptToVideo({
-    script: "Staying hydrated keeps your body and mind running at their best. Drinking enough water boosts your energy, focus, and mood. Keep a water bottle nearby and sip throughout the day.",
-    visualStyle: {
-        type: "AI_IMAGE",
-        aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds"
+  script:
+    "Staying hydrated keeps your body and mind running at their best. Drinking enough water boosts your energy, focus, and mood. Keep a water bottle nearby and sip throughout the day.",
+  visualStyle: {
+    type: "AI_IMAGE",
+    aiStyle: "loose watercolor illustration with visible brushstrokes and soft color bleeds",
+  },
+  visualPacing: "MEDIUM",
+  quality: "HIGH",
+  remixActions: [
+    { type: "ENABLE_CAPTIONS" },
+    {
+      type: "CONVERT_IMAGES_TO_VIDEOS",
+      motionPrompt: "slow cinematic push-in",
+      muteOutputVideos: true,
+      quality: "HIGH",
     },
-    visualPacing: "MEDIUM",
-    quality: "HIGH",
-    remixActions: [{
-            type: "ENABLE_CAPTIONS",
-            captionStyle: {
-                fontName: "Inter",
-                fontWeight: 700,
-                textColor: {
-                    red: 255,
-                    green: 255,
-                    blue: 255
-                },
-                verticalAlignment: "BOTTOM"
-            }
-        }, {
-            type: "SET_BACKGROUND_MUSIC",
-            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
-            volume: 0.25
-        }]
+  ],
 });
 ```
 
