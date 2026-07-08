@@ -10,6 +10,12 @@ export const RemixActionType = {
     ResizeProject: "RESIZE_PROJECT",
     CleanUpTranscript: "CLEAN_UP_TRANSCRIPT",
     ConvertImagesToVideos: "CONVERT_IMAGES_TO_VIDEOS",
+    RegenerateImages: "REGENERATE_IMAGES",
+    UpscaleAssets: "UPSCALE_ASSETS",
+    ChangeNarrator: "CHANGE_NARRATOR",
+    ShuffleStockVisuals: "SHUFFLE_STOCK_VISUALS",
+    GenerateMusic: "GENERATE_MUSIC",
+    TranslateProject: "TRANSLATE_PROJECT",
     EditWithAgent: "EDIT_WITH_AGENT",
 } as const;
 export type RemixActionType = (typeof RemixActionType)[keyof typeof RemixActionType];

@@ -12,7 +12,7 @@ export interface WorkflowRunWebhookPayload {
     /** ISO-8601 timestamp at which VideoGen observed the terminal state. */
     occurredAt: string;
     workflowType: VideoGenApi.WorkflowType;
-    /** Id of the project created for this workflow run. */
+    /** Id of the project created for this workflow run (e.g. `vg_proj_...`). */
     projectId: string;
     /** URL to view the project in the VideoGen app. */
     projectUrl: string;

@@ -3,9 +3,9 @@
 import type * as VideoGenApi from "../index.js";
 
 export interface ProjectExport {
-    /** Opaque export id matching the original request. */
+    /** Opaque export id (e.g. `vg_expo_...`) matching the original request. */
     exportId: string;
-    /** Id of the exported project. */
+    /** Id of the exported project (e.g. `vg_proj_...`). */
     projectId: string;
     status: VideoGenApi.ProjectExportStatus;
     /** Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */

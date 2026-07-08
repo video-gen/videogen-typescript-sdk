@@ -6,6 +6,7 @@ import type * as VideoGenApi from "../index.js";
  * Simplified project metadata.
  */
 export interface ProjectResponse {
+    /** Opaque project id (e.g. `vg_proj_...`). */
     projectId: string;
     title: string;
     aspectRatio: VideoGenApi.AspectRatio;

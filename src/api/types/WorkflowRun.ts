@@ -11,7 +11,7 @@ export interface WorkflowRun {
     progressPercentage: number;
     /** Zero-based index of the current or most recent execution attempt. */
     attemptIndex: number;
-    /** Id of the project created for this workflow run. */
+    /** Id of the project created for this workflow run (e.g. `vg_proj_...`). */
     projectId: string;
     /** URL to view the project in the VideoGen app. */
     projectUrl: string;

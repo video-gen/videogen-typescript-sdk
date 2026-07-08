@@ -11,7 +11,7 @@ describe("ProjectsClient", () => {
         const rawResponseBody = {
             projects: [
                 {
-                    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+                    projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
                     title: "Staying hydrated",
                     aspectRatio: { width: 16, height: 9 },
                     status: "ready",
@@ -35,7 +35,7 @@ describe("ProjectsClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             title: "Staying hydrated",
             aspectRatio: { width: 16, height: 9 },
             status: "ready",
@@ -46,14 +46,14 @@ describe("ProjectsClient", () => {
 
         server
             .mockEndpoint()
-            .get("/v1/projects/1f0a2b3c-4d5e-6789-ab12-cdef34567890")
+            .get("/v1/projects/vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.projects.getProject({
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
         });
         expect(response).toEqual(rawResponseBody);
     });
@@ -62,11 +62,11 @@ describe("ProjectsClient", () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
         const rawRequestBody = { quality: "FULL_HIGH" };
-        const rawResponseBody = { exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890" };
+        const rawResponseBody = { exportId: "vg_expo_4bHn8pR2sY5xM1vL3tC7wd" };
 
         server
             .mockEndpoint()
-            .post("/v1/projects/1f0a2b3c-4d5e-6789-ab12-cdef34567890/export")
+            .post("/v1/projects/vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc/export")
             .jsonBody(rawRequestBody)
             .respondWith()
             .statusCode(200)
@@ -74,7 +74,7 @@ describe("ProjectsClient", () => {
             .build();
 
         const response = await client.projects.exportProject({
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             quality: "FULL_HIGH",
         });
         expect(response).toEqual(rawResponseBody);
@@ -85,8 +85,8 @@ describe("ProjectsClient", () => {
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
         const rawResponseBody = {
-            exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890",
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            exportId: "vg_expo_4bHn8pR2sY5xM1vL3tC7wd",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             status: "succeeded",
             progressPercentage: 100,
             attemptIndex: 0,
@@ -96,15 +96,15 @@ describe("ProjectsClient", () => {
 
         server
             .mockEndpoint()
-            .get("/v1/projects/1f0a2b3c-4d5e-6789-ab12-cdef34567890/exports/2a1b3c4d-5e6f-7890-ab12-cdef34567890")
+            .get("/v1/projects/vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc/exports/vg_expo_4bHn8pR2sY5xM1vL3tC7wd")
             .respondWith()
             .statusCode(200)
             .jsonBody(rawResponseBody)
             .build();
 
         const response = await client.projects.getProjectExport({
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
-            exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
+            exportId: "vg_expo_4bHn8pR2sY5xM1vL3tC7wd",
         });
         expect(response).toEqual(rawResponseBody);
     });

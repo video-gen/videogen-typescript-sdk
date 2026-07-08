@@ -8,7 +8,7 @@ import type * as VideoGenApi from "../index.js";
 export interface Entity {
     /** The entity id (e.g. `vg_enti_...`). */
     entityId: string;
-    /** ACTOR features a consistent character; VISUAL_STYLE guides the look of generated images. */
+    /** ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images. */
     entityType: Entity.EntityType;
     /** Display name. */
     name: string;
@@ -25,9 +25,10 @@ export interface Entity {
 }
 
 export namespace Entity {
-    /** ACTOR features a consistent character; VISUAL_STYLE guides the look of generated images. */
+    /** ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images. */
     export const EntityType = {
         Actor: "ACTOR",
+        Product: "PRODUCT",
         VisualStyle: "VISUAL_STYLE",
     } as const;
     export type EntityType = (typeof EntityType)[keyof typeof EntityType];

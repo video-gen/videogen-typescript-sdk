@@ -7,7 +7,7 @@ export interface RemixActionRun {
     remixActionId: string;
     type: VideoGenApi.RemixActionType;
     status: VideoGenApi.RemixActionStatus;
-    /** Id of the project this remix action edits. */
+    /** Id of the project this remix action edits (e.g. `vg_proj_...`). */
     projectId: string;
     /** URL to view the project in the VideoGen app. */
     projectUrl: string;

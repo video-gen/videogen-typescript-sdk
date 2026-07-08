@@ -165,7 +165,7 @@ export class WebhooksClient {
      *
      * @example
      *     await client.webhooks.deleteWebhookEndpoint({
-     *         endpointId: "endpointId"
+     *         endpointId: "ep_28KVX7vT9mQ2sL4nR6pB1cD0fG"
      *     })
      */
     public deleteWebhookEndpoint(

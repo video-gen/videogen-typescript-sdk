@@ -67,4 +67,22 @@ describe("ResourcesClient", () => {
         const response = await client.resources.listTtsVoices();
         expect(response).toEqual(rawResponseBody);
     });
+
+    test("listLanguages", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = { languages: [{ languageCode: "languageCode", name: "name" }] };
+
+        server
+            .mockEndpoint()
+            .get("/v1/resources/languages")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.resources.listLanguages();
+        expect(response).toEqual(rawResponseBody);
+    });
 });

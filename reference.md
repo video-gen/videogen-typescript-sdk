@@ -36,21 +36,12 @@ await client.workflows.scriptToVideo({
     visualPacing: "MEDIUM",
     quality: "HIGH",
     remixActions: [{
-            type: "ENABLE_CAPTIONS",
-            captionStyle: {
-                fontName: "Inter",
-                fontWeight: 700,
-                textColor: {
-                    red: 255,
-                    green: 255,
-                    blue: 255
-                },
-                verticalAlignment: "BOTTOM"
-            }
+            type: "ENABLE_CAPTIONS"
         }, {
-            type: "SET_BACKGROUND_MUSIC",
-            fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
-            volume: 0.25
+            type: "CONVERT_IMAGES_TO_VIDEOS",
+            motionPrompt: "slow cinematic push-in",
+            muteOutputVideos: true,
+            quality: "HIGH"
         }]
 });
 
@@ -191,9 +182,10 @@ await client.workflows.voiceoverToVideo({
     },
     quality: "HIGH",
     remixActions: [{
-            type: "SET_BACKGROUND_MUSIC",
-            fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
-            volume: 0.2
+            type: "CONVERT_IMAGES_TO_VIDEOS",
+            motionPrompt: "gentle parallax drift",
+            muteOutputVideos: true,
+            quality: "HIGH"
         }, {
             type: "EDIT_WITH_AGENT",
             prompt: "Replace the closing title card with \"Book a demo today\""
@@ -336,9 +328,10 @@ await client.workflows.slideshowToVideo({
             sectionTransition: "DYNAMIC",
             assetTransition: "FADE"
         }, {
-            type: "SET_BACKGROUND_MUSIC",
-            fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
-            volume: 0.2
+            type: "CONVERT_IMAGES_TO_VIDEOS",
+            motionPrompt: "subtle zoom with soft easing",
+            muteOutputVideos: true,
+            quality: "HIGH"
         }]
 });
 
@@ -587,6 +580,69 @@ await client.workflows.generateScenesFromStoryboard({
 </dl>
 </details>
 
+<details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">listWorkflowRuns</a>({ ...params }) -> VideoGenApi.WorkflowRunListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List workflow runs started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all runs for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workflows.listWorkflowRuns();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ListWorkflowRunsRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkflowsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workflows.<a href="/src/api/resources/workflows/client/Client.ts">getWorkflowRun</a>({ ...params }) -> VideoGenApi.WorkflowRun</code></summary>
 <dl>
 <dd>
@@ -781,7 +837,7 @@ Returns a simplified view of a project including its title, aspect ratio, status
 
 ```typescript
 await client.projects.getProject({
-    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890"
+    projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc"
 });
 
 ```
@@ -846,7 +902,7 @@ Starts an export of a project to MP4. Returns immediately with an export id; the
 
 ```typescript
 await client.projects.exportProject({
-    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+    projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
     quality: "FULL_HIGH"
 });
 
@@ -912,8 +968,8 @@ Returns the current status of a project export started via `POST /v1/projects/{p
 
 ```typescript
 await client.projects.getProjectExport({
-    projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
-    exportId: "2a1b3c4d-5e6f-7890-ab12-cdef34567890"
+    projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
+    exportId: "vg_expo_4bHn8pR2sY5xM1vL3tC7wd"
 });
 
 ```
@@ -1916,6 +1972,69 @@ await client.tools.cancelToolExecution({
 <dd>
 
 **request:** `VideoGenApi.CancelToolExecutionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `ToolsClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.tools.<a href="/src/api/resources/tools/client/Client.ts">listToolExecutions</a>({ ...params }) -> VideoGenApi.ToolExecutionListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List tool executions started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all executions for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.tools.listToolExecutions();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ListToolExecutionsRequest` 
     
 </dd>
 </dl>
@@ -3177,6 +3296,61 @@ await client.resources.listTtsVoices();
 </dl>
 </details>
 
+<details><summary><code>client.resources.<a href="/src/api/resources/resources/client/Client.ts">listLanguages</a>() -> VideoGenApi.LanguageListResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the languages a project can be translated into. Pass a `languageCode` from the response to the `TRANSLATE_PROJECT` remix action. Returns the full catalogue in a single response (not paginated).
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.resources.listLanguages();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `ResourcesClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Webhooks
 <details><summary><code>client.webhooks.<a href="/src/api/resources/webhooks/client/Client.ts">listWebhookEndpoints</a>({ ...params }) -> VideoGenApi.WebhookEndpointListResponse</code></summary>
 <dl>
@@ -3335,7 +3509,7 @@ Remove a webhook endpoint. It will stop receiving events immediately.
 
 ```typescript
 await client.webhooks.deleteWebhookEndpoint({
-    endpointId: "endpointId"
+    endpointId: "ep_28KVX7vT9mQ2sL4nR6pB1cD0fG"
 });
 
 ```
@@ -3361,6 +3535,62 @@ await client.webhooks.deleteWebhookEndpoint({
 <dd>
 
 **requestOptions:** `WebhooksClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Account
+<details><summary><code>client.account.<a href="/src/api/resources/account/client/Client.ts">getMe</a>() -> VideoGenApi.MeResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return the account and team behind the API key making the request. Takes no parameters. Call it as a connection test to confirm a key is valid and to discover the `teamId` and account `email` a key belongs to.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.account.getMe();
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**requestOptions:** `AccountClient.RequestOptions` 
     
 </dd>
 </dl>

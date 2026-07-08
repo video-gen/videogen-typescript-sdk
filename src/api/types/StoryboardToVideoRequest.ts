@@ -14,6 +14,8 @@ export interface StoryboardToVideoRequest {
     aspectRatio?: VideoGenApi.AspectRatio | undefined;
     /** Optional storyboard-wide production notes for the AI that builds the video (e.g. recurring characters or props, a consistent setting, or overall staging guidance). Applies across every scene; per-scene direction goes in each scene's `prompt`. */
     workflowAgentContext?: string | undefined;
+    /** Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. `ENABLE_CAPTIONS` shows and styles captions, `SET_BACKGROUND_MUSIC` sets a music track, `ADD_TRANSITIONS` stamps transitions between scenes, and `SET_LOGO` overlays a logo. `EDIT_WITH_AGENT` applies open-ended natural-language edits. See the [Remix actions](/remix-actions) guide. */
+    remixActions?: VideoGenApi.RemixAction[] | undefined;
 }
 
 export namespace StoryboardToVideoRequest {

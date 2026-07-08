@@ -3,10 +3,10 @@
 /**
  * @example
  *     {
- *         endpointId: "endpointId"
+ *         endpointId: "ep_28KVX7vT9mQ2sL4nR6pB1cD0fG"
  *     }
  */
 export interface DeleteWebhookEndpointRequest {
-    /** The webhook endpoint id returned by `POST /v1/webhooks/endpoints`. */
+    /** The webhook endpoint id (e.g. `ep_...`) returned by `POST /v1/webhooks/endpoints`. */
     endpointId: string;
 }

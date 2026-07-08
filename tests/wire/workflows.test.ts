@@ -16,21 +16,18 @@ describe("WorkflowsClient", () => {
             visualPacing: "MEDIUM",
             quality: "HIGH",
             remixActions: [
+                { type: "ENABLE_CAPTIONS" },
                 {
-                    type: "ENABLE_CAPTIONS",
-                    captionStyle: {
-                        fontName: "Inter",
-                        fontWeight: 700,
-                        textColor: { red: 255, green: 255, blue: 255 },
-                        verticalAlignment: "BOTTOM",
-                    },
+                    type: "CONVERT_IMAGES_TO_VIDEOS",
+                    motionPrompt: "slow cinematic push-in",
+                    muteOutputVideos: true,
+                    quality: "HIGH",
                 },
-                { type: "SET_BACKGROUND_MUSIC", fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA", volume: 0.25 },
             ],
         };
         const rawResponseBody = {
             workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
             remixActionIds: ["vg_rmix_ka9d2mZq7vTb1n0847PceR", "vg_rmix_pQ0s6xLm4dWc9r2318YgHt"],
         };
@@ -55,21 +52,12 @@ describe("WorkflowsClient", () => {
             remixActions: [
                 {
                     type: "ENABLE_CAPTIONS",
-                    captionStyle: {
-                        fontName: "Inter",
-                        fontWeight: 700,
-                        textColor: {
-                            red: 255,
-                            green: 255,
-                            blue: 255,
-                        },
-                        verticalAlignment: "BOTTOM",
-                    },
                 },
                 {
-                    type: "SET_BACKGROUND_MUSIC",
-                    fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
-                    volume: 0.25,
+                    type: "CONVERT_IMAGES_TO_VIDEOS",
+                    motionPrompt: "slow cinematic push-in",
+                    muteOutputVideos: true,
+                    quality: "HIGH",
                 },
             ],
         });
@@ -116,13 +104,18 @@ describe("WorkflowsClient", () => {
             },
             quality: "HIGH",
             remixActions: [
-                { type: "SET_BACKGROUND_MUSIC", fileId: "vg_file_mot8bV5POiscDeHyo7TF1g", volume: 0.2 },
+                {
+                    type: "CONVERT_IMAGES_TO_VIDEOS",
+                    motionPrompt: "gentle parallax drift",
+                    muteOutputVideos: true,
+                    quality: "HIGH",
+                },
                 { type: "EDIT_WITH_AGENT", prompt: 'Replace the closing title card with "Book a demo today"' },
             ],
         };
         const rawResponseBody = {
             workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
             remixActionIds: ["vg_rmix_ka9d2mZq7vTb1n0847PceR", "vg_rmix_pQ0s6xLm4dWc9r2318YgHt"],
         };
@@ -145,9 +138,10 @@ describe("WorkflowsClient", () => {
             quality: "HIGH",
             remixActions: [
                 {
-                    type: "SET_BACKGROUND_MUSIC",
-                    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
-                    volume: 0.2,
+                    type: "CONVERT_IMAGES_TO_VIDEOS",
+                    motionPrompt: "gentle parallax drift",
+                    muteOutputVideos: true,
+                    quality: "HIGH",
                 },
                 {
                     type: "EDIT_WITH_AGENT",
@@ -194,12 +188,17 @@ describe("WorkflowsClient", () => {
             fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
             remixActions: [
                 { type: "ADD_TRANSITIONS", sectionTransition: "DYNAMIC", assetTransition: "FADE" },
-                { type: "SET_BACKGROUND_MUSIC", fileId: "vg_file_mot8bV5POiscDeHyo7TF1g", volume: 0.2 },
+                {
+                    type: "CONVERT_IMAGES_TO_VIDEOS",
+                    motionPrompt: "subtle zoom with soft easing",
+                    muteOutputVideos: true,
+                    quality: "HIGH",
+                },
             ],
         };
         const rawResponseBody = {
             workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
             remixActionIds: ["vg_rmix_ka9d2mZq7vTb1n0847PceR", "vg_rmix_pQ0s6xLm4dWc9r2318YgHt"],
         };
@@ -222,9 +221,10 @@ describe("WorkflowsClient", () => {
                     assetTransition: "FADE",
                 },
                 {
-                    type: "SET_BACKGROUND_MUSIC",
-                    fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
-                    volume: 0.2,
+                    type: "CONVERT_IMAGES_TO_VIDEOS",
+                    motionPrompt: "subtle zoom with soft easing",
+                    muteOutputVideos: true,
+                    quality: "HIGH",
                 },
             ],
         });
@@ -280,7 +280,7 @@ describe("WorkflowsClient", () => {
         };
         const rawResponseBody = {
             workflowRunId: "vg_work_ccm3abc123defcm3xyz789ghi",
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
             remixActionIds: [],
         };
@@ -347,6 +347,33 @@ describe("WorkflowsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
+    test("listWorkflowRuns", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            workflowRuns: [
+                {
+                    workflowRunId: "workflowRunId",
+                    status: "pending",
+                    workflowType: "SCRIPT_TO_VIDEO",
+                    progressPercentage: 1.1,
+                    attemptIndex: 1,
+                    projectId: "projectId",
+                    projectUrl: "projectUrl",
+                    error: { message: "message" },
+                },
+            ],
+            hasMore: true,
+            nextCursor: "nextCursor",
+        };
+
+        server.mockEndpoint().get("/v1/workflows/runs").respondWith().statusCode(200).jsonBody(rawResponseBody).build();
+
+        const response = await client.workflows.listWorkflowRuns();
+        expect(response).toEqual(rawResponseBody);
+    });
+
     test("getWorkflowRun", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
@@ -357,7 +384,7 @@ describe("WorkflowsClient", () => {
             workflowType: "SCRIPT_TO_VIDEO",
             progressPercentage: 100,
             attemptIndex: 0,
-            projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890",
+            projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc",
             projectUrl: "https://app.videogen.io/project/1f0a2b3c-4d5e-6789-ab12-cdef34567890",
         };
 

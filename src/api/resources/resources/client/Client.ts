@@ -166,4 +166,58 @@ export class ResourcesClient {
 
         return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/resources/tts-voices");
     }
+
+    /**
+     * List the languages a project can be translated into. Pass a `languageCode` from the response to the `TRANSLATE_PROJECT` remix action. Returns the full catalogue in a single response (not paginated).
+     *
+     * @param {ResourcesClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.resources.listLanguages()
+     */
+    public listLanguages(
+        requestOptions?: ResourcesClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.LanguageListResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listLanguages(requestOptions));
+    }
+
+    private async __listLanguages(
+        requestOptions?: ResourcesClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.LanguageListResponse>> {
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/resources/languages",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.LanguageListResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/resources/languages");
+    }
 }

@@ -41,21 +41,12 @@ export class WorkflowsClient {
      *         visualPacing: "MEDIUM",
      *         quality: "HIGH",
      *         remixActions: [{
-     *                 type: "ENABLE_CAPTIONS",
-     *                 captionStyle: {
-     *                     fontName: "Inter",
-     *                     fontWeight: 700,
-     *                     textColor: {
-     *                         red: 255,
-     *                         green: 255,
-     *                         blue: 255
-     *                     },
-     *                     verticalAlignment: "BOTTOM"
-     *                 }
+     *                 type: "ENABLE_CAPTIONS"
      *             }, {
-     *                 type: "SET_BACKGROUND_MUSIC",
-     *                 fileId: "vg_file_obLD1OX2eJCrEs0071Z4kA",
-     *                 volume: 0.25
+     *                 type: "CONVERT_IMAGES_TO_VIDEOS",
+     *                 motionPrompt: "slow cinematic push-in",
+     *                 muteOutputVideos: true,
+     *                 quality: "HIGH"
      *             }]
      *     })
      */
@@ -204,9 +195,10 @@ export class WorkflowsClient {
      *         },
      *         quality: "HIGH",
      *         remixActions: [{
-     *                 type: "SET_BACKGROUND_MUSIC",
-     *                 fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
-     *                 volume: 0.2
+     *                 type: "CONVERT_IMAGES_TO_VIDEOS",
+     *                 motionPrompt: "gentle parallax drift",
+     *                 muteOutputVideos: true,
+     *                 quality: "HIGH"
      *             }, {
      *                 type: "EDIT_WITH_AGENT",
      *                 prompt: "Replace the closing title card with \"Book a demo today\""
@@ -355,9 +347,10 @@ export class WorkflowsClient {
      *                 sectionTransition: "DYNAMIC",
      *                 assetTransition: "FADE"
      *             }, {
-     *                 type: "SET_BACKGROUND_MUSIC",
-     *                 fileId: "vg_file_mot8bV5POiscDeHyo7TF1g",
-     *                 volume: 0.2
+     *                 type: "CONVERT_IMAGES_TO_VIDEOS",
+     *                 motionPrompt: "subtle zoom with soft easing",
+     *                 muteOutputVideos: true,
+     *                 quality: "HIGH"
      *             }]
      *     })
      */
@@ -638,6 +631,73 @@ export class WorkflowsClient {
             "POST",
             "/v1/workflows/generate-scenes-from-storyboard",
         );
+    }
+
+    /**
+     * List workflow runs started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all runs for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
+     *
+     * @param {VideoGenApi.ListWorkflowRunsRequest} request
+     * @param {WorkflowsClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @example
+     *     await client.workflows.listWorkflowRuns()
+     */
+    public listWorkflowRuns(
+        request: VideoGenApi.ListWorkflowRunsRequest = {},
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): core.HttpResponsePromise<VideoGenApi.WorkflowRunListResponse> {
+        return core.HttpResponsePromise.fromPromise(this.__listWorkflowRuns(request, requestOptions));
+    }
+
+    private async __listWorkflowRuns(
+        request: VideoGenApi.ListWorkflowRunsRequest = {},
+        requestOptions?: WorkflowsClient.RequestOptions,
+    ): Promise<core.WithRawResponse<VideoGenApi.WorkflowRunListResponse>> {
+        const { limit, cursor, selfOnly } = request;
+        const _queryParams: Record<string, unknown> = {
+            limit,
+            cursor,
+            selfOnly,
+        };
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            requestOptions?.headers,
+        );
+        const _response = await core.fetcher({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.VideoGenEnvironment.Production,
+                "v1/workflows/runs",
+            ),
+            method: "GET",
+            headers: _headers,
+            queryString: core.url
+                .queryBuilder()
+                .addMany(_queryParams)
+                .mergeAdditional(requestOptions?.queryParams)
+                .build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as VideoGenApi.WorkflowRunListResponse, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            throw new errors.VideoGenError({
+                statusCode: _response.error.statusCode,
+                body: _response.error.body,
+                rawResponse: _response.rawResponse,
+            });
+        }
+
+        return handleNonStatusCodeError(_response.error, _response.rawResponse, "GET", "/v1/workflows/runs");
     }
 
     /**

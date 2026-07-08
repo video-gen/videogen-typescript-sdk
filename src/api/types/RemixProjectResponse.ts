@@ -4,7 +4,7 @@
  * Returned when remix actions are accepted. Poll `GET /v1/projects/{projectId}/remix-actions` for status.
  */
 export interface RemixProjectResponse {
-    /** Id of the edited project (the duplicate when `saveAsNewProject` was true). */
+    /** Id of the edited project (e.g. `vg_proj_...`; the duplicate when `saveAsNewProject` was true). */
     projectId: string;
     /** URL to view the project in the VideoGen app. */
     projectUrl: string;

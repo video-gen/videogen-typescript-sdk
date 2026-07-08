@@ -6,7 +6,7 @@
 export interface StartWorkflowRunResponse {
     /** Opaque workflow run id (e.g. `vg_work_...`). */
     workflowRunId: string;
-    /** Id of the project created for this workflow run. */
+    /** Id of the project created for this workflow run (e.g. `vg_proj_...`). */
     projectId: string;
     /** URL to view the project in the VideoGen app. */
     projectUrl: string;

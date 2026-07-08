@@ -2,6 +2,7 @@
 
 export const ListEntitiesRequestEntityType = {
     Actor: "ACTOR",
+    Product: "PRODUCT",
     VisualStyle: "VISUAL_STYLE",
 } as const;
 export type ListEntitiesRequestEntityType =

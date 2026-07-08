@@ -3,6 +3,7 @@
 import type * as VideoGenApi from "../index.js";
 
 export interface WebhookEndpoint {
+    /** Webhook endpoint id (e.g. `ep_...`). */
     endpointId: string;
     url: string;
     events: VideoGenApi.WebhookEventName[];

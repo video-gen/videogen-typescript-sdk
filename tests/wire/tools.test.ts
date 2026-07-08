@@ -381,6 +381,38 @@ describe("ToolsClient", () => {
         expect(response).toEqual(rawResponseBody);
     });
 
+    test("listToolExecutions", async () => {
+        const server = mockServerPool.createServer();
+        const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
+
+        const rawResponseBody = {
+            toolExecutions: [
+                {
+                    toolExecutionId: "toolExecutionId",
+                    status: "pending",
+                    toolType: "toolType",
+                    progressPercentage: 1.1,
+                    attemptIndex: 1,
+                    results: [{ fileId: "fileId", type: "IMAGE" }],
+                    error: { message: "message" },
+                },
+            ],
+            hasMore: true,
+            nextCursor: "nextCursor",
+        };
+
+        server
+            .mockEndpoint()
+            .get("/v1/tools/executions")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.tools.listToolExecutions();
+        expect(response).toEqual(rawResponseBody);
+    });
+
     test("getToolExecutionInfo", async () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });

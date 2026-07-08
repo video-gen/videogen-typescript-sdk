@@ -14,6 +14,12 @@ export type RemixAction =
     | VideoGenApi.RemixAction.ResizeProject
     | VideoGenApi.RemixAction.CleanUpTranscript
     | VideoGenApi.RemixAction.ConvertImagesToVideos
+    | VideoGenApi.RemixAction.RegenerateImages
+    | VideoGenApi.RemixAction.UpscaleAssets
+    | VideoGenApi.RemixAction.ChangeNarrator
+    | VideoGenApi.RemixAction.ShuffleStockVisuals
+    | VideoGenApi.RemixAction.GenerateMusic
+    | VideoGenApi.RemixAction.TranslateProject
     | VideoGenApi.RemixAction.EditWithAgent;
 
 export namespace RemixAction {
@@ -47,6 +53,30 @@ export namespace RemixAction {
 
     export interface ConvertImagesToVideos extends VideoGenApi.RemixActionConvertImagesToVideos {
         type: "CONVERT_IMAGES_TO_VIDEOS";
+    }
+
+    export interface RegenerateImages extends VideoGenApi.RemixActionRegenerateImages {
+        type: "REGENERATE_IMAGES";
+    }
+
+    export interface UpscaleAssets extends VideoGenApi.RemixActionUpscaleAssets {
+        type: "UPSCALE_ASSETS";
+    }
+
+    export interface ChangeNarrator extends VideoGenApi.RemixActionChangeNarrator {
+        type: "CHANGE_NARRATOR";
+    }
+
+    export interface ShuffleStockVisuals extends VideoGenApi.RemixActionShuffleStockVisuals {
+        type: "SHUFFLE_STOCK_VISUALS";
+    }
+
+    export interface GenerateMusic extends VideoGenApi.RemixActionGenerateMusic {
+        type: "GENERATE_MUSIC";
+    }
+
+    export interface TranslateProject extends VideoGenApi.RemixActionTranslateProject {
+        type: "TRANSLATE_PROJECT";
     }
 
     export interface EditWithAgent extends VideoGenApi.RemixActionEditWithAgent {

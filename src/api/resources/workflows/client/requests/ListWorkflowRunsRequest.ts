@@ -4,13 +4,11 @@
  * @example
  *     {}
  */
-export interface ListProjectsRequest {
+export interface ListWorkflowRunsRequest {
     /** Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
     limit?: number;
     /** Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
     cursor?: string;
     /** When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
     selfOnly?: boolean;
-    /** When true, includes dashboard-created projects in addition to API-created projects. When false (default), returns only API-created projects. */
-    includeUiProjects?: boolean;
 }

@@ -3,7 +3,7 @@
 /**
  * @example
  *     {
- *         projectId: "1f0a2b3c-4d5e-6789-ab12-cdef34567890"
+ *         projectId: "vg_proj_9dTk3mQ1rZ7xP4vN2sB6wc"
  *     }
  */
 export interface GetProjectRequest {

@@ -11,7 +11,7 @@ describe("WebhooksClient", () => {
         const rawResponseBody = {
             endpoints: [
                 {
-                    endpointId: "a1b2c3d4-e5f6-7890-ab12-cdef34567890",
+                    endpointId: "ep_28KVX7vT9mQ2sL4nR6pB1cD0fG",
                     url: "https://webhooks.example.com/videogen",
                     events: ["tool_execution.succeeded", "tool_execution.failed", "tool_execution.cancelled"],
                     description: "Primary webhook endpoint for tool execution notifications",
@@ -43,7 +43,7 @@ describe("WebhooksClient", () => {
             events: ["tool_execution.succeeded", "tool_execution.failed"],
         };
         const rawResponseBody = {
-            endpointId: "we_9f8b7c6d5a4e3f2b1c0d",
+            endpointId: "ep_31QmZ8rT2vK5nL7sB4pR9cD1fH",
             url: "https://webhooks.myapp.com/videogen",
             events: ["tool_execution.succeeded", "tool_execution.failed"],
             description: "Webhook endpoint for receiving VideoGen tool execution results",
@@ -72,10 +72,15 @@ describe("WebhooksClient", () => {
         const server = mockServerPool.createServer();
         const client = new VideoGenClient({ maxRetries: 0, token: "test", environment: server.baseUrl });
 
-        server.mockEndpoint().delete("/v1/webhooks/endpoints/endpointId").respondWith().statusCode(200).build();
+        server
+            .mockEndpoint()
+            .delete("/v1/webhooks/endpoints/ep_28KVX7vT9mQ2sL4nR6pB1cD0fG")
+            .respondWith()
+            .statusCode(200)
+            .build();
 
         const response = await client.webhooks.deleteWebhookEndpoint({
-            endpointId: "endpointId",
+            endpointId: "ep_28KVX7vT9mQ2sL4nR6pB1cD0fG",
         });
         expect(response).toEqual(undefined);
     });
