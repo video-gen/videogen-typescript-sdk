@@ -49,7 +49,7 @@ Instantiate and use the client with the following:
 ```typescript
 import { VideoGenClient } from "@videogen/sdk";
 
-const client = new VideoGenClient({ token: "YOUR_TOKEN" });
+const client = new VideoGenClient({ token: "sk_videogen_live_..." });
 await client.workflows.scriptToVideo({
   script:
     "Staying hydrated keeps your body and mind running at their best. Drinking enough water boosts your energy, focus, and mood. Keep a water bottle nearby and sip throughout the day.",
