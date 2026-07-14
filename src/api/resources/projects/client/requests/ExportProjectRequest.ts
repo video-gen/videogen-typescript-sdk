@@ -13,4 +13,6 @@ export interface ExportProjectRequest {
     /** The project id (e.g. `vg_proj_...`). */
     projectId: string;
     quality?: VideoGenApi.ExportProjectQuality;
+    /** Destinations to deliver the finished export to when it completes, in addition to any delivery destinations already saved for the team. Each destination references a connected integration. */
+    deliveryDestinations?: VideoGenApi.ExportDeliveryDestination[];
 }

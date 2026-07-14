@@ -59,6 +59,7 @@ export namespace StorageFile {
         Audio: "AUDIO",
         Pdf: "PDF",
         Slideshow: "SLIDESHOW",
+        Text: "TEXT",
     } as const;
     export type Type = (typeof Type)[keyof typeof Type];
     /**

@@ -1,4 +1,6 @@
 export * as account from "./account/index.js";
+export * from "./assistant/client/requests/index.js";
+export * as assistant from "./assistant/index.js";
 export * from "./entities/client/requests/index.js";
 export * as entities from "./entities/index.js";
 export * from "./entities/types/index.js";

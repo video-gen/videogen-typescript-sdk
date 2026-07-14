@@ -3101,6 +3101,204 @@ await client.entities.removeEntityReference({
 </dl>
 </details>
 
+## Assistant
+<details><summary><code>client.assistant.<a href="/src/api/resources/assistant/client/Client.ts">startAssistantChat</a>({ ...params }) -> VideoGenApi.AssistantTurnResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Creates a new project and sends the first message to the VideoGen AI assistant, exactly like typing into the assistant on a new project in the app. Synchronous: the response includes the assistant's reply, any workflow suggestions it offered, and a `projectUrl` to open the project in the app. Continue the conversation with `POST /v1/assistant/chats/{projectId}/messages`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assistant.startAssistantChat({
+    message: "A 30-second explainer about our new pricing tiers"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.StartAssistantChatRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssistantClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.assistant.<a href="/src/api/resources/assistant/client/Client.ts">sendAssistantMessage</a>({ ...params }) -> VideoGenApi.AssistantTurnResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Sends a follow-up message to the assistant in an existing project chat started with `POST /v1/assistant/chats`. Synchronous: the response includes the assistant's reply and any actions it offered.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assistant.sendAssistantMessage({
+    projectId: "projectId",
+    message: "Make it more upbeat and add captions"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.SendAssistantMessageRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssistantClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.assistant.<a href="/src/api/resources/assistant/client/Client.ts">actOnAssistantAction</a>({ ...params }) -> VideoGenApi.AssistantTurnResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Acts on an actionable widget the assistant offered on a prior turn. Reference the action by its `assistantActionId` from a prior `AssistantTurnResponse`. Today this accepts a workflow suggestion: `APPROVE` (the default) applies the suggested workflow and immediately starts generating — the response's `status` is `generating` and `generation` carries the run to poll — while `REJECT` returns the offering turn unchanged. Every other action has `requiresApp` set to true and can only be completed in the web app; open `projectUrl` instead.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.assistant.actOnAssistantAction({
+    projectId: "projectId",
+    assistantActionId: "assistantActionId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `VideoGenApi.ActOnAssistantActionRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `AssistantClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 ## Text
 <details><summary><code>client.text.<a href="/src/api/resources/text/client/Client.ts">generateText</a>({ ...params }) -> VideoGenApi.GenerateTextResponse</code></summary>
 <dl>

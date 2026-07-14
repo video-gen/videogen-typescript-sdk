@@ -6,7 +6,7 @@
 export interface RemixProjectResponse {
     /** Id of the edited project (e.g. `vg_proj_...`; the duplicate when `saveAsNewProject` was true). */
     projectId: string;
-    /** URL to view the project in the VideoGen app. */
+    /** Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard. */
     projectUrl: string;
     /** Opaque remix action ids (e.g. `vg_rmix_...`), one per requested action in order. */
     remixActionIds: string[];

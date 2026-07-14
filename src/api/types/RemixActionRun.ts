@@ -9,7 +9,7 @@ export interface RemixActionRun {
     status: VideoGenApi.RemixActionStatus;
     /** Id of the project this remix action edits (e.g. `vg_proj_...`). */
     projectId: string;
-    /** URL to view the project in the VideoGen app. */
+    /** Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard. */
     projectUrl: string;
     /** Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
     progressPercentage: number;
