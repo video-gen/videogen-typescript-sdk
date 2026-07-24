@@ -2,12 +2,12 @@ import type { VideoGen } from "../client.js";
 import { fillPath, pickFields } from "../request.js";
 import type {
   CreateFileUploadRequest,
+  FileInfo,
   FileUploadResponse,
   GetFilesResponse,
   RequestOptions,
   SearchFilesRequest,
   SearchFilesResponse,
-  StorageFile,
 } from "../types.js";
 
 type ListFilesRequest = {
@@ -56,8 +56,8 @@ export class FilesResource {
   }
 
   // @sdk-operation getFile
-  async getFile(request: FileIdRequest, options?: RequestOptions): Promise<StorageFile> {
-    return this.client.request<StorageFile>({
+  async getFile(request: FileIdRequest, options?: RequestOptions): Promise<FileInfo> {
+    return this.client.request<FileInfo>({
       method: "GET",
       path: fillPath("/v1/files/{fileId}", { fileId: request.fileId }),
       signal: options?.signal,
@@ -81,8 +81,8 @@ export class FilesResource {
   async hydrateFile(
     request: FileIdRequest,
     options?: RequestOptions,
-  ): Promise<StorageFile> {
-    return this.client.request<StorageFile>({
+  ): Promise<FileInfo> {
+    return this.client.request<FileInfo>({
       method: "POST",
       path: fillPath("/v1/files/{fileId}/hydrate", { fileId: request.fileId }),
       signal: options?.signal,
@@ -93,8 +93,8 @@ export class FilesResource {
   async archiveFile(
     request: FileIdRequest,
     options?: RequestOptions,
-  ): Promise<StorageFile> {
-    return this.client.request<StorageFile>({
+  ): Promise<FileInfo> {
+    return this.client.request<FileInfo>({
       method: "POST",
       path: fillPath("/v1/files/{fileId}/archive", { fileId: request.fileId }),
       signal: options?.signal,
@@ -105,8 +105,8 @@ export class FilesResource {
   async enablePublicPreview(
     request: FileIdRequest,
     options?: RequestOptions,
-  ): Promise<StorageFile> {
-    return this.client.request<StorageFile>({
+  ): Promise<FileInfo> {
+    return this.client.request<FileInfo>({
       method: "POST",
       path: fillPath("/v1/files/{fileId}/enable-public-preview", {
         fileId: request.fileId,
@@ -119,8 +119,8 @@ export class FilesResource {
   async disablePublicPreview(
     request: FileIdRequest,
     options?: RequestOptions,
-  ): Promise<StorageFile> {
-    return this.client.request<StorageFile>({
+  ): Promise<FileInfo> {
+    return this.client.request<FileInfo>({
       method: "POST",
       path: fillPath("/v1/files/{fileId}/disable-public-preview", {
         fileId: request.fileId,

@@ -1,5 +1,5 @@
 import type { VideoGen } from "../client.js";
-import type { StorageFile } from "../types.js";
+import type { FileInfo } from "../types.js";
 import {
   pollPublicPreview,
   type PollPublicPreviewOptions,
@@ -14,7 +14,7 @@ export const createPublicPreview = async ({
   client,
   fileId,
   ...opts
-}: CreatePublicPreviewParams): Promise<StorageFile> => {
+}: CreatePublicPreviewParams): Promise<FileInfo> => {
   await client.files.enablePublicPreview({ fileId }, { signal: opts.signal });
   return pollPublicPreview({ client, fileId, ...opts });
 };

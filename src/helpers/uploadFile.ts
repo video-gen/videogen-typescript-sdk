@@ -1,6 +1,6 @@
 import type { VideoGen } from "../client.js";
 import { VideoGenError } from "../errors.js";
-import type { PollOptions, StorageFile } from "../types.js";
+import type { FileInfo, PollOptions } from "../types.js";
 import { sleep } from "./sleep.js";
 
 export type UploadFileParams = {
@@ -15,7 +15,7 @@ export type UploadFileParams = {
   signal?: AbortSignal;
 };
 
-const getIsFileReady = (file: StorageFile): boolean => {
+const getIsFileReady = (file: FileInfo): boolean => {
   const sources = [
     file.downloadSource,
     file.previewSource,
@@ -25,7 +25,7 @@ const getIsFileReady = (file: StorageFile): boolean => {
   return sources.some((source) => source != null && source.status === "ready");
 };
 
-export const uploadFile = async (params: UploadFileParams): Promise<StorageFile> => {
+export const uploadFile = async (params: UploadFileParams): Promise<FileInfo> => {
   const { client } = params;
   const displayName = params.displayName ?? "upload";
   const pollIntervalMs = params.pollIntervalMs ?? 2000;

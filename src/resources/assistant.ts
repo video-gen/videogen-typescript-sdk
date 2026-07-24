@@ -1,20 +1,34 @@
 import type { VideoGen } from "../client.js";
+import { pollAssistantMessage } from "../helpers/pollAssistantMessage.js";
 import { fillPath, omitFields } from "../request.js";
 import type {
   ActOnAssistantActionRequest,
-  AssistantTurnResponse,
+  ActOnAssistantActionResponse,
+  AssistantMessage,
+  GetAssistantResponse,
+  PollOptions,
   RequestOptions,
   SendAssistantMessageRequest,
+  SendAssistantMessageResponse,
   StartAssistantChatRequest,
+  StartAssistantChatResponse,
 } from "../types.js";
 
+type AssistantIdRequest = {
+  assistantId: string;
+};
+
+type MessageIdRequest = {
+  messageId: string;
+};
+
 type SendAssistantMessageMergedRequest = {
-  projectId: string;
+  assistantId: string;
 } & SendAssistantMessageRequest;
 
 type ActOnAssistantActionMergedRequest = {
-  projectId: string;
-  assistantActionId: string;
+  assistantId: string;
+  actionId: string;
 } & ActOnAssistantActionRequest;
 
 export class AssistantResource {
@@ -24,11 +38,37 @@ export class AssistantResource {
   async startAssistantChat(
     request: StartAssistantChatRequest,
     options?: RequestOptions,
-  ): Promise<AssistantTurnResponse> {
-    return this.client.request<AssistantTurnResponse>({
+  ): Promise<StartAssistantChatResponse> {
+    return this.client.request<StartAssistantChatResponse>({
       method: "POST",
-      path: "/v1/assistant/chats",
+      path: "/v1/assistants",
       body: request,
+      signal: options?.signal,
+    });
+  }
+
+  async startAssistantChatAndWait(
+    request: StartAssistantChatRequest,
+    options?: PollOptions,
+  ): Promise<AssistantMessage> {
+    const started = await this.startAssistantChat(request, { signal: options?.signal });
+    return pollAssistantMessage({
+      client: this.client,
+      messageId: started.messageId,
+      ...options,
+    });
+  }
+
+  // @sdk-operation getAssistant
+  async getAssistant(
+    request: AssistantIdRequest,
+    options?: RequestOptions,
+  ): Promise<GetAssistantResponse> {
+    return this.client.request<GetAssistantResponse>({
+      method: "GET",
+      path: fillPath("/v1/assistants/{assistantId}", {
+        assistantId: request.assistantId,
+      }),
       signal: options?.signal,
     });
   }
@@ -37,14 +77,26 @@ export class AssistantResource {
   async sendAssistantMessage(
     request: SendAssistantMessageMergedRequest,
     options?: RequestOptions,
-  ): Promise<AssistantTurnResponse> {
-    return this.client.request<AssistantTurnResponse>({
+  ): Promise<SendAssistantMessageResponse> {
+    return this.client.request<SendAssistantMessageResponse>({
       method: "POST",
-      path: fillPath("/v1/assistant/chats/{projectId}/messages", {
-        projectId: request.projectId,
+      path: fillPath("/v1/assistants/{assistantId}/messages", {
+        assistantId: request.assistantId,
       }),
-      body: omitFields(request, ["projectId"]),
+      body: omitFields(request, ["assistantId"]),
       signal: options?.signal,
+    });
+  }
+
+  async sendAssistantMessageAndWait(
+    request: SendAssistantMessageMergedRequest,
+    options?: PollOptions,
+  ): Promise<AssistantMessage> {
+    const started = await this.sendAssistantMessage(request, { signal: options?.signal });
+    return pollAssistantMessage({
+      client: this.client,
+      messageId: started.messageId,
+      ...options,
     });
   }
 
@@ -52,15 +104,41 @@ export class AssistantResource {
   async actOnAssistantAction(
     request: ActOnAssistantActionMergedRequest,
     options?: RequestOptions,
-  ): Promise<AssistantTurnResponse> {
-    const body = omitFields(request, ["projectId", "assistantActionId"]);
-    return this.client.request<AssistantTurnResponse>({
+  ): Promise<ActOnAssistantActionResponse> {
+    const body = omitFields(request, ["assistantId", "actionId"]);
+    return this.client.request<ActOnAssistantActionResponse>({
       method: "POST",
-      path: fillPath("/v1/assistant/chats/{projectId}/actions/{assistantActionId}", {
-        projectId: request.projectId,
-        assistantActionId: request.assistantActionId,
+      path: fillPath("/v1/assistants/{assistantId}/actions/{actionId}", {
+        assistantId: request.assistantId,
+        actionId: request.actionId,
       }),
       body: Object.keys(body).length > 0 ? body : undefined,
+      signal: options?.signal,
+    });
+  }
+
+  async actOnAssistantActionAndWait(
+    request: ActOnAssistantActionMergedRequest,
+    options?: PollOptions,
+  ): Promise<AssistantMessage> {
+    const started = await this.actOnAssistantAction(request, { signal: options?.signal });
+    return pollAssistantMessage({
+      client: this.client,
+      messageId: started.messageId,
+      ...options,
+    });
+  }
+
+  // @sdk-operation getAssistantMessage
+  async getAssistantMessage(
+    request: MessageIdRequest,
+    options?: RequestOptions,
+  ): Promise<AssistantMessage> {
+    return this.client.request<AssistantMessage>({
+      method: "GET",
+      path: fillPath("/v1/assistant-messages/{messageId}", {
+        messageId: request.messageId,
+      }),
       signal: options?.signal,
     });
   }

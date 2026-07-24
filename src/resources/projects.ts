@@ -38,6 +38,16 @@ type GetProjectExportRequest = {
   exportId: string;
 };
 
+type ListProjectExportsRequest = ProjectIdRequest & {
+  limit?: number;
+  cursor?: string;
+};
+
+type ListProjectRemixActionsRequest = ProjectIdRequest & {
+  limit?: number;
+  cursor?: string;
+};
+
 type CreateTimelineInterchangeMergedRequest = ProjectIdRequest &
   CreateTimelineInterchangeRequest;
 
@@ -111,7 +121,7 @@ export class ProjectsResource {
 
   // @sdk-operation listProjectExports
   async listProjectExports(
-    request: ProjectIdRequest,
+    request: ListProjectExportsRequest,
     options?: RequestOptions,
   ): Promise<ListProjectExportsResponse> {
     return this.client.request<ListProjectExportsResponse>({
@@ -119,6 +129,7 @@ export class ProjectsResource {
       path: fillPath("/v1/projects/{projectId}/exports", {
         projectId: request.projectId,
       }),
+      query: pickFields(request, ["limit", "cursor"]),
       signal: options?.signal,
     });
   }
@@ -212,7 +223,7 @@ export class ProjectsResource {
 
   // @sdk-operation listProjectRemixActions
   async listProjectRemixActions(
-    request: ProjectIdRequest,
+    request: ListProjectRemixActionsRequest,
     options?: RequestOptions,
   ): Promise<ListRemixActionsResponse> {
     return this.client.request<ListRemixActionsResponse>({
@@ -220,6 +231,7 @@ export class ProjectsResource {
       path: fillPath("/v1/projects/{projectId}/remix-actions", {
         projectId: request.projectId,
       }),
+      query: pickFields(request, ["limit", "cursor"]),
       signal: options?.signal,
     });
   }

@@ -2,6 +2,7 @@ import { VideoGenError } from "./errors.js";
 import { createPublicPreview } from "./helpers/createPublicPreview.js";
 import { downloadFile } from "./helpers/downloadFile.js";
 import { getHydratedFile } from "./helpers/getHydratedFile.js";
+import { pollAssistantMessage } from "./helpers/pollAssistantMessage.js";
 import { pollExecutedTool } from "./helpers/pollExecutedTool.js";
 import { pollProjectExport } from "./helpers/pollProjectExport.js";
 import { pollPublicPreview } from "./helpers/pollPublicPreview.js";
@@ -16,6 +17,7 @@ import {
 } from "./request.js";
 import { AccountResource } from "./resources/account.js";
 import { AssistantResource } from "./resources/assistant.js";
+import { EntitiesResource } from "./resources/entities.js";
 import { FilesResource } from "./resources/files.js";
 import { ProjectsResource } from "./resources/projects.js";
 import { ResourcesResource } from "./resources/resources.js";
@@ -49,6 +51,7 @@ export class VideoGen {
   readonly projects: ProjectsResource;
   readonly tools: ToolsResource;
   readonly files: FilesResource;
+  readonly entities: EntitiesResource;
   readonly assistant: AssistantResource;
   readonly text: TextResource;
   readonly resources: ResourcesResource;
@@ -58,6 +61,10 @@ export class VideoGen {
   readonly pollExecutedTool = (
     params: Omit<Parameters<typeof pollExecutedTool>[0], "client">,
   ) => pollExecutedTool({ client: this, ...params });
+
+  readonly pollAssistantMessage = (
+    params: Omit<Parameters<typeof pollAssistantMessage>[0], "client">,
+  ) => pollAssistantMessage({ client: this, ...params });
 
   readonly pollWorkflowRun = (
     params: Omit<Parameters<typeof pollWorkflowRun>[0], "client">,
@@ -114,6 +121,7 @@ export class VideoGen {
     this.projects = new ProjectsResource(this);
     this.tools = new ToolsResource(this);
     this.files = new FilesResource(this);
+    this.entities = new EntitiesResource(this);
     this.assistant = new AssistantResource(this);
     this.text = new TextResource(this);
     this.resources = new ResourcesResource(this);

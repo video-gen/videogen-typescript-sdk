@@ -34,7 +34,7 @@ export const pollRemixActions = async ({
     }
 
     const response = await client.projects.listProjectRemixActions(
-      { projectId },
+      { projectId, limit: 200 },
       { signal },
     );
 

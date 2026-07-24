@@ -1,6 +1,6 @@
 import type { VideoGen } from "../client.js";
 import { VideoGenError } from "../errors.js";
-import type { PollOptions, StorageFile } from "../types.js";
+import type { FileInfo, PollOptions } from "../types.js";
 import { sleep } from "./sleep.js";
 
 export type PollPublicPreviewOptions = PollOptions & {
@@ -12,7 +12,7 @@ export type PollPublicPreviewParams = {
   fileId: string;
 } & PollPublicPreviewOptions;
 
-const getIsStaticPreviewReady = (file: StorageFile): boolean => {
+const getIsStaticPreviewReady = (file: FileInfo): boolean => {
   const source = file.staticPublicPreviewSource;
   return source != null && source.status === "ready" && source.url != null;
 };
@@ -24,7 +24,7 @@ export const pollPublicPreview = async ({
   timeoutMs = 3_600_000,
   waitForEmbedPlaybackId = true,
   signal,
-}: PollPublicPreviewParams): Promise<StorageFile> => {
+}: PollPublicPreviewParams): Promise<FileInfo> => {
   const startedAt = Date.now();
 
   for (;;) {

@@ -2,7 +2,6 @@ import type { VideoGen } from "../client.js";
 import { pollWorkflowRun } from "../helpers/pollWorkflowRun.js";
 import { fillPath, pickFields } from "../request.js";
 import type {
-  ContentOutlineToVideoRequest,
   PollOptions,
   PromptToVideoClipRequest,
   RequestOptions,
@@ -120,33 +119,6 @@ export class WorkflowsResource {
     options?: PollOptions,
   ): Promise<WorkflowRun> {
     const started = await this.promptToVideoClip(request, { signal: options?.signal });
-    return pollWorkflowRun({
-      client: this.client,
-      workflowRunId: started.workflowRunId,
-      ...options,
-    });
-  }
-
-  // @sdk-operation contentOutlineToVideo
-  async contentOutlineToVideo(
-    request: ContentOutlineToVideoRequest,
-    options?: RequestOptions,
-  ): Promise<StartWorkflowRunResponse> {
-    return this.client.request<StartWorkflowRunResponse>({
-      method: "POST",
-      path: "/v1/workflows/content-outline-to-video",
-      body: request,
-      signal: options?.signal,
-    });
-  }
-
-  async contentOutlineToVideoAndWait(
-    request: ContentOutlineToVideoRequest,
-    options?: PollOptions,
-  ): Promise<WorkflowRun> {
-    const started = await this.contentOutlineToVideo(request, {
-      signal: options?.signal,
-    });
     return pollWorkflowRun({
       client: this.client,
       workflowRunId: started.workflowRunId,

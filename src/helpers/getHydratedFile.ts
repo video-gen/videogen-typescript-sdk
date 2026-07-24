@@ -1,5 +1,5 @@
 import type { VideoGen } from "../client.js";
-import type { RequestOptions, StorageFile } from "../types.js";
+import type { FileInfo, RequestOptions } from "../types.js";
 
 const SOURCE_KEYS = [
   "thumbnailSource",
@@ -13,7 +13,7 @@ export type GetHydratedFileParams = {
   fileId: string;
 } & RequestOptions;
 
-const getNeedsHydration = (file: StorageFile): boolean => {
+const getNeedsHydration = (file: FileInfo): boolean => {
   const nowSeconds = Math.floor(Date.now() / 1000);
   for (const key of SOURCE_KEYS) {
     const source = file[key];
@@ -45,7 +45,7 @@ export const getHydratedFile = async ({
   client,
   fileId,
   signal,
-}: GetHydratedFileParams): Promise<StorageFile> => {
+}: GetHydratedFileParams): Promise<FileInfo> => {
   const file = await client.files.getFile({ fileId }, { signal });
   if (!getNeedsHydration(file)) {
     return file;

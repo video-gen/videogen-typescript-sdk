@@ -47,7 +47,7 @@ Default base URL: `https://api.videogen.io`.
 
 Named exports and matching methods on the client:
 
-- `pollExecutedTool` / `pollWorkflowRun` / `pollProjectExport` / `pollTimelineInterchange` / `pollRemixActions` / `pollPublicPreview`
+- `pollAssistantMessage` / `pollExecutedTool` / `pollWorkflowRun` / `pollProjectExport` / `pollTimelineInterchange` / `pollRemixActions` / `pollPublicPreview`
 - `uploadFile` / `getHydratedFile` / `downloadFile`
 - `verifyWebhookSignature` (Standard Webhooks)
 - `createPublicPreview`

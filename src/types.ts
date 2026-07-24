@@ -48,14 +48,37 @@ export type ExecutedTool = Schemas["ExecutedTool"];
 export type GetFilesResponse = Schemas["GetFilesResponse"];
 export type SearchFilesRequest = Schemas["SearchFilesRequest"];
 export type SearchFilesResponse = Schemas["SearchFilesResponse"];
-export type StorageFile = Schemas["StorageFile"];
+export type FileInfo = Schemas["FileInfo"];
 export type CreateFileUploadRequest = Schemas["CreateFileUploadRequest"];
 export type FileUploadResponse = Schemas["FileUploadResponse"];
 
+export type Entity = Schemas["Entity"];
+export type ListEntitiesResponse = Schemas["ListEntitiesResponse"];
+export type CreateEntityRequest = Schemas["CreateEntityRequest"];
+export type UpdateEntityRequest = Schemas["UpdateEntityRequest"];
+export type EntityArchiveResponse = Schemas["EntityArchiveResponse"];
+export type AddEntityReferenceRequest = Schemas["AddEntityReferenceRequest"];
+export type RemoveEntityReferenceRequest = Schemas["RemoveEntityReferenceRequest"];
+
 export type StartAssistantChatRequest = Schemas["StartAssistantChatRequest"];
+export type StartAssistantChatResponse = Schemas["StartAssistantChatResponse"];
 export type SendAssistantMessageRequest = Schemas["SendAssistantMessageRequest"];
+export type SendAssistantMessageResponse = Schemas["SendAssistantMessageResponse"];
 export type ActOnAssistantActionRequest = Schemas["ActOnAssistantActionRequest"];
-export type AssistantTurnResponse = Schemas["AssistantTurnResponse"];
+export type ActOnAssistantActionResponse = Schemas["ActOnAssistantActionResponse"];
+export type GetAssistantResponse = Schemas["GetAssistantResponse"];
+export type AssistantMessage = Schemas["AssistantMessage"];
+export type AssistantInputMessage = Schemas["AssistantInputMessage"];
+export type AssistantOutputMessage = Schemas["AssistantOutputMessage"];
+export type AssistantMessageStatus = Schemas["AssistantMessageStatus"];
+export type AssistantAction = Schemas["AssistantAction"];
+export type AssistantActionKind = Schemas["AssistantActionKind"];
+export type AssistantActionDetail = Schemas["AssistantActionDetail"];
+export type AssistantWorkflowSuggestion = Schemas["AssistantWorkflowSuggestion"];
+export type AssistantMessageAttachment = Schemas["AssistantMessageAttachment"];
+export type AssistantMessageWebhookPayload = Schemas["AssistantMessageWebhookPayload"];
+export type AssistantMessageWebhookEventName =
+  Schemas["AssistantMessageWebhookEventName"];
 
 export type GenerateTextRequest = Schemas["GenerateTextRequest"];
 export type GenerateTextResponse = Schemas["GenerateTextResponse"];
