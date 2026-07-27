@@ -1,5 +1,4 @@
-
-$ tsup --no-dts
+$ tsup --no-dts
 CLI Building entry: src/index.ts
 CLI Using tsconfig: tsconfig.json
 CLI tsup v8.5.1
@@ -7,6 +6,6 @@ CLI Using tsup config: /Users/davidgrossman/GitHub/videogen-main-motion-graphic-
 CLI Target: node20
 CLI Cleaning output folder
 ESM Build start
-ESM dist/index.js     45.26 KB
-ESM dist/index.js.map 101.97 KB
-ESM ⚡️ Build success in 14ms
+ESM dist/index.js     47.39 KB
+ESM dist/index.js.map 107.19 KB
+ESM ⚡️ Build success in 17ms

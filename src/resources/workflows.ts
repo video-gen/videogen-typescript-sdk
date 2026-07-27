@@ -8,6 +8,7 @@ import type {
   ScriptToVideoRequest,
   SlideshowToVideoRequest,
   StartWorkflowRunResponse,
+  StoryboardToVideoRequest,
   VoiceoverToVideoRequest,
   WorkflowRun,
   WorkflowRunListResponse,
@@ -94,6 +95,31 @@ export class WorkflowsResource {
     options?: PollOptions,
   ): Promise<WorkflowRun> {
     const started = await this.slideshowToVideo(request, { signal: options?.signal });
+    return pollWorkflowRun({
+      client: this.client,
+      workflowRunId: started.workflowRunId,
+      ...options,
+    });
+  }
+
+  // @sdk-operation storyboardToVideo
+  async storyboardToVideo(
+    request: StoryboardToVideoRequest,
+    options?: RequestOptions,
+  ): Promise<StartWorkflowRunResponse> {
+    return this.client.request<StartWorkflowRunResponse>({
+      method: "POST",
+      path: "/v1/workflows/storyboard-to-video",
+      body: request,
+      signal: options?.signal,
+    });
+  }
+
+  async storyboardToVideoAndWait(
+    request: StoryboardToVideoRequest,
+    options?: PollOptions,
+  ): Promise<WorkflowRun> {
+    const started = await this.storyboardToVideo(request, { signal: options?.signal });
     return pollWorkflowRun({
       client: this.client,
       workflowRunId: started.workflowRunId,
