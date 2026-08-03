@@ -112,7 +112,9 @@ export class AssistantResource {
         assistantId: request.assistantId,
         actionId: request.actionId,
       }),
-      body: Object.keys(body).length > 0 ? body : undefined,
+      // Always send a JSON object: the API rejects a missing body with
+      // "Request body must be a JSON object." (Python SDK already sends `{}`.)
+      body: Object.keys(body).length > 0 ? body : {},
       signal: options?.signal,
     });
   }

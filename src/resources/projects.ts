@@ -101,7 +101,9 @@ export class ProjectsResource {
       path: fillPath("/v1/projects/{projectId}/export", {
         projectId: request.projectId,
       }),
-      body: Object.keys(body).length > 0 ? body : undefined,
+      // Always send a JSON object: the API rejects a missing body with
+      // "Request body must be a JSON object." (Python SDK already sends `{}`.)
+      body: Object.keys(body).length > 0 ? body : {},
       signal: options?.signal,
     });
   }
@@ -160,7 +162,9 @@ export class ProjectsResource {
       path: fillPath("/v1/projects/{projectId}/timeline-interchange", {
         projectId: request.projectId,
       }),
-      body: Object.keys(body).length > 0 ? body : undefined,
+      // Always send a JSON object: the API rejects a missing body with
+      // "Request body must be a JSON object." (Python SDK already sends `{}`.)
+      body: Object.keys(body).length > 0 ? body : {},
       signal: options?.signal,
     });
   }

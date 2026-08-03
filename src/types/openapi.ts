@@ -351,7 +351,7 @@ export interface paths {
     };
     /**
      * Get project export
-     * @description Returns the current status of a project export started via `POST /v1/projects/{projectId}/export`, and — once `status` is `succeeded` — the signed download/thumbnail URLs and the hydrated export `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URLs are private and valid for 24 hours; this endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Every endpoint that returns hydrated files auto-rehydrates this way — only the file endpoints (`GET /v1/files/{fileId}` and `POST /v1/files/{fileId}/hydrate`) are the explicit, on-demand hydration paths. Use `exportFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the export file directly later.
+     * @description Returns the current status of a project export started via `POST /v1/projects/{projectId}/export`, and — once `status` is `succeeded` — the signed download/thumbnail URLs and the hydrated export `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URLs are private and valid for 7 days; this endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Every endpoint that returns hydrated files auto-rehydrates this way — only the file endpoints (`GET /v1/files/{fileId}` and `POST /v1/files/{fileId}/hydrate`) are the explicit, on-demand hydration paths. Use `exportFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the export file directly later.
      */
     get: operations["getProjectExport"];
     put?: never;
@@ -391,7 +391,7 @@ export interface paths {
     };
     /**
      * Get timeline interchange job
-     * @description Returns the current status of a timeline interchange job started via `POST /v1/projects/{projectId}/timeline-interchange`, and, once `status` is `succeeded`, the signed download URL and the hydrated interchange `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URL is private and valid for 24 hours; this endpoint automatically re-signs it when it is within an hour of expiring. Use `interchangeFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the file directly later.
+     * @description Returns the current status of a timeline interchange job started via `POST /v1/projects/{projectId}/timeline-interchange`, and, once `status` is `succeeded`, the signed download URL and the hydrated interchange `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URL is private and valid for 7 days; this endpoint automatically re-signs it when it is within an hour of expiring. Use `interchangeFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the file directly later.
      */
     get: operations["getTimelineInterchange"];
     put?: never;
@@ -731,7 +731,7 @@ export interface paths {
     };
     /**
      * List tool executions
-     * @description List tool executions started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all executions for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide. Executions remain listable indefinitely (including those older than 24 hours). For efficiency this list does not re-sign result download URLs, so `downloadUrl`/`thumbnailUrl` reflect the last time they were signed and may be expired (always check `downloadUrlExpiresAt`). To obtain a fresh signed URL, GET the individual execution (`GET /v1/tools/executions/{toolExecutionId}`) or hydrate the file (`GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`).
+     * @description List tool executions started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all executions for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide. Executions remain listable indefinitely (including those older than 7 days). For efficiency this list does not re-sign result download URLs, so `downloadUrl`/`thumbnailUrl` reflect the last time they were signed and may be expired (always check `downloadUrlExpiresAt`). To obtain a fresh signed URL, GET the individual execution (`GET /v1/tools/executions/{toolExecutionId}`) or hydrate the file (`GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`).
      */
     get: operations["listToolExecutions"];
     put?: never;
@@ -751,7 +751,7 @@ export interface paths {
     };
     /**
      * Get tool execution info
-     * @description Retrieve the current status and result of a tool execution. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. Each succeeded result carries signed `downloadUrl`/`thumbnailUrl` (with matching `*ExpiresAt` timestamps) alongside the full hydrated `file`. The signed URLs are private and valid for 24 hours; this single-execution endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Results remain retrievable indefinitely, including executions older than 24 hours. Note that list endpoints (e.g. `GET /v1/tools/executions`) do not re-sign URLs: they return the last-signed URL, which may already be expired (check `downloadUrlExpiresAt`). To refresh a URL, GET the individual execution here, or hydrate the file directly via `GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`.
+     * @description Retrieve the current status and result of a tool execution. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. Each succeeded result carries signed `downloadUrl`/`thumbnailUrl` (with matching `*ExpiresAt` timestamps) alongside the full hydrated `file`. The signed URLs are private and valid for 7 days; this single-execution endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Results remain retrievable indefinitely, including executions older than 7 days. Note that list endpoints (e.g. `GET /v1/tools/executions`) do not re-sign URLs: they return the last-signed URL, which may already be expired (check `downloadUrlExpiresAt`). To refresh a URL, GET the individual execution here, or hydrate the file directly via `GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`.
      */
     get: operations["getToolExecutionInfo"];
     put?: never;
@@ -1635,14 +1635,14 @@ export interface components {
       transcriptText?: string | null;
       /**
        * Format: uri
-       * @description Private signed URL for the highest-quality downloadable rendition, provided at the top level for convenience. Valid for 24 hours from when it was signed. `null` when the rendition is still processing or the URL has not been signed yet. See `downloadUrlExpiresAt` for the exact expiry and `downloadSource` for the full rendition metadata; call `POST /v1/files/{fileId}/hydrate` to refresh it.
+       * @description Private signed URL for the highest-quality downloadable rendition, provided at the top level for convenience. Valid for 7 days from when it was signed. `null` when the rendition is still processing or the URL has not been signed yet. See `downloadUrlExpiresAt` for the exact expiry and `downloadSource` for the full rendition metadata; call `POST /v1/files/{fileId}/hydrate` to refresh it.
        */
       downloadUrl?: string | null;
       /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` when `downloadUrl` is null. */
       downloadUrlExpiresAt?: number | null;
       /**
        * Format: uri
-       * @description Private signed URL for the thumbnail rendition, provided at the top level for convenience. Valid for 24 hours from when it was signed. `null` for file types that have no thumbnail (e.g. audio) or when it has not been signed yet. See `thumbnailSource` for the full rendition metadata.
+       * @description Private signed URL for the thumbnail rendition, provided at the top level for convenience. Valid for 7 days from when it was signed. `null` for file types that have no thumbnail (e.g. audio) or when it has not been signed yet. See `thumbnailSource` for the full rendition metadata.
        */
       thumbnailUrl?: string | null;
       /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. `null` when `thumbnailUrl` is null. */
@@ -2358,14 +2358,14 @@ export interface components {
       type: components["schemas"]["FileType"];
       /**
        * Format: uri
-       * @description Private signed download URL for the generated file, valid for 24 hours from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. When you GET a single execution it is automatically re-signed if within an hour of expiring; list endpoints do not re-sign, so there it may be expired (check `downloadUrlExpiresAt`). See `downloadUrlExpiresAt` for the exact expiry. Null only in the rare case that the highest-quality rendition is still finalizing.
+       * @description Private signed download URL for the generated file, valid for 7 days from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. When you GET a single execution it is automatically re-signed if within an hour of expiring; list endpoints do not re-sign, so there it may be expired (check `downloadUrlExpiresAt`). See `downloadUrlExpiresAt` for the exact expiry. Null only in the rare case that the highest-quality rendition is still finalizing.
        */
       downloadUrl: string | null;
       /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. Null only when `downloadUrl` is null. */
       downloadUrlExpiresAt: number | null;
       /**
        * Format: uri
-       * @description Private signed thumbnail URL for the generated file, valid for 24 hours from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. Re-signed on the same terms as `downloadUrl` (single-execution GET re-signs when near expiry; list endpoints do not). Null for file types that have no thumbnail (e.g. audio).
+       * @description Private signed thumbnail URL for the generated file, valid for 7 days from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. Re-signed on the same terms as `downloadUrl` (single-execution GET re-signs when near expiry; list endpoints do not). Null for file types that have no thumbnail (e.g. audio).
        */
       thumbnailUrl: string | null;
       /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. Null when there is no thumbnail URL. */
@@ -3159,14 +3159,14 @@ export interface components {
       attemptIndex: number;
       /**
        * Format: uri
-       * @description Private signed MP4 download URL, valid for 24 hours from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring, so a fresh call to get the export always returns a URL valid long enough to use. See `downloadUrlExpiresAt` for the exact expiry. To fetch a fresh URL directly from the underlying file at any time, use `exportFileId` with the hydrate-file endpoint.
+       * @description Private signed MP4 download URL, valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring, so a fresh call to get the export always returns a URL valid long enough to use. See `downloadUrlExpiresAt` for the exact expiry. To fetch a fresh URL directly from the underlying file at any time, use `exportFileId` with the hydrate-file endpoint.
        */
       downloadUrl: string | null;
       /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` while `downloadUrl` is null. */
       downloadUrlExpiresAt: number | null;
       /**
        * Format: uri
-       * @description Private signed thumbnail URL, valid for 24 hours from when it was signed. Always present as a field; `null` until `status` is `succeeded` (and when no thumbnail is available). Re-signed automatically on the same terms as `downloadUrl`.
+       * @description Private signed thumbnail URL, valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded` (and when no thumbnail is available). Re-signed automatically on the same terms as `downloadUrl`.
        */
       thumbnailUrl: string | null;
       /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. `null` while `thumbnailUrl` is null. */
@@ -3218,7 +3218,7 @@ export interface components {
       attemptIndex: number;
       /**
        * Format: uri
-       * @description Private signed download URL for the interchange document (or the media bundle zip when `mediaDelivery` is `BUNDLE`), valid for 24 hours from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring. To fetch a fresh URL directly from the underlying file at any time, use `interchangeFileId` with the hydrate-file endpoint.
+       * @description Private signed download URL for the interchange document (or the media bundle zip when `mediaDelivery` is `BUNDLE`), valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring. To fetch a fresh URL directly from the underlying file at any time, use `interchangeFileId` with the hydrate-file endpoint.
        */
       downloadUrl: string | null;
       /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` while `downloadUrl` is null. */

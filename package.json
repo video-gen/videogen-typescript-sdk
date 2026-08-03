@@ -1,6 +1,6 @@
 {
   "name": "@videogen/sdk",
-  "version": "2.0.9",
+  "version": "2.0.12",
   "description": "Official TypeScript SDK for the VideoGen API.",
   "license": "MIT",
   "type": "module",
@@ -24,13 +24,13 @@
     "build": "tsup",
     "build:js": "tsup --no-dts",
     "typecheck": "tsc --noEmit",
-    "generate:types": "openapi-typescript ../api/fern/openapi.yml -o src/types/openapi.ts --default-non-nullable false",
+    "generate:types": "pnpm -C ../api exec openapi-typescript ./fern/openapi.yml -o ../sdk-typescript/src/types/openapi.ts --default-non-nullable false",
     "clean": "rm -rf dist *.tsbuildinfo"
   },
   "devDependencies": {
     "@types/node": "^20.19.4",
-    "openapi-typescript": "^7.9.1",
+    "@typescript/native": "npm:typescript@^7.0.2",
     "tsup": "^8.5.0",
-    "typescript": "^5.9.3"
+    "typescript": "npm:@typescript/typescript6@^6.0.2"
   }
 }
