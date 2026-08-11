@@ -84,7 +84,6 @@ export type AssistantMessageWebhookEventName =
 export type GenerateTextRequest = Schemas["GenerateTextRequest"];
 export type GenerateTextResponse = Schemas["GenerateTextResponse"];
 
-export type AvatarPresenterListResponse = Schemas["AvatarPresenterListResponse"];
 export type TtsVoiceListResponse = Schemas["TtsVoiceListResponse"];
 export type LanguageListResponse = Schemas["LanguageListResponse"];
 

@@ -4,5878 +4,5815 @@
  */
 
 export interface paths {
-  "/v1/workflows/script-to-video": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Script to video
-     * @description Creates a project and generates a narrated video from a prompt or script. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
-     */
-    post: operations["scriptToVideo"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/add-visuals-narrations-and-captions-to-script": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Script to video (legacy alias)
-     * @deprecated
-     * @description Legacy alias for `POST /v1/workflows/script-to-video`. Use that endpoint instead.
-     */
-    post: operations["addVisualsNarrationsAndCaptionsToScript"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/voiceover-to-video": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Voiceover to video
-     * @description Creates a project from an uploaded voiceover file and generates a video with matching b-roll. Upload the voiceover via the files API first.
-     */
-    post: operations["voiceoverToVideo"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/add-visuals-and-captions-to-voiceover": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Voiceover to video (legacy alias)
-     * @deprecated
-     * @description Legacy alias for `POST /v1/workflows/voiceover-to-video`. Use that endpoint instead.
-     */
-    post: operations["addVisualsAndCaptionsToVoiceover"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/slideshow-to-video": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Slideshow to video
-     * @description Creates a project from an uploaded PDF or PowerPoint file and generates an AI-narrated video walking through each slide. Upload the file via `POST /v1/files/upload` first.
-     */
-    post: operations["slideshowToVideo"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/add-narration-transitions-and-captions-to-slideshow": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Slideshow to video (legacy alias)
-     * @deprecated
-     * @description Legacy alias for `POST /v1/workflows/slideshow-to-video`. Use that endpoint instead.
-     */
-    post: operations["addNarrationTransitionsAndCaptionsToSlideshow"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/storyboard-to-video": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Storyboard to video
-     * @description Creates a project from an ordered list of scenes and generates one section per scene. Each scene is generated from its prompt as either a still image or a video clip; the scenes are then assembled into a single video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
-     */
-    post: operations["storyboardToVideo"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/generate-scenes-from-storyboard": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Storyboard to video (legacy alias)
-     * @deprecated
-     * @description Legacy alias for `POST /v1/workflows/storyboard-to-video`. Use that endpoint instead.
-     */
-    post: operations["generateScenesFromStoryboard"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/prompt-to-video-clip": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Prompt to video clip
-     * @description Creates a project from a text prompt and generates one short AI video clip (up to 15 seconds). VideoGen first generates an opening frame from the prompt (optionally guided by reference images), then animates that frame into a video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion. For a standalone clip without an editable project, use `POST /v1/tools/generate-video-clip` instead. For longer narrated multi-scene videos, use `POST /v1/workflows/script-to-video`.
-     */
-    post: operations["promptToVideoClip"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/content-outline-to-video": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Content outline to video
-     * @description Creates a project from a content outline (a Markdown brief) and generates a full video from it. This experimental, fully-agentic workflow reads the outline, plans the video, and builds it section by section — generating any narration, visuals, and media it needs. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
-     */
-    post: operations["contentOutlineToVideo"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/runs": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List workflow runs
-     * @description List workflow runs started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all runs for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listWorkflowRuns"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/runs/{workflowRunId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /** Get workflow run status */
-    get: operations["getWorkflowRun"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/workflows/runs/{workflowRunId}/cancel": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /** Cancel a workflow run */
-    post: operations["cancelWorkflowRun"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List projects
-     * @description Returns projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` to also include dashboard-created projects. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all matching projects for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listProjects"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects/{projectId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get project metadata
-     * @description Returns a simplified view of a project including its title, aspect ratio, status, and URL.
-     */
-    get: operations["getProject"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects/{projectId}/export": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Export a project as MP4
-     * @description Starts an export of a project to MP4. Returns immediately with an export id; the file becomes available when the export task completes. Exporting requires a paid plan in the app, but the API lets you export for free with a VideoGen watermark and a short 'Made with VideoGen' end screen appended to the video. To export without them, purchase the Production API add-on and set `watermarkMode` and `endScreenMode` to `NONE`.
-     */
-    post: operations["exportProject"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects/{projectId}/exports": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List project exports
-     * @description Returns a project's exports, newest first, as fully hydrated `ProjectExport` objects (status, signed download/thumbnail URLs, and the embedded `file`). Signed URLs are re-signed when within an hour of expiring, so they are always valid long enough to use. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listProjectExports"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects/{projectId}/exports/{exportId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get project export
-     * @description Returns the current status of a project export started via `POST /v1/projects/{projectId}/export`, and — once `status` is `succeeded` — the signed download/thumbnail URLs and the hydrated export `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URLs are private and valid for 7 days; this endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Every endpoint that returns hydrated files auto-rehydrates this way — only the file endpoints (`GET /v1/files/{fileId}` and `POST /v1/files/{fileId}/hydrate`) are the explicit, on-demand hydration paths. Use `exportFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the export file directly later.
-     */
-    get: operations["getProjectExport"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects/{projectId}/timeline-interchange": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Create a timeline interchange
-     * @description Starts a timeline interchange job that converts a project into an editor interchange document (Final Cut Pro FCPXML, Adobe Premiere Pro XML, OpenTimelineIO, or an SRT caption sidecar). Returns immediately with an interchange job id; the file becomes available when the job completes. Unlike `POST /v1/projects/{projectId}/export` (which renders a flattened MP4), this preserves the project as an editable timeline of separate clips, tracks, and captions so you can keep editing it in a desktop video editor. Choose `mediaDelivery` to control how the document references media: `REMOTE_URLS` produces a single document that links to signed media URLs, while `BUNDLE` produces a zip containing the document plus every referenced media file for durable offline relinking.
-     */
-    post: operations["createTimelineInterchange"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/timeline-interchange/{interchangeJobId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get timeline interchange job
-     * @description Returns the current status of a timeline interchange job started via `POST /v1/projects/{projectId}/timeline-interchange`, and, once `status` is `succeeded`, the signed download URL and the hydrated interchange `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URL is private and valid for 7 days; this endpoint automatically re-signs it when it is within an hour of expiring. Use `interchangeFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the file directly later.
-     */
-    get: operations["getTimelineInterchange"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects/{projectId}/remix": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Apply remix actions to a project
-     * @description Applies an ordered list of edits (background music, logo overlay, caption visibility/style) to a project. Each action runs asynchronously as its own remix action; the response returns one remix action id per action in order. Set `saveAsNewProject` to apply the edits to a copy and leave the original untouched. Poll `GET /v1/projects/{projectId}/remix-actions` for status.
-     */
-    post: operations["remixProject"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/projects/{projectId}/remix-actions": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List remix actions for a project
-     * @description Returns remix actions applied to a project (via `POST /v1/projects/{projectId}/remix` or as a post-workflow step), most recent first, with each action's status and progress. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listProjectRemixActions"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/generate-image": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Generate image
-     * @description Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation. VideoGen automatically routes each request to the most effective state-of-the-art image model for your prompt, reference images, and quality tier, so you don't pick a model.
-     */
-    post: operations["generateImage"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/generate-video-clip": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Generate video clip
-     * @description Generate a single short video clip (up to 15 seconds) from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. VideoGen automatically routes each request to the most effective state-of-the-art video model for your inputs and settings, so you don't pick a model. This endpoint returns one standalone clip. For longer, higher-quality, professionally edited videos with narration, captions, music, and multiple scenes, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
-     */
-    post: operations["generateVideoClip"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/generate-motion-graphic": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Generate motion graphic
-     * @description Generate an animated motion graphic video from a text prompt. This is an experimental, fully agentic alternative to a video workflow: VideoGen plans the animation, optionally generates or fetches supporting media, and renders a self-contained animated clip. It is especially well suited to precise text animations (e.g. a typing effect, animated captions, kinetic typography, lower thirds) that are hard to express with stock or generated footage. Optionally pass uploaded `fileIds` for reference media the animation may display. This endpoint returns one standalone video. For longer, narrated, multi-scene videos, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
-     */
-    post: operations["generateMotionGraphic"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/text-to-speech": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Text to speech
-     * @description Convert text into a spoken audio file. Only voices with `supportsDirectToolExecution` set to true can be used. Optionally choose a voice, language, speed, and pronunciation overrides.
-     */
-    post: operations["textToSpeech"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/generate-sound-effect": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Generate sound effect
-     * @description Generate a sound effect from a text description. Optionally control the duration and prompt influence. VideoGen automatically routes each request to the most effective state-of-the-art sound effect model for your prompt and settings, so you don't pick a model.
-     */
-    post: operations["generateSoundEffect"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/generate-music": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Generate music
-     * @description Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long. VideoGen automatically routes each request to the most effective state-of-the-art music model for your prompt, so you don't pick a model.
-     */
-    post: operations["generateMusic"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/generate-avatar": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Generate avatar clip
-     * @description Generate a talking-head avatar video by pairing a presenter with an audio file, typically from a prior text-to-speech result.
-     */
-    post: operations["generateAvatar"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/vectorize-image": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Vectorize image
-     * @description Convert any raster image into a scalable vector graphic (SVG). The output traces the shapes and colors of the input image.
-     */
-    post: operations["vectorizeImage"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/remove-image-background": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Remove background from an image
-     * @description Remove the background from an image, returning a transparent-background PNG of the foreground subject.
-     */
-    post: operations["removeImageBackground"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/remove-video-background": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Remove background from a video
-     * @description Remove the background from a video, producing a transparent-background video of the foreground subject.
-     */
-    post: operations["removeVideoBackground"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/upscale-image": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Upscale an image
-     * @description Increase the resolution of an image while preserving detail and sharpness.
-     */
-    post: operations["upscaleImage"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/upscale-video": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Upscale a video
-     * @description Increase the resolution of a video while preserving detail and sharpness.
-     */
-    post: operations["upscaleVideo"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/image-3d-effect": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Add 3D motion to an image
-     * @description Turn a still image into a short video clip with a 3D parallax motion effect, simulating camera movement through the scene.
-     */
-    post: operations["image3dEffect"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/executions/{toolExecutionId}/cancel": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Cancel tool execution
-     * @description Request cancellation of a running tool execution. The execution transitions to `cancelled` if it has not already completed.
-     */
-    post: operations["cancelToolExecution"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/executions": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List tool executions
-     * @description List tool executions started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all executions for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide. Executions remain listable indefinitely (including those older than 7 days). For efficiency this list does not re-sign result download URLs, so `downloadUrl`/`thumbnailUrl` reflect the last time they were signed and may be expired (always check `downloadUrlExpiresAt`). To obtain a fresh signed URL, GET the individual execution (`GET /v1/tools/executions/{toolExecutionId}`) or hydrate the file (`GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`).
-     */
-    get: operations["listToolExecutions"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/tools/executions/{toolExecutionId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get tool execution info
-     * @description Retrieve the current status and result of a tool execution. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. Each succeeded result carries signed `downloadUrl`/`thumbnailUrl` (with matching `*ExpiresAt` timestamps) alongside the full hydrated `file`. The signed URLs are private and valid for 7 days; this single-execution endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Results remain retrievable indefinitely, including executions older than 7 days. Note that list endpoints (e.g. `GET /v1/tools/executions`) do not re-sign URLs: they return the last-signed URL, which may already be expired (check `downloadUrlExpiresAt`). To refresh a URL, GET the individual execution here, or hydrate the file directly via `GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`.
-     */
-    get: operations["getToolExecutionInfo"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List files
-     * @description List files in your account. By default this returns your standalone files (direct tool-call outputs and uploads) and omits two categories: export files (the raw output files of your exports) and project files (the generative files created within a project, e.g. each AI image and text-to-speech file in a script-to-video workflow output). Set `includeExportFiles` and/or `includeProjectFiles` to true to include them — both require the Production API add-on. Files are returned most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["getFiles"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files/search": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Search files
-     * @description Semantic vector search over your files. Embeds the query text and returns the closest matching files ranked by cosine similarity. Only files with indexed descriptions are searchable.
-     */
-    post: operations["searchFiles"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files/{fileId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get file
-     * @description Retrieve metadata for a single file by its id.
-     */
-    get: operations["getFile"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files/upload": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Create file upload
-     * @description Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{fileId}` until the file is ready.
-     */
-    post: operations["createFileUpload"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files/{fileId}/hydrate": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Hydrate file
-     * @description Generate fresh signed URLs for all available renditions of a file. Call this when source URLs are missing or expired. Returns the full file object with populated `downloadSource`, `thumbnailSource`, and `previewSource` (and the convenience root-level `downloadUrl` / `thumbnailUrl`).
-     */
-    post: operations["hydrateFile"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files/{fileId}/archive": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Archive file
-     * @description Archive a file by setting its archived timestamp. Archived files are excluded from list results. Returns the updated file object.
-     */
-    post: operations["archiveFile"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files/{fileId}/enable-public-preview": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Enable public preview
-     * @description Enable public preview for a file. Works for any file type. Copies the file to a permanent public URL (`staticPublicPreviewSource`) and, for video and audio, registers a public embed playback id (`publicPlaybackId`) for use with `@videogen/player`. If streaming playback is still processing, the endpoint polls briefly and background processing finishes creating the embed playback id. Returns the updated file.
-     */
-    post: operations["enablePublicPreview"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/files/{fileId}/disable-public-preview": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Disable public preview
-     * @description Disable public preview for a file. Removes the permanent public URL copy and revokes unauthenticated embed streaming access. Authenticated signed URLs remain functional. Returns the updated file.
-     */
-    post: operations["disablePublicPreview"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/entities": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List entities
-     * @description List the actors and visual styles available to your team, most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listEntities"];
-    put?: never;
-    /**
-     * Create entity
-     * @description Create a new actor or visual style. Attach reference images with `POST /v1/entities/{entityId}/references`.
-     */
-    post: operations["createEntity"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/entities/{entityId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get entity
-     * @description Retrieve a single entity by its id, including its reference images.
-     */
-    get: operations["getEntity"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/entities/{entityId}/update": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Update entity
-     * @description Update an entity's name or description. Provide at least one field.
-     */
-    post: operations["updateEntity"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/entities/{entityId}/archive": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Archive entity
-     * @description Archive an entity. Archived entities no longer appear in `GET /v1/entities` and can't be attached to new workflows.
-     */
-    post: operations["archiveEntity"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/entities/{entityId}/references": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Add entity reference
-     * @description Attach an image file as a reference for the entity. Upload the image first via `POST /v1/files/upload`. Returns the updated entity.
-     */
-    post: operations["addEntityReference"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/entities/{entityId}/references/remove": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Remove entity reference
-     * @description Detach a reference image from the entity. Returns the updated entity.
-     */
-    post: operations["removeEntityReference"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/assistants": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Start an assistant chat
-     * @description Creates a new project and sends the first message to the VideoGen AI assistant, exactly like typing into the assistant on a new project in the app. Asynchronous: the response contains the `messageId` of the assistant's pending reply (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}` until `status` is `succeeded`, `failed`, or `cancelled`, or subscribe to `assistant_message.*` webhooks. Fetch the parent assistant with `GET /v1/assistants/{assistantId}` to list all messages in the chat.
-     */
-    post: operations["startAssistantChat"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/assistants/{assistantId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get an assistant chat
-     * @description Returns the assistant chat identified by `assistantId`, including every message in it (user and assistant turns) in chronological order.
-     */
-    get: operations["getAssistant"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/assistants/{assistantId}/messages": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Send an assistant message
-     * @description Sends a follow-up message to an existing assistant chat started with `POST /v1/assistants`. Asynchronous: the response contains the `messageId` of the assistant's pending reply. Poll `GET /v1/assistant-messages/{messageId}` until `status` is terminal, or subscribe to `assistant_message.*` webhooks.
-     */
-    post: operations["sendAssistantMessage"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/assistants/{assistantId}/actions/{actionId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Act on an assistant action
-     * @description Acts on an actionable widget the assistant offered on a prior turn. Reference the action by its `actionId` from a prior assistant message. `APPROVE` (the default) completes the action; `REJECT` records the rejection. Two kinds are actionable via the API: accepting a workflow suggestion (`APPROVE` applies the suggested workflow and immediately starts generating; the returned assistant message carries the workflow run in `generation`), and applying an assistant edit (an `APPLY_EDIT` action with `requiresApp` false, which applies the edit to the project). Actions with `requiresApp` set to true (plans, tools, and other app-only widgets) can only be completed in the web app: open the assistant's `projectUrl` instead. Asynchronous: the response contains the `messageId` of the resulting assistant message. Poll `GET /v1/assistant-messages/{messageId}` for its terminal state.
-     */
-    post: operations["actOnAssistantAction"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/assistant-messages/{messageId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get an assistant message
-     * @description Returns a single assistant chat message by id. Poll after a POST that returned `messageId` until `status` is `succeeded`, `failed`, or `cancelled`. Also supported for `USER` messages (which reach terminal state as soon as they're accepted).
-     */
-    get: operations["getAssistantMessage"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/text/generate": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    /**
-     * Generate text
-     * @description Generate text from a prompt using a general-purpose language model. Choose a quality tier with `quality` (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Synchronous: the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
-     */
-    post: operations["generateText"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/resources/avatar-presenters": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List avatar presenters
-     * @description List available avatar presenters. Pass an `avatarPresenterId` from the response to the avatar video endpoint or to a script/slideshow workflow. Pass a reference `voiceId` to return presenters sorted by best match for that voice. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listAvatarPresenters"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/resources/tts-voices": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List TTS voices
-     * @description List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listTtsVoices"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/resources/languages": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List supported languages
-     * @description List the languages a project can be translated into. Pass a `languageCode` from the response to the `TRANSLATE_PROJECT` remix action. Returns the full catalogue in a single response (not paginated).
-     */
-    get: operations["listLanguages"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/webhooks/endpoints": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * List webhooks
-     * @description List configured webhook endpoints for your account. Cursor-paginated; see the [Pagination](/pagination) guide.
-     */
-    get: operations["listWebhookEndpoints"];
-    put?: never;
-    /**
-     * Create webhook
-     * @description Register a new webhook endpoint to receive `tool_execution.*`, `workflow_run.*`, and `file.*` events. The signing secret is only returned in this response. Store it securely.
-     */
-    post: operations["createWebhookEndpoint"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/webhooks/endpoints/{endpointId}": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    get?: never;
-    put?: never;
-    post?: never;
-    /**
-     * Delete webhook
-     * @description Remove a webhook endpoint. It will stop receiving events immediately.
-     */
-    delete: operations["deleteWebhookEndpoint"];
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "/v1/me": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    /**
-     * Get current account
-     * @description Return the account and team behind the API key making the request. Takes no parameters. Call it as a connection test to confirm a key is valid and to discover the `teamId` and account `email` a key belongs to.
-     */
-    get: operations["getMe"];
-    put?: never;
-    post?: never;
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
+    "/v1/workflows/script-to-video": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Script to video
+         * @description Creates a project and generates a narrated video from a prompt or script. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+         */
+        post: operations["scriptToVideo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/add-visuals-narrations-and-captions-to-script": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Script to video (legacy alias)
+         * @deprecated
+         * @description Legacy alias for `POST /v1/workflows/script-to-video`. Use that endpoint instead.
+         */
+        post: operations["addVisualsNarrationsAndCaptionsToScript"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/voiceover-to-video": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Voiceover to video
+         * @description Creates a project from an uploaded voiceover file and generates a video with matching b-roll. Upload the voiceover via the files API first.
+         */
+        post: operations["voiceoverToVideo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/add-visuals-and-captions-to-voiceover": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Voiceover to video (legacy alias)
+         * @deprecated
+         * @description Legacy alias for `POST /v1/workflows/voiceover-to-video`. Use that endpoint instead.
+         */
+        post: operations["addVisualsAndCaptionsToVoiceover"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/slideshow-to-video": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Slideshow to video
+         * @description Creates a project from an uploaded PDF or PowerPoint file and generates an AI-narrated video walking through each slide. Upload the file via `POST /v1/files/upload` first.
+         */
+        post: operations["slideshowToVideo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/add-narration-transitions-and-captions-to-slideshow": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Slideshow to video (legacy alias)
+         * @deprecated
+         * @description Legacy alias for `POST /v1/workflows/slideshow-to-video`. Use that endpoint instead.
+         */
+        post: operations["addNarrationTransitionsAndCaptionsToSlideshow"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/storyboard-to-video": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Storyboard to video
+         * @description Creates a project from an ordered list of scenes and generates one section per scene. Each scene is generated from its prompt as either a still image or a video clip; the scenes are then assembled into a single video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+         */
+        post: operations["storyboardToVideo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/generate-scenes-from-storyboard": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Storyboard to video (legacy alias)
+         * @deprecated
+         * @description Legacy alias for `POST /v1/workflows/storyboard-to-video`. Use that endpoint instead.
+         */
+        post: operations["generateScenesFromStoryboard"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/prompt-to-video-clip": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Prompt to video clip
+         * @description Creates a project from a text prompt and generates one short AI video clip (up to 15 seconds). VideoGen first generates an opening frame from the prompt (optionally guided by reference images), then animates that frame into a video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion. For a standalone clip without an editable project, use `POST /v1/tools/generate-video-clip` instead. For longer narrated multi-scene videos, use `POST /v1/workflows/script-to-video`.
+         */
+        post: operations["promptToVideoClip"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/content-outline-to-video": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Content outline to video
+         * @description Creates a project from a content outline (a Markdown brief) and generates a full video from it. This experimental, fully-agentic workflow reads the outline, plans the video, and builds it section by section — generating any narration, visuals, and media it needs. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+         */
+        post: operations["contentOutlineToVideo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/runs": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List workflow runs
+         * @description List workflow runs started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all runs for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
+         */
+        get: operations["listWorkflowRuns"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/runs/{workflowRunId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Get workflow run status */
+        get: operations["getWorkflowRun"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/workflows/runs/{workflowRunId}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Cancel a workflow run */
+        post: operations["cancelWorkflowRun"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List projects
+         * @description Returns projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` to also include dashboard-created projects. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all matching projects for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
+         */
+        get: operations["listProjects"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{projectId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get project metadata
+         * @description Returns a simplified view of a project including its title, aspect ratio, status, and URL.
+         */
+        get: operations["getProject"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{projectId}/export": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Export a project as MP4
+         * @description Starts an export of a project to MP4. Returns immediately with an export id; the file becomes available when the export task completes. Exporting requires a paid plan in the app, but the API lets you export for free with a VideoGen watermark and a short 'Made with VideoGen' end screen appended to the video. A Pro plan lets you remove both by setting `watermarkMode` and `endScreenMode` to `NONE`.
+         */
+        post: operations["exportProject"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{projectId}/exports": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List project exports
+         * @description Returns a project's exports, newest first, as fully hydrated `ProjectExport` objects (status, signed download/thumbnail URLs, and the embedded `file`). Signed URLs are re-signed when within an hour of expiring, so they are always valid long enough to use. Cursor-paginated; see the [Pagination](/pagination) guide.
+         */
+        get: operations["listProjectExports"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{projectId}/exports/{exportId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get project export
+         * @description Returns the current status of a project export started via `POST /v1/projects/{projectId}/export`, and — once `status` is `succeeded` — the signed download/thumbnail URLs and the hydrated export `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URLs are private and valid for 7 days; this endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Every endpoint that returns hydrated files auto-rehydrates this way — only the file endpoints (`GET /v1/files/{fileId}` and `POST /v1/files/{fileId}/hydrate`) are the explicit, on-demand hydration paths. Use `exportFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the export file directly later.
+         */
+        get: operations["getProjectExport"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{projectId}/timeline-interchange": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create a timeline interchange
+         * @description Starts a timeline interchange job that converts a project into an editor interchange document (Final Cut Pro FCPXML, Adobe Premiere Pro XML, OpenTimelineIO, or an SRT caption sidecar). Returns immediately with an interchange job id; the file becomes available when the job completes. Unlike `POST /v1/projects/{projectId}/export` (which renders a flattened MP4), this preserves the project as an editable timeline of separate clips, tracks, and captions so you can keep editing it in a desktop video editor. Choose `mediaDelivery` to control how the document references media: `REMOTE_URLS` produces a single document that links to signed media URLs, while `BUNDLE` produces a zip containing the document plus every referenced media file for durable offline relinking.
+         */
+        post: operations["createTimelineInterchange"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/timeline-interchange/{interchangeJobId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get timeline interchange job
+         * @description Returns the current status of a timeline interchange job started via `POST /v1/projects/{projectId}/timeline-interchange`, and, once `status` is `succeeded`, the signed download URL and the hydrated interchange `file`. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. The signed URL is private and valid for 7 days; this endpoint automatically re-signs it when it is within an hour of expiring. Use `interchangeFileId` with `POST /v1/files/{fileId}/hydrate` if you need to re-sign the file directly later.
+         */
+        get: operations["getTimelineInterchange"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{projectId}/remix": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Apply remix actions to a project
+         * @description Applies an ordered list of edits (background music, logo overlay, caption visibility/style) to a project. Each action runs asynchronously as its own remix action; the response returns one remix action id per action in order. Set `saveAsNewProject` to apply the edits to a copy and leave the original untouched. Poll `GET /v1/projects/{projectId}/remix-actions` for status.
+         */
+        post: operations["remixProject"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/projects/{projectId}/remix-actions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List remix actions for a project
+         * @description Returns remix actions applied to a project (via `POST /v1/projects/{projectId}/remix` or as a post-workflow step), most recent first, with each action's status and progress. Cursor-paginated; see the [Pagination](/pagination) guide.
+         */
+        get: operations["listProjectRemixActions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/generate-image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate image
+         * @description Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation. VideoGen automatically routes each request to the most effective state-of-the-art image model for your prompt, reference images, and quality tier, so you don't pick a model.
+         */
+        post: operations["generateImage"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/generate-video-clip": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate video clip
+         * @description Generate a single short video clip (up to 15 seconds) from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. VideoGen automatically routes each request to the most effective state-of-the-art video model for your inputs and settings, so you don't pick a model. This endpoint returns one standalone clip. For longer, higher-quality, professionally edited videos with narration, captions, music, and multiple scenes, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
+         */
+        post: operations["generateVideoClip"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/generate-motion-graphic": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate motion graphic
+         * @description Generate an animated motion graphic video from a text prompt. This is an experimental, fully agentic alternative to a video workflow: VideoGen plans the animation, optionally generates or fetches supporting media, and renders a self-contained animated clip. It is especially well suited to precise text animations (e.g. a typing effect, animated captions, kinetic typography, lower thirds) that are hard to express with stock or generated footage. Optionally pass uploaded `fileIds` for reference media the animation may display. This endpoint returns one standalone video. For longer, narrated, multi-scene videos, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
+         */
+        post: operations["generateMotionGraphic"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/text-to-speech": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Text to speech
+         * @description Convert text into a spoken audio file. Only voices with `supportsDirectToolExecution` set to true can be used. Optionally choose a voice, language, speed, and pronunciation overrides.
+         */
+        post: operations["textToSpeech"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/generate-sound-effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate sound effect
+         * @description Generate a sound effect from a text description. Optionally control the duration and prompt influence. VideoGen automatically routes each request to the most effective state-of-the-art sound effect model for your prompt and settings, so you don't pick a model.
+         */
+        post: operations["generateSoundEffect"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/generate-music": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate music
+         * @description Generate an instrumental music track from a text description. The returned track is approximately 30 seconds long. VideoGen automatically routes each request to the most effective state-of-the-art music model for your prompt, so you don't pick a model.
+         */
+        post: operations["generateMusic"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/generate-avatar": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate avatar clip
+         * @description Generate a talking-head avatar video by pairing an ACTOR entity with an audio file, typically from a prior text-to-speech result.
+         */
+        post: operations["generateAvatar"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/vectorize-image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Vectorize image
+         * @description Convert any raster image into a scalable vector graphic (SVG). The output traces the shapes and colors of the input image.
+         */
+        post: operations["vectorizeImage"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/remove-image-background": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Remove background from an image
+         * @description Remove the background from an image, returning a transparent-background PNG of the foreground subject.
+         */
+        post: operations["removeImageBackground"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/remove-video-background": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Remove background from a video
+         * @description Remove the background from a video, producing a transparent-background video of the foreground subject.
+         */
+        post: operations["removeVideoBackground"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/upscale-image": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Upscale an image
+         * @description Increase the resolution of an image while preserving detail and sharpness.
+         */
+        post: operations["upscaleImage"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/upscale-video": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Upscale a video
+         * @description Increase the resolution of a video while preserving detail and sharpness.
+         */
+        post: operations["upscaleVideo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/image-3d-effect": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Add 3D motion to an image
+         * @description Turn a still image into a short video clip with a 3D parallax motion effect, simulating camera movement through the scene.
+         */
+        post: operations["image3dEffect"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/executions/{toolExecutionId}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Cancel tool execution
+         * @description Request cancellation of a running tool execution. The execution transitions to `cancelled` if it has not already completed.
+         */
+        post: operations["cancelToolExecution"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/executions": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List tool executions
+         * @description List tool executions started via the API, most recently created first. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all executions for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide. Executions remain listable indefinitely (including those older than 7 days). For efficiency this list does not re-sign result download URLs, so `downloadUrl`/`thumbnailUrl` reflect the last time they were signed and may be expired (always check `downloadUrlExpiresAt`). To obtain a fresh signed URL, GET the individual execution (`GET /v1/tools/executions/{toolExecutionId}`) or hydrate the file (`GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`).
+         */
+        get: operations["listToolExecutions"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/tools/executions/{toolExecutionId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get tool execution info
+         * @description Retrieve the current status and result of a tool execution. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`. Each succeeded result carries signed `downloadUrl`/`thumbnailUrl` (with matching `*ExpiresAt` timestamps) alongside the full hydrated `file`. The signed URLs are private and valid for 7 days; this single-execution endpoint automatically re-signs them when they are within an hour of expiring, so a caller always receives a URL valid long enough to use. Results remain retrievable indefinitely, including executions older than 7 days. Note that list endpoints (e.g. `GET /v1/tools/executions`) do not re-sign URLs: they return the last-signed URL, which may already be expired (check `downloadUrlExpiresAt`). To refresh a URL, GET the individual execution here, or hydrate the file directly via `GET /v1/files/{fileId}` / `POST /v1/files/{fileId}/hydrate`.
+         */
+        get: operations["getToolExecutionInfo"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List files
+         * @description List files accessible to your team. By default this returns standalone files (direct tool-call outputs and uploads) and omits two categories: export files (the raw output files of your exports) and project files (the generative files created within a project, e.g. each AI image and text-to-speech file in a script-to-video workflow output). Set `includeExportFiles` and/or `includeProjectFiles` to true to include them. Use `selfOnly=true` to restrict results to files created by the calling API key's user. Files are returned most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
+         */
+        get: operations["getFiles"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/search": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Search files
+         * @description Semantic vector search over your files. Embeds the query text and returns the closest matching files ranked by cosine similarity. Only files with indexed descriptions are searchable.
+         */
+        post: operations["searchFiles"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/{fileId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get file
+         * @description Retrieve metadata for a single file by its id.
+         */
+        get: operations["getFile"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/upload": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create file upload
+         * @description Create a new file and receive a pre-signed upload URL. PUT the file bytes to the returned URL, then poll `GET /v1/files/{fileId}` until the file is ready.
+         */
+        post: operations["createFileUpload"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/{fileId}/hydrate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Hydrate file
+         * @description Generate fresh signed URLs for all available renditions of a file. Call this when source URLs are missing or expired. Returns the full file object with populated `downloadSource`, `thumbnailSource`, and `previewSource` (and the convenience root-level `downloadUrl` / `thumbnailUrl`).
+         */
+        post: operations["hydrateFile"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/{fileId}/archive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Archive file
+         * @description Archive a file by setting its archived timestamp. Archived files are excluded from list results. Returns the updated file object.
+         */
+        post: operations["archiveFile"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/{fileId}/enable-public-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Enable public preview
+         * @description Enable public preview for a file. Works for any file type. Copies the file to a permanent public URL (`staticPublicPreviewSource`) and, for video and audio, registers a public embed playback id (`publicPlaybackId`) for use with `@videogen/player`. If streaming playback is still processing, the endpoint polls briefly and background processing finishes creating the embed playback id. Returns the updated file.
+         */
+        post: operations["enablePublicPreview"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/{fileId}/disable-public-preview": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Disable public preview
+         * @description Disable public preview for a file. Removes the permanent public URL copy and revokes unauthenticated embed streaming access. Authenticated signed URLs remain functional. Returns the updated file.
+         */
+        post: operations["disablePublicPreview"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/entities": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List entities
+         * @description List the actors and visual styles available to your team, most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
+         */
+        get: operations["listEntities"];
+        put?: never;
+        /**
+         * Create entity
+         * @description Create a new actor or visual style. Attach reference images with `POST /v1/entities/{entityId}/references`.
+         */
+        post: operations["createEntity"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/entities/{entityId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get entity
+         * @description Retrieve a single entity by its id, including its reference images.
+         */
+        get: operations["getEntity"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/entities/{entityId}/update": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Update entity
+         * @description Update an entity's name or description. Provide at least one field.
+         */
+        post: operations["updateEntity"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/entities/{entityId}/archive": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Archive entity
+         * @description Archive an entity. Archived entities no longer appear in `GET /v1/entities` and can't be attached to new workflows.
+         */
+        post: operations["archiveEntity"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/entities/{entityId}/references": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Add entity reference
+         * @description Attach an image file as a reference for the entity. Upload the image first via `POST /v1/files/upload`. Returns the updated entity.
+         */
+        post: operations["addEntityReference"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/entities/{entityId}/references/remove": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Remove entity reference
+         * @description Detach a reference image from the entity. Returns the updated entity.
+         */
+        post: operations["removeEntityReference"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/assistants": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Start an assistant chat
+         * @description Creates a new project and sends the first message to the VideoGen AI assistant, exactly like typing into the assistant on a new project in the app. Asynchronous: the response contains the `messageId` of the assistant's pending reply (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}` until `status` is `succeeded`, `failed`, or `cancelled`, or subscribe to `assistant_message.*` webhooks. Fetch the parent assistant with `GET /v1/assistants/{assistantId}` to list all messages in the chat.
+         */
+        post: operations["startAssistantChat"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/assistants/{assistantId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get an assistant chat
+         * @description Returns the assistant chat identified by `assistantId`, including every message in it (user and assistant turns) in chronological order.
+         */
+        get: operations["getAssistant"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/assistants/{assistantId}/messages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Send an assistant message
+         * @description Sends a follow-up message to an existing assistant chat started with `POST /v1/assistants`. Asynchronous: the response contains the `messageId` of the assistant's pending reply. Poll `GET /v1/assistant-messages/{messageId}` until `status` is terminal, or subscribe to `assistant_message.*` webhooks.
+         */
+        post: operations["sendAssistantMessage"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/assistants/{assistantId}/actions/{actionId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Act on an assistant action
+         * @description Acts on an actionable widget the assistant offered on a prior turn. Reference the action by its `actionId` from a prior assistant message. `APPROVE` (the default) completes the action; `REJECT` records the rejection. Two kinds are actionable via the API: accepting a workflow suggestion (`APPROVE` applies the suggested workflow and immediately starts generating; the returned assistant message carries the workflow run in `generation`), and applying an assistant edit (an `APPLY_EDIT` action with `requiresApp` false, which applies the edit to the project). Actions with `requiresApp` set to true (plans, tools, and other app-only widgets) can only be completed in the web app: open the assistant's `projectUrl` instead. Asynchronous: the response contains the `messageId` of the resulting assistant message. Poll `GET /v1/assistant-messages/{messageId}` for its terminal state.
+         */
+        post: operations["actOnAssistantAction"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/assistant-messages/{messageId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get an assistant message
+         * @description Returns a single assistant chat message by id. Poll after a POST that returned `messageId` until `status` is `succeeded`, `failed`, or `cancelled`. Also supported for `USER` messages (which reach terminal state as soon as they're accepted).
+         */
+        get: operations["getAssistantMessage"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/text/generate": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Generate text
+         * @description Generate text from a prompt using a general-purpose language model. Choose a quality tier with `quality` (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Synchronous: the response includes the generated text. Useful for drafting scripts, titles, descriptions, and other short copy before generating a video.
+         */
+        post: operations["generateText"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/resources/tts-voices": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List TTS voices
+         * @description List available text-to-speech voices. Pass a `voiceId` from the response to the text-to-speech endpoint. Cursor-paginated; see the [Pagination](/pagination) guide. Pass `query` to filter by voice id, display name, language, accent, or description.
+         */
+        get: operations["listTtsVoices"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/resources/languages": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List supported languages
+         * @description List the languages a project can be translated into. Pass a `languageCode` from the response to the `TRANSLATE_PROJECT` remix action. Returns the full catalogue in a single response (not paginated). Pass `query` to filter by language code or English name.
+         */
+        get: operations["listLanguages"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/webhooks/endpoints": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List webhooks
+         * @description List configured webhook endpoints for your account. Cursor-paginated; see the [Pagination](/pagination) guide.
+         */
+        get: operations["listWebhookEndpoints"];
+        put?: never;
+        /**
+         * Create webhook
+         * @description Register a new webhook endpoint to receive `tool_execution.*`, `workflow_run.*`, and `file.*` events. The signing secret is only returned in this response. Store it securely.
+         */
+        post: operations["createWebhookEndpoint"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/webhooks/endpoints/{endpointId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Delete webhook
+         * @description Remove a webhook endpoint. It will stop receiving events immediately.
+         */
+        delete: operations["deleteWebhookEndpoint"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/me": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get current account
+         * @description Return the account and team behind the API key making the request. Takes no parameters. Call it as a connection test to confirm a key is valid and to discover the `teamId` and account `email` a key belongs to.
+         */
+        get: operations["getMe"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export interface webhooks {
-  "tool_execution.succeeded": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "tool_execution.succeeded": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * tool_execution.succeeded
+         * @description Delivered when a tool execution completes successfully.
+         */
+        post: operations["toolExecutionSucceeded"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * tool_execution.succeeded
-     * @description Delivered when a tool execution completes successfully.
-     */
-    post: operations["toolExecutionSucceeded"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "tool_execution.failed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "tool_execution.failed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * tool_execution.failed
+         * @description Delivered when a tool execution fails.
+         */
+        post: operations["toolExecutionFailed"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * tool_execution.failed
-     * @description Delivered when a tool execution fails.
-     */
-    post: operations["toolExecutionFailed"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "tool_execution.cancelled": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "tool_execution.cancelled": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * tool_execution.cancelled
+         * @description Delivered when a tool execution is cancelled.
+         */
+        post: operations["toolExecutionCancelled"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * tool_execution.cancelled
-     * @description Delivered when a tool execution is cancelled.
-     */
-    post: operations["toolExecutionCancelled"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "workflow_run.succeeded": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "workflow_run.succeeded": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * workflow_run.succeeded
+         * @description Delivered when a workflow run completes successfully.
+         */
+        post: operations["workflowRunSucceeded"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * workflow_run.succeeded
-     * @description Delivered when a workflow run completes successfully.
-     */
-    post: operations["workflowRunSucceeded"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "workflow_run.failed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "workflow_run.failed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * workflow_run.failed
+         * @description Delivered when a workflow run fails.
+         */
+        post: operations["workflowRunFailed"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * workflow_run.failed
-     * @description Delivered when a workflow run fails.
-     */
-    post: operations["workflowRunFailed"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "workflow_run.cancelled": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "workflow_run.cancelled": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * workflow_run.cancelled
+         * @description Delivered when a workflow run is cancelled.
+         */
+        post: operations["workflowRunCancelled"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * workflow_run.cancelled
-     * @description Delivered when a workflow run is cancelled.
-     */
-    post: operations["workflowRunCancelled"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "file.upload.completed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "file.upload.completed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * file.upload.completed
+         * @description Delivered when a file upload finishes and the file is stored. Only fired for files uploaded via the API.
+         */
+        post: operations["fileUploadCompleted"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * file.upload.completed
-     * @description Delivered when a file upload finishes and the file is stored. Only fired for files uploaded via the API.
-     */
-    post: operations["fileUploadCompleted"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "file.upload.failed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "file.upload.failed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * file.upload.failed
+         * @description Delivered when a file upload fails. Only fired for files uploaded via the API.
+         */
+        post: operations["fileUploadFailed"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * file.upload.failed
-     * @description Delivered when a file upload fails. Only fired for files uploaded via the API.
-     */
-    post: operations["fileUploadFailed"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "file.playback_ready": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "file.playback_ready": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * file.playback_ready
+         * @description Delivered when a file is ready for streaming playback. Only fired for files uploaded via the API.
+         */
+        post: operations["filePlaybackReady"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * file.playback_ready
-     * @description Delivered when a file is ready for streaming playback. Only fired for files uploaded via the API.
-     */
-    post: operations["filePlaybackReady"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "file.download_ready": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "file.download_ready": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * file.download_ready
+         * @description Delivered when a file is ready for download. Only fired for files uploaded via the API.
+         */
+        post: operations["fileDownloadReady"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * file.download_ready
-     * @description Delivered when a file is ready for download. Only fired for files uploaded via the API.
-     */
-    post: operations["fileDownloadReady"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "file.analysis_completed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "file.analysis_completed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * file.analysis_completed
+         * @description Delivered when file analysis (description, transcript, embedding) completes. Only fired for files uploaded via the API.
+         */
+        post: operations["fileAnalysisCompleted"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * file.analysis_completed
-     * @description Delivered when file analysis (description, transcript, embedding) completes. Only fired for files uploaded via the API.
-     */
-    post: operations["fileAnalysisCompleted"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "file.analysis_failed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "file.analysis_failed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * file.analysis_failed
+         * @description Delivered when file analysis fails. Only fired for files uploaded via the API.
+         */
+        post: operations["fileAnalysisFailed"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * file.analysis_failed
-     * @description Delivered when file analysis fails. Only fired for files uploaded via the API.
-     */
-    post: operations["fileAnalysisFailed"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "assistant_message.succeeded": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "assistant_message.succeeded": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * assistant_message.succeeded
+         * @description Delivered when an assistant message completes successfully.
+         */
+        post: operations["assistantMessageSucceeded"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * assistant_message.succeeded
-     * @description Delivered when an assistant message completes successfully.
-     */
-    post: operations["assistantMessageSucceeded"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "assistant_message.failed": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "assistant_message.failed": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * assistant_message.failed
+         * @description Delivered when an assistant message fails.
+         */
+        post: operations["assistantMessageFailed"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * assistant_message.failed
-     * @description Delivered when an assistant message fails.
-     */
-    post: operations["assistantMessageFailed"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
-  "assistant_message.cancelled": {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
+    "assistant_message.cancelled": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * assistant_message.cancelled
+         * @description Delivered when an assistant message is cancelled.
+         */
+        post: operations["assistantMessageCancelled"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
     };
-    get?: never;
-    put?: never;
-    /**
-     * assistant_message.cancelled
-     * @description Delivered when an assistant message is cancelled.
-     */
-    post: operations["assistantMessageCancelled"];
-    delete?: never;
-    options?: never;
-    head?: never;
-    patch?: never;
-    trace?: never;
-  };
 }
 export interface components {
-  schemas: {
-    /**
-     * @description File type. `TEXT` covers plain-text and editor-interchange documents; `LOTTIE` is a JSON animation.
-     * @enum {string}
-     */
-    FileType:
-      | "IMAGE"
-      | "VIDEO"
-      | "AUDIO"
-      | "PDF"
-      | "SLIDESHOW"
-      | "TEXT"
-      | "LOTTIE";
-    /** @description Metadata for a generated file. Obtain ids from tool results or `GET /v1/files`. */
-    FileInfo: {
-      /** @description File id (e.g. `vg_file_...`). */
-      fileId: string;
-      /** @description File type. Null when the file is still being processed and the type has not yet been determined. */
-      type?: components["schemas"]["FileType"] | null;
-      /**
-       * @description File scope.
-       *
-       *     - `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely.
-       *     - `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project).
-       *     - `EXPORT`: project exports.
-       *     - `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. Not analyzed (no description, transcript, or embedding).
-       *     - `ENTITY`: files attached to a reusable entity (e.g. a voice sample for an actor), shared across your team.
-       * @enum {string}
-       */
-      scope: "GLOBAL" | "PROJECT" | "EXPORT" | "TEMPORARY" | "ENTITY";
-      /** @description Display name for the file. */
-      displayName?: string;
-      description?: string | null;
-      /** @description Duration in seconds for video and audio files. Null for images. */
-      durationSeconds?: number | null;
-      /** @description Timed transcript for video and audio files, when available, as a `Transcript` object with timed `words`. Null for images or when no transcript has been generated. For plain transcript text, use `transcriptText`. */
-      transcript?: components["schemas"]["Transcript"] | null;
-      /** @description Plain transcript text for video and audio files, when available. Null for images or when no transcript has been generated. */
-      transcriptText?: string | null;
-      /**
-       * Format: uri
-       * @description Private signed URL for the highest-quality downloadable rendition, provided at the top level for convenience. Valid for 7 days from when it was signed. `null` when the rendition is still processing or the URL has not been signed yet. See `downloadUrlExpiresAt` for the exact expiry and `downloadSource` for the full rendition metadata; call `POST /v1/files/{fileId}/hydrate` to refresh it.
-       */
-      downloadUrl?: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` when `downloadUrl` is null. */
-      downloadUrlExpiresAt?: number | null;
-      /**
-       * Format: uri
-       * @description Private signed URL for the thumbnail rendition, provided at the top level for convenience. Valid for 7 days from when it was signed. `null` for file types that have no thumbnail (e.g. audio) or when it has not been signed yet. See `thumbnailSource` for the full rendition metadata.
-       */
-      thumbnailUrl?: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. `null` when `thumbnailUrl` is null. */
-      thumbnailUrlExpiresAt?: number | null;
-      /** @description Thumbnail image source. Populated after hydration. */
-      thumbnailSource?: components["schemas"]["FileSource"] | null;
-      /** @description Preview rendition source (720p for video, resized for images). Populated after hydration. */
-      previewSource?: components["schemas"]["FileSource"] | null;
-      /** @description Highest-quality downloadable rendition. Populated after hydration. */
-      downloadSource?: components["schemas"]["FileSource"] | null;
-      /** @description Private HLS streaming source. Populated for video and audio files once streaming renditions are ready. Uses a signed token; treat like other signed sources. */
-      hlsSource?: components["schemas"]["FileSource"] | null;
-      /** @description Whether public preview is enabled for this file. When true, `staticPublicPreviewSource` is populated for all file types. For video and audio, `publicHlsUrl` and `publicPlaybackId` are also populated once embed streaming is ready. */
-      isPublicPreviewEnabled?: boolean;
-      /** @description Permanent public URL for the file's highest-quality rendition. Populated when `isPublicPreviewEnabled` is true. Does not expire (`expiresAt` is null). Use for direct links to images, downloads, or any file type. For embedded video or audio players, prefer `publicPlaybackId`. */
-      staticPublicPreviewSource?: components["schemas"]["FileSource"] | null;
-      /** @description Public HLS streaming URL for video and audio. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. Prefer `publicPlaybackId` with `@videogen/player` for embeds. */
-      publicHlsUrl?: string | null;
-      /** @description Encoded public playback id (e.g. `vg_play_...`) for video and audio embeds. Pass this to `@videogen/player` or `@videogen/player-react`. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. For a permanent direct file URL (any type), use `staticPublicPreviewSource` instead. */
-      publicPlaybackId?: string | null;
-      /** @description Tool type that generated this file (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). Only present when the file was created by a tool execution. */
-      sourceToolType?: string;
-      /** @description Execution id of the tool call that generated this file (e.g. `vg_tool_...`). Only present when the file was created by a tool execution. */
-      sourceToolExecutionId?: string;
-      /** @description Background analysis state for the file (used to populate `description`, `transcript`, `durationSeconds`, and the search embedding). Omitted when the file was returned via a path that does not check analysis progress (e.g. tool-result inline files and webhook payloads). */
-      fileAnalysisMetadata?: components["schemas"]["FileAnalysisMetadata"];
-    };
-    /** @description A rendition source for a file (e.g. thumbnail, preview, download). Contains a signed URL and metadata. */
-    FileSource: {
-      /**
-       * @description `pending`: asset is still processing or has not been hydrated yet. `ready`: signed URL is available. `failed`: rendition generation failed. `skipped`: rendition does not apply to this file type (e.g. thumbnail for audio).
-       * @enum {string}
-       */
-      status: "pending" | "ready" | "failed" | "skipped";
-      /** @description Signed URL. Present when status is `ready` and file has been recently hydrated. If missing, call the hydrate endpoint. */
-      url?: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when the signed URL expires. */
-      expiresAt?: number | null;
-      /** @description Rendition width in pixels, when known. */
-      width?: number | null;
-      /** @description Rendition height in pixels, when known. */
-      height?: number | null;
-      /** @description File size in bytes, when known. */
-      fileBytes?: number | null;
-    };
-    /** @description Background analysis state for a file. Background analysis populates `description`, `transcript`, `durationSeconds`, and the search embedding after a file is uploaded or generated; this object lets you render a progress indicator while it runs (and skip rendering once it's done). */
-    FileAnalysisMetadata: {
-      /**
-       * @description Coarse-grained analysis state.
-       *
-       *     - `UNATTEMPTED`: analysis has not started yet.
-       *     - `LOADING`: analysis is in progress.
-       *     - `FULFILLED`: analysis completed successfully. `description`, `transcript`, and `durationSeconds` are now populated where applicable for the file's type.
-       *     - `REJECTED`: analysis failed permanently and will not be retried.
-       * @enum {string}
-       */
-      analysisLoadingState:
-        | "UNATTEMPTED"
-        | "LOADING"
-        | "FULFILLED"
-        | "REJECTED";
-      /** @description Progress in `[0, 100]`. Always `100` when `analysisLoadingState` is `FULFILLED`. Otherwise the most recent in-flight progress reported by the analysis task (or `0` if no progress has been reported yet). */
-      analysisProgressPercentage: number;
-      /** @description Zero-based index of the current analysis task attempt. Only present while analysis is still loading (`UNATTEMPTED` or `LOADING`); omitted once analysis reaches a terminal state. */
-      analysisAttemptIndex?: number;
-    };
-    SearchFilesRequest: {
-      /** @description Natural-language search query. The text is embedded and compared against file description vectors using cosine similarity. */
-      query: string;
-      /**
-       * @description Number of results to return (1-100). Defaults to 10.
-       * @default 10
-       */
-      numResults?: number;
-      /**
-       * @description When true, only files created by the calling API key's user are returned. When false (default), all files accessible to the team are included.
-       * @default false
-       */
-      selfOnly?: boolean;
-    };
-    SearchFilesResponse: {
-      results: components["schemas"]["SearchFilesResult"][];
-    };
-    SearchFilesResult: {
-      /**
-       * @description Cosine similarity between the query embedding and the file description embedding. Ranges from 0 (no match) to 1 (identical). Values above 0.7 typically indicate strong relevance.
-       * @example 0.82
-       */
-      similarity: number;
-      file: components["schemas"]["FileInfo"];
-    };
-    CreateFileUploadRequest: {
-      /** @description The type of file to upload. Optional; when omitted, the type is inferred after upload processing completes. */
-      type?: components["schemas"]["FileType"];
-      /** @description Display name for the uploaded file. */
-      displayName: string;
-      /**
-       * @description When true, the file is temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isTemporary?: boolean;
-      /** @description Optional pre-computed transcript for an audio or video upload, as timed `words`. When provided, transcription is skipped and caption timing matches your transcript. Ignored for non-audio/video files. */
-      transcript?: components["schemas"]["Transcript"] | null;
-    };
-    FileUploadResponse: {
-      /** @description The file id to use in subsequent API calls (e.g. `vg_file_...`). */
-      fileId: string;
-      /** @description Pre-signed URL. PUT the raw file bytes to this URL to complete the upload. */
-      uploadUrl: string;
-    };
-    GetFilesResponse: {
-      files: components["schemas"]["FileInfo"][];
-      /** @description When true, there are more files available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    /** @description A file attached to an entity as a reference image. */
-    EntityReference: {
-      /** @description The reference image file id (e.g. `vg_file_...`). Hydrate it via `GET /v1/files/{fileId}` to fetch a viewable URL. */
-      fileId: string;
-      /** @description Optional description of the reference. Empty string when not set. */
-      description: string;
-      /** @description When true, this is the entity's primary reference (used for its thumbnail). */
-      isDefault: boolean;
-    };
-    /** @description Read-only voice and presenter summary for an ACTOR entity. Always null for VISUAL_STYLE entities. */
-    EntityActorConfig: {
-      /** @description Display name of the actor's voice when one is configured. Null otherwise. */
-      voiceDisplayName?: string | null;
-      /** @description True when the actor has a configured voice. */
-      hasVoice: boolean;
-      /** @description True when the actor has a configured avatar presenter. */
-      hasAvatarPresenter: boolean;
-    };
-    /** @description A reusable actor or visual style. Attach its reference images to workflows for consistent characters and looks. */
-    Entity: {
-      /** @description The entity id (e.g. `vg_enti_...`). */
-      entityId: string;
-      /**
-       * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images.
-       * @enum {string}
-       */
-      entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
-      /** @description Display name. */
-      name: string;
-      /** @description Optional description. Empty string when not set. */
-      description: string;
-      /** @description Voice and presenter summary for ACTOR entities. Null for VISUAL_STYLE entities. */
-      actorConfig?: components["schemas"]["EntityActorConfig"] | null;
-      /** @description Reference images attached to the entity. */
-      references: components["schemas"]["EntityReference"][];
-      /** @description Seconds since epoch (Unix timestamp) when the entity was created. */
-      createdAt: number;
-      /** @description Seconds since epoch (Unix timestamp) when the entity was last updated. */
-      updatedAt: number;
-    };
-    ListEntitiesResponse: {
-      entities: components["schemas"]["Entity"][];
-      /** @description When true, there are more entities available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    CreateEntityRequest: {
-      /**
-       * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images.
-       * @enum {string}
-       */
-      entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
-      /** @description Display name. */
-      name: string;
-      /** @description Optional description. */
-      description?: string;
-    };
-    /** @description At least one field must be provided. */
-    UpdateEntityRequest: {
-      /** @description New display name. Omit to leave unchanged. */
-      name?: string | null;
-      /** @description New description. Omit to leave unchanged. */
-      description?: string | null;
-    };
-    EntityArchiveResponse: {
-      /** @description The id of the archived entity. */
-      entityId: string;
-      /** @description Always true on success. */
-      archived: boolean;
-    };
-    AddEntityReferenceRequest: {
-      /** @description The file id (e.g. `vg_file_...`) of an image to attach as a reference. */
-      fileId: string;
-      /** @description Optional description of the reference. */
-      description?: string;
-      /**
-       * @description When true, make this the entity's primary reference (used for its thumbnail).
-       * @default false
-       */
-      isDefault?: boolean;
-    };
-    RemoveEntityReferenceRequest: {
-      /** @description The file id (e.g. `vg_file_...`) of the reference to remove. */
-      fileId: string;
-    };
-    /** @description An avatar presenter available for video generation. */
-    AvatarPresenter: {
-      /** @description Presenter id (e.g. `vg_pres_...`). Pass as `avatarPresenterId` to `POST /v1/tools/generate-avatar`. */
-      avatarPresenterId: string;
-      /**
-       * @description Presenter gender.
-       * @enum {string}
-       */
-      displayableGender: "MALE" | "FEMALE" | "NEUTRAL";
-      /**
-       * Format: uri
-       * @description Still image of the presenter.
-       */
-      imageUrl: string;
-      /**
-       * Format: uri
-       * @description Thumbnail image of the presenter.
-       */
-      thumbnailUrl: string;
-      /**
-       * Format: uri
-       * @description Short preview clip of the presenter speaking.
-       */
-      previewVideoUrl: string;
-    };
-    AvatarPresenterListResponse: {
-      avatarPresenters: components["schemas"]["AvatarPresenter"][];
-      /** @description When true, there are more avatar presenters available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    /** @description A text-to-speech voice. */
-    TtsVoice: {
-      /** @description Voice id (e.g. `vg_voic_...`). Pass as `voiceId` to `POST /v1/tools/text-to-speech`. */
-      voiceId: string;
-      /** @description Locale tag for the voice (e.g. `en-US`, `es-ES`). */
-      languageCode: string;
-      /** @description Human-readable voice name. */
-      displayName: string;
-      /**
-       * @description Voice gender.
-       * @enum {string}
-       */
-      displayGender: "MALE" | "FEMALE" | "NEUTRAL";
-      /** @description Accent (e.g. `american`, `british`). */
-      accent?: string | null;
-      /** @description Description of the voice. */
-      description?: string | null;
-      /** @description When false, this voice cannot be used directly with `POST /v1/tools/text-to-speech`. All voices, regardless of this field, can be used in full video generation workflows such as script-to-video. */
-      supportsDirectToolExecution: boolean;
-      /** @description When true, this voice can synthesize text in any language regardless of its `languageCode`. When false, the voice only supports its listed language. */
-      supportsAllLanguages: boolean;
-      /** @description When true, this voice is deprecated and may be removed in a future API version. Prefer non-deprecated voices for new integrations. */
-      isDeprecated: boolean;
-    };
-    MeResponse: {
-      /** @description The id of the API key used to authenticate this request. */
-      apiKeyId: string;
-      /** @description The nickname given to the API key when it was created. */
-      apiKeyNickname: string;
-      /** @description The email address of the account the API key belongs to. */
-      email: string;
-      /** @description The display name of the account the API key belongs to. `null` if the account has not set one. */
-      displayName: string | null;
-      /** @description The id of the team the API key belongs to. */
-      teamId: string;
-    };
-    TtsVoiceListResponse: {
-      ttsVoices: components["schemas"]["TtsVoice"][];
-      /** @description When true, there are more voices available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    /** @description A language a project can be translated into. */
-    Language: {
-      /** @description The language code to pass to a `TRANSLATE_PROJECT` remix action (e.g. `es`, `fr`, `ja`). */
-      languageCode: string;
-      /** @description Human-readable English name of the language (e.g. `Spanish`). */
-      name: string;
-    };
-    LanguageListResponse: {
-      languages: components["schemas"]["Language"][];
-    };
-    /**
-     * @description Controls whether the VideoGen watermark is applied to the output. `AUTO` applies the watermark unless you have the Production API add-on. `VIDEO_GEN` always applies it. `NONE` removes the watermark (requires the Production API add-on; returns an error if you don't have it).
-     * @default AUTO
-     * @enum {string}
-     */
-    WatermarkMode: "NONE" | "VIDEO_GEN" | "AUTO";
-    /**
-     * @description Controls whether a short 'Made with VideoGen' end screen is appended to the output. `AUTO` appends it unless you have the Production API add-on. `VIDEO_GEN` always appends it. `NONE` removes it (requires the Production API add-on; returns an error if you don't have it).
-     * @default AUTO
-     * @enum {string}
-     */
-    EndScreenMode: "NONE" | "VIDEO_GEN" | "AUTO";
-    /** @description Aspect ratio as a width:height pair (e.g. 16 and 9 for 16:9). Not pixel dimensions. */
-    AspectRatio: {
-      width: number;
-      height: number;
-    };
-    GenerateTextRequest: {
-      /**
-       * @description The instruction or content to generate text from.
-       * @example Write a 30-second upbeat video script about why the sky is blue.
-       */
-      prompt: string;
-      /** @description Optional system instructions that steer the model's role, tone, and constraints. */
-      system?: string | null;
-      /** @description Text generation quality tier. Optional; when omitted, your workspace's Default AI quality for text is used (change it at https://app.videogen.io/settings/account). */
-      quality?: components["schemas"]["ModelQuality"];
-      /** @description Sampling temperature. Higher values produce more varied output. Defaults to the model's default. */
-      temperature?: number;
-      /**
-       * @description Maximum number of tokens to generate. Defaults to 512.
-       * @default 512
-       */
-      maxOutputTokens?: number;
-    };
-    GenerateTextResponse: {
-      /** @description The generated text. */
-      text: string;
-    };
-    StartAssistantChatRequest: {
-      /**
-       * @description The first message to send to the assistant, exactly as a person would type it into the assistant on a new project.
-       * @example A 30-second explainer about our new pricing tiers
-       */
-      message: string;
-      /**
-       * @description When true, the assistant must respond with at least one workflow suggestion. If it doesn't, the assistant message is settled to `failed` with a `no_workflow_suggestion` error.
-       * @default false
-       */
-      forceWorkflowSuggestion?: boolean;
-      /**
-       * @description When true, the assistant picks the best workflow for the message and immediately starts generating, skipping the suggestion step. When the assistant message reaches `succeeded`, its `generation` carries the workflow run to poll.
-       * @default false
-       */
-      autoGenerate?: boolean;
-    };
-    SendAssistantMessageRequest: {
-      /**
-       * @description The message to send to the assistant in this project chat.
-       * @example Make it more upbeat and add captions
-       */
-      message: string;
-    };
-    ActOnAssistantActionRequest: {
-      /**
-       * @description Whether to approve (apply) or reject the action. Defaults to `APPROVE`.
-       * @default APPROVE
-       * @enum {string}
-       */
-      decision?: "APPROVE" | "REJECT";
-    };
-    /** @description Returned when a `POST /v1/assistants` call is accepted. Poll `messageId` for the pending assistant reply; keep `assistantId` / `projectId` to continue the chat and address the project. */
-    StartAssistantChatResponse: {
-      /** @description Opaque assistant message id for the pending assistant reply (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}`. */
-      messageId: string;
-      /** @description Opaque assistant chat id (e.g. `vg_asst_...`). Pass to `GET /v1/assistants/{assistantId}` and follow-up message/action calls. */
-      assistantId: string;
-      /** @description Opaque project id for the new chat (e.g. `vg_proj_...`). */
-      projectId: string;
-      /**
-       * Format: uri
-       * @description Deep link to open this project in the VideoGen web app.
-       */
-      projectUrl: string;
-    };
-    /** @description Returned when a `POST /v1/assistants/{assistantId}/messages` call is accepted. Use `messageId` to poll the pending assistant reply. */
-    SendAssistantMessageResponse: {
-      /** @description Opaque assistant message id for the pending assistant reply (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}`. */
-      messageId: string;
-    };
-    /** @description Returned when a `POST /v1/assistants/{assistantId}/actions/{actionId}` call is accepted. Use `messageId` to poll the resulting assistant message. */
-    ActOnAssistantActionResponse: {
-      /** @description Opaque assistant message id for the assistant reply produced by acting on the action (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}`. */
-      messageId: string;
-    };
-    /**
-     * @description Lifecycle status of an assistant chat message. `pending` and `running` are in-progress; `succeeded`, `failed`, and `cancelled` are terminal.
-     * @enum {string}
-     */
-    AssistantMessageStatus:
-      | "pending"
-      | "running"
-      | "succeeded"
-      | "failed"
-      | "cancelled";
-    /**
-     * @description Normalized category of an actionable widget the assistant offered. `APPROVE_PLAN` accepts a proposed generation plan; `APPLY_EDIT` applies a proposed edit (e.g. a rewritten script); `RUN_TOOL` runs an inline tool; `GENERATE` starts building the video; `OPEN_IN_APP` requires the full web app — open the assistant's `projectUrl` instead of acting via the API.
-     * @enum {string}
-     */
-    AssistantActionKind:
-      | "APPROVE_PLAN"
-      | "APPLY_EDIT"
-      | "RUN_TOOL"
-      | "GENERATE"
-      | "OPEN_IN_APP";
-    /** @description A starting-point workflow the assistant suggests for the conversation. Act on it with `POST /v1/assistants/{assistantId}/actions/{actionId}` to select the workflow and continue. */
-    AssistantWorkflowSuggestion: {
-      /** @description Opaque id to pass to the act-on-action endpoint to select this workflow. */
-      actionId: string;
-      /** @description Identifier of the suggested workflow. */
-      workflowType: components["schemas"]["WorkflowType"];
-      /** @description Short human-readable name of the suggested workflow. */
-      title: string;
-      /** @description One-line explanation of what this workflow will do. */
-      description: string;
-    };
-    /** @description Extra data for rendering this action inline (in a chat surface or integration) without opening the web app. Fields are populated only when relevant to the action's kind; all are optional. */
-    AssistantActionDetail: {
-      /** @description Human-readable summary of the proposed plan or edit (for `APPROVE_PLAN` and `APPLY_EDIT` actions). */
-      summary?: string | null;
-      /** @description Credits currently remaining on your team (for the usage/credits widget). A whole number of credits. */
-      creditsRemaining?: number | null;
-      /** @description Estimated credit cost of the current workflow (for the cost-estimate widget). A whole number of credits. */
-      estimatedCredits?: number | null;
-    };
-    /** @description An actionable widget the assistant offered on this turn. Act on it with `POST /v1/assistants/{assistantId}/actions/{actionId}` unless `requiresApp` is true. */
-    AssistantAction: {
-      /** @description Opaque id to pass to the act-on-action endpoint. */
-      actionId: string;
-      kind: components["schemas"]["AssistantActionKind"];
-      /** @description Human-readable label describing what acting on this will do. */
-      label: string;
-      /** @description When true, this action can only be completed in the web app; open the assistant's `projectUrl` instead of calling the API. */
-      requiresApp: boolean;
-      /** @description Optional extra data for rendering this action inline without opening the app. */
-      detail?: components["schemas"]["AssistantActionDetail"];
-    };
-    /** @description A file linked to an assistant chat message. */
-    AssistantMessageAttachment: {
-      /** @description File id (e.g. `vg_file_...`) when the attachment is a storage file. `null` for attachments that are not resolvable storage files. */
-      fileId?: string | null;
-      /** @description Human-readable name of the attachment. */
-      displayName: string;
-    };
-    /** @description A user-authored message in an assistant chat. */
-    AssistantInputMessage: {
-      /** @description Opaque assistant message id (e.g. `vg_mesg_...`). */
-      messageId: string;
-      /**
-       * @description Always `user`. (enum property replaced by openapi-typescript)
-       * @enum {string}
-       */
-      role: "user";
-      status: components["schemas"]["AssistantMessageStatus"];
-      /** @description The user's message text. */
-      content: string;
-      /** @description Files attached to this message. */
-      attachments: components["schemas"]["AssistantMessageAttachment"][];
-      /** @description Seconds since epoch (Unix timestamp) when the message was created. */
-      createdAt: number;
-    };
-    /** @description An assistant-authored message in an assistant chat, including any suggestions or actions it offered. */
-    AssistantOutputMessage: {
-      /** @description Opaque assistant message id (e.g. `vg_mesg_...`). */
-      messageId: string;
-      /**
-       * @description Always `assistant`. (enum property replaced by openapi-typescript)
-       * @enum {string}
-       */
-      role: "assistant";
-      status: components["schemas"]["AssistantMessageStatus"];
-      /** @description The assistant's text reply. `null` while `status` is `pending` or `running`; may be empty when the assistant only offered widgets. */
-      content: string | null;
-      /** @description Files attached to this message. */
-      attachments: components["schemas"]["AssistantMessageAttachment"][];
-      /** @description Workflow starting points the assistant suggested on this message. Empty when none were offered. */
-      workflowSuggestions: components["schemas"]["AssistantWorkflowSuggestion"][];
-      /** @description Actionable widgets the assistant offered on this message (plans, edits, tools, generate). Empty when none were offered. */
-      actions: components["schemas"]["AssistantAction"][];
-      /** @description Present when this message kicked off a workflow run (via `autoGenerate` on start, or acting on a workflow suggestion): the workflow run to poll via `GET /v1/workflows/runs/{workflowRunId}`. */
-      generation: components["schemas"]["StartWorkflowRunResponse"] | null;
-      /** @description Error details. `null` unless `status` is `failed`. */
-      error: components["schemas"]["ApiError"] | null;
-      /** @description Seconds since epoch (Unix timestamp) when the message was created. */
-      createdAt: number;
-    };
-    /** @description A single message in an assistant chat. Discriminated by `role`. */
-    AssistantMessage:
-      | components["schemas"]["AssistantInputMessage"]
-      | components["schemas"]["AssistantOutputMessage"];
-    /** @description An assistant chat and every message it currently contains. */
-    GetAssistantResponse: {
-      /** @description Opaque assistant chat id (e.g. `vg_asst_...`). */
-      assistantId: string;
-      /** @description Opaque project id of the project this chat belongs to (e.g. `vg_proj_...`). */
-      projectId: string;
-      /**
-       * Format: uri
-       * @description Deep link to open this chat's project in the VideoGen web app. Visible only to members of your team and project collaborators.
-       */
-      projectUrl: string;
-      /** @description Every message in the chat in chronological order (oldest first). */
-      messages: components["schemas"]["AssistantMessage"][];
-    };
-    GenerateImageRequest: {
-      /**
-       * @description Text prompt describing the image to generate. When reference images are provided, the prompt describes the desired transformation.
-       * @example A serene Japanese garden with cherry blossoms at golden hour
-       */
-      prompt: string;
-      /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. Maximum 4 images. When provided, the model uses these as guidance for generation. */
-      imageFileIds?: string[];
-      /** @description Aspect ratio for the generated image. Defaults to 16:9 when omitted. */
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      /** @description Image generation quality tier. Optional; when omitted, your workspace's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). */
-      quality?: components["schemas"]["ModelQuality"];
-      watermarkMode?: components["schemas"]["WatermarkMode"];
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    /** @description At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. */
-    GenerateVideoClipRequest: {
-      /**
-       * @description Text prompt describing the video to generate. Optional when reference media is provided. Describe the video in plain language; any reference media you provide is incorporated automatically.
-       * @example A golden retriever running through a sunlit meadow in slow motion, cinematic
-       */
-      prompt?: string;
-      /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the images are animated or used as visual guidance for the generated video. */
-      imageFileIds?: string[];
-      /** @description Optional file ids of reference videos (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. They are used as motion or style guidance for the generated video. */
-      videoFileIds?: string[];
-      /** @description Optional file ids of reference audio clips (e.g. `["vg_file_..."]`) used for native lip-sync and soundtrack. Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
-      audioFileIds?: string[];
-      /**
-       * @description When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false.
-       * @default false
-       */
-      generateAudio?: boolean;
-      /** @description Desired clip length in seconds. A whole number between 1 and 15. Defaults to 6 when omitted. This endpoint produces a single short clip. For longer, multi-scene, professionally edited videos, use a video workflow such as `POST /v1/workflows/script-to-video`. */
-      durationSeconds?: number | null;
-      /** @description Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      /** @description Video generation quality tier. Optional; when omitted, your workspace's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video clip generation and is rejected. */
-      quality?: components["schemas"]["ModelQuality"];
-      watermarkMode?: components["schemas"]["WatermarkMode"];
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    GenerateMotionGraphicRequest: {
-      /**
-       * @description Text prompt describing the animated motion graphic to generate. Describe the on-screen elements, any text and how it should animate, and the overall motion in plain language.
-       * @example A dark terminal window that types out the command `npm run build` character by character, then shows a green success checkmark
-       */
-      prompt: string;
-      /** @description Optional file ids of uploaded reference media (images, videos, or audio) the motion graphic may display or animate (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
-      fileIds?: string[];
-      /** @description Desired length of the motion graphic in seconds, a whole number between 1 and 300. When omitted, the duration is chosen automatically to fit the prompt (recommended). */
-      durationSeconds?: number | null;
-      /** @description Aspect ratio for the generated motion graphic. Defaults to 16:9 when omitted. */
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    PronunciationReplacement: {
-      original: string;
-      replacement: string;
-    };
-    TextToSpeechRequest: {
-      ttsText: string;
-      /** @description Voice id from `GET /v1/resources/tts-voices`. Only voices with `supportsDirectToolExecution` set to true are accepted. */
-      voiceId: string;
-      /** @description ISO-639-1 language hint for pronunciation (e.g. `en`, `es`, `zh`). */
-      speechLanguageCode?: string | null;
-      pronunciationReplacements?: components["schemas"]["PronunciationReplacement"][];
-      /** @description When true, automatically expands numbers, symbols, acronyms, and other non-word tokens into their spoken forms before synthesis so the voice pronounces them correctly (e.g. `$100` → `one hundred dollars`, `NASA` → `nasa`, `3rd` → `third`). Defaults to false when omitted. */
-      autoExpandPronunciationReplacements?: boolean;
-      /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
-      voiceSpeed?: number;
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    GenerateSoundEffectRequest: {
-      /** @description A text description of the sound effect to generate. */
-      prompt: string;
-      /** @description Desired length of the sound effect in seconds, between 1 and 30. Defaults to about 10 seconds when omitted. */
-      durationSeconds?: number | null;
-      /** @description How closely the generated sound effect follows the prompt, between 0 (more creative, more variation) and 1 (more literal, less variation). Defaults to a balanced value when omitted. */
-      promptInfluence?: number | null;
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    GenerateMusicRequest: {
-      /** @description A text description of the music to generate. Include genre, mood, instrumentation, and tempo for best results. */
-      prompt: string;
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    GenerateAvatarRequest: {
-      /** @description Presenter id from `GET /v1/resources/avatar-presenters`. */
-      avatarPresenterId: string;
-      /** @description File id of an AUDIO file (e.g. `vg_file_...`), typically from a prior text-to-speech result. Upload a file first via `POST /v1/files/upload` or generate one with `POST /v1/tools/text-to-speech`, then pass the returned id here. */
-      audioFileId: string;
-      watermarkMode?: components["schemas"]["WatermarkMode"];
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    ImageAssetRequest: {
-      /** @description File id of the source image (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. */
-      imageFileId: string;
-      watermarkMode?: components["schemas"]["WatermarkMode"];
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    /**
-     * @description AI generation quality tier, shared across every generative feature (image, video, text, and so on). `LOW` is fastest and cheapest, `STANDARD` balances quality and cost, `HIGH` is higher quality, and `MAX` is the highest quality.
-     *
-     *     When a request omits the quality field, VideoGen falls back to your workspace's **Default AI quality** for that feature, which you can change at [Account settings](https://app.videogen.io/settings/account). Not every feature supports every tier; unsupported tiers are rejected with an error (see each field's description).
-     * @enum {string}
-     */
-    ModelQuality: "LOW" | "STANDARD" | "HIGH" | "MAX";
-    VideoAssetRequest: {
-      /** @description File id of the source video (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. */
-      videoFileId: string;
-      watermarkMode?: components["schemas"]["WatermarkMode"];
-      /**
-       * @description Number of output results to generate. Defaults to 1.
-       * @default 1
-       */
-      numResults?: number;
-      /**
-       * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    /** @description Returned when a tool execution is started. Use `toolExecutionId` to poll for results or cancel. */
-    StartToolExecutionResponse: {
-      /** @description Execution id (e.g. `vg_tool_...`). */
-      toolExecutionId: string;
-    };
-    /**
-     * @description Lifecycle status shared by every asynchronous job (tool executions, workflow runs, remix actions, project exports, and timeline interchange jobs). `pending` and `running` are in-progress; `succeeded`, `failed`, and `cancelled` are terminal.
-     * @enum {string}
-     */
-    JobStatus: "pending" | "running" | "succeeded" | "failed" | "cancelled";
-    /** @description Result for a single generated file. Only appears inside a succeeded execution's `results`, so every field below is always present. */
-    ToolSuccessResult: {
-      /** @description File id for the generated asset. */
-      fileId: string;
-      /** @description File type. */
-      type: components["schemas"]["FileType"];
-      /**
-       * Format: uri
-       * @description Private signed download URL for the generated file, valid for 7 days from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. When you GET a single execution it is automatically re-signed if within an hour of expiring; list endpoints do not re-sign, so there it may be expired (check `downloadUrlExpiresAt`). See `downloadUrlExpiresAt` for the exact expiry. Null only in the rare case that the highest-quality rendition is still finalizing.
-       */
-      downloadUrl: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. Null only when `downloadUrl` is null. */
-      downloadUrlExpiresAt: number | null;
-      /**
-       * Format: uri
-       * @description Private signed thumbnail URL for the generated file, valid for 7 days from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. Re-signed on the same terms as `downloadUrl` (single-execution GET re-signs when near expiry; list endpoints do not). Null for file types that have no thumbnail (e.g. audio).
-       */
-      thumbnailUrl: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. Null when there is no thumbnail URL. */
-      thumbnailUrlExpiresAt: number | null;
-      /** @description Hydrated file metadata with signed download URLs (always present and hydrated for a succeeded result). Its signed URLs follow the same 24-hour validity and automatic re-signing as `downloadUrl`. */
-      file: components["schemas"]["FileInfo"];
-    };
-    /** @description What is needed to resolve an error, when it can be fixed by fulfilling a specific requirement (e.g. purchasing an add-on or upgrading the plan). */
-    ErrorRequirement: {
-      /** @description Machine-readable requirement type in snake_case (e.g. `purchase_add_on`, `upgrade_plan`). */
-      type: string;
-      /** @description Key-value pairs with requirement-specific context (e.g. the add-on id to purchase). */
-      details?: {
-        [key: string]: string;
-      };
-    };
-    /**
-     * @description Standard error body returned with every non-2xx response (the `default` response of every operation). The HTTP status code conveys the error class; this body carries the details:
-     *
-     *     - `400` invalid request, `401` missing or invalid API key, `403` not permitted (e.g. plan or add-on required, see `requirement`), `404` not found, `409` conflict, `429` rate limited or out of credits, `5xx` server error.
-     *
-     *     Common `code` values include `invalid_request`, `invalid_api_key`, `not_authorized`, `not_found`, `insufficient_credits`, and `rate_limited`. Always branch on `code` (and `requirement.type` when present) rather than parsing `message`.
-     */
-    ApiError: {
-      /** @description Human-readable error description. For display and logging only; do not branch on its exact text. */
-      message: string;
-      /** @description Machine-readable error code in snake_case (e.g. `invalid_api_key`, `insufficient_credits`). `null` when no specific code applies. */
-      code?: string | null;
-      /** @description What is needed to resolve the error. Present when the error can be fixed by fulfilling a specific requirement (e.g. purchasing an add-on); `null` otherwise. */
-      requirement?: components["schemas"]["ErrorRequirement"] | null;
-      /** @description Opaque internal error code for debugging. Include this when contacting support. `null` when not applicable. */
-      internalErrorCode?: string | null;
-    };
-    ExecutedTool: {
-      /** @description Execution id matching the original request. */
-      toolExecutionId: string;
-      status: components["schemas"]["JobStatus"];
-      /** @description Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
-      toolType: string;
-      /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
-      progressPercentage: number;
-      /** @description Zero-based index of the current or most recent execution attempt. */
-      attemptIndex: number;
-      /** @description One entry per generated result. Always present; empty until `status` is `succeeded`, then one entry per generated file (each with signed URLs and a hydrated `file`). */
-      results: components["schemas"]["ToolSuccessResult"][];
-      /** @description Error details. Always present; `null` unless `status` is `failed`. */
-      error: components["schemas"]["ApiError"] | null;
-    };
-    /** @description Paginated list of API-started tool executions, most recently created first. */
-    ToolExecutionListResponse: {
-      toolExecutions: components["schemas"]["ExecutedTool"][];
-      /** @description When true, there are more executions available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    /**
-     * @description Webhook event types for tool execution lifecycle.
-     * @enum {string}
-     */
-    ToolExecutionWebhookEventName:
-      | "tool_execution.succeeded"
-      | "tool_execution.failed"
-      | "tool_execution.cancelled";
-    /**
-     * @description Lifecycle events emitted for workflow runs started via the developer API.
-     * @enum {string}
-     */
-    WorkflowRunWebhookEventName:
-      | "workflow_run.succeeded"
-      | "workflow_run.failed"
-      | "workflow_run.cancelled";
-    /**
-     * @description Webhook event types for the file lifecycle (upload, analysis, playback, and download readiness). Only fired for files uploaded via the API (not the VideoGen UI).
-     * @enum {string}
-     */
-    FileWebhookEventName:
-      | "file.upload.completed"
-      | "file.upload.failed"
-      | "file.playback_ready"
-      | "file.download_ready"
-      | "file.analysis_completed"
-      | "file.analysis_failed";
-    /**
-     * @description Lifecycle events for assistant messages started via the developer API.
-     * @enum {string}
-     */
-    AssistantMessageWebhookEventName:
-      | "assistant_message.succeeded"
-      | "assistant_message.failed"
-      | "assistant_message.cancelled";
-    /**
-     * @description All webhook event types. Use when creating or listing webhook endpoints.
-     * @enum {string}
-     */
-    WebhookEventName:
-      | "tool_execution.succeeded"
-      | "tool_execution.failed"
-      | "tool_execution.cancelled"
-      | "workflow_run.succeeded"
-      | "workflow_run.failed"
-      | "workflow_run.cancelled"
-      | "assistant_message.succeeded"
-      | "assistant_message.failed"
-      | "assistant_message.cancelled"
-      | "file.upload.completed"
-      | "file.upload.failed"
-      | "file.playback_ready"
-      | "file.download_ready"
-      | "file.analysis_completed"
-      | "file.analysis_failed";
-    /**
-     * @description Workflow type identifier.
-     * @enum {string}
-     */
-    WorkflowType:
-      | "SCRIPT_TO_VIDEO"
-      | "VOICEOVER_TO_VIDEO"
-      | "SLIDESHOW_TO_VIDEO"
-      | "STORYBOARD_TO_VIDEO"
-      | "PROMPT_TO_VIDEO_CLIP"
-      | "CONTENT_OUTLINE_TO_VIDEO";
-    /**
-     * @description How quickly visuals change. FAST shows more, shorter shots; SLOW holds each visual longer. Defaults to MEDIUM.
-     * @default MEDIUM
-     * @enum {string}
-     */
-    VisualPacing: "FAST" | "MEDIUM" | "SLOW";
-    /** @description Visual style for the generated b-roll. */
-    WorkflowVisualStyle: {
-      /**
-       * @description STOCK pulls stock footage and images. AI_IMAGE generates a styled image for each section. ENTITY generates images that match a visual-style entity's reference images for a consistent look.
-       * @enum {string}
-       */
-      type: "STOCK" | "AI_IMAGE" | "ENTITY";
-      /** @description Only applies when type is AI_IMAGE. A free-form description of the look applied to every generated image (e.g. `vintage 1970s film photography, warm grain`). See the AI styles reference for example descriptions of the app's default styles. Required when type is AI_IMAGE. */
-      aiStyle?: string;
-      /** @description Only applies when type is ENTITY. The id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide every generated image. Required when type is ENTITY. */
-      entityId?: string;
-      /**
-       * @description Only applies when type is AI_IMAGE. When true, featured b-roll images you provide are re-rendered in the chosen style so they match the generated look (no effect on featured b-roll videos). Defaults to true.
-       * @default true
-       */
-      restyleFeaturedBRollWithAiStyle?: boolean;
-    };
-    /** @description An RGB color. Each channel is an integer from 0 to 255. */
-    WorkflowRgbColor: {
-      red: number;
-      green: number;
-      blue: number;
-    };
-    /** @description Background drawn behind caption text. */
-    WorkflowCaptionBackgroundStyle: {
-      /**
-       * @description RECT draws one rectangle behind the whole line; WRAPPED hugs the text; WORD_BY_WORD draws a box per word.
-       * @enum {string}
-       */
-      type: "RECT" | "WRAPPED" | "WORD_BY_WORD";
-      backgroundColor: components["schemas"]["WorkflowRgbColor"];
-      /** @description Corner rounding as a proportion of the background height, between 0 (square corners) and 1 (fully rounded). */
-      borderRadiusProportion?: number;
-      /** @description Background opacity from 0 (transparent) to 1 (opaque). */
-      opacityProportion?: number;
-    };
-    /** @description Caption styling. Any omitted field falls back to the VideoGen default caption style. Provide an empty object (`{}`) to keep the default style but ensure captions are shown. Pass `null` for the whole `captionStyle` field to hide captions entirely. */
-    WorkflowCaptionStyle: {
-      /** @description Font family name. */
-      fontName?: string;
-      /** @description Font size in pixels at 1080p. Must be greater than 0. */
-      fontSize?: number;
-      /**
-       * @description Numeric font weight (400 = regular, 700 = bold).
-       * @enum {integer}
-       */
-      fontWeight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
-      textColor?: components["schemas"]["WorkflowRgbColor"];
-      /** @enum {string} */
-      textJustification?: "LEFT" | "CENTER" | "RIGHT";
-      /**
-       * @description Vertical position of the caption block in the frame.
-       * @enum {string}
-       */
-      verticalAlignment?: "TOP" | "MIDDLE" | "BOTTOM";
-      /** @description Outline color around glyphs, or null for no outline. */
-      strokeColor?: components["schemas"]["WorkflowRgbColor"] | null;
-      /** @description Outline thickness in pixels. 0 disables the outline. */
-      strokeWeight?: number;
-      /** @description Background drawn behind the text, or null for no background. */
-      backgroundStyle?:
-        | components["schemas"]["WorkflowCaptionBackgroundStyle"]
-        | null;
-      /** @description Color applied to the currently spoken word for karaoke-style highlighting, or null to keep the base text color. */
-      spokenTextColor?: components["schemas"]["WorkflowRgbColor"] | null;
-      /** @description Outline color applied to the currently spoken word, or null. */
-      spokenTextStrokeColor?: components["schemas"]["WorkflowRgbColor"] | null;
-      /** @description When true, a word keeps the spoken-text color after it has been spoken instead of reverting. */
-      persistSpokenTextColor?: boolean;
-    };
-    /**
-     * @description The kind of edit a remix action applies.
-     * @enum {string}
-     */
-    RemixActionType:
-      | "SET_BACKGROUND_MUSIC"
-      | "SET_LOGO"
-      | "ENABLE_CAPTIONS"
-      | "DISABLE_CAPTIONS"
-      | "ADD_TRANSITIONS"
-      | "RESIZE_PROJECT"
-      | "CLEAN_UP_TRANSCRIPT"
-      | "CONVERT_IMAGES_TO_VIDEOS"
-      | "REGENERATE_IMAGES"
-      | "UPSCALE_ASSETS"
-      | "CHANGE_NARRATOR"
-      | "SHUFFLE_STOCK_VISUALS"
-      | "GENERATE_MUSIC"
-      | "TRANSLATE_PROJECT";
-    /**
-     * @description A transition applied at a boundary. `DYNAMIC` auto-varies the style across boundaries; `NONE` removes transitions; the rest apply that fixed style everywhere.
-     * @enum {string}
-     */
-    RemixTransitionStyle:
-      | "DYNAMIC"
-      | "NONE"
-      | "FADE"
-      | "RISE"
-      | "PAN"
-      | "POP"
-      | "WIPE";
-    /** @description Set, replace, or remove the project's background music track. */
-    RemixActionSetBackgroundMusic: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "SET_BACKGROUND_MUSIC";
-      /** @description File id of an uploaded audio file to use as background music (e.g. `vg_file_...`). Upload it first via `POST /v1/files/upload`. Pass `null` to remove the existing background music. */
-      fileId?: string | null;
-      /** @description Music volume from 0 (silent) to 1 (full). Omit or pass `null` to keep the current volume. */
-      volume?: number | null;
-    };
-    /** @description Set, replace, or remove the logo overlay. */
-    RemixActionSetLogo: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "SET_LOGO";
-      /** @description File id of an uploaded image to overlay as a logo (e.g. `vg_file_...`). Upload it first via `POST /v1/files/upload`. Pass `null` to remove the existing logo. */
-      fileId?: string | null;
-      /**
-       * @description Position the logo is anchored to. Omit or pass `null` to keep the current position.
-       * @enum {string|null}
-       */
-      position?:
-        | "TOP_LEFT"
-        | "TOP_CENTER"
-        | "TOP_RIGHT"
-        | "BOTTOM_LEFT"
-        | "BOTTOM_CENTER"
-        | "BOTTOM_RIGHT"
-        | null;
-      /** @description Logo width as a percentage of the video width. Omit or pass `null` to keep the current size. */
-      sizePercent?: number | null;
-    };
-    /** @description Show captions on every captionable section. Optionally override the project caption style. */
-    RemixActionEnableCaptions: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "ENABLE_CAPTIONS";
-      /** @description Caption styling to apply. Omit or pass `null` to show captions with the current style. Any provided field overrides that field; omitted fields keep their current value. */
-      captionStyle?: components["schemas"]["WorkflowCaptionStyle"] | null;
-    };
-    /** @description Hide captions on every captionable section. */
-    RemixActionDisableCaptions: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "DISABLE_CAPTIONS";
-    };
-    /** @description Stamp transitions across the project. Not per-boundary: each field you set is applied uniformly to every boundary in that scope, replacing any transition already there. Set the transition between sections, between base-layer assets, or both; omit or pass `null` for a scope to leave its transitions untouched. */
-    RemixActionAddTransitions: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "ADD_TRANSITIONS";
-      /** @description Transition applied at every boundary between sections, replacing any existing section transitions. Omit or pass `null` to leave section transitions untouched. */
-      sectionTransition?: components["schemas"]["RemixTransitionStyle"] | null;
-      /** @description Transition applied at every boundary between base-layer assets within sections, replacing any existing asset transitions. Omit or pass `null` to leave asset transitions untouched. */
-      assetTransition?: components["schemas"]["RemixTransitionStyle"] | null;
-    };
-    /** @description Change the project's output aspect ratio (e.g. to a vertical 9:16 social format). The video is re-flowed to the new ratio. */
-    RemixActionResizeProject: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "RESIZE_PROJECT";
-      aspectRatio: components["schemas"]["AspectRatio"];
-    };
-    /** @description Tighten every transcript in the project by removing silent pauses and/or filler words. Useful for polishing narration captured from raw recordings. */
-    RemixActionCleanUpTranscript: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "CLEAN_UP_TRANSCRIPT";
-      /** @description Remove filler words ("um", "uh", …). Defaults to `true`. */
-      removeFillers?: boolean | null;
-      /** @description Remove silent pauses longer than `minPauseSeconds`. Defaults to `true`. */
-      removePauses?: boolean | null;
-      /** @description Override the filler-word list to remove. Omit or pass `null` to use the built-in defaults. */
-      fillerWords?: string[] | null;
-      /** @description Shortest pause (in seconds) to remove; pauses below this stay. Omit or pass `null` to use the default threshold. */
-      minPauseSeconds?: number | null;
-    };
-    /** @description Animate every eligible still image in the project into a short AI video clip (image-to-video), replacing each image in place. Eligible images are non-SVG image assets backed by an uploaded or stock file. Runs asynchronously: one clip is generated per image. If the project has no eligible images, the action is skipped and completes successfully without changing anything (for example, a project whose timeline is already all video clips). */
-    RemixActionConvertImagesToVideos: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "CONVERT_IMAGES_TO_VIDEOS";
-      /** @description Describe the motion to apply to every image (e.g. "slow cinematic push-in"). Omit or pass `null` for automatic motion. */
-      motionPrompt?: string | null;
-      /** @description Mute the generated clips and suppress generated background music. Recommended when the clips sit behind a voiceover. Defaults to `true`. */
-      muteOutputVideos?: boolean | null;
-      /** @description Video generation quality tier for the image-to-video conversions. Optional; when omitted, your workspace's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video and is rejected. */
-      quality?: components["schemas"]["ModelQuality"];
-    };
-    /** @description Restyle every eligible still image in the project to a new look (image-to-image), replacing each image in place. Eligible images are non-SVG image assets backed by an uploaded or generated file. Runs asynchronously: one restyled image is generated per eligible image. If the project has no eligible images, the action is skipped and completes successfully without changing anything. */
-    RemixActionRegenerateImages: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "REGENERATE_IMAGES";
-      /** @description Describe the visual style to apply to every image (e.g. "watercolor painting", "cinematic film still"). */
-      stylePrompt: string;
-      /** @description Image generation quality tier for the restyled images. Optional; when omitted, your workspace's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). */
-      quality?: components["schemas"]["ModelQuality"];
-    };
-    /** @description Sharpen every eligible asset in the project up to 4K, replacing each in place. Runs asynchronously: one upscaled asset is generated per eligible asset. If the project has no eligible assets, the action is skipped and completes successfully without changing anything. */
-    RemixActionUpscaleAssets: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "UPSCALE_ASSETS";
-      /** @description Also upscale video assets (billed per output second). Defaults to `true`. */
-      includeVideos?: boolean | null;
-      /** @description Also upscale stock (library) assets, not just uploaded or generated ones. Defaults to `true`. */
-      includeStockContent?: boolean | null;
-    };
-    /** @description Re-narrate every AI-voiceover asset in the project with a new voice (and optionally a presenter avatar), replacing each narration in place. Runs asynchronously: text-to-speech is re-fired per asset with the original narration text. If the project has no AI-narrated assets, the action is skipped and completes successfully without changing anything. */
-    RemixActionChangeNarrator: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "CHANGE_NARRATOR";
-      /** @description Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`) to re-narrate with. */
-      voiceId: string;
-      /** @description Optional avatar presenter id from `GET /v1/resources/avatar-presenters` (e.g. `vg_pres_...`). When set, the narration is delivered by a talking-head presenter avatar. Pass your `voiceId` to that endpoint to list presenters sorted by best match for the voice. Omit or pass `null` for a standard voiceover with no presenter. */
-      avatarPresenterId?: string | null;
-      /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Omit or pass `null` to keep each asset's current speed. */
-      voiceSpeed?: number | null;
-    };
-    /** @description Replace every stock (library) visual in the project with a fresh alternative from the same search, replacing each in place. Runs asynchronously: each stock asset's original search is re-run, excluding the currently-shown result. If the project has no shuffleable stock visuals, the action is skipped and completes successfully without changing anything. */
-    RemixActionShuffleStockVisuals: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "SHUFFLE_STOCK_VISUALS";
-    };
-    /** @description Generate a background music track from a text prompt and set it as the project's background music, replacing any existing track. Runs asynchronously. */
-    RemixActionGenerateMusic: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "GENERATE_MUSIC";
-      /** @description Describe the music to generate (e.g. "upbeat corporate background music with a driving beat"). */
-      prompt: string;
-    };
-    /** @description Translate the whole project into another language: every piece of text (title, section names, on-screen text overlays, transcripts, and narration scripts) is translated, and — unless disabled — each AI voiceover is re-narrated in the new language. Runs asynchronously. Requires a Pro subscription. Retrieve the list of supported language codes from `GET /v1/resources/languages`. */
-    RemixActionTranslateProject: {
-      /**
-       * @description discriminator enum property added by openapi-typescript
-       * @enum {string}
-       */
-      type: "TRANSLATE_PROJECT";
-      /** @description Target language code to translate the project into (e.g. `es`, `fr`, `ja`). Must be one of the codes returned by `GET /v1/resources/languages`. */
-      languageCode: string;
-      /** @description Swap each AI voiceover to a voice that natively matches the target language. Recommended, since keeping the original voice usually produces a foreign accent. Defaults to `true`. */
-      changeVoice?: boolean | null;
-      /** @description Also re-generate every eligible image so that text baked into the image is translated too (image-to-image). Billed per generated image. Defaults to `false`. */
-      translateImageText?: boolean | null;
-    };
-    /** @description A single edit applied to a project. Each array entry is exactly one of the action types below, chosen by its `type` field; the variants are mutually-exclusive options, not fields you must all provide. Include only the actions you want. */
-    RemixAction:
-      | components["schemas"]["RemixActionSetBackgroundMusic"]
-      | components["schemas"]["RemixActionSetLogo"]
-      | components["schemas"]["RemixActionEnableCaptions"]
-      | components["schemas"]["RemixActionDisableCaptions"]
-      | components["schemas"]["RemixActionAddTransitions"]
-      | components["schemas"]["RemixActionResizeProject"]
-      | components["schemas"]["RemixActionCleanUpTranscript"]
-      | components["schemas"]["RemixActionConvertImagesToVideos"]
-      | components["schemas"]["RemixActionRegenerateImages"]
-      | components["schemas"]["RemixActionUpscaleAssets"]
-      | components["schemas"]["RemixActionChangeNarrator"]
-      | components["schemas"]["RemixActionShuffleStockVisuals"]
-      | components["schemas"]["RemixActionGenerateMusic"]
-      | components["schemas"]["RemixActionTranslateProject"];
-    RemixProjectRequest: {
-      /** @description Ordered list of edits to apply. Each runs asynchronously as its own remix action. Must contain at least one action. */
-      remixActions: components["schemas"]["RemixAction"][];
-      /** @description When true, the project is duplicated first and the edits are applied to the copy, leaving the original untouched. The response's `projectId` is the copy. Defaults to false (edits the project in place). */
-      saveAsNewProject?: boolean;
-    };
-    /** @description Returned when remix actions are accepted. Poll `GET /v1/projects/{projectId}/remix-actions` for status. */
-    RemixProjectResponse: {
-      /** @description Id of the edited project (e.g. `vg_proj_...`; the duplicate when `saveAsNewProject` was true). */
-      projectId: string;
-      /**
-       * Format: uri
-       * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
-       */
-      projectUrl: string;
-      /** @description Opaque remix action ids (e.g. `vg_rmix_...`), one per requested action in order. */
-      remixActionIds: string[];
-    };
-    RemixActionRun: {
-      /** @description Opaque remix action id (e.g. `vg_rmix_...`). */
-      remixActionId: string;
-      type: components["schemas"]["RemixActionType"];
-      status: components["schemas"]["JobStatus"];
-      /** @description Id of the project this remix action edits (e.g. `vg_proj_...`). */
-      projectId: string;
-      /**
-       * Format: uri
-       * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
-       */
-      projectUrl: string;
-      /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
-      progressPercentage: number;
-      /** @description Zero-based index of the current or most recent execution attempt. */
-      attemptIndex: number;
-      /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
-      error: components["schemas"]["ApiError"] | null;
-    };
-    ListRemixActionsResponse: {
-      /** @description Remix actions for the project, most recent first. */
-      remixActions: components["schemas"]["RemixActionRun"][];
-      /** @description When true, there are more remix actions available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    ScriptToVideoRequest: {
-      /** @description The narration script, used verbatim. This exact text is narrated and turned into a video — it is not rewritten or expanded. */
-      script: string;
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      visualStyle: components["schemas"]["WorkflowVisualStyle"];
-      visualPacing?: components["schemas"]["VisualPacing"];
-      /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your workspace's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. */
-      quality?: components["schemas"]["ModelQuality"];
-      /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
-      language?: string;
-      /** @description Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). A default voice is used when omitted. Any voice may be used here, including voices where `supportsDirectToolExecution` is false. */
-      voiceId?: string | null;
-      /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
-      voiceSpeed?: number;
-      /** @description Optional avatar presenter id from `GET /v1/resources/avatar-presenters` (e.g. `vg_pres_...`). When set, the narration is delivered by a talking-head presenter avatar. Pass your `voiceId` to that endpoint to list presenters sorted by best match for the voice. Omit for a standard voiceover with no presenter. */
-      avatarPresenterId?: string | null;
-      /** @description Optional file ids of images or videos to feature as b-roll (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`. Only image and video files are accepted. */
-      featuredBRollFileIds?: string[];
-      /** @description Optional production notes for the AI that builds the video — visual direction that should not appear in the spoken narration (e.g. on-screen code or text to display, specific b-roll to feature, or scene-by-scene staging). Never spoken; keep the narration itself in `script`. */
-      workflowAgentContext?: string;
-      /** @description Optional timed scene descriptions guiding what to show on screen during each absolute time range of the video. Ranges must be sorted by `startSeconds` and non-overlapping. Omit to let the workflow choose visuals automatically. */
-      scenes?: components["schemas"]["SceneDescriptionRange"][];
-      /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Recommended for script-to-video: `ENABLE_CAPTIONS` to show and style captions, `CONVERT_IMAGES_TO_VIDEOS` to animate still images into clips, `ADD_TRANSITIONS` to stamp transitions between sections, and `SET_LOGO` to overlay a logo (this workflow has no native caption-style or logo fields). See the [Remix actions](/remix-actions) guide. */
-      remixActions?: components["schemas"]["RemixAction"][];
-      /**
-       * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    /** @description A single timed word of a transcript. */
-    TranscriptWord: {
-      /** @description Start time of the word in seconds from the beginning of the audio. */
-      startSeconds: number;
-      /** @description End time of the word in seconds from the beginning of the audio. Must be greater than `startSeconds`. */
-      endSeconds: number;
-      /** @description The spoken word, used verbatim for narration timing and captions. */
-      word: string;
-    };
-    /** @description A transcript of an audio file, as timed words in order. */
-    Transcript: {
-      /** @description Optional BCP-47 language code of the spoken audio (e.g. `en`, `es`). Used to tag the transcript's language; omit if unknown. */
-      languageCode?: string | null;
-      /** @description The transcript words, sorted by `startSeconds` and non-overlapping. Must contain at least one word. */
-      words: components["schemas"]["TranscriptWord"][];
-    };
-    /** @description A description of the visuals to show during an absolute time range of the finished video. */
-    SceneDescriptionRange: {
-      /** @description Start time of the range in seconds from the beginning of the video. */
-      startSeconds: number;
-      /** @description End time of the range in seconds from the beginning of the video. Must be greater than `startSeconds`. */
-      endSeconds: number;
-      /** @description What should be shown on screen during this range (e.g. the b-roll subject, on-screen text, or staging). */
-      description: string;
-    };
-    VoiceoverToVideoRequest: {
-      /** @description Opaque file id of an uploaded voiceover audio file (e.g. `vg_file_...`). Upload the file first via `POST /v1/files/upload`. Attach a pre-computed transcript at upload time (via the `transcript` field on `POST /v1/files/upload`) to skip re-transcription. */
-      fileId: string;
-      /** @description Optional timed scene descriptions guiding what to show on screen during each absolute time range of the video. Ranges must be sorted by `startSeconds` and non-overlapping. Omit to let the workflow choose visuals automatically. */
-      scenes?: components["schemas"]["SceneDescriptionRange"][];
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      visualStyle: components["schemas"]["WorkflowVisualStyle"];
-      visualPacing?: components["schemas"]["VisualPacing"];
-      /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your workspace's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. */
-      quality?: components["schemas"]["ModelQuality"];
-      /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
-      language?: string;
-      /** @description Caption styling. Omit to use the default style with captions shown. Pass an object to override individual style fields (any omitted field uses the default). Pass `null` to hide captions entirely. */
-      captionStyle?: components["schemas"]["WorkflowCaptionStyle"] | null;
-      /** @description Optional file id of an uploaded logo image to overlay on the video (e.g. `vg_file_...`). Upload the image first via `POST /v1/files/upload`. Only image files are accepted. */
-      logoFileId?: string | null;
-      /** @description Optional production notes for the AI that builds the video — visual direction for how to illustrate the voiceover (e.g. on-screen code or text to display, specific b-roll to feature, or scene-by-scene staging). Never spoken; does not change the uploaded voiceover audio or its transcript. */
-      workflowAgentContext?: string;
-      /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Captions and a logo are set with the `captionStyle` and `logoFileId` request fields above; recommended remix actions here are `CONVERT_IMAGES_TO_VIDEOS` to animate still images into clips, and `ADD_TRANSITIONS` to stamp transitions between sections and assets. See the [Remix actions](/remix-actions) guide. */
-      remixActions?: components["schemas"]["RemixAction"][];
-      /**
-       * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    SlideshowToVideoRequest: {
-      /** @description Opaque file id of an uploaded PDF or PowerPoint file (e.g. `vg_file_...`). Upload the file first via `POST /v1/files/upload`. */
-      fileId: string;
-      /** @description Optional per-slide narration, in slide order, applied by index: each slide uses its matching entry, and an empty string makes that slide silent. If you provide fewer entries than slides, the remaining slides are silent; extra entries are ignored. Omit this field entirely to narrate each slide from its speaker notes in the uploaded file. To guarantee no narration on any slide, pass an empty array. */
-      slideScripts?: string[];
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
-      language?: string;
-      /** @description Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). A default voice is used when omitted. Any voice may be used here, including voices where `supportsDirectToolExecution` is false. */
-      voiceId?: string | null;
-      /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
-      voiceSpeed?: number;
-      /** @description Optional avatar presenter id from `GET /v1/resources/avatar-presenters` (e.g. `vg_pres_...`). When set, the narration is delivered by a talking-head presenter avatar. Pass your `voiceId` to that endpoint to list presenters sorted by best match for the voice. Omit for a standard voiceover with no presenter. */
-      avatarPresenterId?: string | null;
-      /** @description Caption styling. Omit to use the default style with captions shown. Pass an object to override individual style fields (any omitted field uses the default). Pass `null` to hide captions entirely. */
-      captionStyle?: components["schemas"]["WorkflowCaptionStyle"] | null;
-      /** @description Optional file id of an uploaded logo image to overlay on the video (e.g. `vg_file_...`). Upload the image first via `POST /v1/files/upload`. Only image files are accepted. */
-      logoFileId?: string | null;
-      /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Captions and a logo are set with the `captionStyle` and `logoFileId` request fields above; recommended remix actions here are `CONVERT_IMAGES_TO_VIDEOS` to animate still images into clips, and `ADD_TRANSITIONS` to stamp transitions between sections and assets. See the [Remix actions](/remix-actions) guide. */
-      remixActions?: components["schemas"]["RemixAction"][];
-      /**
-       * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    /** @description Optional look for a storyboard scene. Full builds always produce a video clip per scene (stills are intermediate first frames). */
-    SceneGeneration: {
-      /** @description A free-form description of the look, appended to the scene prompt (e.g. `loose watercolor illustration with visible brushstrokes`). See the AI styles reference for example descriptions of the app's default styles. No extra style is applied when omitted. */
-      aiStyle?: string | null;
-      /**
-       * @deprecated
-       * @description Deprecated. Ignored. Full builds always produce video clips. Kept so older clients that still send `type` are accepted.
-       * @enum {string}
-       */
-      type?: "AI_IMAGE" | "AI_VIDEO";
-    };
-    /** @description A single scene in the storyboard. Becomes one section in the final video. */
-    GenerateStoryboardScene: {
-      /** @description What to generate for this scene. May optionally embed entity mention tokens of the form `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) so the model can bind names in the prompt to labeled entity reference images. Prefer the structured `actorEntityIds` / `productEntityIds` / `visualStyleEntityId` fields as the primary attachment contract; mention tokens are optional sugar that generation also unions. */
-      prompt: string;
-      /** @description Optional section name for this scene. Defaults to a numbered name. */
-      title?: string;
-      /** @description Optional per-scene look override. Falls back to the request-level `defaultGeneration` when omitted. */
-      generation?: components["schemas"]["SceneGeneration"] | null;
-      /** @description Optional per-scene duration in seconds. Falls back to `defaultDurationSeconds` when omitted. Must be a whole number between 1 and 15 when the scene is animated to video. */
-      durationSeconds?: number | null;
-      /** @description Optional ids of ACTOR entities (e.g. `vg_enti_...`) to feature in this scene. Each entity's reference images are added so the same characters appear in the generated image or video. A scene can feature multiple actors. */
-      actorEntityIds?: string[];
-      /** @description Optional ids of PRODUCT entities (e.g. `vg_enti_...`) to feature in this scene. Each entity's reference images are added so the same products appear in the generated image or video. A scene can feature multiple products. */
-      productEntityIds?: string[];
-      /** @description Optional id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide the look of this scene. */
-      visualStyleEntityId?: string | null;
-      /** @description Optional spoken script for this scene. When provided, the generative video clip speaks this exact text natively (lip-synced). Keep it short enough to speak in one clip (at most about 10 seconds). May optionally embed the same `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) mention tokens as `prompt` so named entities match attached reference identity. Prefer structured entity id fields for attachments; mention tokens are optional. */
-      voiceoverScript?: string | null;
-    };
-    StoryboardToVideoRequest: {
-      /** @description Ordered list of scenes. Each scene becomes one section in the final video, in this order. Must contain at least one scene. */
-      scenes: components["schemas"]["GenerateStoryboardScene"][];
-      /** @description Optional project-level ids of ACTOR entities (e.g. `vg_enti_...`) to register on the storyboard. These stay attached to the project even when no scene references them (e.g. after a scene is removed). Actors referenced by a scene are registered automatically. */
-      actorEntityIds?: string[];
-      /** @description Optional project-level ids of PRODUCT entities (e.g. `vg_enti_...`) to register on the storyboard. These stay attached to the project even when no scene references them (e.g. after a scene is removed). Products referenced by a scene are registered automatically. */
-      productEntityIds?: string[];
-      /** @description Default look applied to scenes that don't set their own `generation`. Defaults to no extra style. */
-      defaultGeneration?: components["schemas"]["SceneGeneration"] | null;
-      /** @description Default per-scene duration in seconds for scenes that don't set their own `durationSeconds`. Defaults to 5. Must be a whole number between 1 and 15. */
-      defaultDurationSeconds?: number;
-      /** @description Generation quality tier for every scene. Optional; when omitted, your workspace's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for storyboard video clips and is rejected. */
-      quality?: components["schemas"]["ModelQuality"];
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      /** @description Optional storyboard-wide production notes for the AI that builds the video (e.g. recurring characters or props, a consistent setting, or overall staging guidance). Applies across every scene; per-scene direction goes in each scene's `prompt`. */
-      workflowAgentContext?: string;
-      /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. `ENABLE_CAPTIONS` shows and styles captions, `SET_BACKGROUND_MUSIC` sets a music track, `ADD_TRANSITIONS` stamps transitions between scenes, and `SET_LOGO` overlays a logo. See the [Remix actions](/remix-actions) guide. */
-      remixActions?: components["schemas"]["RemixAction"][];
-      /**
-       * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    /** @description Creates a project from a text prompt and generates one short AI video clip. VideoGen generates an opening frame from the prompt (optionally guided by reference images), then animates that frame into a video inside an editable project. This workflow does not accept `remixActions`. For a standalone clip without a project, use `POST /v1/tools/generate-video-clip`. For longer narrated multi-scene videos, use `POST /v1/workflows/script-to-video`. */
-    PromptToVideoClipRequest: {
-      /** @description Text prompt describing the video to generate (e.g. `A golden retriever running through a sunlit meadow in slow motion, cinematic`). */
-      prompt: string;
-      /** @description Optional ids of previously uploaded reference images (e.g. `vg_file_...`) that guide the opening frame. Upload files via `POST /v1/files/upload` first. */
-      imageFileIds?: string[];
-      /** @description Desired clip length in whole seconds (1 to 15). Defaults to 10. */
-      durationSeconds?: number;
-      /** @description Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      /** @description Video generation quality tier. Also used for the opening-frame image. Optional; when omitted, your workspace's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video and is rejected. */
-      quality?: components["schemas"]["ModelQuality"];
-      /**
-       * @description When true, the generated OUTPUT files (the opening-frame image and the video clip) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
-       * @default false
-       */
-      isOutputTemporary?: boolean;
-    };
-    /** @description Creates a project from a content outline and generates a full video from it. This is an experimental, fully-agentic workflow: an AI agent reads the outline (a Markdown brief describing the sections, beats, and key points the video should cover), plans the video, and builds it section by section — generating any narration, visuals, and media it needs. Provide a well-structured outline; the richer the brief, the closer the result. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion. */
-    ContentOutlineToVideoRequest: {
-      /** @description The content outline as Markdown — a brief describing what the video should cover. Use headings, bullet lists, and short prose to lay out the sections, beats, and key facts in order (e.g. `# Solar panels explained\n## How they work\n- Photons knock electrons loose...`). The agent grounds the video in this brief. */
-      outlineMarkdown: string;
-      aspectRatio?: components["schemas"]["AspectRatio"];
-      /** @description Optional ids of previously uploaded image or video files (e.g. `vg_file_...`) to make available to the video. The agent decides whether and where to use them. Upload files via `POST /v1/files/upload` first. */
-      inputFileIds?: string[];
-    };
-    /** @description Returned when a workflow run is accepted. Poll `GET /v1/workflows/runs/{workflowRunId}` or subscribe to webhooks for completion. */
-    StartWorkflowRunResponse: {
-      /** @description Opaque workflow run id (e.g. `vg_work_...`). */
-      workflowRunId: string;
-      /** @description Id of the project created for this workflow run (e.g. `vg_proj_...`). */
-      projectId: string;
-      /**
-       * Format: uri
-       * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
-       */
-      projectUrl: string;
-      /** @description Opaque remix action ids (e.g. `vg_rmix_...`), one per `remixActions` entry in request order. Empty when no remix actions were requested. Each runs after the video is built; poll `GET /v1/projects/{projectId}/remix-actions`. */
-      remixActionIds: string[];
-    };
-    WorkflowRun: {
-      /** @description Opaque workflow run id. */
-      workflowRunId: string;
-      status: components["schemas"]["JobStatus"];
-      workflowType: components["schemas"]["WorkflowType"];
-      /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
-      progressPercentage: number;
-      /** @description Zero-based index of the current or most recent execution attempt. */
-      attemptIndex: number;
-      /** @description Id of the project created for this workflow run (e.g. `vg_proj_...`). */
-      projectId: string;
-      /**
-       * Format: uri
-       * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
-       */
-      projectUrl: string;
-      /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
-      error: components["schemas"]["ApiError"] | null;
-    };
-    /** @description Paginated list of API-started workflow runs, most recently created first. */
-    WorkflowRunListResponse: {
-      workflowRuns: components["schemas"]["WorkflowRun"][];
-      /** @description When true, there are more runs available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    /** @description Body POSTed to a registered webhook endpoint when an assistant message reaches a terminal state. Mirrors the `AssistantMessage` GET response. */
-    AssistantMessageWebhookPayload: {
-      event: components["schemas"]["AssistantMessageWebhookEventName"];
-      /** @description Opaque assistant message id (e.g. `vg_mesg_...`). */
-      messageId: string;
-      /** @description Seconds since epoch (Unix timestamp) when the message reached a terminal state. */
-      occurredAt: number;
-      /** @description The full assistant message with its terminal `status`. */
-      message: components["schemas"]["AssistantMessage"];
-    };
-    /** @description Body POSTed to a registered webhook endpoint when a workflow run reaches a terminal state. */
-    WorkflowRunWebhookPayload: {
-      event: components["schemas"]["WorkflowRunWebhookEventName"];
-      /** @description Opaque workflow run id matching the original request. */
-      workflowRunId: string;
-      /** @description Seconds since epoch (Unix timestamp) at which VideoGen observed the terminal state. */
-      occurredAt: number;
-      workflowType: components["schemas"]["WorkflowType"];
-      /** @description Id of the project created for this workflow run (e.g. `vg_proj_...`). */
-      projectId: string;
-      /**
-       * Format: uri
-       * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
-       */
-      projectUrl: string;
-      /** @description Error details. Present (non-null) only on `workflow_run.failed`; `null` otherwise. */
-      error?: components["schemas"]["ApiError"] | null;
-    };
-    /** @description Simplified project metadata. */
-    ProjectResponse: {
-      /** @description Opaque project id (e.g. `vg_proj_...`). */
-      projectId: string;
-      /** @description Opaque id of this project's assistant conversation (e.g. `vg_asst_...`). Use with the Assistant API to send follow-up messages or list the assistant's prior messages for this project. `null` for older projects created before assistant chats were attached at creation time. */
-      assistantId: string | null;
-      title: string;
-      aspectRatio: components["schemas"]["AspectRatio"];
-      /**
-       * @description High-level project status.
-       * @enum {string}
-       */
-      status: "generating" | "ready";
-      /** @description Seconds since epoch (Unix timestamp) when the project was created. */
-      createdAt: number;
-      /** @description Seconds since epoch (Unix timestamp) when the project was last updated. */
-      updatedAt: number;
-      /**
-       * Format: uri
-       * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
-       */
-      projectUrl: string;
-    };
-    /** @description Paginated list of projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` on the request to also include dashboard-created projects. */
-    ListProjectsResponse: {
-      projects: components["schemas"]["ProjectResponse"][];
-      /** @description When true, there are more projects available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    /**
-     * @description Vertical resolution tier for the rendered MP4.
-     * @enum {string}
-     */
-    ExportProjectQuality: "STANDARD" | "HIGH" | "FULL_HIGH" | "ULTRA_HIGH";
-    ExportProjectRequest: {
-      quality?: components["schemas"]["ExportProjectQuality"];
-      watermarkMode?: components["schemas"]["WatermarkMode"];
-      endScreenMode?: components["schemas"]["EndScreenMode"];
-      /** @description Destinations to deliver the finished export to when it completes, in addition to any delivery destinations already saved for the team. Each destination references a connected integration. */
-      deliveryDestinations?: components["schemas"]["ExportDeliveryDestination"][];
-    };
-    ExportDeliveryDestination: {
-      /** @description Id of the connected integration that will receive this export. */
-      integrationConnectionId: string;
-      /**
-       * @description Where to deliver the export within the connected integration.
-       * @enum {string}
-       */
-      type: "SLACK_CHANNEL" | "GOOGLE_DRIVE_FOLDER";
-      /** @description Target channel id. Required when `type` is `SLACK_CHANNEL`. */
-      slackChannelId?: string | null;
-      /** @description Target folder id. Required when `type` is `GOOGLE_DRIVE_FOLDER`. */
-      googleDriveFolderId?: string | null;
-    };
-    ExportProjectResponse: {
-      /** @description Opaque export id (e.g. `vg_expo_...`). Poll `GET /v1/projects/{projectId}/exports/{exportId}` or subscribe to webhooks for completion. */
-      exportId: string;
-    };
-    ProjectExport: {
-      /** @description Opaque export id (e.g. `vg_expo_...`) matching the original request. */
-      exportId: string;
-      /** @description Id of the exported project (e.g. `vg_proj_...`). */
-      projectId: string;
-      status: components["schemas"]["JobStatus"];
-      /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
-      progressPercentage: number;
-      /** @description Zero-based index of the current or most recent export attempt. */
-      attemptIndex: number;
-      /**
-       * Format: uri
-       * @description Private signed MP4 download URL, valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring, so a fresh call to get the export always returns a URL valid long enough to use. See `downloadUrlExpiresAt` for the exact expiry. To fetch a fresh URL directly from the underlying file at any time, use `exportFileId` with the hydrate-file endpoint.
-       */
-      downloadUrl: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` while `downloadUrl` is null. */
-      downloadUrlExpiresAt: number | null;
-      /**
-       * Format: uri
-       * @description Private signed thumbnail URL, valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded` (and when no thumbnail is available). Re-signed automatically on the same terms as `downloadUrl`.
-       */
-      thumbnailUrl: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. `null` while `thumbnailUrl` is null. */
-      thumbnailUrlExpiresAt: number | null;
-      /** @description File id (e.g. `vg_file_...`) of the exported MP4. Always present as a field; `null` until `status` is `succeeded`. Pass it to `POST /v1/files/{fileId}/hydrate` to fetch fresh signed URLs directly from the file at any time, which is useful once the 24-hour URLs above have expired. */
-      exportFileId: string | null;
-      /** @description Hydrated export file metadata with signed download URLs. Always present as a field; `null` until `status` is `succeeded`. Its signed URLs follow the same 24-hour validity and automatic re-signing as `downloadUrl`. */
-      file: components["schemas"]["FileInfo"] | null;
-      /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
-      error: components["schemas"]["ApiError"] | null;
-    };
-    ListProjectExportsResponse: {
-      /** @description Fully hydrated exports for this project, newest first. Each includes status, signed download/thumbnail URLs, and the embedded `file`. */
-      exports: components["schemas"]["ProjectExport"][];
-      /** @description When true, there are more exports available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-    /**
-     * @description Editor interchange document format. `FCPXML` is Final Cut Pro (also imported by DaVinci Resolve and others). `PREMIERE_XML` is the Final Cut 7 `xmeml` XML that Adobe Premiere Pro imports natively. `OTIO` is OpenTimelineIO, the vendor-neutral format. `SRT` is a SubRip caption sidecar.
-     * @enum {string}
-     */
-    TimelineInterchangeFormat: "FCPXML" | "PREMIERE_XML" | "OTIO" | "SRT";
-    /**
-     * @description How the interchange document references media. `REMOTE_URLS` produces a single document that links to signed media URLs. `BUNDLE` produces a zip containing the document plus every referenced media file, referenced by relative path, for durable offline relinking.
-     * @enum {string}
-     */
-    TimelineInterchangeMediaDelivery: "REMOTE_URLS" | "BUNDLE";
-    CreateTimelineInterchangeRequest: {
-      format?: components["schemas"]["TimelineInterchangeFormat"];
-      mediaDelivery?: components["schemas"]["TimelineInterchangeMediaDelivery"];
-    };
-    CreateTimelineInterchangeResponse: {
-      /** @description Opaque timeline interchange job id (e.g. `vg_inte_...`). Poll `GET /v1/timeline-interchange/{interchangeJobId}` for completion. */
-      interchangeJobId: string;
-    };
-    TimelineInterchange: {
-      /** @description Opaque timeline interchange job id (e.g. `vg_inte_...`) matching the original request. */
-      interchangeJobId: string;
-      /** @description Id of the source project (e.g. `vg_proj_...`). */
-      projectId: string;
-      format: components["schemas"]["TimelineInterchangeFormat"];
-      mediaDelivery: components["schemas"]["TimelineInterchangeMediaDelivery"];
-      status: components["schemas"]["JobStatus"];
-      /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
-      progressPercentage: number;
-      /** @description Zero-based index of the current or most recent job attempt. */
-      attemptIndex: number;
-      /**
-       * Format: uri
-       * @description Private signed download URL for the interchange document (or the media bundle zip when `mediaDelivery` is `BUNDLE`), valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring. To fetch a fresh URL directly from the underlying file at any time, use `interchangeFileId` with the hydrate-file endpoint.
-       */
-      downloadUrl: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` while `downloadUrl` is null. */
-      downloadUrlExpiresAt: number | null;
-      /** @description File id (e.g. `vg_file_...`) of the interchange document or bundle zip. Always present as a field; `null` until `status` is `succeeded`. Pass it to `POST /v1/files/{fileId}/hydrate` to fetch fresh signed URLs directly from the file at any time. */
-      interchangeFileId: string | null;
-      /** @description Hydrated interchange file metadata with a signed download URL. Always present as a field; `null` until `status` is `succeeded`. Its signed URL follows the same 24-hour validity and automatic re-signing as `downloadUrl`. */
-      file: components["schemas"]["FileInfo"] | null;
-      /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
-      error: components["schemas"]["ApiError"] | null;
-    };
-    CreateWebhookEndpointRequest: {
-      /**
-       * Format: uri
-       * @description HTTPS URL that will receive webhook POST requests.
-       */
-      url: string;
-      description?: string | null;
-      /** @description Webhook event names to subscribe to. Must contain at least one event. */
-      events: components["schemas"]["WebhookEventName"][];
-    };
-    /** @description Delivered to your webhook endpoint when a tool execution reaches a terminal state. The shape mirrors the `ExecutedTool` response with the addition of `event` and `occurredAt`. */
-    ToolExecutionWebhookPayload: {
-      event: components["schemas"]["ToolExecutionWebhookEventName"];
-      /** @description Execution id matching the original request. */
-      toolExecutionId: string;
-      /** @description Seconds since epoch (Unix timestamp) when the execution reached a terminal state. */
-      occurredAt: number;
-      /** @description Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
-      toolType: string;
-      /** @description One entry per generated result, each with a hydrated `file`. Present only on `tool_execution.succeeded`. */
-      results?: components["schemas"]["ToolSuccessResult"][];
-      /** @description Present only on `tool_execution.failed`. */
-      error?: components["schemas"]["ApiError"] | null;
-    };
-    /** @description Delivered to your webhook endpoint during the file lifecycle (upload, analysis, playback, and download readiness). Only sent for files uploaded via the API. The payload always includes a hydrated `file` object with the latest state. */
-    FileWebhookPayload: {
-      event: components["schemas"]["FileWebhookEventName"];
-      /** @description File id (e.g. `vg_file_...`). */
-      fileId: string;
-      /** @description Seconds since epoch (Unix timestamp) when the event occurred. */
-      occurredAt: number;
-      /** @description Hydrated file object with the latest state at the time of the event. */
-      file: components["schemas"]["FileInfo"];
-      /** @description Error details. Present only on `file.upload.failed` and `file.analysis_failed`. */
-      error?: components["schemas"]["ApiError"] | null;
-    };
-    WebhookEndpoint: {
-      /** @description Webhook endpoint id (e.g. `ep_...`). */
-      endpointId: string;
-      /** Format: uri */
-      url: string;
-      events: components["schemas"]["WebhookEventName"][];
-      description?: string | null;
-      /** @description Seconds since epoch (Unix timestamp) when the endpoint was created. */
-      createdAt: number;
-      /** @description HMAC secret for verifying [Standard Webhooks](https://www.standardwebhooks.com/) signatures. Only returned once on create; store it securely. */
-      signingSecret?: string;
-      /** @description Last four characters of the signing secret, for display purposes. */
-      signingSecretLast4?: string;
-    };
-    WebhookEndpointListResponse: {
-      endpoints: components["schemas"]["WebhookEndpoint"][];
-      /** @description When true, there are more endpoints available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
-      hasMore: boolean;
-      /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
-      nextCursor: string | null;
-    };
-  };
-  responses: never;
-  parameters: {
-    /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-    PaginationLimit: number;
-    /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-    PaginationCursor: string;
-    /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
-    SelfOnlyQuery: boolean;
-    /** @description When true, includes dashboard-created projects in addition to API-created projects. When false (default), returns only API-created projects. */
-    IncludeUiProjectsQuery: boolean;
-    /** @description When true, includes export files — the raw output files of your exports (the rendered MP4 you download from an export). When false (default), they are omitted. Requires the Production API add-on; returns an error if you set it to true without it. */
-    IncludeExportFilesQuery: boolean;
-    /** @description When true, includes project files — the generative files created within a project (e.g. each AI image and text-to-speech file produced inside a script-to-video workflow output). When false (default), they are omitted. Requires the Production API add-on; returns an error if you set it to true without it. */
-    IncludeProjectFilesQuery: boolean;
-    /** @description When true, includes voices that are deprecated but still callable. Defaults to false. */
-    IncludeDeprecatedVoicesQuery: boolean;
-    /** @description Optional reference voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). When provided, avatar presenters are returned sorted by best match for that voice (best first). Omit to return presenters in the default catalogue order. */
-    AvatarPresenterReferenceVoiceIdQuery: string;
-    /** @description The project id (e.g. `vg_proj_...`). */
-    ProjectIdPath: string;
-    /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
-    AssistantIdPath: string;
-    /** @description The assistant message id (e.g. `vg_mesg_...`) returned by an assistant POST. */
-    MessageIdPath: string;
-    /** @description The export id (e.g. `vg_expo_...`) returned by `POST /v1/projects/{projectId}/export`. */
-    ExportIdPath: string;
-    /** @description The timeline interchange job id (e.g. `vg_inte_...`) returned by `POST /v1/projects/{projectId}/timeline-interchange`. */
-    InterchangeJobIdPath: string;
-    /** @description The file id (e.g. `vg_file_...`). */
-    FileIdPath: string;
-    /** @description The entity id (e.g. `vg_enti_...`). */
-    EntityIdPath: string;
-    /** @description When provided, returns only entities of this type. Omit to return all entities. */
-    EntityTypeQuery: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
-    /** @description The workflow run id returned when the workflow was started. */
-    WorkflowRunIdPath: string;
-    /** @description The tool execution id returned when the tool was started. */
-    ToolExecutionIdPath: string;
-    /** @description The webhook endpoint id (e.g. `ep_...`) returned by `POST /v1/webhooks/endpoints`. */
-    WebhookEndpointIdPath: string;
-  };
-  requestBodies: never;
-  headers: never;
-  pathItems: never;
+    schemas: {
+        /**
+         * @description File type. `TEXT` covers plain-text and editor-interchange documents; `LOTTIE` is a JSON animation.
+         * @enum {string}
+         */
+        FileType: "IMAGE" | "VIDEO" | "AUDIO" | "PDF" | "SLIDESHOW" | "TEXT" | "LOTTIE";
+        /** @description Metadata for a generated file. Obtain ids from tool results or `GET /v1/files`. */
+        FileInfo: {
+            /** @description File id (e.g. `vg_file_...`). */
+            fileId: string;
+            /** @description File type. Null when the file is still being processed and the type has not yet been determined. */
+            type?: components["schemas"]["FileType"] | null;
+            /**
+             * @description File scope.
+             *
+             *     - `GLOBAL`: user-uploaded or standalone generated files that persist indefinitely.
+             *     - `PROJECT`: project-specific files (e.g. text-to-speech clips in a generated project).
+             *     - `EXPORT`: project exports.
+             *     - `TEMPORARY`: short-lived files guaranteed to be available for 24 hours, after which they may be archived at any time. Not analyzed (no description, transcript, or embedding).
+             *     - `ENTITY`: files attached to a reusable entity (e.g. a voice sample for an actor), shared across your team.
+             * @enum {string}
+             */
+            scope: "GLOBAL" | "PROJECT" | "EXPORT" | "TEMPORARY" | "ENTITY";
+            /** @description Display name for the file. */
+            displayName?: string;
+            description?: string | null;
+            /** @description Duration in seconds for video and audio files. Null for images. */
+            durationSeconds?: number | null;
+            /** @description Timed transcript for video and audio files, when available, as a `Transcript` object with timed `words`. Null for images or when no transcript has been generated. For plain transcript text, use `transcriptText`. */
+            transcript?: components["schemas"]["Transcript"] | null;
+            /** @description Plain transcript text for video and audio files, when available. Null for images or when no transcript has been generated. */
+            transcriptText?: string | null;
+            /**
+             * Format: uri
+             * @description Private signed URL for the highest-quality downloadable rendition, provided at the top level for convenience. Valid for 7 days from when it was signed. `null` when the rendition is still processing or the URL has not been signed yet. See `downloadUrlExpiresAt` for the exact expiry and `downloadSource` for the full rendition metadata; call `POST /v1/files/{fileId}/hydrate` to refresh it.
+             */
+            downloadUrl?: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` when `downloadUrl` is null. */
+            downloadUrlExpiresAt?: number | null;
+            /**
+             * Format: uri
+             * @description Private signed URL for the thumbnail rendition, provided at the top level for convenience. Valid for 7 days from when it was signed. `null` for file types that have no thumbnail (e.g. audio) or when it has not been signed yet. See `thumbnailSource` for the full rendition metadata.
+             */
+            thumbnailUrl?: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. `null` when `thumbnailUrl` is null. */
+            thumbnailUrlExpiresAt?: number | null;
+            /** @description Thumbnail image source. Populated after hydration. */
+            thumbnailSource?: components["schemas"]["FileSource"] | null;
+            /** @description Preview rendition source (720p for video, resized for images). Populated after hydration. */
+            previewSource?: components["schemas"]["FileSource"] | null;
+            /** @description Highest-quality downloadable rendition. Populated after hydration. */
+            downloadSource?: components["schemas"]["FileSource"] | null;
+            /** @description Private HLS streaming source. Populated for video and audio files once streaming renditions are ready. Uses a signed token; treat like other signed sources. */
+            hlsSource?: components["schemas"]["FileSource"] | null;
+            /** @description Whether public preview is enabled for this file. When true, `staticPublicPreviewSource` is populated for all file types. For video and audio, `publicHlsUrl` and `publicPlaybackId` are also populated once embed streaming is ready. */
+            isPublicPreviewEnabled?: boolean;
+            /** @description Permanent public URL for the file's highest-quality rendition. Populated when `isPublicPreviewEnabled` is true. Does not expire (`expiresAt` is null). Use for direct links to images, downloads, or any file type. For embedded video or audio players, prefer `publicPlaybackId`. */
+            staticPublicPreviewSource?: components["schemas"]["FileSource"] | null;
+            /** @description Public HLS streaming URL for video and audio. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. Prefer `publicPlaybackId` with `@videogen/player` for embeds. */
+            publicHlsUrl?: string | null;
+            /** @description Encoded public playback id (e.g. `vg_play_...`) for video and audio embeds. Pass this to `@videogen/player` or `@videogen/player-react`. Only present when `isPublicPreviewEnabled` is true and embed streaming is ready. For a permanent direct file URL (any type), use `staticPublicPreviewSource` instead. */
+            publicPlaybackId?: string | null;
+            /** @description Tool type that generated this file (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). Only present when the file was created by a tool execution. */
+            sourceToolType?: string;
+            /** @description Execution id of the tool call that generated this file (e.g. `vg_tool_...`). Only present when the file was created by a tool execution. */
+            sourceToolExecutionId?: string;
+            /** @description Background analysis state for the file (used to populate `description`, `transcript`, `durationSeconds`, and the search embedding). Omitted when the file was returned via a path that does not check analysis progress (e.g. tool-result inline files and webhook payloads). */
+            fileAnalysisMetadata?: components["schemas"]["FileAnalysisMetadata"];
+        };
+        /** @description A rendition source for a file (e.g. thumbnail, preview, download). Contains a signed URL and metadata. */
+        FileSource: {
+            /**
+             * @description `pending`: asset is still processing or has not been hydrated yet. `ready`: signed URL is available. `failed`: rendition generation failed. `skipped`: rendition does not apply to this file type (e.g. thumbnail for audio).
+             * @enum {string}
+             */
+            status: "pending" | "ready" | "failed" | "skipped";
+            /** @description Signed URL. Present when status is `ready` and file has been recently hydrated. If missing, call the hydrate endpoint. */
+            url?: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when the signed URL expires. */
+            expiresAt?: number | null;
+            /** @description Rendition width in pixels, when known. */
+            width?: number | null;
+            /** @description Rendition height in pixels, when known. */
+            height?: number | null;
+            /** @description File size in bytes, when known. */
+            fileBytes?: number | null;
+        };
+        /** @description Background analysis state for a file. Background analysis populates `description`, `transcript`, `durationSeconds`, and the search embedding after a file is uploaded or generated; this object lets you render a progress indicator while it runs (and skip rendering once it's done). */
+        FileAnalysisMetadata: {
+            /**
+             * @description Coarse-grained analysis state.
+             *
+             *     - `UNATTEMPTED`: analysis has not started yet.
+             *     - `LOADING`: analysis is in progress.
+             *     - `FULFILLED`: analysis completed successfully. `description`, `transcript`, and `durationSeconds` are now populated where applicable for the file's type.
+             *     - `REJECTED`: analysis failed permanently and will not be retried.
+             * @enum {string}
+             */
+            analysisLoadingState: "UNATTEMPTED" | "LOADING" | "FULFILLED" | "REJECTED";
+            /** @description Progress in `[0, 100]`. Always `100` when `analysisLoadingState` is `FULFILLED`. Otherwise the most recent in-flight progress reported by the analysis task (or `0` if no progress has been reported yet). */
+            analysisProgressPercentage: number;
+            /** @description Zero-based index of the current analysis task attempt. Only present while analysis is still loading (`UNATTEMPTED` or `LOADING`); omitted once analysis reaches a terminal state. */
+            analysisAttemptIndex?: number;
+        };
+        SearchFilesRequest: {
+            /** @description Natural-language search query. The text is embedded and compared against file description vectors using cosine similarity. */
+            query: string;
+            /**
+             * @description Number of results to return (1-100). Defaults to 10.
+             * @default 10
+             */
+            numResults?: number;
+            /**
+             * @description When true, only files created by the calling API key's user are returned. When false (default), all files accessible to the team are included.
+             * @default false
+             */
+            selfOnly?: boolean;
+        };
+        SearchFilesResponse: {
+            results: components["schemas"]["SearchFilesResult"][];
+        };
+        SearchFilesResult: {
+            /**
+             * @description Cosine similarity between the query embedding and the file description embedding. Ranges from 0 (no match) to 1 (identical). Values above 0.7 typically indicate strong relevance.
+             * @example 0.82
+             */
+            similarity: number;
+            file: components["schemas"]["FileInfo"];
+        };
+        CreateFileUploadRequest: {
+            /** @description The type of file to upload. Optional; when omitted, the type is inferred after upload processing completes. */
+            type?: components["schemas"]["FileType"];
+            /** @description Display name for the uploaded file. */
+            displayName: string;
+            /**
+             * @description When true, the file is temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isTemporary?: boolean;
+            /**
+             * @description When true, the file is hidden from the VideoGen Media page by default. It remains accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+            /** @description Optional pre-computed transcript for an audio or video upload, as timed `words`. When provided, transcription is skipped and caption timing matches your transcript. Ignored for non-audio/video files. */
+            transcript?: components["schemas"]["Transcript"] | null;
+        };
+        FileUploadResponse: {
+            /** @description The file id to use in subsequent API calls (e.g. `vg_file_...`). */
+            fileId: string;
+            /** @description Pre-signed URL. PUT the raw file bytes to this URL to complete the upload. */
+            uploadUrl: string;
+        };
+        GetFilesResponse: {
+            files: components["schemas"]["FileInfo"][];
+            /** @description When true, there are more files available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        /** @description A file attached to an entity as a reference image. */
+        EntityReference: {
+            /** @description The reference image file id (e.g. `vg_file_...`). Hydrate it via `GET /v1/files/{fileId}` to fetch a viewable URL. */
+            fileId: string;
+            /** @description Optional description of the reference. Empty string when not set. */
+            description: string;
+            /** @description When true, this is the entity's primary reference (used for its thumbnail). */
+            isDefault: boolean;
+        };
+        /** @description Read-only voice and avatar summary for an ACTOR entity. Always null for VISUAL_STYLE entities. */
+        EntityActorConfig: {
+            /** @description Display name of the actor's voice when one is configured. Null otherwise. */
+            voiceDisplayName?: string | null;
+            /** @description True when the actor has a configured voice. */
+            hasVoice: boolean;
+            /** @description True when the actor has an image reference that can be used with `actorEntityId` for avatar generation. */
+            hasAvatarPresenter: boolean;
+        };
+        /** @description A reusable actor or visual style. Attach its reference images to workflows for consistent characters and looks. */
+        Entity: {
+            /** @description The entity id (e.g. `vg_enti_...`). */
+            entityId: string;
+            /**
+             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images.
+             * @enum {string}
+             */
+            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
+            /** @description Display name. */
+            name: string;
+            /** @description Optional description. Empty string when not set. */
+            description: string;
+            /** @description Voice and presenter summary for ACTOR entities. Null for VISUAL_STYLE entities. */
+            actorConfig?: components["schemas"]["EntityActorConfig"] | null;
+            /** @description Reference images attached to the entity. */
+            references: components["schemas"]["EntityReference"][];
+            /** @description Seconds since epoch (Unix timestamp) when the entity was created. */
+            createdAt: number;
+            /** @description Seconds since epoch (Unix timestamp) when the entity was last updated. */
+            updatedAt: number;
+        };
+        ListEntitiesResponse: {
+            entities: components["schemas"]["Entity"][];
+            /** @description When true, there are more entities available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        CreateEntityRequest: {
+            /**
+             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images.
+             * @enum {string}
+             */
+            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
+            /** @description Display name. */
+            name: string;
+            /** @description Optional description. */
+            description?: string;
+        };
+        /** @description At least one field must be provided. */
+        UpdateEntityRequest: {
+            /** @description New display name. Omit to leave unchanged. */
+            name?: string | null;
+            /** @description New description. Omit to leave unchanged. */
+            description?: string | null;
+        };
+        EntityArchiveResponse: {
+            /** @description The id of the archived entity. */
+            entityId: string;
+            /** @description Always true on success. */
+            archived: boolean;
+        };
+        AddEntityReferenceRequest: {
+            /** @description The file id (e.g. `vg_file_...`) of an image to attach as a reference. */
+            fileId: string;
+            /** @description Optional description of the reference. */
+            description?: string;
+            /**
+             * @description When true, make this the entity's primary reference (used for its thumbnail).
+             * @default false
+             */
+            isDefault?: boolean;
+        };
+        RemoveEntityReferenceRequest: {
+            /** @description The file id (e.g. `vg_file_...`) of the reference to remove. */
+            fileId: string;
+        };
+        /** @description A text-to-speech voice. */
+        TtsVoice: {
+            /** @description Voice id (e.g. `vg_voic_...`). Pass as `voiceId` to `POST /v1/tools/text-to-speech`. */
+            voiceId: string;
+            /** @description Locale tag for the voice (e.g. `en-US`, `es-ES`). */
+            languageCode: string;
+            /** @description Human-readable voice name. */
+            displayName: string;
+            /**
+             * @description Voice gender.
+             * @enum {string}
+             */
+            displayGender: "MALE" | "FEMALE" | "NEUTRAL";
+            /** @description Accent (e.g. `american`, `british`). */
+            accent?: string | null;
+            /** @description Description of the voice. */
+            description?: string | null;
+            /** @description When false, this voice cannot be used directly with `POST /v1/tools/text-to-speech`. All voices, regardless of this field, can be used in full video generation workflows such as script-to-video. */
+            supportsDirectToolExecution: boolean;
+            /** @description When true, this voice can synthesize text in any language regardless of its `languageCode`. When false, the voice only supports its listed language. */
+            supportsAllLanguages: boolean;
+            /** @description When true, this voice is deprecated and may be removed in a future API version. Prefer non-deprecated voices for new integrations. */
+            isDeprecated: boolean;
+        };
+        MeResponse: {
+            /** @description The id of the API key used to authenticate this request. */
+            apiKeyId: string;
+            /** @description The nickname given to the API key when it was created. */
+            apiKeyNickname: string;
+            /** @description The email address of the account the API key belongs to. */
+            email: string;
+            /** @description The display name of the account the API key belongs to. `null` if the account has not set one. */
+            displayName: string | null;
+            /** @description The id of the team the API key belongs to. */
+            teamId: string;
+        };
+        TtsVoiceListResponse: {
+            ttsVoices: components["schemas"]["TtsVoice"][];
+            /** @description When true, there are more voices available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        /** @description A language a project can be translated into. */
+        Language: {
+            /** @description The language code to pass to a `TRANSLATE_PROJECT` remix action (e.g. `es`, `fr`, `ja`). */
+            languageCode: string;
+            /** @description Human-readable English name of the language (e.g. `Spanish`). */
+            name: string;
+        };
+        LanguageListResponse: {
+            languages: components["schemas"]["Language"][];
+        };
+        /**
+         * @description Controls whether the VideoGen watermark is applied to the output. `AUTO` applies the watermark unless you have a Pro plan. `VIDEO_GEN` always applies it. `NONE` removes the watermark (requires Pro; returns an error if you don't have it).
+         * @default AUTO
+         * @enum {string}
+         */
+        WatermarkMode: "NONE" | "VIDEO_GEN" | "AUTO";
+        /**
+         * @description Controls whether a short 'Made with VideoGen' end screen is appended to the output. `AUTO` appends it unless you have a Pro plan. `VIDEO_GEN` always appends it. `NONE` removes it (requires Pro; returns an error if you don't have it).
+         * @default AUTO
+         * @enum {string}
+         */
+        EndScreenMode: "NONE" | "VIDEO_GEN" | "AUTO";
+        /** @description Controls how content-policy rejections are handled during generation. */
+        ContentPolicyConfig: {
+            /**
+             * @description Maximum number of automatic prompt rewrites to attempt after a content-policy rejection before failing. Must be an integer between 0 and 4. 0 (the default) fails on the first rejection and returns the moderation error so you can revise the prompt yourself. Higher values let the request automatically rephrase and retry the prompt.
+             * @default 0
+             */
+            maxPromptRewrites?: number;
+        };
+        /** @description Aspect ratio as a width:height pair (e.g. 16 and 9 for 16:9). Not pixel dimensions. */
+        AspectRatio: {
+            width: number;
+            height: number;
+        };
+        GenerateTextRequest: {
+            /**
+             * @description The instruction or content to generate text from.
+             * @example Write a 30-second upbeat video script about why the sky is blue.
+             */
+            prompt: string;
+            /** @description Optional system instructions that steer the model's role, tone, and constraints. */
+            system?: string | null;
+            /** @description Text generation quality tier. Optional; when omitted, your account's Default AI quality for text is used (change it at https://app.videogen.io/settings/account). */
+            quality?: components["schemas"]["ModelQuality"];
+            /** @description Sampling temperature. Higher values produce more varied output. Defaults to the model's default. */
+            temperature?: number;
+            /**
+             * @description Maximum number of tokens to generate. Defaults to 512.
+             * @default 512
+             */
+            maxOutputTokens?: number;
+        };
+        GenerateTextResponse: {
+            /** @description The generated text. */
+            text: string;
+        };
+        StartAssistantChatRequest: {
+            /**
+             * @description The first message to send to the assistant, exactly as a person would type it into the assistant on a new project.
+             * @example A 30-second explainer about our new pricing tiers
+             */
+            message: string;
+            /**
+             * @description When true, the assistant must respond with at least one workflow suggestion. If it doesn't, the assistant message is settled to `failed` with a `no_workflow_suggestion` error.
+             * @default false
+             */
+            forceWorkflowSuggestion?: boolean;
+            /**
+             * @description When true, the assistant picks the best workflow for the message and immediately starts generating, skipping the suggestion step. When the assistant message reaches `succeeded`, its `generation` carries the workflow run to poll.
+             * @default false
+             */
+            autoGenerate?: boolean;
+        };
+        SendAssistantMessageRequest: {
+            /**
+             * @description The message to send to the assistant in this project chat.
+             * @example Make it more upbeat and add captions
+             */
+            message: string;
+        };
+        ActOnAssistantActionRequest: {
+            /**
+             * @description Whether to approve (apply) or reject the action. Defaults to `APPROVE`.
+             * @default APPROVE
+             * @enum {string}
+             */
+            decision?: "APPROVE" | "REJECT";
+        };
+        /** @description Returned when a `POST /v1/assistants` call is accepted. Poll `messageId` for the pending assistant reply; keep `assistantId` / `projectId` to continue the chat and address the project. */
+        StartAssistantChatResponse: {
+            /** @description Opaque assistant message id for the pending assistant reply (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}`. */
+            messageId: string;
+            /** @description Opaque assistant chat id (e.g. `vg_asst_...`). Pass to `GET /v1/assistants/{assistantId}` and follow-up message/action calls. */
+            assistantId: string;
+            /** @description Opaque project id for the new chat (e.g. `vg_proj_...`). */
+            projectId: string;
+            /**
+             * Format: uri
+             * @description Deep link to open this project in the VideoGen web app.
+             */
+            projectUrl: string;
+        };
+        /** @description Returned when a `POST /v1/assistants/{assistantId}/messages` call is accepted. Use `messageId` to poll the pending assistant reply. */
+        SendAssistantMessageResponse: {
+            /** @description Opaque assistant message id for the pending assistant reply (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}`. */
+            messageId: string;
+        };
+        /** @description Returned when a `POST /v1/assistants/{assistantId}/actions/{actionId}` call is accepted. Use `messageId` to poll the resulting assistant message. */
+        ActOnAssistantActionResponse: {
+            /** @description Opaque assistant message id for the assistant reply produced by acting on the action (e.g. `vg_mesg_...`). Poll `GET /v1/assistant-messages/{messageId}`. */
+            messageId: string;
+        };
+        /**
+         * @description Lifecycle status of an assistant chat message. `pending` and `running` are in-progress; `succeeded`, `failed`, and `cancelled` are terminal.
+         * @enum {string}
+         */
+        AssistantMessageStatus: "pending" | "running" | "succeeded" | "failed" | "cancelled";
+        /**
+         * @description Normalized category of an actionable widget the assistant offered. `APPROVE_PLAN` accepts a proposed generation plan; `APPLY_EDIT` applies a proposed edit (e.g. a rewritten script); `RUN_TOOL` runs an inline tool; `GENERATE` starts building the video; `OPEN_IN_APP` requires the full web app — open the assistant's `projectUrl` instead of acting via the API.
+         * @enum {string}
+         */
+        AssistantActionKind: "APPROVE_PLAN" | "APPLY_EDIT" | "RUN_TOOL" | "GENERATE" | "OPEN_IN_APP";
+        /** @description A starting-point workflow the assistant suggests for the conversation. Act on it with `POST /v1/assistants/{assistantId}/actions/{actionId}` to select the workflow and continue. */
+        AssistantWorkflowSuggestion: {
+            /** @description Opaque id to pass to the act-on-action endpoint to select this workflow. */
+            actionId: string;
+            /** @description Identifier of the suggested workflow. */
+            workflowType: components["schemas"]["WorkflowType"];
+            /** @description Short human-readable name of the suggested workflow. */
+            title: string;
+            /** @description One-line explanation of what this workflow will do. */
+            description: string;
+        };
+        /** @description Extra data for rendering this action inline (in a chat surface or integration) without opening the web app. Fields are populated only when relevant to the action's kind; all are optional. */
+        AssistantActionDetail: {
+            /** @description Human-readable summary of the proposed plan or edit (for `APPROVE_PLAN` and `APPLY_EDIT` actions). */
+            summary?: string | null;
+            /** @description Credits currently remaining on your team (for the usage/credits widget). A whole number of credits. */
+            creditsRemaining?: number | null;
+            /** @description Estimated credit cost of the current workflow (for the cost-estimate widget). A whole number of credits. */
+            estimatedCredits?: number | null;
+        };
+        /** @description An actionable widget the assistant offered on this turn. Act on it with `POST /v1/assistants/{assistantId}/actions/{actionId}` unless `requiresApp` is true. */
+        AssistantAction: {
+            /** @description Opaque id to pass to the act-on-action endpoint. */
+            actionId: string;
+            kind: components["schemas"]["AssistantActionKind"];
+            /** @description Human-readable label describing what acting on this will do. */
+            label: string;
+            /** @description When true, this action can only be completed in the web app; open the assistant's `projectUrl` instead of calling the API. */
+            requiresApp: boolean;
+            /** @description Optional extra data for rendering this action inline without opening the app. */
+            detail?: components["schemas"]["AssistantActionDetail"];
+        };
+        /** @description A file linked to an assistant chat message. */
+        AssistantMessageAttachment: {
+            /** @description File id (e.g. `vg_file_...`) when the attachment is a storage file. `null` for attachments that are not resolvable storage files. */
+            fileId?: string | null;
+            /** @description Human-readable name of the attachment. */
+            displayName: string;
+        };
+        /** @description A user-authored message in an assistant chat. */
+        AssistantInputMessage: {
+            /** @description Opaque assistant message id (e.g. `vg_mesg_...`). */
+            messageId: string;
+            /**
+             * @description Always `user`. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            role: "user";
+            status: components["schemas"]["AssistantMessageStatus"];
+            /** @description The user's message text. */
+            content: string;
+            /** @description Files attached to this message. */
+            attachments: components["schemas"]["AssistantMessageAttachment"][];
+            /** @description Seconds since epoch (Unix timestamp) when the message was created. */
+            createdAt: number;
+        };
+        /** @description An assistant-authored message in an assistant chat, including any suggestions or actions it offered. */
+        AssistantOutputMessage: {
+            /** @description Opaque assistant message id (e.g. `vg_mesg_...`). */
+            messageId: string;
+            /**
+             * @description Always `assistant`. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            role: "assistant";
+            status: components["schemas"]["AssistantMessageStatus"];
+            /** @description The assistant's text reply. `null` while `status` is `pending` or `running`; may be empty when the assistant only offered widgets. */
+            content: string | null;
+            /** @description Files attached to this message. */
+            attachments: components["schemas"]["AssistantMessageAttachment"][];
+            /** @description Workflow starting points the assistant suggested on this message. Empty when none were offered. */
+            workflowSuggestions: components["schemas"]["AssistantWorkflowSuggestion"][];
+            /** @description Actionable widgets the assistant offered on this message (plans, edits, tools, generate). Empty when none were offered. */
+            actions: components["schemas"]["AssistantAction"][];
+            /** @description Present when this message kicked off a workflow run (via `autoGenerate` on start, or acting on a workflow suggestion): the workflow run to poll via `GET /v1/workflows/runs/{workflowRunId}`. */
+            generation: components["schemas"]["StartWorkflowRunResponse"] | null;
+            /** @description Error details. `null` unless `status` is `failed`. */
+            error: components["schemas"]["ApiError"] | null;
+            /** @description Seconds since epoch (Unix timestamp) when the message was created. */
+            createdAt: number;
+        };
+        /** @description A single message in an assistant chat. Discriminated by `role`. */
+        AssistantMessage: components["schemas"]["AssistantInputMessage"] | components["schemas"]["AssistantOutputMessage"];
+        /** @description An assistant chat and every message it currently contains. */
+        GetAssistantResponse: {
+            /** @description Opaque assistant chat id (e.g. `vg_asst_...`). */
+            assistantId: string;
+            /** @description Opaque project id of the project this chat belongs to (e.g. `vg_proj_...`). */
+            projectId: string;
+            /**
+             * Format: uri
+             * @description Deep link to open this chat's project in the VideoGen web app. Visible only to members of your team and project collaborators.
+             */
+            projectUrl: string;
+            /** @description Every message in the chat in chronological order (oldest first). */
+            messages: components["schemas"]["AssistantMessage"][];
+        };
+        GenerateImageRequest: {
+            /**
+             * @description Text prompt describing the image to generate. When reference images are provided, the prompt describes the desired transformation.
+             * @example A serene Japanese garden with cherry blossoms at golden hour
+             */
+            prompt: string;
+            /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. Maximum 4 images. When provided, the model uses these as guidance for generation. */
+            imageFileIds?: string[];
+            /** @description Aspect ratio for the generated image. Defaults to 16:9 when omitted. */
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /** @description Image generation quality tier. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). */
+            quality?: components["schemas"]["ModelQuality"];
+            contentPolicyConfig?: components["schemas"]["ContentPolicyConfig"];
+            watermarkMode?: components["schemas"]["WatermarkMode"];
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /** @description At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. */
+        GenerateVideoClipRequest: {
+            /**
+             * @description Text prompt describing the video to generate. Optional when reference media is provided. Describe the video in plain language; any reference media you provide is incorporated automatically.
+             * @example A golden retriever running through a sunlit meadow in slow motion, cinematic
+             */
+            prompt?: string;
+            /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the images are animated or used as visual guidance for the generated video. */
+            imageFileIds?: string[];
+            /** @description Optional file ids of reference videos (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. They are used as motion or style guidance for the generated video. */
+            videoFileIds?: string[];
+            /** @description Optional file ids of reference audio clips (e.g. `["vg_file_..."]`) used for native lip-sync and soundtrack. Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
+            audioFileIds?: string[];
+            /**
+             * @description When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false.
+             * @default false
+             */
+            generateAudio?: boolean;
+            /** @description Desired clip length in seconds. A whole number between 1 and 15. Defaults to 6 when omitted. This endpoint produces a single short clip. For longer, multi-scene, professionally edited videos, use a video workflow such as `POST /v1/workflows/script-to-video`. */
+            durationSeconds?: number | null;
+            /** @description Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /** @description Video generation quality tier. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video clip generation and is rejected. */
+            quality?: components["schemas"]["ModelQuality"];
+            contentPolicyConfig?: components["schemas"]["ContentPolicyConfig"];
+            watermarkMode?: components["schemas"]["WatermarkMode"];
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        GenerateMotionGraphicRequest: {
+            /**
+             * @description Text prompt describing the animated motion graphic to generate. Describe the on-screen elements, any text and how it should animate, and the overall motion in plain language.
+             * @example A dark terminal window that types out the command `npm run build` character by character, then shows a green success checkmark
+             */
+            prompt: string;
+            /** @description Optional file ids of uploaded reference media (images, videos, or audio) the motion graphic may display or animate (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
+            fileIds?: string[];
+            /** @description Desired length of the motion graphic in seconds, a whole number between 1 and 300. When omitted, the duration is chosen automatically to fit the prompt (recommended). */
+            durationSeconds?: number | null;
+            /** @description Aspect ratio for the generated motion graphic. Defaults to 16:9 when omitted. */
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /**
+             * @description When true, renders the motion graphic with a transparent background as a WebM video suitable for overlaying on other video or images. Set to false for an opaque MP4. Defaults to true.
+             * @default true
+             */
+            transparentBackground?: boolean;
+            /** @description Optional per-capability controls for the media the motion graphic may generate or fetch (generated images, generated video clips, generated voiceover, and stock media search). Each capability is AUTO, ENABLED, or DISABLED. Omit to use AUTO for every capability. */
+            subToolModes?: components["schemas"]["MotionGraphicSubToolModes"];
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /**
+         * @description Access mode for a motion graphic capability. AUTO uses the capability only when it is available on your plan (generated video clips require a paid plan). ENABLED forces the capability on and returns an upgrade error if your plan lacks it. DISABLED prevents the motion graphic from using the capability.
+         * @enum {string}
+         */
+        MotionGraphicSubToolMode: "AUTO" | "ENABLED" | "DISABLED";
+        /** @description Per-capability access modes for a motion graphic. Any omitted capability defaults to AUTO. */
+        MotionGraphicSubToolModes: {
+            /** @description Whether the motion graphic may generate images. Defaults to AUTO. */
+            generateImages?: components["schemas"]["MotionGraphicSubToolMode"];
+            /** @description Whether the motion graphic may generate video clips. Requires a paid plan. Defaults to AUTO. */
+            generateVideoClips?: components["schemas"]["MotionGraphicSubToolMode"];
+            /** @description Whether the motion graphic may generate voiceover audio. Defaults to AUTO. */
+            generateVoiceover?: components["schemas"]["MotionGraphicSubToolMode"];
+            /** @description Whether the motion graphic may search stock media. Defaults to AUTO. */
+            searchStockMedia?: components["schemas"]["MotionGraphicSubToolMode"];
+        };
+        PronunciationReplacement: {
+            original: string;
+            replacement: string;
+        };
+        TextToSpeechRequest: {
+            ttsText: string;
+            /** @description Voice id from `GET /v1/resources/tts-voices`. Only voices with `supportsDirectToolExecution` set to true are accepted. */
+            voiceId: string;
+            /** @description ISO-639-1 language hint for pronunciation (e.g. `en`, `es`, `zh`). */
+            speechLanguageCode?: string | null;
+            pronunciationReplacements?: components["schemas"]["PronunciationReplacement"][];
+            /** @description When true, automatically expands numbers, symbols, acronyms, and other non-word tokens into their spoken forms before synthesis so the voice pronounces them correctly (e.g. `$100` → `one hundred dollars`, `NASA` → `nasa`, `3rd` → `third`). Defaults to false when omitted. */
+            autoExpandPronunciationReplacements?: boolean;
+            /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
+            voiceSpeed?: number;
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        GenerateSoundEffectRequest: {
+            /** @description A text description of the sound effect to generate. */
+            prompt: string;
+            /** @description Desired length of the sound effect in seconds, between 1 and 30. Defaults to about 10 seconds when omitted. */
+            durationSeconds?: number | null;
+            /** @description How closely the generated sound effect follows the prompt, between 0 (more creative, more variation) and 1 (more literal, less variation). Defaults to a balanced value when omitted. */
+            promptInfluence?: number | null;
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        GenerateMusicRequest: {
+            /** @description A text description of the music to generate. Include genre, mood, instrumentation, and tempo for best results. */
+            prompt: string;
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /** @description Generate a talking-head avatar from an ACTOR entity and audio. */
+        GenerateAvatarRequest: {
+            /** @description The id of an ACTOR entity (e.g. `vg_enti_...`) with at least one image reference. */
+            actorEntityId: string;
+            /** @description Avatar generation quality tier. Optional; when omitted, your account's Default AI quality for avatars is used. */
+            avatarQuality?: components["schemas"]["ModelQuality"];
+            /** @description File id of an AUDIO file (e.g. `vg_file_...`), typically from a prior text-to-speech result. Upload a file first via `POST /v1/files/upload` or generate one with `POST /v1/tools/text-to-speech`, then pass the returned id here. */
+            audioFileId: string;
+            watermarkMode?: components["schemas"]["WatermarkMode"];
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        ImageAssetRequest: {
+            /** @description File id of the source image (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. */
+            imageFileId: string;
+            watermarkMode?: components["schemas"]["WatermarkMode"];
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /**
+         * @description AI generation quality tier, shared across every generative feature (image, video, text, and so on). `LOW` is fastest and cheapest, `STANDARD` balances quality and cost, `HIGH` is higher quality, and `MAX` is the highest quality.
+         *
+         *     When a request omits the quality field, VideoGen falls back to your account's **Default AI quality** for that feature, which you can change at [Account settings](https://app.videogen.io/settings/account). Not every feature supports every tier; unsupported tiers are rejected with an error (see each field's description).
+         * @enum {string}
+         */
+        ModelQuality: "LOW" | "STANDARD" | "HIGH" | "MAX";
+        VideoAssetRequest: {
+            /** @description File id of the source video (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. */
+            videoFileId: string;
+            watermarkMode?: components["schemas"]["WatermarkMode"];
+            /**
+             * @description Number of output results to generate. Defaults to 1.
+             * @default 1
+             */
+            numResults?: number;
+            /**
+             * @description When true, generated files are temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /** @description Returned when a tool execution is started. Use `toolExecutionId` to poll for results or cancel. */
+        StartToolExecutionResponse: {
+            /** @description Execution id (e.g. `vg_tool_...`). */
+            toolExecutionId: string;
+        };
+        /**
+         * @description Lifecycle status shared by every asynchronous job (tool executions, workflow runs, remix actions, project exports, and timeline interchange jobs). `pending` and `running` are in-progress; `succeeded`, `failed`, and `cancelled` are terminal.
+         * @enum {string}
+         */
+        JobStatus: "pending" | "running" | "succeeded" | "failed" | "cancelled";
+        /** @description Result for a single generated file. Only appears inside a succeeded execution's `results`, so every field below is always present. */
+        ToolSuccessResult: {
+            /** @description File id for the generated asset. */
+            fileId: string;
+            /** @description File type. */
+            type: components["schemas"]["FileType"];
+            /**
+             * Format: uri
+             * @description Private signed download URL for the generated file, valid for 7 days from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. When you GET a single execution it is automatically re-signed if within an hour of expiring; list endpoints do not re-sign, so there it may be expired (check `downloadUrlExpiresAt`). See `downloadUrlExpiresAt` for the exact expiry. Null only in the rare case that the highest-quality rendition is still finalizing.
+             */
+            downloadUrl: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. Null only when `downloadUrl` is null. */
+            downloadUrlExpiresAt: number | null;
+            /**
+             * Format: uri
+             * @description Private signed thumbnail URL for the generated file, valid for 7 days from when it was signed. Provided at the top level for convenience so you don't have to read it out of `file`. Re-signed on the same terms as `downloadUrl` (single-execution GET re-signs when near expiry; list endpoints do not). Null for file types that have no thumbnail (e.g. audio).
+             */
+            thumbnailUrl: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. Null when there is no thumbnail URL. */
+            thumbnailUrlExpiresAt: number | null;
+            /** @description Hydrated file metadata with signed download URLs (always present and hydrated for a succeeded result). Its signed URLs follow the same 24-hour validity and automatic re-signing as `downloadUrl`. */
+            file: components["schemas"]["FileInfo"];
+        };
+        /** @description What is needed to resolve an error, when it can be fixed by fulfilling a specific requirement (e.g. purchasing an add-on or upgrading the plan). */
+        ErrorRequirement: {
+            /** @description Machine-readable requirement type in snake_case (e.g. `purchase_add_on`, `upgrade_plan`). */
+            type: string;
+            /** @description Key-value pairs with requirement-specific context (e.g. the add-on id to purchase). */
+            details?: {
+                [key: string]: string;
+            };
+        };
+        /**
+         * @description Standard error body returned with every non-2xx response (the `default` response of every operation). The HTTP status code conveys the error class; this body carries the details:
+         *
+         *     - `400` invalid request, `401` missing or invalid API key, `403` not permitted (e.g. plan or add-on required, see `requirement`), `404` not found, `409` conflict, `429` rate limited or out of credits, `5xx` server error.
+         *
+         *     Common `code` values include `invalid_request`, `invalid_api_key`, `not_authorized`, `not_found`, `insufficient_credits`, and `rate_limited`. Always branch on `code` (and `requirement.type` when present) rather than parsing `message`.
+         */
+        ApiError: {
+            /** @description Human-readable error description. For display and logging only; do not branch on its exact text. */
+            message: string;
+            /** @description Machine-readable error code in snake_case (e.g. `invalid_api_key`, `insufficient_credits`). `null` when no specific code applies. */
+            code?: string | null;
+            /** @description What is needed to resolve the error. Present when the error can be fixed by fulfilling a specific requirement (e.g. purchasing an add-on); `null` otherwise. */
+            requirement?: components["schemas"]["ErrorRequirement"] | null;
+            /** @description Opaque internal error code for debugging. Include this when contacting support. `null` when not applicable. */
+            internalErrorCode?: string | null;
+        };
+        ExecutedTool: {
+            /** @description Execution id matching the original request. */
+            toolExecutionId: string;
+            status: components["schemas"]["JobStatus"];
+            /** @description Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
+            toolType: string;
+            /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+            progressPercentage: number;
+            /** @description Zero-based index of the current or most recent execution attempt. */
+            attemptIndex: number;
+            /** @description One entry per generated result. Always present; empty until `status` is `succeeded`, then one entry per generated file (each with signed URLs and a hydrated `file`). */
+            results: components["schemas"]["ToolSuccessResult"][];
+            /** @description Error details. Always present; `null` unless `status` is `failed`. */
+            error: components["schemas"]["ApiError"] | null;
+        };
+        /** @description Paginated list of API-started tool executions, most recently created first. */
+        ToolExecutionListResponse: {
+            toolExecutions: components["schemas"]["ExecutedTool"][];
+            /** @description When true, there are more executions available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        /**
+         * @description Webhook event types for tool execution lifecycle.
+         * @enum {string}
+         */
+        ToolExecutionWebhookEventName: "tool_execution.succeeded" | "tool_execution.failed" | "tool_execution.cancelled";
+        /**
+         * @description Lifecycle events emitted for workflow runs started via the developer API.
+         * @enum {string}
+         */
+        WorkflowRunWebhookEventName: "workflow_run.succeeded" | "workflow_run.failed" | "workflow_run.cancelled";
+        /**
+         * @description Webhook event types for the file lifecycle (upload, analysis, playback, and download readiness). Only fired for files uploaded via the API (not the VideoGen UI).
+         * @enum {string}
+         */
+        FileWebhookEventName: "file.upload.completed" | "file.upload.failed" | "file.playback_ready" | "file.download_ready" | "file.analysis_completed" | "file.analysis_failed";
+        /**
+         * @description Lifecycle events for assistant messages started via the developer API.
+         * @enum {string}
+         */
+        AssistantMessageWebhookEventName: "assistant_message.succeeded" | "assistant_message.failed" | "assistant_message.cancelled";
+        /**
+         * @description All webhook event types. Use when creating or listing webhook endpoints.
+         * @enum {string}
+         */
+        WebhookEventName: "tool_execution.succeeded" | "tool_execution.failed" | "tool_execution.cancelled" | "workflow_run.succeeded" | "workflow_run.failed" | "workflow_run.cancelled" | "assistant_message.succeeded" | "assistant_message.failed" | "assistant_message.cancelled" | "file.upload.completed" | "file.upload.failed" | "file.playback_ready" | "file.download_ready" | "file.analysis_completed" | "file.analysis_failed";
+        /**
+         * @description Workflow type identifier.
+         * @enum {string}
+         */
+        WorkflowType: "SCRIPT_TO_VIDEO" | "VOICEOVER_TO_VIDEO" | "SLIDESHOW_TO_VIDEO" | "STORYBOARD_TO_VIDEO" | "PROMPT_TO_VIDEO_CLIP" | "CONTENT_OUTLINE_TO_VIDEO";
+        /**
+         * @description How quickly visuals change. FAST shows more, shorter shots; SLOW holds each visual longer. Defaults to MEDIUM.
+         * @default MEDIUM
+         * @enum {string}
+         */
+        VisualPacing: "FAST" | "MEDIUM" | "SLOW";
+        /** @description Visual style for the generated b-roll. */
+        WorkflowVisualStyle: {
+            /**
+             * @description STOCK pulls stock footage and images. AI_IMAGE generates a styled image for each section. ENTITY generates images that match a visual-style entity's reference images for a consistent look.
+             * @enum {string}
+             */
+            type: "STOCK" | "AI_IMAGE" | "ENTITY";
+            /** @description Only applies when type is AI_IMAGE. A free-form description of the look applied to every generated image (e.g. `vintage 1970s film photography, warm grain`). See the AI styles reference for example descriptions of the app's default styles. Required when type is AI_IMAGE. */
+            aiStyle?: string;
+            /** @description Only applies when type is ENTITY. The id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide every generated image. Required when type is ENTITY. */
+            entityId?: string;
+            /**
+             * @description Only applies when type is AI_IMAGE. When true, featured b-roll images you provide are re-rendered in the chosen style so they match the generated look (no effect on featured b-roll videos). Defaults to true.
+             * @default true
+             */
+            restyleFeaturedBRollWithAiStyle?: boolean;
+        };
+        /** @description An RGB color. Each channel is an integer from 0 to 255. */
+        WorkflowRgbColor: {
+            red: number;
+            green: number;
+            blue: number;
+        };
+        /** @description Background drawn behind caption text. */
+        WorkflowCaptionBackgroundStyle: {
+            /**
+             * @description RECT draws one rectangle behind the whole line; WRAPPED hugs the text; WORD_BY_WORD draws a box per word.
+             * @enum {string}
+             */
+            type: "RECT" | "WRAPPED" | "WORD_BY_WORD";
+            backgroundColor: components["schemas"]["WorkflowRgbColor"];
+            /** @description Corner rounding as a proportion of the background height, between 0 (square corners) and 1 (fully rounded). */
+            borderRadiusProportion?: number;
+            /** @description Background opacity from 0 (transparent) to 1 (opaque). */
+            opacityProportion?: number;
+        };
+        /** @description Caption styling. Any omitted field falls back to the VideoGen default caption style. Provide an empty object (`{}`) to keep the default style but ensure captions are shown. Pass `null` for the whole `captionStyle` field to hide captions entirely. */
+        WorkflowCaptionStyle: {
+            /** @description Font family name. */
+            fontName?: string;
+            /** @description Font size in pixels at 1080p. Must be greater than 0. */
+            fontSize?: number;
+            /**
+             * @description Numeric font weight (400 = regular, 700 = bold).
+             * @enum {integer}
+             */
+            fontWeight?: 100 | 200 | 300 | 400 | 500 | 600 | 700 | 800 | 900;
+            textColor?: components["schemas"]["WorkflowRgbColor"];
+            /** @enum {string} */
+            textJustification?: "LEFT" | "CENTER" | "RIGHT";
+            /**
+             * @description Vertical position of the caption block in the frame.
+             * @enum {string}
+             */
+            verticalAlignment?: "TOP" | "MIDDLE" | "BOTTOM";
+            /** @description Outline color around glyphs, or null for no outline. */
+            strokeColor?: components["schemas"]["WorkflowRgbColor"] | null;
+            /** @description Outline thickness in pixels. 0 disables the outline. */
+            strokeWeight?: number;
+            /** @description Background drawn behind the text, or null for no background. */
+            backgroundStyle?: components["schemas"]["WorkflowCaptionBackgroundStyle"] | null;
+            /** @description Color applied to the currently spoken word for karaoke-style highlighting, or null to keep the base text color. */
+            spokenTextColor?: components["schemas"]["WorkflowRgbColor"] | null;
+            /** @description Outline color applied to the currently spoken word, or null. */
+            spokenTextStrokeColor?: components["schemas"]["WorkflowRgbColor"] | null;
+            /** @description When true, a word keeps the spoken-text color after it has been spoken instead of reverting. */
+            persistSpokenTextColor?: boolean;
+        };
+        /**
+         * @description The kind of edit a remix action applies.
+         * @enum {string}
+         */
+        RemixActionType: "SET_BACKGROUND_MUSIC" | "SET_LOGO" | "ENABLE_CAPTIONS" | "DISABLE_CAPTIONS" | "ADD_TRANSITIONS" | "RESIZE_PROJECT" | "CLEAN_UP_TRANSCRIPT" | "CONVERT_IMAGES_TO_VIDEOS" | "REGENERATE_IMAGES" | "UPSCALE_ASSETS" | "CHANGE_NARRATOR" | "SHUFFLE_STOCK_VISUALS" | "GENERATE_MUSIC" | "TRANSLATE_PROJECT";
+        /**
+         * @description A transition applied at a boundary. `DYNAMIC` auto-varies the style across boundaries; `NONE` removes transitions; the rest apply that fixed style everywhere.
+         * @enum {string}
+         */
+        RemixTransitionStyle: "DYNAMIC" | "NONE" | "FADE" | "RISE" | "PAN" | "POP" | "WIPE";
+        /** @description Set, replace, or remove the project's background music track. */
+        RemixActionSetBackgroundMusic: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "SET_BACKGROUND_MUSIC";
+            /** @description File id of an uploaded audio file to use as background music (e.g. `vg_file_...`). Upload it first via `POST /v1/files/upload`. Pass `null` to remove the existing background music. */
+            fileId?: string | null;
+            /** @description Music volume from 0 (silent) to 1 (full). Omit or pass `null` to keep the current volume. */
+            volume?: number | null;
+        };
+        /** @description Set, replace, or remove the logo overlay. */
+        RemixActionSetLogo: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "SET_LOGO";
+            /** @description File id of an uploaded image to overlay as a logo (e.g. `vg_file_...`). Upload it first via `POST /v1/files/upload`. Pass `null` to remove the existing logo. */
+            fileId?: string | null;
+            /**
+             * @description Position the logo is anchored to. Omit or pass `null` to keep the current position.
+             * @enum {string|null}
+             */
+            position?: "TOP_LEFT" | "TOP_CENTER" | "TOP_RIGHT" | "BOTTOM_LEFT" | "BOTTOM_CENTER" | "BOTTOM_RIGHT" | null;
+            /** @description Logo width as a percentage of the video width. Omit or pass `null` to keep the current size. */
+            sizePercent?: number | null;
+        };
+        /** @description Show captions on every captionable section. Optionally override the project caption style. */
+        RemixActionEnableCaptions: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "ENABLE_CAPTIONS";
+            /** @description Caption styling to apply. Omit or pass `null` to show captions with the current style. Any provided field overrides that field; omitted fields keep their current value. */
+            captionStyle?: components["schemas"]["WorkflowCaptionStyle"] | null;
+        };
+        /** @description Hide captions on every captionable section. */
+        RemixActionDisableCaptions: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "DISABLE_CAPTIONS";
+        };
+        /** @description Stamp transitions across the project. Not per-boundary: each field you set is applied uniformly to every boundary in that scope, replacing any transition already there. Set the transition between sections, between base-layer assets, or both; omit or pass `null` for a scope to leave its transitions untouched. */
+        RemixActionAddTransitions: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "ADD_TRANSITIONS";
+            /** @description Transition applied at every boundary between sections, replacing any existing section transitions. Omit or pass `null` to leave section transitions untouched. */
+            sectionTransition?: components["schemas"]["RemixTransitionStyle"] | null;
+            /** @description Transition applied at every boundary between base-layer assets within sections, replacing any existing asset transitions. Omit or pass `null` to leave asset transitions untouched. */
+            assetTransition?: components["schemas"]["RemixTransitionStyle"] | null;
+        };
+        /** @description Change the project's output aspect ratio (e.g. to a vertical 9:16 social format). The video is re-flowed to the new ratio. */
+        RemixActionResizeProject: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "RESIZE_PROJECT";
+            aspectRatio: components["schemas"]["AspectRatio"];
+        };
+        /** @description Tighten every transcript in the project by removing silent pauses and/or filler words. Useful for polishing narration captured from raw recordings. */
+        RemixActionCleanUpTranscript: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "CLEAN_UP_TRANSCRIPT";
+            /** @description Remove filler words ("um", "uh", …). Defaults to `true`. */
+            removeFillers?: boolean | null;
+            /** @description Remove silent pauses longer than `minPauseSeconds`. Defaults to `true`. */
+            removePauses?: boolean | null;
+            /** @description Override the filler-word list to remove. Omit or pass `null` to use the built-in defaults. */
+            fillerWords?: string[] | null;
+            /** @description Shortest pause (in seconds) to remove; pauses below this stay. Omit or pass `null` to use the default threshold. */
+            minPauseSeconds?: number | null;
+        };
+        /** @description Animate every eligible still image in the project into a short AI video clip (image-to-video), replacing each image in place. Eligible images are non-SVG image assets backed by an uploaded or stock file. Runs asynchronously: one clip is generated per image. If the project has no eligible images, the action is skipped and completes successfully without changing anything (for example, a project whose timeline is already all video clips). */
+        RemixActionConvertImagesToVideos: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "CONVERT_IMAGES_TO_VIDEOS";
+            /** @description Describe the motion to apply to every image (e.g. "slow cinematic push-in"). Omit or pass `null` for automatic motion. */
+            motionPrompt?: string | null;
+            /** @description Mute the generated clips and suppress generated background music. Recommended when the clips sit behind a voiceover. Defaults to `true`. */
+            muteOutputVideos?: boolean | null;
+            /** @description Video generation quality tier for the image-to-video conversions. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video and is rejected. */
+            quality?: components["schemas"]["ModelQuality"];
+        };
+        /** @description Restyle every eligible still image in the project to a new look (image-to-image), replacing each image in place. Eligible images are non-SVG image assets backed by an uploaded or generated file. Runs asynchronously: one restyled image is generated per eligible image. If the project has no eligible images, the action is skipped and completes successfully without changing anything. */
+        RemixActionRegenerateImages: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "REGENERATE_IMAGES";
+            /** @description Describe the visual style to apply to every image (e.g. "watercolor painting", "cinematic film still"). */
+            stylePrompt: string;
+            /** @description Image generation quality tier for the restyled images. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). */
+            quality?: components["schemas"]["ModelQuality"];
+        };
+        /** @description Sharpen every eligible asset in the project up to 4K, replacing each in place. Runs asynchronously: one upscaled asset is generated per eligible asset. If the project has no eligible assets, the action is skipped and completes successfully without changing anything. */
+        RemixActionUpscaleAssets: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "UPSCALE_ASSETS";
+            /** @description Also upscale video assets (billed per output second). Defaults to `true`. */
+            includeVideos?: boolean | null;
+            /** @description Also upscale stock (library) assets, not just uploaded or generated ones. Defaults to `true`. */
+            includeStockContent?: boolean | null;
+        };
+        /** @description Re-narrate every AI-voiceover asset in the project with a new voice and optional actor avatar, replacing each narration in place. Runs asynchronously: text-to-speech is re-fired per asset with the original narration text. If the project has no AI-narrated assets, the action is skipped and completes successfully without changing anything. */
+        RemixActionChangeNarrator: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "CHANGE_NARRATOR";
+            /** @description Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`) to re-narrate with. */
+            voiceId: string;
+            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            actorEntityId?: string | null;
+            /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
+            avatarQuality?: components["schemas"]["ModelQuality"];
+            /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Omit or pass `null` to keep each asset's current speed. */
+            voiceSpeed?: number | null;
+        };
+        /** @description Replace every stock (library) visual in the project with a fresh alternative from the same search, replacing each in place. Runs asynchronously: each stock asset's original search is re-run, excluding the currently-shown result. If the project has no shuffleable stock visuals, the action is skipped and completes successfully without changing anything. */
+        RemixActionShuffleStockVisuals: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "SHUFFLE_STOCK_VISUALS";
+        };
+        /** @description Generate a background music track from a text prompt and set it as the project's background music, replacing any existing track. Runs asynchronously. */
+        RemixActionGenerateMusic: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "GENERATE_MUSIC";
+            /** @description Describe the music to generate (e.g. "upbeat corporate background music with a driving beat"). */
+            prompt: string;
+        };
+        /** @description Translate the whole project into another language: every piece of text (title, section names, on-screen text overlays, transcripts, and narration scripts) is translated, and — unless disabled — each AI voiceover is re-narrated in the new language. Runs asynchronously. Requires a Pro subscription. Retrieve the list of supported language codes from `GET /v1/resources/languages`. */
+        RemixActionTranslateProject: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "TRANSLATE_PROJECT";
+            /** @description Target language code to translate the project into (e.g. `es`, `fr`, `ja`). Must be one of the codes returned by `GET /v1/resources/languages`. */
+            languageCode: string;
+            /** @description Swap each AI voiceover to a voice that natively matches the target language. Recommended, since keeping the original voice usually produces a foreign accent. Defaults to `true`. */
+            changeVoice?: boolean | null;
+            /** @description Also re-generate every eligible image so that text baked into the image is translated too (image-to-image). Billed per generated image. Defaults to `false`. */
+            translateImageText?: boolean | null;
+        };
+        /** @description A single edit applied to a project. Each array entry is exactly one of the action types below, chosen by its `type` field; the variants are mutually-exclusive options, not fields you must all provide. Include only the actions you want. */
+        RemixAction: components["schemas"]["RemixActionSetBackgroundMusic"] | components["schemas"]["RemixActionSetLogo"] | components["schemas"]["RemixActionEnableCaptions"] | components["schemas"]["RemixActionDisableCaptions"] | components["schemas"]["RemixActionAddTransitions"] | components["schemas"]["RemixActionResizeProject"] | components["schemas"]["RemixActionCleanUpTranscript"] | components["schemas"]["RemixActionConvertImagesToVideos"] | components["schemas"]["RemixActionRegenerateImages"] | components["schemas"]["RemixActionUpscaleAssets"] | components["schemas"]["RemixActionChangeNarrator"] | components["schemas"]["RemixActionShuffleStockVisuals"] | components["schemas"]["RemixActionGenerateMusic"] | components["schemas"]["RemixActionTranslateProject"];
+        RemixProjectRequest: {
+            /** @description Ordered list of edits to apply. Each runs asynchronously as its own remix action. Must contain at least one action. */
+            remixActions: components["schemas"]["RemixAction"][];
+            /** @description When true, the project is duplicated first and the edits are applied to the copy, leaving the original untouched. The response's `projectId` is the copy. Defaults to false (edits the project in place). */
+            saveAsNewProject?: boolean;
+        };
+        /** @description Returned when remix actions are accepted. Poll `GET /v1/projects/{projectId}/remix-actions` for status. */
+        RemixProjectResponse: {
+            /** @description Id of the edited project (e.g. `vg_proj_...`; the duplicate when `saveAsNewProject` was true). */
+            projectId: string;
+            /**
+             * Format: uri
+             * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
+             */
+            projectUrl: string;
+            /** @description Opaque remix action ids (e.g. `vg_rmix_...`), one per requested action in order. */
+            remixActionIds: string[];
+        };
+        RemixActionRun: {
+            /** @description Opaque remix action id (e.g. `vg_rmix_...`). */
+            remixActionId: string;
+            type: components["schemas"]["RemixActionType"];
+            status: components["schemas"]["JobStatus"];
+            /** @description Id of the project this remix action edits (e.g. `vg_proj_...`). */
+            projectId: string;
+            /**
+             * Format: uri
+             * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
+             */
+            projectUrl: string;
+            /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+            progressPercentage: number;
+            /** @description Zero-based index of the current or most recent execution attempt. */
+            attemptIndex: number;
+            /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
+            error: components["schemas"]["ApiError"] | null;
+        };
+        ListRemixActionsResponse: {
+            /** @description Remix actions for the project, most recent first. */
+            remixActions: components["schemas"]["RemixActionRun"][];
+            /** @description When true, there are more remix actions available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        ScriptToVideoRequest: {
+            /** @description The narration script, used verbatim. This exact text is narrated and turned into a video — it is not rewritten or expanded. */
+            script: string;
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            visualStyle: components["schemas"]["WorkflowVisualStyle"];
+            visualPacing?: components["schemas"]["VisualPacing"];
+            /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. */
+            quality?: components["schemas"]["ModelQuality"];
+            /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
+            language?: string;
+            /** @description Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). A default voice is used when omitted. Any voice may be used here, including voices where `supportsDirectToolExecution` is false. */
+            voiceId?: string | null;
+            /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
+            voiceSpeed?: number;
+            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            actorEntityId?: string | null;
+            /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
+            avatarQuality?: components["schemas"]["ModelQuality"];
+            /** @description Optional file ids of images or videos to feature as b-roll (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`. Only image and video files are accepted. */
+            featuredBRollFileIds?: string[];
+            /** @description Optional production notes for the AI that builds the video — visual direction that should not appear in the spoken narration (e.g. on-screen code or text to display, specific b-roll to feature, or scene-by-scene staging). Never spoken; keep the narration itself in `script`. */
+            workflowAgentContext?: string;
+            /** @description Optional timed scene descriptions guiding what to show on screen during each absolute time range of the video. Ranges must be sorted by `startSeconds` and non-overlapping. Omit to let the workflow choose visuals automatically. */
+            scenes?: components["schemas"]["SceneDescriptionRange"][];
+            /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Recommended for script-to-video: `ENABLE_CAPTIONS` to show and style captions, `CONVERT_IMAGES_TO_VIDEOS` to animate still images into clips, `ADD_TRANSITIONS` to stamp transitions between sections, and `SET_LOGO` to overlay a logo (this workflow has no native caption-style or logo fields). See the [Remix actions](/remix-actions) guide. */
+            remixActions?: components["schemas"]["RemixAction"][];
+            /**
+             * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /** @description A single timed word of a transcript. */
+        TranscriptWord: {
+            /** @description Start time of the word in seconds from the beginning of the audio. */
+            startSeconds: number;
+            /** @description End time of the word in seconds from the beginning of the audio. Must be greater than `startSeconds`. */
+            endSeconds: number;
+            /** @description The spoken word, used verbatim for narration timing and captions. */
+            word: string;
+        };
+        /** @description A transcript of an audio file, as timed words in order. */
+        Transcript: {
+            /** @description Optional BCP-47 language code of the spoken audio (e.g. `en`, `es`). Used to tag the transcript's language; omit if unknown. */
+            languageCode?: string | null;
+            /** @description The transcript words, sorted by `startSeconds` and non-overlapping. Must contain at least one word. */
+            words: components["schemas"]["TranscriptWord"][];
+        };
+        /** @description A description of the visuals to show during an absolute time range of the finished video. */
+        SceneDescriptionRange: {
+            /** @description Start time of the range in seconds from the beginning of the video. */
+            startSeconds: number;
+            /** @description End time of the range in seconds from the beginning of the video. Must be greater than `startSeconds`. */
+            endSeconds: number;
+            /** @description What should be shown on screen during this range (e.g. the b-roll subject, on-screen text, or staging). */
+            description: string;
+        };
+        VoiceoverToVideoRequest: {
+            /** @description Opaque file id of an uploaded voiceover audio file (e.g. `vg_file_...`). Upload the file first via `POST /v1/files/upload`. Attach a pre-computed transcript at upload time (via the `transcript` field on `POST /v1/files/upload`) to skip re-transcription. */
+            fileId: string;
+            /** @description Optional timed scene descriptions guiding what to show on screen during each absolute time range of the video. Ranges must be sorted by `startSeconds` and non-overlapping. Omit to let the workflow choose visuals automatically. */
+            scenes?: components["schemas"]["SceneDescriptionRange"][];
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            visualStyle: components["schemas"]["WorkflowVisualStyle"];
+            visualPacing?: components["schemas"]["VisualPacing"];
+            /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. */
+            quality?: components["schemas"]["ModelQuality"];
+            /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
+            language?: string;
+            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            actorEntityId?: string | null;
+            /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
+            avatarQuality?: components["schemas"]["ModelQuality"];
+            /** @description Caption styling. Omit to use the default style with captions shown. Pass an object to override individual style fields (any omitted field uses the default). Pass `null` to hide captions entirely. */
+            captionStyle?: components["schemas"]["WorkflowCaptionStyle"] | null;
+            /** @description Optional file id of an uploaded logo image to overlay on the video (e.g. `vg_file_...`). Upload the image first via `POST /v1/files/upload`. Only image files are accepted. */
+            logoFileId?: string | null;
+            /** @description Optional production notes for the AI that builds the video — visual direction for how to illustrate the voiceover (e.g. on-screen code or text to display, specific b-roll to feature, or scene-by-scene staging). Never spoken; does not change the uploaded voiceover audio or its transcript. */
+            workflowAgentContext?: string;
+            /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Captions and a logo are set with the `captionStyle` and `logoFileId` request fields above; recommended remix actions here are `CONVERT_IMAGES_TO_VIDEOS` to animate still images into clips, and `ADD_TRANSITIONS` to stamp transitions between sections and assets. See the [Remix actions](/remix-actions) guide. */
+            remixActions?: components["schemas"]["RemixAction"][];
+            /**
+             * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        SlideshowToVideoRequest: {
+            /** @description Opaque file id of an uploaded PDF or PowerPoint file (e.g. `vg_file_...`). Upload the file first via `POST /v1/files/upload`. */
+            fileId: string;
+            /** @description Optional per-slide narration, in slide order, applied by index: each slide uses its matching entry, and an empty string makes that slide silent. If you provide fewer entries than slides, the remaining slides are silent; extra entries are ignored. Omit this field entirely to narrate each slide from its speaker notes in the uploaded file. To guarantee no narration on any slide, pass an empty array. */
+            slideScripts?: string[];
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
+            language?: string;
+            /** @description Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). A default voice is used when omitted. Any voice may be used here, including voices where `supportsDirectToolExecution` is false. */
+            voiceId?: string | null;
+            /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
+            voiceSpeed?: number;
+            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            actorEntityId?: string | null;
+            /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
+            avatarQuality?: components["schemas"]["ModelQuality"];
+            /** @description Caption styling. Omit to use the default style with captions shown. Pass an object to override individual style fields (any omitted field uses the default). Pass `null` to hide captions entirely. */
+            captionStyle?: components["schemas"]["WorkflowCaptionStyle"] | null;
+            /** @description Optional file id of an uploaded logo image to overlay on the video (e.g. `vg_file_...`). Upload the image first via `POST /v1/files/upload`. Only image files are accepted. */
+            logoFileId?: string | null;
+            /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. Captions and a logo are set with the `captionStyle` and `logoFileId` request fields above; recommended remix actions here are `CONVERT_IMAGES_TO_VIDEOS` to animate still images into clips, and `ADD_TRANSITIONS` to stamp transitions between sections and assets. See the [Remix actions](/remix-actions) guide. */
+            remixActions?: components["schemas"]["RemixAction"][];
+            /**
+             * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /** @description Optional look for a storyboard scene. Full builds always produce a video clip per scene (stills are intermediate first frames). */
+        SceneGeneration: {
+            /** @description A free-form description of the look, appended to the scene prompt (e.g. `loose watercolor illustration with visible brushstrokes`). See the AI styles reference for example descriptions of the app's default styles. No extra style is applied when omitted. */
+            aiStyle?: string | null;
+            /**
+             * @deprecated
+             * @description Deprecated. Ignored. Full builds always produce video clips. Kept so older clients that still send `type` are accepted.
+             * @enum {string}
+             */
+            type?: "AI_IMAGE" | "AI_VIDEO";
+        };
+        /** @description A single scene in the storyboard. Becomes one section in the final video. */
+        GenerateStoryboardScene: {
+            /** @description What to generate for this scene. May optionally embed entity mention tokens of the form `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) so the model can bind names in the prompt to labeled entity reference images. Prefer the structured `actorEntityIds` / `productEntityIds` / `visualStyleEntityId` fields as the primary attachment contract; mention tokens are optional sugar that generation also unions. */
+            prompt: string;
+            /** @description Optional section name for this scene. Defaults to a numbered name. */
+            title?: string;
+            /** @description Optional per-scene look override. Falls back to the request-level `defaultGeneration` when omitted. */
+            generation?: components["schemas"]["SceneGeneration"] | null;
+            /** @description Optional per-scene duration in seconds. Omit or pass null to inherit `defaultDurationSeconds` (which may itself be Auto). When set, must be a whole number between 1 and 15. */
+            durationSeconds?: number | null;
+            /** @description Optional ids of ACTOR entities (e.g. `vg_enti_...`) to feature in this scene. Each entity's reference images are added so the same characters appear in the generated image or video. A scene can feature multiple actors. */
+            actorEntityIds?: string[];
+            /** @description Optional ids of PRODUCT entities (e.g. `vg_enti_...`) to feature in this scene. Each entity's reference images are added so the same products appear in the generated image or video. A scene can feature multiple products. */
+            productEntityIds?: string[];
+            /** @description Optional id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide the look of this scene. */
+            visualStyleEntityId?: string | null;
+            /** @description Optional spoken script for this scene. When provided, the generative video clip speaks this exact text natively (lip-synced). Keep it short enough to speak in one clip (at most about 10 seconds). May optionally embed the same `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) mention tokens as `prompt` so named entities match attached reference identity. Prefer structured entity id fields for attachments; mention tokens are optional. */
+            voiceoverScript?: string | null;
+        };
+        StoryboardToVideoRequest: {
+            /** @description Ordered list of scenes. Each scene becomes one section in the final video, in this order. Must contain at least one scene. */
+            scenes: components["schemas"]["GenerateStoryboardScene"][];
+            /** @description Optional project-level ids of ACTOR entities (e.g. `vg_enti_...`) to register on the storyboard. These stay attached to the project even when no scene references them (e.g. after a scene is removed). Actors referenced by a scene are registered automatically. */
+            actorEntityIds?: string[];
+            /** @description Optional project-level ids of PRODUCT entities (e.g. `vg_enti_...`) to register on the storyboard. These stay attached to the project even when no scene references them (e.g. after a scene is removed). Products referenced by a scene are registered automatically. */
+            productEntityIds?: string[];
+            /** @description Default look applied to scenes that don't set their own `generation`. Defaults to no extra style. */
+            defaultGeneration?: components["schemas"]["SceneGeneration"] | null;
+            /** @description Default per-scene duration in seconds for scenes that don't set their own `durationSeconds`. Omit or pass null for Auto (duration is estimated at generate time so spoken text or the visual beat fits, clamped to model limits). When set, must be a whole number between 1 and 15. */
+            defaultDurationSeconds?: number | null;
+            /** @description Generation quality tier for every scene. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for storyboard video clips and is rejected. */
+            quality?: components["schemas"]["ModelQuality"];
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /** @description Optional storyboard-wide production notes for the AI that builds the video (e.g. recurring characters or props, a consistent setting, or overall staging guidance). Applies across every scene; per-scene direction goes in each scene's `prompt`. */
+            workflowAgentContext?: string;
+            /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. `ENABLE_CAPTIONS` shows and styles captions, `SET_BACKGROUND_MUSIC` sets a music track, `ADD_TRANSITIONS` stamps transitions between scenes, and `SET_LOGO` overlays a logo. See the [Remix actions](/remix-actions) guide. */
+            remixActions?: components["schemas"]["RemixAction"][];
+            /**
+             * @description When true, the video's generated OUTPUT files (AI images, video clips, voiceover audio, avatars) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. This also covers files produced by post-build remix actions (e.g. generated background music, image-to-video conversions). Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /** @description Creates a project from a text prompt and generates one short AI video clip. VideoGen generates an opening frame from the prompt (optionally guided by reference images), then animates that frame into a video inside an editable project. This workflow does not accept `remixActions`. For a standalone clip without a project, use `POST /v1/tools/generate-video-clip`. For longer narrated multi-scene videos, use `POST /v1/workflows/script-to-video`. */
+        PromptToVideoClipRequest: {
+            /** @description Text prompt describing the video to generate (e.g. `A golden retriever running through a sunlit meadow in slow motion, cinematic`). */
+            prompt: string;
+            /** @description Optional ids of previously uploaded reference images (e.g. `vg_file_...`) that guide the opening frame. Upload files via `POST /v1/files/upload` first. */
+            imageFileIds?: string[];
+            /** @description Desired clip length in whole seconds (1 to 15). Defaults to 10. */
+            durationSeconds?: number;
+            /** @description Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /** @description Video generation quality tier. Also used for the opening-frame image. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video and is rejected. */
+            quality?: components["schemas"]["ModelQuality"];
+            /**
+             * @description When true, the generated OUTPUT files (the opening-frame image and the video clip) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
+            /**
+             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
+             * @default false
+             */
+            hideFromUi?: boolean;
+        };
+        /** @description Creates a project from a content outline and generates a full video from it. This is an experimental, fully-agentic workflow: an AI agent reads the outline (a Markdown brief describing the sections, beats, and key points the video should cover), plans the video, and builds it section by section — generating any narration, visuals, and media it needs. Provide a well-structured outline; the richer the brief, the closer the result. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion. */
+        ContentOutlineToVideoRequest: {
+            /** @description The content outline as Markdown — a brief describing what the video should cover. Use headings, bullet lists, and short prose to lay out the sections, beats, and key facts in order (e.g. `# Solar panels explained\n## How they work\n- Photons knock electrons loose...`). The agent grounds the video in this brief. */
+            outlineMarkdown: string;
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /** @description Optional ids of previously uploaded image or video files (e.g. `vg_file_...`) to make available to the video. The agent decides whether and where to use them. Upload files via `POST /v1/files/upload` first. */
+            inputFileIds?: string[];
+        };
+        /** @description Returned when a workflow run is accepted. Poll `GET /v1/workflows/runs/{workflowRunId}` or subscribe to webhooks for completion. */
+        StartWorkflowRunResponse: {
+            /** @description Opaque workflow run id (e.g. `vg_work_...`). */
+            workflowRunId: string;
+            /** @description Id of the project created for this workflow run (e.g. `vg_proj_...`). */
+            projectId: string;
+            /**
+             * Format: uri
+             * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
+             */
+            projectUrl: string;
+            /** @description Opaque remix action ids (e.g. `vg_rmix_...`), one per `remixActions` entry in request order. Empty when no remix actions were requested. Each runs after the video is built; poll `GET /v1/projects/{projectId}/remix-actions`. */
+            remixActionIds: string[];
+        };
+        WorkflowRun: {
+            /** @description Opaque workflow run id. */
+            workflowRunId: string;
+            status: components["schemas"]["JobStatus"];
+            workflowType: components["schemas"]["WorkflowType"];
+            /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+            progressPercentage: number;
+            /** @description Zero-based index of the current or most recent execution attempt. */
+            attemptIndex: number;
+            /** @description Id of the project created for this workflow run (e.g. `vg_proj_...`). */
+            projectId: string;
+            /**
+             * Format: uri
+             * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
+             */
+            projectUrl: string;
+            /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
+            error: components["schemas"]["ApiError"] | null;
+        };
+        /** @description Paginated list of API-started workflow runs, most recently created first. */
+        WorkflowRunListResponse: {
+            workflowRuns: components["schemas"]["WorkflowRun"][];
+            /** @description When true, there are more runs available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        /** @description Body POSTed to a registered webhook endpoint when an assistant message reaches a terminal state. Mirrors the `AssistantMessage` GET response. */
+        AssistantMessageWebhookPayload: {
+            event: components["schemas"]["AssistantMessageWebhookEventName"];
+            /** @description Opaque assistant message id (e.g. `vg_mesg_...`). */
+            messageId: string;
+            /** @description Seconds since epoch (Unix timestamp) when the message reached a terminal state. */
+            occurredAt: number;
+            /** @description The full assistant message with its terminal `status`. */
+            message: components["schemas"]["AssistantMessage"];
+        };
+        /** @description Body POSTed to a registered webhook endpoint when a workflow run reaches a terminal state. */
+        WorkflowRunWebhookPayload: {
+            event: components["schemas"]["WorkflowRunWebhookEventName"];
+            /** @description Opaque workflow run id matching the original request. */
+            workflowRunId: string;
+            /** @description Seconds since epoch (Unix timestamp) at which VideoGen observed the terminal state. */
+            occurredAt: number;
+            workflowType: components["schemas"]["WorkflowType"];
+            /** @description Id of the project created for this workflow run (e.g. `vg_proj_...`). */
+            projectId: string;
+            /**
+             * Format: uri
+             * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
+             */
+            projectUrl: string;
+            /** @description Error details. Present (non-null) only on `workflow_run.failed`; `null` otherwise. */
+            error?: components["schemas"]["ApiError"] | null;
+        };
+        /** @description Simplified project metadata. */
+        ProjectResponse: {
+            /** @description Opaque project id (e.g. `vg_proj_...`). */
+            projectId: string;
+            /** @description Opaque id of this project's assistant conversation (e.g. `vg_asst_...`). Use with the Assistant API to send follow-up messages or list the assistant's prior messages for this project. `null` for older projects created before assistant chats were attached at creation time. */
+            assistantId: string | null;
+            title: string;
+            aspectRatio: components["schemas"]["AspectRatio"];
+            /**
+             * @description High-level project status.
+             * @enum {string}
+             */
+            status: "generating" | "ready";
+            /** @description Seconds since epoch (Unix timestamp) when the project was created. */
+            createdAt: number;
+            /** @description Seconds since epoch (Unix timestamp) when the project was last updated. */
+            updatedAt: number;
+            /**
+             * Format: uri
+             * @description Deep link to open this project in the VideoGen web editor. Not required for an API-only integration: store `projectId` and use the Projects API (export, remix, metadata). Use `projectUrl` when a person should open the project in the app to review or edit it manually. The project is visible only to members of your team and any project collaborators, the same access model as a project created in the dashboard.
+             */
+            projectUrl: string;
+        };
+        /** @description Paginated list of projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` on the request to also include dashboard-created projects. */
+        ListProjectsResponse: {
+            projects: components["schemas"]["ProjectResponse"][];
+            /** @description When true, there are more projects available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        /**
+         * @description Vertical resolution tier for the rendered MP4.
+         * @enum {string}
+         */
+        ExportProjectQuality: "STANDARD" | "HIGH" | "FULL_HIGH" | "ULTRA_HIGH";
+        ExportProjectRequest: {
+            quality?: components["schemas"]["ExportProjectQuality"];
+            watermarkMode?: components["schemas"]["WatermarkMode"];
+            endScreenMode?: components["schemas"]["EndScreenMode"];
+            /** @description Destinations to deliver the finished export to when it completes, in addition to any delivery destinations already saved for the team. Each destination references a connected integration. */
+            deliveryDestinations?: components["schemas"]["ExportDeliveryDestination"][];
+        };
+        ExportDeliveryDestination: {
+            /** @description Id of the connected integration that will receive this export. */
+            integrationConnectionId: string;
+            /**
+             * @description Where to deliver the export within the connected integration.
+             * @enum {string}
+             */
+            type: "SLACK_CHANNEL" | "GOOGLE_DRIVE_FOLDER";
+            /** @description Target channel id. Required when `type` is `SLACK_CHANNEL`. */
+            slackChannelId?: string | null;
+            /** @description Target folder id. Required when `type` is `GOOGLE_DRIVE_FOLDER`. */
+            googleDriveFolderId?: string | null;
+        };
+        ExportProjectResponse: {
+            /** @description Opaque export id (e.g. `vg_expo_...`). Poll `GET /v1/projects/{projectId}/exports/{exportId}` or subscribe to webhooks for completion. */
+            exportId: string;
+        };
+        ProjectExport: {
+            /** @description Opaque export id (e.g. `vg_expo_...`) matching the original request. */
+            exportId: string;
+            /** @description Id of the exported project (e.g. `vg_proj_...`). */
+            projectId: string;
+            status: components["schemas"]["JobStatus"];
+            /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+            progressPercentage: number;
+            /** @description Zero-based index of the current or most recent export attempt. */
+            attemptIndex: number;
+            /**
+             * Format: uri
+             * @description Private signed MP4 download URL, valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring, so a fresh call to get the export always returns a URL valid long enough to use. See `downloadUrlExpiresAt` for the exact expiry. To fetch a fresh URL directly from the underlying file at any time, use `exportFileId` with the hydrate-file endpoint.
+             */
+            downloadUrl: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` while `downloadUrl` is null. */
+            downloadUrlExpiresAt: number | null;
+            /**
+             * Format: uri
+             * @description Private signed thumbnail URL, valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded` (and when no thumbnail is available). Re-signed automatically on the same terms as `downloadUrl`.
+             */
+            thumbnailUrl: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when `thumbnailUrl` expires. `null` while `thumbnailUrl` is null. */
+            thumbnailUrlExpiresAt: number | null;
+            /** @description File id (e.g. `vg_file_...`) of the exported MP4. Always present as a field; `null` until `status` is `succeeded`. Pass it to `POST /v1/files/{fileId}/hydrate` to fetch fresh signed URLs directly from the file at any time, which is useful once the 24-hour URLs above have expired. */
+            exportFileId: string | null;
+            /** @description Hydrated export file metadata with signed download URLs. Always present as a field; `null` until `status` is `succeeded`. Its signed URLs follow the same 24-hour validity and automatic re-signing as `downloadUrl`. */
+            file: components["schemas"]["FileInfo"] | null;
+            /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
+            error: components["schemas"]["ApiError"] | null;
+        };
+        ListProjectExportsResponse: {
+            /** @description Fully hydrated exports for this project, newest first. Each includes status, signed download/thumbnail URLs, and the embedded `file`. */
+            exports: components["schemas"]["ProjectExport"][];
+            /** @description When true, there are more exports available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+        /**
+         * @description Editor interchange document format. `FCPXML` is Final Cut Pro (also imported by DaVinci Resolve and others). `PREMIERE_XML` is the Final Cut 7 `xmeml` XML that Adobe Premiere Pro imports natively. `OTIO` is OpenTimelineIO, the vendor-neutral format. `SRT` is a SubRip caption sidecar.
+         * @enum {string}
+         */
+        TimelineInterchangeFormat: "FCPXML" | "PREMIERE_XML" | "OTIO" | "SRT";
+        /**
+         * @description How the interchange document references media. `REMOTE_URLS` produces a single document that links to signed media URLs. `BUNDLE` produces a zip containing the document plus every referenced media file, referenced by relative path, for durable offline relinking.
+         * @enum {string}
+         */
+        TimelineInterchangeMediaDelivery: "REMOTE_URLS" | "BUNDLE";
+        CreateTimelineInterchangeRequest: {
+            format?: components["schemas"]["TimelineInterchangeFormat"];
+            mediaDelivery?: components["schemas"]["TimelineInterchangeMediaDelivery"];
+        };
+        CreateTimelineInterchangeResponse: {
+            /** @description Opaque timeline interchange job id (e.g. `vg_inte_...`). Poll `GET /v1/timeline-interchange/{interchangeJobId}` for completion. */
+            interchangeJobId: string;
+        };
+        TimelineInterchange: {
+            /** @description Opaque timeline interchange job id (e.g. `vg_inte_...`) matching the original request. */
+            interchangeJobId: string;
+            /** @description Id of the source project (e.g. `vg_proj_...`). */
+            projectId: string;
+            format: components["schemas"]["TimelineInterchangeFormat"];
+            mediaDelivery: components["schemas"]["TimelineInterchangeMediaDelivery"];
+            status: components["schemas"]["JobStatus"];
+            /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+            progressPercentage: number;
+            /** @description Zero-based index of the current or most recent job attempt. */
+            attemptIndex: number;
+            /**
+             * Format: uri
+             * @description Private signed download URL for the interchange document (or the media bundle zip when `mediaDelivery` is `BUNDLE`), valid for 7 days from when it was signed. Always present as a field; `null` until `status` is `succeeded`. This endpoint automatically re-signs the URL when it is within an hour of expiring. To fetch a fresh URL directly from the underlying file at any time, use `interchangeFileId` with the hydrate-file endpoint.
+             */
+            downloadUrl: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when `downloadUrl` expires. `null` while `downloadUrl` is null. */
+            downloadUrlExpiresAt: number | null;
+            /** @description File id (e.g. `vg_file_...`) of the interchange document or bundle zip. Always present as a field; `null` until `status` is `succeeded`. Pass it to `POST /v1/files/{fileId}/hydrate` to fetch fresh signed URLs directly from the file at any time. */
+            interchangeFileId: string | null;
+            /** @description Hydrated interchange file metadata with a signed download URL. Always present as a field; `null` until `status` is `succeeded`. Its signed URL follows the same 24-hour validity and automatic re-signing as `downloadUrl`. */
+            file: components["schemas"]["FileInfo"] | null;
+            /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
+            error: components["schemas"]["ApiError"] | null;
+        };
+        CreateWebhookEndpointRequest: {
+            /**
+             * Format: uri
+             * @description HTTPS URL that will receive webhook POST requests.
+             */
+            url: string;
+            description?: string | null;
+            /** @description Webhook event names to subscribe to. Must contain at least one event. */
+            events: components["schemas"]["WebhookEventName"][];
+        };
+        /** @description Delivered to your webhook endpoint when a tool execution reaches a terminal state. The shape mirrors the `ExecutedTool` response with the addition of `event` and `occurredAt`. */
+        ToolExecutionWebhookPayload: {
+            event: components["schemas"]["ToolExecutionWebhookEventName"];
+            /** @description Execution id matching the original request. */
+            toolExecutionId: string;
+            /** @description Seconds since epoch (Unix timestamp) when the execution reached a terminal state. */
+            occurredAt: number;
+            /** @description Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
+            toolType: string;
+            /** @description One entry per generated result, each with a hydrated `file`. Present only on `tool_execution.succeeded`. */
+            results?: components["schemas"]["ToolSuccessResult"][];
+            /** @description Present only on `tool_execution.failed`. */
+            error?: components["schemas"]["ApiError"] | null;
+        };
+        /** @description Delivered to your webhook endpoint during the file lifecycle (upload, analysis, playback, and download readiness). Only sent for files uploaded via the API. The payload always includes a hydrated `file` object with the latest state. */
+        FileWebhookPayload: {
+            event: components["schemas"]["FileWebhookEventName"];
+            /** @description File id (e.g. `vg_file_...`). */
+            fileId: string;
+            /** @description Seconds since epoch (Unix timestamp) when the event occurred. */
+            occurredAt: number;
+            /** @description Hydrated file object with the latest state at the time of the event. */
+            file: components["schemas"]["FileInfo"];
+            /** @description Error details. Present only on `file.upload.failed` and `file.analysis_failed`. */
+            error?: components["schemas"]["ApiError"] | null;
+        };
+        WebhookEndpoint: {
+            /** @description Webhook endpoint id (e.g. `ep_...`). */
+            endpointId: string;
+            /** Format: uri */
+            url: string;
+            events: components["schemas"]["WebhookEventName"][];
+            description?: string | null;
+            /** @description Seconds since epoch (Unix timestamp) when the endpoint was created. */
+            createdAt: number;
+            /** @description HMAC secret for verifying [Standard Webhooks](https://www.standardwebhooks.com/) signatures. Only returned once on create; store it securely. */
+            signingSecret?: string;
+            /** @description Last four characters of the signing secret, for display purposes. */
+            signingSecretLast4?: string;
+        };
+        WebhookEndpointListResponse: {
+            endpoints: components["schemas"]["WebhookEndpoint"][];
+            /** @description When true, there are more endpoints available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
+            hasMore: boolean;
+            /** @description Opaque cursor to fetch the next page. `null` when `hasMore` is false. */
+            nextCursor: string | null;
+        };
+    };
+    responses: never;
+    parameters: {
+        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+        PaginationLimit: number;
+        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+        PaginationCursor: string;
+        /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
+        SelfOnlyQuery: boolean;
+        /** @description When true, includes dashboard-created projects in addition to API-created projects. When false (default), returns only API-created projects. */
+        IncludeUiProjectsQuery: boolean;
+        /** @description When true, includes export files: the raw output files of your exports (the rendered MP4 you download from an export). When false (default), they are omitted. */
+        IncludeExportFilesQuery: boolean;
+        /** @description When true, includes project files: the generative files created within a project (e.g. each AI image and text-to-speech file produced inside a script-to-video workflow output). When false (default), they are omitted. */
+        IncludeProjectFilesQuery: boolean;
+        /** @description Optional case-insensitive substring filter across each item's searchable text fields. Omit to return the unfiltered catalogue. */
+        CatalogueQuery: string;
+        /** @description When true, includes voices that are deprecated but still callable. Defaults to false. */
+        IncludeDeprecatedVoicesQuery: boolean;
+        /** @description The project id (e.g. `vg_proj_...`). */
+        ProjectIdPath: string;
+        /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
+        AssistantIdPath: string;
+        /** @description The assistant message id (e.g. `vg_mesg_...`) returned by an assistant POST. */
+        MessageIdPath: string;
+        /** @description The export id (e.g. `vg_expo_...`) returned by `POST /v1/projects/{projectId}/export`. */
+        ExportIdPath: string;
+        /** @description The timeline interchange job id (e.g. `vg_inte_...`) returned by `POST /v1/projects/{projectId}/timeline-interchange`. */
+        InterchangeJobIdPath: string;
+        /** @description The file id (e.g. `vg_file_...`). */
+        FileIdPath: string;
+        /** @description The entity id (e.g. `vg_enti_...`). */
+        EntityIdPath: string;
+        /** @description When provided, returns only entities of this type. Omit to return all entities. */
+        EntityTypeQuery: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
+        /** @description The workflow run id returned when the workflow was started. */
+        WorkflowRunIdPath: string;
+        /** @description The tool execution id returned when the tool was started. */
+        ToolExecutionIdPath: string;
+        /** @description The webhook endpoint id (e.g. `ep_...`) returned by `POST /v1/webhooks/endpoints`. */
+        WebhookEndpointIdPath: string;
+    };
+    requestBodies: never;
+    headers: never;
+    pathItems: never;
 }
 export type $defs = Record<string, never>;
 export interface operations {
-  scriptToVideo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ScriptToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  addVisualsNarrationsAndCaptionsToScript: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ScriptToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  voiceoverToVideo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VoiceoverToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  addVisualsAndCaptionsToVoiceover: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VoiceoverToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  slideshowToVideo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SlideshowToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  addNarrationTransitionsAndCaptionsToSlideshow: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SlideshowToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  storyboardToVideo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["StoryboardToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateScenesFromStoryboard: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["StoryboardToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  promptToVideoClip: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["PromptToVideoClipRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  contentOutlineToVideo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ContentOutlineToVideoRequest"];
-      };
-    };
-    responses: {
-      /** @description Workflow run accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listWorkflowRuns: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-        /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
-        selfOnly?: components["parameters"]["SelfOnlyQuery"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Paginated list of workflow runs. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["WorkflowRunListResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getWorkflowRun: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The workflow run id returned when the workflow was started. */
-        workflowRunId: components["parameters"]["WorkflowRunIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Current workflow run state. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["WorkflowRun"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  cancelWorkflowRun: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The workflow run id returned when the workflow was started. */
-        workflowRunId: components["parameters"]["WorkflowRunIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Cancellation request accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartWorkflowRunResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listProjects: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-        /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
-        selfOnly?: components["parameters"]["SelfOnlyQuery"];
-        /** @description When true, includes dashboard-created projects in addition to API-created projects. When false (default), returns only API-created projects. */
-        includeUiProjects?: components["parameters"]["IncludeUiProjectsQuery"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Paginated list of projects. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ListProjectsResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getProject: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The project id (e.g. `vg_proj_...`). */
-        projectId: components["parameters"]["ProjectIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Project metadata. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ProjectResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  exportProject: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The project id (e.g. `vg_proj_...`). */
-        projectId: components["parameters"]["ProjectIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: {
-      content: {
-        "application/json": components["schemas"]["ExportProjectRequest"];
-      };
-    };
-    responses: {
-      /** @description Export accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ExportProjectResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listProjectExports: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-      };
-      header?: never;
-      path: {
-        /** @description The project id (e.g. `vg_proj_...`). */
-        projectId: components["parameters"]["ProjectIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Project exports. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ListProjectExportsResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getProjectExport: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The project id (e.g. `vg_proj_...`). */
-        projectId: components["parameters"]["ProjectIdPath"];
-        /** @description The export id (e.g. `vg_expo_...`) returned by `POST /v1/projects/{projectId}/export`. */
-        exportId: components["parameters"]["ExportIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Export status. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ProjectExport"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  createTimelineInterchange: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The project id (e.g. `vg_proj_...`). */
-        projectId: components["parameters"]["ProjectIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: {
-      content: {
-        "application/json": components["schemas"]["CreateTimelineInterchangeRequest"];
-      };
-    };
-    responses: {
-      /** @description Timeline interchange accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["CreateTimelineInterchangeResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getTimelineInterchange: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The timeline interchange job id (e.g. `vg_inte_...`) returned by `POST /v1/projects/{projectId}/timeline-interchange`. */
-        interchangeJobId: components["parameters"]["InterchangeJobIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Timeline interchange status. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["TimelineInterchange"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  remixProject: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The project id (e.g. `vg_proj_...`). */
-        projectId: components["parameters"]["ProjectIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["RemixProjectRequest"];
-      };
-    };
-    responses: {
-      /** @description Remix actions accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["RemixProjectResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listProjectRemixActions: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-      };
-      header?: never;
-      path: {
-        /** @description The project id (e.g. `vg_proj_...`). */
-        projectId: components["parameters"]["ProjectIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Remix actions for the project. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ListRemixActionsResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateImage: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GenerateImageRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateVideoClip: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GenerateVideoClipRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateMotionGraphic: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GenerateMotionGraphicRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  textToSpeech: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["TextToSpeechRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateSoundEffect: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GenerateSoundEffectRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateMusic: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GenerateMusicRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateAvatar: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GenerateAvatarRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  vectorizeImage: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ImageAssetRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  removeImageBackground: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ImageAssetRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  removeVideoBackground: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VideoAssetRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  upscaleImage: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ImageAssetRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  upscaleVideo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["VideoAssetRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  image3dEffect: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ImageAssetRequest"];
-      };
-    };
-    responses: {
-      /** @description Execution accepted; poll until complete. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  cancelToolExecution: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The tool execution id returned when the tool was started. */
-        toolExecutionId: components["parameters"]["ToolExecutionIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Cancellation request accepted */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartToolExecutionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listToolExecutions: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-        /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
-        selfOnly?: components["parameters"]["SelfOnlyQuery"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Paginated list of tool executions. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ToolExecutionListResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getToolExecutionInfo: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The tool execution id returned when the tool was started. */
-        toolExecutionId: components["parameters"]["ToolExecutionIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Current execution state */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ExecutedTool"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getFiles: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-        /** @description When true, includes export files — the raw output files of your exports (the rendered MP4 you download from an export). When false (default), they are omitted. Requires the Production API add-on; returns an error if you set it to true without it. */
-        includeExportFiles?: components["parameters"]["IncludeExportFilesQuery"];
-        /** @description When true, includes project files — the generative files created within a project (e.g. each AI image and text-to-speech file produced inside a script-to-video workflow output). When false (default), they are omitted. Requires the Production API add-on; returns an error if you set it to true without it. */
-        includeProjectFiles?: components["parameters"]["IncludeProjectFilesQuery"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description File list */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["GetFilesResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  searchFiles: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SearchFilesRequest"];
-      };
-    };
-    responses: {
-      /** @description Search results ordered by descending similarity */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["SearchFilesResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getFile: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The file id (e.g. `vg_file_...`). */
-        fileId: components["parameters"]["FileIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description File metadata */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FileInfo"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  createFileUpload: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CreateFileUploadRequest"];
-      };
-    };
-    responses: {
-      /** @description Upload instructions */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FileUploadResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  hydrateFile: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The file id (e.g. `vg_file_...`). */
-        fileId: components["parameters"]["FileIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description File with hydrated sources */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FileInfo"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  archiveFile: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The file id (e.g. `vg_file_...`). */
-        fileId: components["parameters"]["FileIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Archived file */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FileInfo"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  enablePublicPreview: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The file id (e.g. `vg_file_...`). */
-        fileId: components["parameters"]["FileIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description File with public preview enabled */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FileInfo"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  disablePublicPreview: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The file id (e.g. `vg_file_...`). */
-        fileId: components["parameters"]["FileIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description File with public preview disabled */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["FileInfo"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listEntities: {
-    parameters: {
-      query?: {
-        /** @description When provided, returns only entities of this type. Omit to return all entities. */
-        entityType?: components["parameters"]["EntityTypeQuery"];
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Entity list */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ListEntitiesResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  createEntity: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CreateEntityRequest"];
-      };
-    };
-    responses: {
-      /** @description The created entity */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["Entity"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getEntity: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The entity id (e.g. `vg_enti_...`). */
-        entityId: components["parameters"]["EntityIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Entity */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["Entity"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  updateEntity: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The entity id (e.g. `vg_enti_...`). */
-        entityId: components["parameters"]["EntityIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["UpdateEntityRequest"];
-      };
-    };
-    responses: {
-      /** @description The updated entity */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["Entity"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  archiveEntity: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The entity id (e.g. `vg_enti_...`). */
-        entityId: components["parameters"]["EntityIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Archive acknowledged */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["EntityArchiveResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  addEntityReference: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The entity id (e.g. `vg_enti_...`). */
-        entityId: components["parameters"]["EntityIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AddEntityReferenceRequest"];
-      };
-    };
-    responses: {
-      /** @description The updated entity */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["Entity"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  removeEntityReference: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The entity id (e.g. `vg_enti_...`). */
-        entityId: components["parameters"]["EntityIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["RemoveEntityReferenceRequest"];
-      };
-    };
-    responses: {
-      /** @description The updated entity */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["Entity"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  startAssistantChat: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["StartAssistantChatRequest"];
-      };
-    };
-    responses: {
-      /** @description Assistant message accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["StartAssistantChatResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getAssistant: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
-        assistantId: components["parameters"]["AssistantIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description The assistant chat and its messages. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["GetAssistantResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  sendAssistantMessage: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
-        assistantId: components["parameters"]["AssistantIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["SendAssistantMessageRequest"];
-      };
-    };
-    responses: {
-      /** @description Assistant message accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["SendAssistantMessageResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  actOnAssistantAction: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
-        assistantId: components["parameters"]["AssistantIdPath"];
-        /** @description The `actionId` of the action to act on, from a prior assistant message. */
-        actionId: string;
-      };
-      cookie?: never;
-    };
-    requestBody?: {
-      content: {
-        "application/json": components["schemas"]["ActOnAssistantActionRequest"];
-      };
-    };
-    responses: {
-      /** @description Assistant action accepted. */
-      202: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ActOnAssistantActionResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getAssistantMessage: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The assistant message id (e.g. `vg_mesg_...`) returned by an assistant POST. */
-        messageId: components["parameters"]["MessageIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description The assistant chat message. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["AssistantMessage"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  generateText: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["GenerateTextRequest"];
-      };
-    };
-    responses: {
-      /** @description Generated text. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["GenerateTextResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listAvatarPresenters: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-        /** @description Optional reference voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`). When provided, avatar presenters are returned sorted by best match for that voice (best first). Omit to return presenters in the default catalogue order. */
-        voiceId?: components["parameters"]["AvatarPresenterReferenceVoiceIdQuery"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description List of avatar presenters. Pass an `avatarPresenterId` to `POST /v1/tools/generate-avatar`. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["AvatarPresenterListResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listTtsVoices: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-        /** @description When true, includes voices that are deprecated but still callable. Defaults to false. */
-        includeDeprecatedVoices?: components["parameters"]["IncludeDeprecatedVoicesQuery"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description List of TTS voices. Pass a `voiceId` to `POST /v1/tools/text-to-speech`. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["TtsVoiceListResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listLanguages: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description List of supported languages. Pass a `languageCode` to a `TRANSLATE_PROJECT` remix action. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["LanguageListResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  listWebhookEndpoints: {
-    parameters: {
-      query?: {
-        /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
-        limit?: components["parameters"]["PaginationLimit"];
-        /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
-        cursor?: components["parameters"]["PaginationCursor"];
-      };
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Configured endpoints */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["WebhookEndpointListResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  createWebhookEndpoint: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["CreateWebhookEndpointRequest"];
-      };
-    };
-    responses: {
-      /** @description Created; `signingSecret` is only returned in this response. */
-      201: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["WebhookEndpoint"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  deleteWebhookEndpoint: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path: {
-        /** @description The webhook endpoint id (e.g. `ep_...`) returned by `POST /v1/webhooks/endpoints`. */
-        endpointId: components["parameters"]["WebhookEndpointIdPath"];
-      };
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description Removed */
-      204: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  getMe: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody?: never;
-    responses: {
-      /** @description The account and team for the authenticated API key. */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["MeResponse"];
-        };
-      };
-      /** @description Error */
-      default: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content: {
-          "application/json": components["schemas"]["ApiError"];
-        };
-      };
-    };
-  };
-  toolExecutionSucceeded: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  toolExecutionFailed: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  toolExecutionCancelled: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  workflowRunSucceeded: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["WorkflowRunWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  workflowRunFailed: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["WorkflowRunWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  workflowRunCancelled: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["WorkflowRunWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  fileUploadCompleted: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FileWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  fileUploadFailed: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FileWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  filePlaybackReady: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FileWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  fileDownloadReady: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FileWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  fileAnalysisCompleted: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FileWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  fileAnalysisFailed: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["FileWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  assistantMessageSucceeded: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AssistantMessageWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  assistantMessageFailed: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AssistantMessageWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
-  assistantMessageCancelled: {
-    parameters: {
-      query?: never;
-      header?: never;
-      path?: never;
-      cookie?: never;
-    };
-    requestBody: {
-      content: {
-        "application/json": components["schemas"]["AssistantMessageWebhookPayload"];
-      };
-    };
-    responses: {
-      /** @description Acknowledge receipt */
-      200: {
-        headers: {
-          [name: string]: unknown;
-        };
-        content?: never;
-      };
-    };
-  };
+    scriptToVideo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ScriptToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    addVisualsNarrationsAndCaptionsToScript: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ScriptToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    voiceoverToVideo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VoiceoverToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    addVisualsAndCaptionsToVoiceover: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VoiceoverToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    slideshowToVideo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SlideshowToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    addNarrationTransitionsAndCaptionsToSlideshow: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SlideshowToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    storyboardToVideo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StoryboardToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateScenesFromStoryboard: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StoryboardToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    promptToVideoClip: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["PromptToVideoClipRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    contentOutlineToVideo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ContentOutlineToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listWorkflowRuns: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+                /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
+                selfOnly?: components["parameters"]["SelfOnlyQuery"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Paginated list of workflow runs. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkflowRunListResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getWorkflowRun: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The workflow run id returned when the workflow was started. */
+                workflowRunId: components["parameters"]["WorkflowRunIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Current workflow run state. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WorkflowRun"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    cancelWorkflowRun: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The workflow run id returned when the workflow was started. */
+                workflowRunId: components["parameters"]["WorkflowRunIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Cancellation request accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listProjects: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+                /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
+                selfOnly?: components["parameters"]["SelfOnlyQuery"];
+                /** @description When true, includes dashboard-created projects in addition to API-created projects. When false (default), returns only API-created projects. */
+                includeUiProjects?: components["parameters"]["IncludeUiProjectsQuery"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Paginated list of projects. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListProjectsResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getProject: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The project id (e.g. `vg_proj_...`). */
+                projectId: components["parameters"]["ProjectIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Project metadata. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    exportProject: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The project id (e.g. `vg_proj_...`). */
+                projectId: components["parameters"]["ProjectIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["ExportProjectRequest"];
+            };
+        };
+        responses: {
+            /** @description Export accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExportProjectResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listProjectExports: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+            };
+            header?: never;
+            path: {
+                /** @description The project id (e.g. `vg_proj_...`). */
+                projectId: components["parameters"]["ProjectIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Project exports. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListProjectExportsResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getProjectExport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The project id (e.g. `vg_proj_...`). */
+                projectId: components["parameters"]["ProjectIdPath"];
+                /** @description The export id (e.g. `vg_expo_...`) returned by `POST /v1/projects/{projectId}/export`. */
+                exportId: components["parameters"]["ExportIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Export status. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ProjectExport"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    createTimelineInterchange: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The project id (e.g. `vg_proj_...`). */
+                projectId: components["parameters"]["ProjectIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateTimelineInterchangeRequest"];
+            };
+        };
+        responses: {
+            /** @description Timeline interchange accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateTimelineInterchangeResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getTimelineInterchange: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The timeline interchange job id (e.g. `vg_inte_...`) returned by `POST /v1/projects/{projectId}/timeline-interchange`. */
+                interchangeJobId: components["parameters"]["InterchangeJobIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Timeline interchange status. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TimelineInterchange"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    remixProject: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The project id (e.g. `vg_proj_...`). */
+                projectId: components["parameters"]["ProjectIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RemixProjectRequest"];
+            };
+        };
+        responses: {
+            /** @description Remix actions accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RemixProjectResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listProjectRemixActions: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+            };
+            header?: never;
+            path: {
+                /** @description The project id (e.g. `vg_proj_...`). */
+                projectId: components["parameters"]["ProjectIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Remix actions for the project. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListRemixActionsResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateImage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateImageRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateVideoClip: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateVideoClipRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateMotionGraphic: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateMotionGraphicRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    textToSpeech: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["TextToSpeechRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateSoundEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateSoundEffectRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateMusic: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateMusicRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateAvatar: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateAvatarRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    vectorizeImage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ImageAssetRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    removeImageBackground: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ImageAssetRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    removeVideoBackground: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VideoAssetRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    upscaleImage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ImageAssetRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    upscaleVideo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VideoAssetRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    image3dEffect: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ImageAssetRequest"];
+            };
+        };
+        responses: {
+            /** @description Execution accepted; poll until complete. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    cancelToolExecution: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The tool execution id returned when the tool was started. */
+                toolExecutionId: components["parameters"]["ToolExecutionIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Cancellation request accepted */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartToolExecutionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listToolExecutions: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+                /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
+                selfOnly?: components["parameters"]["SelfOnlyQuery"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Paginated list of tool executions. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ToolExecutionListResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getToolExecutionInfo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The tool execution id returned when the tool was started. */
+                toolExecutionId: components["parameters"]["ToolExecutionIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Current execution state */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExecutedTool"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getFiles: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+                /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
+                selfOnly?: components["parameters"]["SelfOnlyQuery"];
+                /** @description When true, includes export files: the raw output files of your exports (the rendered MP4 you download from an export). When false (default), they are omitted. */
+                includeExportFiles?: components["parameters"]["IncludeExportFilesQuery"];
+                /** @description When true, includes project files: the generative files created within a project (e.g. each AI image and text-to-speech file produced inside a script-to-video workflow output). When false (default), they are omitted. */
+                includeProjectFiles?: components["parameters"]["IncludeProjectFilesQuery"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description File list */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetFilesResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    searchFiles: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SearchFilesRequest"];
+            };
+        };
+        responses: {
+            /** @description Search results ordered by descending similarity */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SearchFilesResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getFile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The file id (e.g. `vg_file_...`). */
+                fileId: components["parameters"]["FileIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description File metadata */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FileInfo"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    createFileUpload: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateFileUploadRequest"];
+            };
+        };
+        responses: {
+            /** @description Upload instructions */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FileUploadResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    hydrateFile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The file id (e.g. `vg_file_...`). */
+                fileId: components["parameters"]["FileIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description File with hydrated sources */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FileInfo"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    archiveFile: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The file id (e.g. `vg_file_...`). */
+                fileId: components["parameters"]["FileIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Archived file */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FileInfo"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    enablePublicPreview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The file id (e.g. `vg_file_...`). */
+                fileId: components["parameters"]["FileIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description File with public preview enabled */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FileInfo"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    disablePublicPreview: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The file id (e.g. `vg_file_...`). */
+                fileId: components["parameters"]["FileIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description File with public preview disabled */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FileInfo"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listEntities: {
+        parameters: {
+            query?: {
+                /** @description When provided, returns only entities of this type. Omit to return all entities. */
+                entityType?: components["parameters"]["EntityTypeQuery"];
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Entity list */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ListEntitiesResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    createEntity: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateEntityRequest"];
+            };
+        };
+        responses: {
+            /** @description The created entity */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Entity"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getEntity: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The entity id (e.g. `vg_enti_...`). */
+                entityId: components["parameters"]["EntityIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Entity */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Entity"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    updateEntity: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The entity id (e.g. `vg_enti_...`). */
+                entityId: components["parameters"]["EntityIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["UpdateEntityRequest"];
+            };
+        };
+        responses: {
+            /** @description The updated entity */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Entity"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    archiveEntity: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The entity id (e.g. `vg_enti_...`). */
+                entityId: components["parameters"]["EntityIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Archive acknowledged */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["EntityArchiveResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    addEntityReference: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The entity id (e.g. `vg_enti_...`). */
+                entityId: components["parameters"]["EntityIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AddEntityReferenceRequest"];
+            };
+        };
+        responses: {
+            /** @description The updated entity */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Entity"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    removeEntityReference: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The entity id (e.g. `vg_enti_...`). */
+                entityId: components["parameters"]["EntityIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["RemoveEntityReferenceRequest"];
+            };
+        };
+        responses: {
+            /** @description The updated entity */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["Entity"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    startAssistantChat: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["StartAssistantChatRequest"];
+            };
+        };
+        responses: {
+            /** @description Assistant message accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartAssistantChatResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getAssistant: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
+                assistantId: components["parameters"]["AssistantIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The assistant chat and its messages. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GetAssistantResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    sendAssistantMessage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
+                assistantId: components["parameters"]["AssistantIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SendAssistantMessageRequest"];
+            };
+        };
+        responses: {
+            /** @description Assistant message accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SendAssistantMessageResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    actOnAssistantAction: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The assistant chat id (e.g. `vg_asst_...`). Every API project has one assistant chat; find it on `ProjectResponse.assistantId`. */
+                assistantId: components["parameters"]["AssistantIdPath"];
+                /** @description The `actionId` of the action to act on, from a prior assistant message. */
+                actionId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["ActOnAssistantActionRequest"];
+            };
+        };
+        responses: {
+            /** @description Assistant action accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ActOnAssistantActionResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getAssistantMessage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The assistant message id (e.g. `vg_mesg_...`) returned by an assistant POST. */
+                messageId: components["parameters"]["MessageIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The assistant chat message. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AssistantMessage"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    generateText: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["GenerateTextRequest"];
+            };
+        };
+        responses: {
+            /** @description Generated text. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenerateTextResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listTtsVoices: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+                /** @description When true, includes voices that are deprecated but still callable. Defaults to false. */
+                includeDeprecatedVoices?: components["parameters"]["IncludeDeprecatedVoicesQuery"];
+                /** @description Optional case-insensitive substring filter across each item's searchable text fields. Omit to return the unfiltered catalogue. */
+                query?: components["parameters"]["CatalogueQuery"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of TTS voices. Pass a `voiceId` to `POST /v1/tools/text-to-speech`. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["TtsVoiceListResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listLanguages: {
+        parameters: {
+            query?: {
+                /** @description Optional case-insensitive substring filter across each item's searchable text fields. Omit to return the unfiltered catalogue. */
+                query?: components["parameters"]["CatalogueQuery"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description List of supported languages. Pass a `languageCode` to a `TRANSLATE_PROJECT` remix action. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["LanguageListResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    listWebhookEndpoints: {
+        parameters: {
+            query?: {
+                /** @description Maximum number of items to return in the page. Defaults to 50; capped at 200. See [Pagination](/pagination). */
+                limit?: components["parameters"]["PaginationLimit"];
+                /** @description Opaque pagination cursor returned as `nextCursor` by the previous page. Omit on the first request. Cursors are tied to the endpoint that produced them and must be passed unmodified. See [Pagination](/pagination). */
+                cursor?: components["parameters"]["PaginationCursor"];
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Configured endpoints */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WebhookEndpointListResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    createWebhookEndpoint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateWebhookEndpointRequest"];
+            };
+        };
+        responses: {
+            /** @description Created; `signingSecret` is only returned in this response. */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["WebhookEndpoint"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    deleteWebhookEndpoint: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The webhook endpoint id (e.g. `ep_...`) returned by `POST /v1/webhooks/endpoints`. */
+                endpointId: components["parameters"]["WebhookEndpointIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Removed */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getMe: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description The account and team for the authenticated API key. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["MeResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    toolExecutionSucceeded: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    toolExecutionFailed: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    toolExecutionCancelled: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    workflowRunSucceeded: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkflowRunWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    workflowRunFailed: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkflowRunWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    workflowRunCancelled: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkflowRunWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    fileUploadCompleted: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FileWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    fileUploadFailed: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FileWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    filePlaybackReady: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FileWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    fileDownloadReady: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FileWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    fileAnalysisCompleted: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FileWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    fileAnalysisFailed: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["FileWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    assistantMessageSucceeded: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssistantMessageWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    assistantMessageFailed: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssistantMessageWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    assistantMessageCancelled: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["AssistantMessageWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
 }

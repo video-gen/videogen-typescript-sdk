@@ -57,7 +57,7 @@ Omit `apiKey` to read `VIDEOGEN_API_KEY` from the environment.
 | Assistant | `vg.assistant` | `startAssistantChatAndWait`, `sendAssistantMessageAndWait` |
 | Entities | `vg.entities` | `createEntity`, `listEntities`, `addEntityReference` |
 | Text | `vg.text` | `generateText` |
-| Catalog | `vg.resources` | `listTtsVoices`, `listAvatarPresenters`, `listLanguages` |
+| Catalog | `vg.resources` | `listTtsVoices`, `listLanguages` |
 | Webhooks | `vg.webhooks` + helper | `createWebhookEndpoint`, `verifyWebhookSignature` |
 
 Prefer `*AndWait` (or the matching `poll*` helper) for anything asynchronous. Thin REST methods match OpenAPI `operationId`s one-to-one; see the [API docs](https://docs.videogen.io).
@@ -103,6 +103,8 @@ console.log(execution.status, preview);
 ```
 
 The same `*AndWait` pattern exists for video clips, motion graphics, TTS, music, sound effects, avatar, upscale, background removal, and more under `vg.tools`.
+
+For avatar video, call `generateAvatarAndWait` with `audioFileId` and an ACTOR entity as `actorEntityId`. You may set `avatarQuality` to `LOW`, `STANDARD`, `HIGH`, or `MAX`. Script-to-video, voiceover-to-video, slideshow-to-video, and `CHANGE_NARRATOR` accept the same optional actor fields.
 
 ## Files
 
