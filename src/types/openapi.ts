@@ -179,7 +179,7 @@ export interface paths {
         put?: never;
         /**
          * Prompt to video clip
-         * @description Creates a project from a text prompt and generates one short AI video clip (up to 15 seconds). VideoGen first generates an opening frame from the prompt (optionally guided by reference images), then animates that frame into a video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion. For a standalone clip without an editable project, use `POST /v1/tools/generate-video-clip` instead. For longer narrated multi-scene videos, use `POST /v1/workflows/script-to-video`.
+         * @description Creates a project from a text prompt and generates one short AI video clip (up to 30 seconds). VideoGen first generates an opening frame from the prompt (optionally guided by reference images), then animates that frame into a video. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion. For a standalone clip without an editable project, use `POST /v1/tools/generate-video-clip` instead. For longer narrated multi-scene videos, use `POST /v1/workflows/script-to-video`. The generated clip is clamped to the selected quality's supported range.
          */
         post: operations["promptToVideoClip"];
         delete?: never;
@@ -188,7 +188,7 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
-    "/v1/workflows/content-outline-to-video": {
+    "/v1/workflows/creative-brief-to-video": {
         parameters: {
             query?: never;
             header?: never;
@@ -198,10 +198,10 @@ export interface paths {
         get?: never;
         put?: never;
         /**
-         * Content outline to video
+         * Creative brief to video
          * @description Creates a project from a content outline (a Markdown brief) and generates a full video from it. This experimental, fully-agentic workflow reads the outline, plans the video, and builds it section by section — generating any narration, visuals, and media it needs. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
          */
-        post: operations["contentOutlineToVideo"];
+        post: operations["creativeBriefToVideo"];
         delete?: never;
         options?: never;
         head?: never;
@@ -453,7 +453,7 @@ export interface paths {
         put?: never;
         /**
          * Generate image
-         * @description Generate an image from a text prompt, optionally guided by one or more reference images. When reference images are provided, the prompt describes the desired transformation. VideoGen automatically routes each request to the most effective state-of-the-art image model for your prompt, reference images, and quality tier, so you don't pick a model.
+         * @description Generate an image from a text prompt, optionally guided by reference images and actor, product, or visual-style entity ids. When reference images are provided, the prompt describes the desired transformation. VideoGen automatically routes each request to the most effective state-of-the-art image model for your prompt, reference images, entities, and quality tier, so you don't pick a model.
          */
         post: operations["generateImage"];
         delete?: never;
@@ -473,7 +473,7 @@ export interface paths {
         put?: never;
         /**
          * Generate video clip
-         * @description Generate a single short video clip (up to 15 seconds) from a text prompt, optionally guided by reference images, videos, and audio. At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. VideoGen automatically routes each request to the most effective state-of-the-art video model for your inputs and settings, so you don't pick a model. This endpoint returns one standalone clip. For longer, higher-quality, professionally edited videos with narration, captions, music, and multiple scenes, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
+         * @description Generate a single short video clip (up to 30 seconds) from a text prompt, optionally guided by an opening-frame still, reference images, videos, and audio. At least one of `prompt`, `startFrameFileId`, `imageFileIds`, `videoFileIds`, `audioFileIds`, or `spokenDialogue` must be provided. VideoGen automatically routes each request to the most effective state-of-the-art video model for your inputs and settings, so you don't pick a model. This endpoint returns one standalone clip. For longer, higher-quality, professionally edited videos with narration, captions, music, and multiple scenes, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
          */
         post: operations["generateVideoClip"];
         delete?: never;
@@ -493,7 +493,7 @@ export interface paths {
         put?: never;
         /**
          * Generate motion graphic
-         * @description Generate an animated motion graphic video from a text prompt. This is an experimental, fully agentic alternative to a video workflow: VideoGen plans the animation, optionally generates or fetches supporting media, and renders a self-contained animated clip. It is especially well suited to precise text animations (e.g. a typing effect, animated captions, kinetic typography, lower thirds) that are hard to express with stock or generated footage. Optionally pass uploaded `fileIds` for reference media the animation may display. This endpoint returns one standalone video. For longer, narrated, multi-scene videos, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
+         * @description Generate an animated motion graphic video from a text prompt. This is an experimental, fully agentic alternative to a video workflow: VideoGen plans the animation, optionally generates or fetches supporting media, and renders a self-contained animated clip. It is especially well suited to precise text animations (e.g. a typing effect, animated captions, kinetic typography, lower thirds) that are hard to express with stock or generated footage. Optionally pass uploaded `fileIds` for reference media and `entityIds` for actors, products, or visual styles the animation should use. This endpoint returns one standalone video. For longer, narrated, multi-scene videos, use a video workflow such as [Script to video](/workflows) (`POST /v1/workflows/script-to-video`) instead.
          */
         post: operations["generateMotionGraphic"];
         delete?: never;
@@ -931,7 +931,7 @@ export interface paths {
         };
         /**
          * List entities
-         * @description List the actors and visual styles available to your team, most recently updated first. Cursor-paginated; see the [Pagination](/pagination) guide.
+         * @description List built-in actors, products, visual styles, and slideshow themes, followed by the entities available to your team. Built-in entities have `isBuiltIn: true` and cannot be updated or archived. Cursor-paginated; see the [Pagination](/pagination) guide.
          */
         get: operations["listEntities"];
         put?: never;
@@ -955,7 +955,7 @@ export interface paths {
         };
         /**
          * Get entity
-         * @description Retrieve a single entity by its id, including its reference images.
+         * @description Retrieve a single entity by its id, including its reference images. Built-in catalog entities are included.
          */
         get: operations["getEntity"];
         put?: never;
@@ -977,7 +977,7 @@ export interface paths {
         put?: never;
         /**
          * Update entity
-         * @description Update an entity's name or description. Provide at least one field.
+         * @description Update an entity's name or description. Provide at least one field. Built-in entities (`isBuiltIn: true`) cannot be updated.
          */
         post: operations["updateEntity"];
         delete?: never;
@@ -997,7 +997,7 @@ export interface paths {
         put?: never;
         /**
          * Archive entity
-         * @description Archive an entity. Archived entities no longer appear in `GET /v1/entities` and can't be attached to new workflows.
+         * @description Archive an entity. Archived entities no longer appear in `GET /v1/entities` and can't be attached to new workflows. Built-in entities (`isBuiltIn: true`) cannot be archived.
          */
         post: operations["archiveEntity"];
         delete?: never;
@@ -1017,7 +1017,7 @@ export interface paths {
         put?: never;
         /**
          * Add entity reference
-         * @description Attach an image file as a reference for the entity. Upload the image first via `POST /v1/files/upload`. Returns the updated entity.
+         * @description Attach an image file as a reference for the entity. Upload the image first via `POST /v1/files/upload`. Returns the updated entity. Built-in entities (`isBuiltIn: true`) cannot have references added.
          */
         post: operations["addEntityReference"];
         delete?: never;
@@ -1037,7 +1037,7 @@ export interface paths {
         put?: never;
         /**
          * Remove entity reference
-         * @description Detach a reference image from the entity. Returns the updated entity.
+         * @description Detach a reference image from the entity. Returns the updated entity. Built-in entities (`isBuiltIn: true`) cannot have references removed.
          */
         post: operations["removeEntityReference"];
         delete?: never;
@@ -1743,29 +1743,29 @@ export interface components {
             /** @description When true, this is the entity's primary reference (used for its thumbnail). */
             isDefault: boolean;
         };
-        /** @description Read-only voice and avatar summary for an ACTOR entity. Always null for VISUAL_STYLE entities. */
+        /** @description Read-only voice and avatar summary for an ACTOR entity. Always null for non-ACTOR entities. */
         EntityActorConfig: {
             /** @description Display name of the actor's voice when one is configured. Null otherwise. */
             voiceDisplayName?: string | null;
             /** @description True when the actor has a configured voice. */
             hasVoice: boolean;
-            /** @description True when the actor has an image reference that can be used with `actorEntityId` for avatar generation. */
+            /** @description True when the actor has a built-in presenter or image reference that can be used with `actorEntityId` for avatar generation. */
             hasAvatarPresenter: boolean;
         };
-        /** @description A reusable actor or visual style. Attach its reference images to workflows for consistent characters and looks. */
+        /** @description A reusable actor, product, visual style, or slideshow theme. Attach its reference images to workflows for consistent characters, looks, and slide designs. */
         Entity: {
             /** @description The entity id (e.g. `vg_enti_...`). */
             entityId: string;
             /**
-             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images.
+             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images; SLIDESHOW_THEME is a shared slide design system (fonts, colors, layout) applied to every slide of a slideshow-to-video deck.
              * @enum {string}
              */
-            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
+            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
             /** @description Display name. */
             name: string;
             /** @description Optional description. Empty string when not set. */
             description: string;
-            /** @description Voice and presenter summary for ACTOR entities. Null for VISUAL_STYLE entities. */
+            /** @description Voice and presenter summary for ACTOR entities. Null for non-ACTOR entities. */
             actorConfig?: components["schemas"]["EntityActorConfig"] | null;
             /** @description Reference images attached to the entity. */
             references: components["schemas"]["EntityReference"][];
@@ -1773,6 +1773,8 @@ export interface components {
             createdAt: number;
             /** @description Seconds since epoch (Unix timestamp) when the entity was last updated. */
             updatedAt: number;
+            /** @description When true, this is a VideoGen catalog entity. Built-in entities cannot be updated, archived, or have references added or removed. */
+            isBuiltIn?: boolean;
         };
         ListEntitiesResponse: {
             entities: components["schemas"]["Entity"][];
@@ -1783,10 +1785,10 @@ export interface components {
         };
         CreateEntityRequest: {
             /**
-             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images.
+             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images; SLIDESHOW_THEME is a shared slide design system (fonts, colors, layout) applied to every slide of a slideshow-to-video deck.
              * @enum {string}
              */
-            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
+            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
             /** @description Display name. */
             name: string;
             /** @description Optional description. */
@@ -1926,11 +1928,6 @@ export interface components {
              * @example A 30-second explainer about our new pricing tiers
              */
             message: string;
-            /**
-             * @description When true, the assistant must respond with at least one workflow suggestion. If it doesn't, the assistant message is settled to `failed` with a `no_workflow_suggestion` error.
-             * @default false
-             */
-            forceWorkflowSuggestion?: boolean;
             /**
              * @description When true, the assistant picks the best workflow for the message and immediately starts generating, skipping the suggestion step. When the assistant message reaches `succeeded`, its `generation` carries the workflow run to poll.
              * @default false
@@ -2091,6 +2088,8 @@ export interface components {
             prompt: string;
             /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. Maximum 4 images. When provided, the model uses these as guidance for generation. */
             imageFileIds?: string[];
+            /** @description Optional actor, product, or visual-style entity ids (e.g. `["vg_enti_..."]`). The model uses each entity as identity/reference the same way in-app image generation does. Can be combined with `imageFileIds`. A missing id returns not found; an inaccessible id returns a permission error. */
+            entityIds?: string[];
             /** @description Aspect ratio for the generated image. Defaults to 16:9 when omitted. */
             aspectRatio?: components["schemas"]["AspectRatio"];
             /** @description Image generation quality tier. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). */
@@ -2113,29 +2112,40 @@ export interface components {
              */
             hideFromUi?: boolean;
         };
-        /** @description At least one of `prompt`, `imageFileIds`, `videoFileIds`, or `audioFileIds` must be provided. */
+        /** @description At least one of `prompt`, `startFrameFileId`, `imageFileIds`, `videoFileIds`, `audioFileIds`, or `spokenDialogue` must be provided. */
         GenerateVideoClipRequest: {
             /**
-             * @description Text prompt describing the video to generate. Optional when reference media is provided. Describe the video in plain language; any reference media you provide is incorporated automatically.
+             * @description Text prompt describing the video to generate. Optional when reference media, `startFrameFileId`, or `spokenDialogue` is provided. Describe the video in plain language; any reference media you provide is incorporated automatically.
              * @example A golden retriever running through a sunlit meadow in slow motion, cinematic
              */
             prompt?: string;
-            /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the images are animated or used as visual guidance for the generated video. */
+            /** @description Optional file id of the opening-frame still (e.g. `vg_file_...`). Upload first via `POST /v1/files/upload`. When set, this image is the first frame of the clip. If the same id also appears in `imageFileIds`, it is used only as the opening frame and dropped from the reference list. Can be the only input (prompt optional). */
+            startFrameFileId?: string;
+            /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the images are used as visual guidance. To animate a specific still as the opening frame, pass it as `startFrameFileId` instead. */
             imageFileIds?: string[];
             /** @description Optional file ids of reference videos (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. They are used as motion or style guidance for the generated video. */
             videoFileIds?: string[];
-            /** @description Optional file ids of reference audio clips (e.g. `["vg_file_..."]`) used for native lip-sync and soundtrack. Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
+            /** @description Optional file ids of reference audio clips (e.g. `["vg_file_..."]`) used for lip-sync from that recording. Upload files first via `POST /v1/files/upload`, then pass the returned ids here. To have the model speak a line it generates itself, pass `spokenDialogue` instead (or in addition). */
             audioFileIds?: string[];
+            /** @description Optional exact line the subject should speak as native, lip-synced speech in the generated clip. The model synthesizes the voice from this text. Can be the only input. Combine with a visual `prompt`, `startFrameFileId`, or reference media. Combine with `audioFileIds` when you also have a reference recording. */
+            spokenDialogue?: string;
+            /** @description Optional natural-language description of the voice that speaks `spokenDialogue` (for example, a warm, confident young man's voice). Used when `spokenDialogue` is set. When omitted, a clear natural voice is used. */
+            voiceDescription?: string;
             /**
              * @description When true, the generated video is guaranteed to include audio. When false, audio may still be present. Defaults to false.
              * @default false
              */
             generateAudio?: boolean;
-            /** @description Desired clip length in seconds. A whole number between 1 and 15. Defaults to 6 when omitted. This endpoint produces a single short clip. For longer, multi-scene, professionally edited videos, use a video workflow such as `POST /v1/workflows/script-to-video`. */
+            /**
+             * @description When true, the generated clip will not include a musical soundtrack. Spoken dialogue and environmental sound are still allowed. Use this when you will add background music separately (for example at the project level). Defaults to false.
+             * @default false
+             */
+            suppressBackgroundMusic?: boolean;
+            /** @description Desired clip length in seconds. A whole number between 1 and 30. Defaults to 6 when omitted. The generated clip is clamped to the selected quality's supported range. This endpoint produces a single short clip. For longer, multi-scene, professionally edited videos, use a video workflow such as `POST /v1/workflows/script-to-video`. */
             durationSeconds?: number | null;
             /** @description Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
             aspectRatio?: components["schemas"]["AspectRatio"];
-            /** @description Video generation quality tier. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video clip generation and is rejected. */
+            /** @description Video generation quality tier (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). */
             quality?: components["schemas"]["ModelQuality"];
             contentPolicyConfig?: components["schemas"]["ContentPolicyConfig"];
             watermarkMode?: components["schemas"]["WatermarkMode"];
@@ -2163,6 +2173,8 @@ export interface components {
             prompt: string;
             /** @description Optional file ids of uploaded reference media (images, videos, or audio) the motion graphic may display or animate (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. */
             fileIds?: string[];
+            /** @description Optional actor, product, or visual-style entity ids (e.g. `["vg_enti_..."]`). The motion graphic uses each entity as identity/reference the same way in-app motion graphic generation does. Can be combined with `fileIds`. Mentions in `prompt` are also collected. A missing id returns not found; an inaccessible id returns a permission error. */
+            entityIds?: string[];
             /** @description Desired length of the motion graphic in seconds, a whole number between 1 and 300. When omitted, the duration is chosen automatically to fit the prompt (recommended). */
             durationSeconds?: number | null;
             /** @description Aspect ratio for the generated motion graphic. Defaults to 16:9 when omitted. */
@@ -2281,7 +2293,7 @@ export interface components {
         };
         /** @description Generate a talking-head avatar from an ACTOR entity and audio. */
         GenerateAvatarRequest: {
-            /** @description The id of an ACTOR entity (e.g. `vg_enti_...`) with at least one image reference. */
+            /** @description The id of a built-in stock actor or an ACTOR entity (e.g. `vg_enti_...`) with an image reference. */
             actorEntityId: string;
             /** @description Avatar generation quality tier. Optional; when omitted, your account's Default AI quality for avatars is used. */
             avatarQuality?: components["schemas"]["ModelQuality"];
@@ -2462,7 +2474,7 @@ export interface components {
          * @description Workflow type identifier.
          * @enum {string}
          */
-        WorkflowType: "SCRIPT_TO_VIDEO" | "VOICEOVER_TO_VIDEO" | "SLIDESHOW_TO_VIDEO" | "STORYBOARD_TO_VIDEO" | "PROMPT_TO_VIDEO_CLIP" | "CONTENT_OUTLINE_TO_VIDEO";
+        WorkflowType: "SCRIPT_TO_VIDEO" | "VOICEOVER_TO_VIDEO" | "SLIDESHOW_TO_VIDEO" | "STORYBOARD_TO_VIDEO" | "PROMPT_TO_VIDEO_CLIP" | "CREATIVE_BRIEF_TO_VIDEO";
         /**
          * @description How quickly visuals change. FAST shows more, shorter shots; SLOW holds each visual longer. Defaults to MEDIUM.
          * @default MEDIUM
@@ -2541,7 +2553,7 @@ export interface components {
          * @description The kind of edit a remix action applies.
          * @enum {string}
          */
-        RemixActionType: "SET_BACKGROUND_MUSIC" | "SET_LOGO" | "ENABLE_CAPTIONS" | "DISABLE_CAPTIONS" | "ADD_TRANSITIONS" | "RESIZE_PROJECT" | "CLEAN_UP_TRANSCRIPT" | "CONVERT_IMAGES_TO_VIDEOS" | "REGENERATE_IMAGES" | "UPSCALE_ASSETS" | "CHANGE_NARRATOR" | "SHUFFLE_STOCK_VISUALS" | "GENERATE_MUSIC" | "TRANSLATE_PROJECT";
+        RemixActionType: "SET_BACKGROUND_MUSIC" | "SET_LOGO" | "ENABLE_CAPTIONS" | "DISABLE_CAPTIONS" | "ADD_TRANSITIONS" | "ADD_ZOOM" | "RESIZE_PROJECT" | "CLEAN_UP_TRANSCRIPT" | "CONVERT_IMAGES_TO_VIDEOS" | "REGENERATE_IMAGES" | "UPSCALE_ASSETS" | "CHANGE_NARRATOR" | "SHUFFLE_STOCK_VISUALS" | "GENERATE_MUSIC" | "TRANSLATE_PROJECT";
         /**
          * @description A transition applied at a boundary. `DYNAMIC` auto-varies the style across boundaries; `NONE` removes transitions; the rest apply that fixed style everywhere.
          * @enum {string}
@@ -2606,6 +2618,14 @@ export interface components {
             /** @description Transition applied at every boundary between base-layer assets within sections, replacing any existing asset transitions. Omit or pass `null` to leave asset transitions untouched. */
             assetTransition?: components["schemas"]["RemixTransitionStyle"] | null;
         };
+        /** @description Apply a Ken Burns zoom to every eligible still image in the project, including uploaded images. Replaces any existing still-image effect on those assets. If the project has no eligible stills, the action is skipped and completes successfully without changing anything. */
+        RemixActionAddZoom: {
+            /**
+             * @description discriminator enum property added by openapi-typescript
+             * @enum {string}
+             */
+            type: "ADD_ZOOM";
+        };
         /** @description Change the project's output aspect ratio (e.g. to a vertical 9:16 social format). The video is re-flowed to the new ratio. */
         RemixActionResizeProject: {
             /**
@@ -2642,7 +2662,7 @@ export interface components {
             motionPrompt?: string | null;
             /** @description Mute the generated clips and suppress generated background music. Recommended when the clips sit behind a voiceover. Defaults to `true`. */
             muteOutputVideos?: boolean | null;
-            /** @description Video generation quality tier for the image-to-video conversions. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video and is rejected. */
+            /** @description Video generation quality tier for the image-to-video conversions (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). */
             quality?: components["schemas"]["ModelQuality"];
         };
         /** @description Restyle every eligible still image in the project to a new look (image-to-image), replacing each image in place. Eligible images are non-SVG image assets backed by an uploaded or generated file. Runs asynchronously: one restyled image is generated per eligible image. If the project has no eligible images, the action is skipped and completes successfully without changing anything. */
@@ -2678,7 +2698,7 @@ export interface components {
             type: "CHANGE_NARRATOR";
             /** @description Voice id from `GET /v1/resources/tts-voices` (e.g. `vg_voic_...`) to re-narrate with. */
             voiceId: string;
-            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            /** @description Recommended. Optional id of a built-in stock actor or an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
             actorEntityId?: string | null;
             /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
             avatarQuality?: components["schemas"]["ModelQuality"];
@@ -2718,7 +2738,7 @@ export interface components {
             translateImageText?: boolean | null;
         };
         /** @description A single edit applied to a project. Each array entry is exactly one of the action types below, chosen by its `type` field; the variants are mutually-exclusive options, not fields you must all provide. Include only the actions you want. */
-        RemixAction: components["schemas"]["RemixActionSetBackgroundMusic"] | components["schemas"]["RemixActionSetLogo"] | components["schemas"]["RemixActionEnableCaptions"] | components["schemas"]["RemixActionDisableCaptions"] | components["schemas"]["RemixActionAddTransitions"] | components["schemas"]["RemixActionResizeProject"] | components["schemas"]["RemixActionCleanUpTranscript"] | components["schemas"]["RemixActionConvertImagesToVideos"] | components["schemas"]["RemixActionRegenerateImages"] | components["schemas"]["RemixActionUpscaleAssets"] | components["schemas"]["RemixActionChangeNarrator"] | components["schemas"]["RemixActionShuffleStockVisuals"] | components["schemas"]["RemixActionGenerateMusic"] | components["schemas"]["RemixActionTranslateProject"];
+        RemixAction: components["schemas"]["RemixActionSetBackgroundMusic"] | components["schemas"]["RemixActionSetLogo"] | components["schemas"]["RemixActionEnableCaptions"] | components["schemas"]["RemixActionDisableCaptions"] | components["schemas"]["RemixActionAddTransitions"] | components["schemas"]["RemixActionAddZoom"] | components["schemas"]["RemixActionResizeProject"] | components["schemas"]["RemixActionCleanUpTranscript"] | components["schemas"]["RemixActionConvertImagesToVideos"] | components["schemas"]["RemixActionRegenerateImages"] | components["schemas"]["RemixActionUpscaleAssets"] | components["schemas"]["RemixActionChangeNarrator"] | components["schemas"]["RemixActionShuffleStockVisuals"] | components["schemas"]["RemixActionGenerateMusic"] | components["schemas"]["RemixActionTranslateProject"];
         RemixProjectRequest: {
             /** @description Ordered list of edits to apply. Each runs asynchronously as its own remix action. Must contain at least one action. */
             remixActions: components["schemas"]["RemixAction"][];
@@ -2778,7 +2798,7 @@ export interface components {
             voiceId?: string | null;
             /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
             voiceSpeed?: number;
-            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            /** @description Recommended. Optional id of a built-in stock actor or an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
             actorEntityId?: string | null;
             /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
             avatarQuality?: components["schemas"]["ModelQuality"];
@@ -2838,7 +2858,7 @@ export interface components {
             quality?: components["schemas"]["ModelQuality"];
             /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
             language?: string;
-            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            /** @description Recommended. Optional id of a built-in stock actor or an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
             actorEntityId?: string | null;
             /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
             avatarQuality?: components["schemas"]["ModelQuality"];
@@ -2873,10 +2893,12 @@ export interface components {
             voiceId?: string | null;
             /** @description Speech rate multiplier, between 0.5 (half speed) and 2 (double speed). Defaults to the voice's default speed. */
             voiceSpeed?: number;
-            /** @description Recommended. Optional id of an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
+            /** @description Recommended. Optional id of a built-in stock actor or an ACTOR entity (e.g. `vg_enti_...`) with an image reference. When set, narration is delivered by that actor avatar. Omit or pass `null` for voiceover without an avatar. */
             actorEntityId?: string | null;
             /** @description Avatar generation quality tier. Applies when `actorEntityId` is provided. Optional; when omitted, your account's Default AI quality for avatars is used. */
             avatarQuality?: components["schemas"]["ModelQuality"];
+            /** @description Optional id of a SLIDESHOW_THEME entity (e.g. `vg_enti_...`) whose reference board defines the shared slide design system (fonts, colors, layout) applied to generated or edited slides. Create one via `POST /v1/entities` with `entityType` SLIDESHOW_THEME and attach a reference image or a PDF / PowerPoint. Omit when converting an uploaded deck's original pages into a video; VideoGen derives a theme from those pages in the background so later edits can match the original slides. */
+            slideshowThemeEntityId?: string;
             /** @description Caption styling. Omit to use the default style with captions shown. Pass an object to override individual style fields (any omitted field uses the default). Pass `null` to hide captions entirely. */
             captionStyle?: components["schemas"]["WorkflowCaptionStyle"] | null;
             /** @description Optional file id of an uploaded logo image to overlay on the video (e.g. `vg_file_...`). Upload the image first via `POST /v1/files/upload`. Only image files are accepted. */
@@ -2913,7 +2935,7 @@ export interface components {
             title?: string;
             /** @description Optional per-scene look override. Falls back to the request-level `defaultGeneration` when omitted. */
             generation?: components["schemas"]["SceneGeneration"] | null;
-            /** @description Optional per-scene duration in seconds. Omit or pass null to inherit `defaultDurationSeconds` (which may itself be Auto). When set, must be a whole number between 1 and 15. */
+            /** @description Optional per-scene duration in seconds. Omit or pass null to inherit `defaultDurationSeconds` (which may itself be Auto). When set, must be a whole number between 1 and 20. */
             durationSeconds?: number | null;
             /** @description Optional ids of ACTOR entities (e.g. `vg_enti_...`) to feature in this scene. Each entity's reference images are added so the same characters appear in the generated image or video. A scene can feature multiple actors. */
             actorEntityIds?: string[];
@@ -2921,7 +2943,7 @@ export interface components {
             productEntityIds?: string[];
             /** @description Optional id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide the look of this scene. */
             visualStyleEntityId?: string | null;
-            /** @description Optional spoken script for this scene. When provided, the generative video clip speaks this exact text natively (lip-synced). Keep it short enough to speak in one clip (at most about 10 seconds). May optionally embed the same `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) mention tokens as `prompt` so named entities match attached reference identity. Prefer structured entity id fields for attachments; mention tokens are optional. */
+            /** @description Optional spoken script for this scene. When provided, the generative video clip speaks this exact text natively (lip-synced). Keep it short enough to speak in one clip (at most about 20 seconds). May optionally embed the same `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) mention tokens as `prompt` so named entities match attached reference identity. Prefer structured entity id fields for attachments; mention tokens are optional. */
             voiceoverScript?: string | null;
         };
         StoryboardToVideoRequest: {
@@ -2933,10 +2955,13 @@ export interface components {
             productEntityIds?: string[];
             /** @description Default look applied to scenes that don't set their own `generation`. Defaults to no extra style. */
             defaultGeneration?: components["schemas"]["SceneGeneration"] | null;
-            /** @description Default per-scene duration in seconds for scenes that don't set their own `durationSeconds`. Omit or pass null for Auto (duration is estimated at generate time so spoken text or the visual beat fits, clamped to model limits). When set, must be a whole number between 1 and 15. */
+            /** @description Default per-scene duration in seconds for scenes that don't set their own `durationSeconds`. Omit or pass null for Auto (duration is estimated at generate time so spoken text or the visual beat fits, clamped to model limits). When set, must be a whole number between 1 and 20. */
             defaultDurationSeconds?: number | null;
-            /** @description Generation quality tier for every scene. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for storyboard video clips and is rejected. */
-            quality?: components["schemas"]["ModelQuality"];
+            /**
+             * @description Image generation quality for scene opening frames. Optional; defaults to `HIGH`. This does not change video generation quality.
+             * @enum {string}
+             */
+            quality?: "HIGH" | "MAX";
             aspectRatio?: components["schemas"]["AspectRatio"];
             /** @description Optional storyboard-wide production notes for the AI that builds the video (e.g. recurring characters or props, a consistent setting, or overall staging guidance). Applies across every scene; per-scene direction goes in each scene's `prompt`. */
             workflowAgentContext?: string;
@@ -2959,11 +2984,11 @@ export interface components {
             prompt: string;
             /** @description Optional ids of previously uploaded reference images (e.g. `vg_file_...`) that guide the opening frame. Upload files via `POST /v1/files/upload` first. */
             imageFileIds?: string[];
-            /** @description Desired clip length in whole seconds (1 to 15). Defaults to 10. */
+            /** @description Desired clip length in whole seconds (1 to 30). Defaults to 10. The generated clip is clamped to the selected quality's supported range. */
             durationSeconds?: number;
             /** @description Aspect ratio for the generated video. Defaults to 16:9 when omitted. */
             aspectRatio?: components["schemas"]["AspectRatio"];
-            /** @description Video generation quality tier. Also used for the opening-frame image. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). `LOW` is not supported for video and is rejected. */
+            /** @description Video generation quality tier (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Also used for the opening-frame image. Optional; when omitted, your account's Default AI quality for video is used (change it at https://app.videogen.io/settings/account). */
             quality?: components["schemas"]["ModelQuality"];
             /**
              * @description When true, the generated OUTPUT files (the opening-frame image and the video clip) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
@@ -2977,9 +3002,9 @@ export interface components {
             hideFromUi?: boolean;
         };
         /** @description Creates a project from a content outline and generates a full video from it. This is an experimental, fully-agentic workflow: an AI agent reads the outline (a Markdown brief describing the sections, beats, and key points the video should cover), plans the video, and builds it section by section — generating any narration, visuals, and media it needs. Provide a well-structured outline; the richer the brief, the closer the result. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion. */
-        ContentOutlineToVideoRequest: {
+        CreativeBriefToVideoRequest: {
             /** @description The content outline as Markdown — a brief describing what the video should cover. Use headings, bullet lists, and short prose to lay out the sections, beats, and key facts in order (e.g. `# Solar panels explained\n## How they work\n- Photons knock electrons loose...`). The agent grounds the video in this brief. */
-            outlineMarkdown: string;
+            briefMarkdown: string;
             aspectRatio?: components["schemas"]["AspectRatio"];
             /** @description Optional ids of previously uploaded image or video files (e.g. `vg_file_...`) to make available to the video. The agent decides whether and where to use them. Upload files via `POST /v1/files/upload` first. */
             inputFileIds?: string[];
@@ -3287,7 +3312,7 @@ export interface components {
         /** @description The entity id (e.g. `vg_enti_...`). */
         EntityIdPath: string;
         /** @description When provided, returns only entities of this type. Omit to return all entities. */
-        EntityTypeQuery: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
+        EntityTypeQuery: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
         /** @description The workflow run id returned when the workflow was started. */
         WorkflowRunIdPath: string;
         /** @description The tool execution id returned when the tool was started. */
@@ -3598,7 +3623,7 @@ export interface operations {
             };
         };
     };
-    contentOutlineToVideo: {
+    creativeBriefToVideo: {
         parameters: {
             query?: never;
             header?: never;
@@ -3607,7 +3632,7 @@ export interface operations {
         };
         requestBody: {
             content: {
-                "application/json": components["schemas"]["ContentOutlineToVideoRequest"];
+                "application/json": components["schemas"]["CreativeBriefToVideoRequest"];
             };
         };
         responses: {

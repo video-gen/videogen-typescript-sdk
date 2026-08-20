@@ -9,7 +9,6 @@ export type VoiceoverToVideoRequest = Schemas["VoiceoverToVideoRequest"];
 export type SlideshowToVideoRequest = Schemas["SlideshowToVideoRequest"];
 export type PromptToVideoClipRequest = Schemas["PromptToVideoClipRequest"];
 export type StoryboardToVideoRequest = Schemas["StoryboardToVideoRequest"];
-export type ContentOutlineToVideoRequest = Schemas["ContentOutlineToVideoRequest"];
 export type StartWorkflowRunResponse = Schemas["StartWorkflowRunResponse"];
 export type WorkflowRun = Schemas["WorkflowRun"];
 export type WorkflowRunListResponse = Schemas["WorkflowRunListResponse"];

@@ -68,7 +68,6 @@ export type {
   AssistantMessageWebhookPayload,
   AssistantOutputMessage,
   AssistantWorkflowSuggestion,
-  ContentOutlineToVideoRequest,
   CreateEntityRequest,
   CreateFileUploadRequest,
   CreateTimelineInterchangeRequest,

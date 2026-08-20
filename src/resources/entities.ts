@@ -12,7 +12,7 @@ import type {
 } from "../types.js";
 
 type ListEntitiesRequest = {
-  entityType?: "ACTOR" | "PRODUCT" | "VISUAL_STYLE";
+  entityType?: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
   limit?: number;
   cursor?: string;
 };
