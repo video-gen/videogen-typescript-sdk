@@ -3,10 +3,10 @@
 [34mCLI[39m Building entry: src/index.ts
 [34mCLI[39m Using tsconfig: tsconfig.json
 [34mCLI[39m tsup v8.5.1
-[34mCLI[39m Using tsup config: /Users/davidgrossman/GitHub/videogen-main-ai-assistant-backend-refactor-spec/sdk-typescript/tsup.config.ts
+[34mCLI[39m Using tsup config: /Users/davidgrossman/GitHub/videogen-main-reprioritize-workflows/sdk-typescript/tsup.config.ts
 [34mCLI[39m Target: node20
 [34mCLI[39m Cleaning output folder
 [34mESM[39m Build start
 [32mESM[39m [1mdist/index.js     [22m[32m48.06 KB[39m
 [32mESM[39m [1mdist/index.js.map [22m[32m108.94 KB[39m
-[32mESM[39m ⚡️ Build success in 48ms
+[32mESM[39m ⚡️ Build success in 18ms
