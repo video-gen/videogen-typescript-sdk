@@ -3,7 +3,7 @@ import { VideoGenError } from "../errors.js";
 import type { PollOptions, ProjectExport } from "../types.js";
 import { sleep } from "./sleep.js";
 
-const TERMINAL = new Set(["succeeded", "failed"]);
+const TERMINAL = new Set(["succeeded", "failed", "cancelled"]);
 
 export type PollProjectExportParams = {
   client: VideoGen;
@@ -38,7 +38,10 @@ export const pollProjectExport = async ({
     onProgress?.(projectExport.progressPercentage);
 
     if (TERMINAL.has(projectExport.status)) {
-      if (throwOnFailure && projectExport.status === "failed") {
+      if (
+        throwOnFailure &&
+        (projectExport.status === "failed" || projectExport.status === "cancelled")
+      ) {
         const message =
           projectExport.error != null &&
           typeof projectExport.error === "object" &&
