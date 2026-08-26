@@ -1,6 +1,6 @@
 {
   "name": "@videogen/sdk",
-  "version": "2.1.8",
+  "version": "2.1.9",
   "description": "Official TypeScript SDK for the VideoGen API.",
   "license": "MIT",
   "type": "module",

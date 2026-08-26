@@ -2614,13 +2614,13 @@ export interface components {
     /** @description Visual style for the generated b-roll. */
     WorkflowVisualStyle: {
       /**
-       * @description STOCK pulls stock footage and images. AI_IMAGE generates a styled image for each section. ENTITY generates images that match a visual-style entity's reference images for a consistent look.
+       * @description STOCK pulls stock footage and images. AI_IMAGE generates a styled image for each section. Pass `entityId` to match a saved visual-style entity, or `aiStyle` for a free-form look.
        * @enum {string}
        */
-      type: "STOCK" | "AI_IMAGE" | "ENTITY";
-      /** @description Only applies when type is AI_IMAGE. A free-form description of the look applied to every generated image (e.g. `vintage 1970s film photography, warm grain`). See the AI styles reference for example descriptions of the app's default styles. Required when type is AI_IMAGE. */
+      type: "STOCK" | "AI_IMAGE";
+      /** @description Only applies when type is AI_IMAGE and `entityId` is omitted. A free-form description of the look applied to every generated image (e.g. `vintage 1970s film photography, warm grain`). See the AI styles reference for example descriptions of the app's default styles. Required when type is AI_IMAGE and `entityId` is omitted. */
       aiStyle?: string;
-      /** @description Only applies when type is ENTITY. The id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide every generated image. Required when type is ENTITY. */
+      /** @description Only applies when type is AI_IMAGE. The id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide every generated image. When set, generated images match that entity instead of `aiStyle`. */
       entityId?: string;
       /**
        * @description Only applies when type is AI_IMAGE. When true, featured b-roll images you provide are re-rendered in the chosen style so they match the generated look (no effect on featured b-roll videos). Defaults to true.
@@ -2966,7 +2966,7 @@ export interface components {
       aspectRatio?: components["schemas"]["AspectRatio"];
       visualStyle: components["schemas"]["WorkflowVisualStyle"];
       visualPacing?: components["schemas"]["VisualPacing"];
-      /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. */
+      /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE; STOCK pulls existing footage and is unaffected. */
       quality?: components["schemas"]["ModelQuality"];
       /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
       language?: string;
@@ -3030,7 +3030,7 @@ export interface components {
       aspectRatio?: components["schemas"]["AspectRatio"];
       visualStyle: components["schemas"]["WorkflowVisualStyle"];
       visualPacing?: components["schemas"]["VisualPacing"];
-      /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE or ENTITY; STOCK pulls existing footage and is unaffected. */
+      /** @description Image generation quality tier for AI-generated visuals. Optional; when omitted, your account's Default AI quality for images is used (change it at https://app.videogen.io/settings/account). Only applies when `visualStyle.type` is AI_IMAGE; STOCK pulls existing footage and is unaffected. */
       quality?: components["schemas"]["ModelQuality"];
       /** @description Output language as a BCP-47 code (e.g. `en`, `es`, `fr`). Defaults to English. */
       language?: string;
