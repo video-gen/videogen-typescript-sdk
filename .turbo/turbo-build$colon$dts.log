@@ -1,2 +1,2 @@
 
-[2m$ tsc --emitDeclarationOnly[22m
+$ tsc --emitDeclarationOnly
