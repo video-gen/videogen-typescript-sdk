@@ -26,9 +26,10 @@ const run = await vg.workflows.scriptToVideoAndWait({
   script: "Stay hydrated for better focus and energy.",
   visualStyle: {
     type: "AI_IMAGE",
-    aiStyle: "loose watercolor illustration with visible brushstrokes",
+    aiStyle: "Loose watercolor illustration, visible brushstrokes, soft color bleeds, paper texture, muted palette. A clear uncluttered subject centered in the frame, occupying only the middle half of the image, with generous empty margins on all four sides, no background clutter.",
   },
   quality: "HIGH",
+  autoExport: true,
   remixActions: [
     { type: "ENABLE_CAPTIONS" },
     {
@@ -40,7 +41,7 @@ const run = await vg.workflows.scriptToVideoAndWait({
   ],
 });
 
-console.log(run.status, run.projectId);
+console.log(run.downloadUrl);
 ```
 
 Omit `apiKey` to read `VIDEOGEN_API_KEY` from the environment.
@@ -76,7 +77,7 @@ const run = await vg.workflows.promptToVideoClipAndWait({
   quality: "HIGH",
 });
 
-console.log(run.status, run.projectId);
+console.log(run.downloadUrl);
 ```
 
 Other workflow starters: `voiceoverToVideoAndWait` (uploaded audio `fileId`), `slideshowToVideoAndWait` (deck `fileId`).

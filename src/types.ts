@@ -1,6 +1,11 @@
 import type { components } from "./types/openapi.js";
 
-export type { components, paths, operations, webhooks } from "./types/openapi.js";
+export type {
+  components,
+  paths,
+  operations,
+  webhooks,
+} from "./types/openapi.js";
 
 export type Schemas = components["schemas"];
 
@@ -34,7 +39,8 @@ export type RemixActionRun = Schemas["RemixActionRun"];
 
 export type GenerateImageRequest = Schemas["GenerateImageRequest"];
 export type GenerateVideoClipRequest = Schemas["GenerateVideoClipRequest"];
-export type GenerateMotionGraphicRequest = Schemas["GenerateMotionGraphicRequest"];
+export type GenerateMotionGraphicRequest =
+  Schemas["GenerateMotionGraphicRequest"];
 export type TextToSpeechRequest = Schemas["TextToSpeechRequest"];
 export type GenerateSoundEffectRequest = Schemas["GenerateSoundEffectRequest"];
 export type GenerateMusicRequest = Schemas["GenerateMusicRequest"];
@@ -58,14 +64,19 @@ export type CreateEntityRequest = Schemas["CreateEntityRequest"];
 export type UpdateEntityRequest = Schemas["UpdateEntityRequest"];
 export type EntityArchiveResponse = Schemas["EntityArchiveResponse"];
 export type AddEntityReferenceRequest = Schemas["AddEntityReferenceRequest"];
-export type RemoveEntityReferenceRequest = Schemas["RemoveEntityReferenceRequest"];
+export type RemoveEntityReferenceRequest =
+  Schemas["RemoveEntityReferenceRequest"];
 
 export type StartAssistantChatRequest = Schemas["StartAssistantChatRequest"];
 export type StartAssistantChatResponse = Schemas["StartAssistantChatResponse"];
-export type SendAssistantMessageRequest = Schemas["SendAssistantMessageRequest"];
-export type SendAssistantMessageResponse = Schemas["SendAssistantMessageResponse"];
-export type ActOnAssistantActionRequest = Schemas["ActOnAssistantActionRequest"];
-export type ActOnAssistantActionResponse = Schemas["ActOnAssistantActionResponse"];
+export type SendAssistantMessageRequest =
+  Schemas["SendAssistantMessageRequest"];
+export type SendAssistantMessageResponse =
+  Schemas["SendAssistantMessageResponse"];
+export type ActOnAssistantActionRequest =
+  Schemas["ActOnAssistantActionRequest"];
+export type ActOnAssistantActionResponse =
+  Schemas["ActOnAssistantActionResponse"];
 export type GetAssistantResponse = Schemas["GetAssistantResponse"];
 export type AssistantMessage = Schemas["AssistantMessage"];
 export type AssistantInputMessage = Schemas["AssistantInputMessage"];
@@ -74,9 +85,11 @@ export type AssistantMessageStatus = Schemas["AssistantMessageStatus"];
 export type AssistantAction = Schemas["AssistantAction"];
 export type AssistantActionKind = Schemas["AssistantActionKind"];
 export type AssistantActionDetail = Schemas["AssistantActionDetail"];
-export type AssistantWorkflowSuggestion = Schemas["AssistantWorkflowSuggestion"];
+export type AssistantWorkflowSuggestion =
+  Schemas["AssistantWorkflowSuggestion"];
 export type AssistantMessageAttachment = Schemas["AssistantMessageAttachment"];
-export type AssistantMessageWebhookPayload = Schemas["AssistantMessageWebhookPayload"];
+export type AssistantMessageWebhookPayload =
+  Schemas["AssistantMessageWebhookPayload"];
 export type AssistantMessageWebhookEventName =
   Schemas["AssistantMessageWebhookEventName"];
 
@@ -86,9 +99,11 @@ export type GenerateTextResponse = Schemas["GenerateTextResponse"];
 export type TtsVoiceListResponse = Schemas["TtsVoiceListResponse"];
 export type LanguageListResponse = Schemas["LanguageListResponse"];
 
-export type CreateWebhookEndpointRequest = Schemas["CreateWebhookEndpointRequest"];
+export type CreateWebhookEndpointRequest =
+  Schemas["CreateWebhookEndpointRequest"];
 export type WebhookEndpoint = Schemas["WebhookEndpoint"];
-export type WebhookEndpointListResponse = Schemas["WebhookEndpointListResponse"];
+export type WebhookEndpointListResponse =
+  Schemas["WebhookEndpointListResponse"];
 
 export type MeResponse = Schemas["MeResponse"];
 export type ApiError = Schemas["ApiError"];
