@@ -24,6 +24,7 @@ type ListProjectsRequest = {
   limit?: number;
   cursor?: string;
   selfOnly?: boolean;
+  /** @deprecated Ignored. The list always includes projects created in the VideoGen app. */
   includeUiProjects?: boolean;
 };
 
@@ -68,12 +69,7 @@ export class ProjectsResource {
     return this.client.request<ListProjectsResponse>({
       method: "GET",
       path: "/v1/projects",
-      query: pickFields(request ?? {}, [
-        "limit",
-        "cursor",
-        "selfOnly",
-        "includeUiProjects",
-      ]),
+      query: pickFields(request ?? {}, ["limit", "cursor", "selfOnly"]),
       signal: options?.signal,
     });
   }

@@ -9,7 +9,7 @@ export type UploadFileParams = {
   type?: "IMAGE" | "VIDEO" | "AUDIO" | "PDF" | "SLIDESHOW";
   displayName?: string;
   temporary?: boolean;
-  /** When true, hide the file from the VideoGen Media page. Defaults to false. */
+  /** @deprecated Ignored. Uploaded files always appear in the VideoGen app. */
   hideFromUi?: boolean;
   contentType?: string;
   pollIntervalMs?: number;
@@ -57,7 +57,6 @@ export const uploadFile = async (params: UploadFileParams): Promise<FileInfo> =>
     {
       displayName,
       isTemporary: params.temporary ?? false,
-      hideFromUi: params.hideFromUi ?? false,
       ...(params.type != null ? { type: params.type } : {}),
     },
     { signal: params.signal },

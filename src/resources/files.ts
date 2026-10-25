@@ -1,10 +1,15 @@
 import type { VideoGen } from "../client.js";
+import { pollFileUrlImport } from "../helpers/pollFileUrlImport.js";
 import { fillPath, pickFields } from "../request.js";
 import type {
   CreateFileUploadRequest,
+  CreateFileUrlImportRequest,
+  CreateFileUrlImportResponse,
   FileInfo,
   FileUploadResponse,
+  FileUrlImport,
   GetFilesResponse,
+  PollOptions,
   RequestOptions,
   SearchFilesRequest,
   SearchFilesResponse,
@@ -19,6 +24,10 @@ type ListFilesRequest = {
 
 type FileIdRequest = {
   fileId: string;
+};
+
+type FileImportIdRequest = {
+  fileImportId: string;
 };
 
 export class FilesResource {
@@ -73,6 +82,47 @@ export class FilesResource {
       method: "POST",
       path: "/v1/files/upload",
       body: request,
+      signal: options?.signal,
+    });
+  }
+
+  // @sdk-operation createFileUrlImport
+  async createFileUrlImport(
+    request: CreateFileUrlImportRequest,
+    options?: RequestOptions,
+  ): Promise<CreateFileUrlImportResponse> {
+    return this.client.request<CreateFileUrlImportResponse>({
+      method: "POST",
+      path: "/v1/files/import-url",
+      body: request,
+      signal: options?.signal,
+    });
+  }
+
+  async createFileUrlImportAndWait(
+    request: CreateFileUrlImportRequest,
+    options?: PollOptions,
+  ): Promise<FileUrlImport> {
+    const started = await this.createFileUrlImport(request, {
+      signal: options?.signal,
+    });
+    return pollFileUrlImport({
+      client: this.client,
+      fileImportId: started.fileImportId,
+      ...options,
+    });
+  }
+
+  // @sdk-operation getFileUrlImport
+  async getFileUrlImport(
+    request: FileImportIdRequest,
+    options?: RequestOptions,
+  ): Promise<FileUrlImport> {
+    return this.client.request<FileUrlImport>({
+      method: "GET",
+      path: fillPath("/v1/files/imports/{fileImportId}", {
+        fileImportId: request.fileImportId,
+      }),
       signal: options?.signal,
     });
   }

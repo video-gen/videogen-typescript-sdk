@@ -12,7 +12,14 @@ import type {
 } from "../types.js";
 
 type ListEntitiesRequest = {
-  entityType?: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
+  entityType?:
+    | "ACTOR"
+    | "PRODUCT"
+    | "VISUAL_STYLE"
+    | "SLIDESHOW_THEME"
+    | "BRAND"
+    | "LOCATION"
+    | "PROP";
   limit?: number;
   cursor?: string;
 };

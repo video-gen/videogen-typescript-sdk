@@ -188,6 +188,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/workflows/video-to-video": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Video to video
+         * @description Creates a project from a video and restyles it from a text prompt. The output keeps the restyled part's length and timing. Pass an uploaded video as `videoFileId`, or a public link as `videoUrl` and the run imports it for you. Up to 120 seconds of the video is restyled per run: choose the part with `trimStartSeconds` and `trimEndSeconds`, or omit them to restyle the first 120 seconds. Returns immediately with a workflow run id; poll or subscribe to webhooks for completion.
+         */
+        post: operations["videoToVideo"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/workflows/runs": {
         parameters: {
             query?: never;
@@ -251,7 +271,7 @@ export interface paths {
         };
         /**
          * List projects
-         * @description Returns projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` to also include dashboard-created projects. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all matching projects for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
+         * @description Returns projects, most recently updated first, including projects created in the dashboard. Use `selfOnly=true` to restrict results to the calling API key's user; otherwise all matching projects for the team are returned. Cursor-paginated; see the [Pagination](/pagination) guide.
          */
         get: operations["listProjects"];
         put?: never;
@@ -822,6 +842,46 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/files/import-url": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Import a file from a link
+         * @description Starts importing a video from a public link (a video page or a direct video URL) into your files. Returns immediately with a file import id. Poll `GET /v1/files/imports/{fileImportId}` until `status` is `succeeded`, then use `fileId` anywhere a video file id is accepted, such as `POST /v1/workflows/video-to-video`. Videos up to 10 minutes long can be imported. Only import media you have the rights to use.
+         */
+        post: operations["createFileUrlImport"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/files/imports/{fileImportId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get file import
+         * @description Returns the current status of a file import started via `POST /v1/files/import-url`, and, once `status` is `succeeded`, the imported file. Poll this endpoint until `status` is `succeeded`, `failed`, or `cancelled`.
+         */
+        get: operations["getFileUrlImport"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/files/{fileId}/hydrate": {
         parameters: {
             query?: never;
@@ -917,7 +977,7 @@ export interface paths {
         put?: never;
         /**
          * Create entity
-         * @description Create a new actor or visual style. Attach reference images with `POST /v1/entities/{entityId}/references`.
+         * @description Create a reusable entity. Attach reference images with `POST /v1/entities/{entityId}/references`.
          */
         post: operations["createEntity"];
         delete?: never;
@@ -957,7 +1017,7 @@ export interface paths {
         put?: never;
         /**
          * Update entity
-         * @description Update an entity's name or description. Provide at least one field. Built-in entities (`isBuiltIn: true`) cannot be updated.
+         * @description Update an entity's name, description, or brand configuration. Provide at least one field. Built-in entities (`isBuiltIn: true`) cannot be updated.
          */
         post: operations["updateEntity"];
         delete?: never;
@@ -1250,8 +1310,148 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/billing/account": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Billing account
+         * @description Returns the current team, usable balance and explicit billing delegation. No charge or account changes.
+         */
+        get: operations["getBillingAccount"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/billing/orders": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Quote a credit purchase
+         * @description Prepare an isolated one-time credit order for an eligible active USD subscriber. No payment or generation is started. Reuse the client-generated order UUID when retrying. Show every returned term before requesting payment approval.
+         */
+        post: operations["createBillingOrder"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/billing/orders/{orderId}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get billing order
+         * @description Read current payment and fulfillment evidence for the original order before retrying an uncertain purchase. This operation never collects money or grants credits.
+         */
+        get: operations["getBillingOrder"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/billing/orders/{orderId}/complete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Complete approved credit purchase
+         * @description Sensitive write. Complete only this quoted order after the user approves its exact terms. Deliver the scoped one-time card token through the secure header, never model-visible text. Reuse the same order, revision, client idempotency key and credential on an identical retry. A different token cannot replace an existing claim. Payment and credit fulfillment are separate states.
+         */
+        post: operations["completeBillingOrder"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/billing/orders/{orderId}/cancel": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Cancel unpaid credit purchase
+         * @description Void an unpaid order. If payment already settled, return its paid outcome; cancellation does not refund a settled payment.
+         */
+        post: operations["cancelBillingOrder"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/billing/orders/{orderId}/refund": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Request credit purchase refund
+         * @description Sensitive write. Record a support-reviewed refund request for a paid order. A requested refund is not an approved or completed refund.
+         */
+        post: operations["requestBillingRefund"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export interface webhooks {
+    "tool_execution.awaiting_approval": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * tool_execution.awaiting_approval
+         * @description Delivered when a generated tool result conflicts with newer project edits and needs explicit approval in the project's Tasks drawer. The result is retained; generation has not failed and the project has not been overwritten.
+         */
+        post: operations["toolExecutionAwaitingApproval"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "tool_execution.succeeded": {
         parameters: {
             query?: never;
@@ -1306,6 +1506,26 @@ export interface webhooks {
          * @description Delivered when a tool execution is cancelled.
          */
         post: operations["toolExecutionCancelled"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "workflow_run.awaiting_approval": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * workflow_run.awaiting_approval
+         * @description Delivered when a retained workflow result conflicts with newer project edits and needs explicit approval in the project's Tasks drawer. This is not successful application or a generation failure.
+         */
+        post: operations["workflowRunAwaitingApproval"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1523,7 +1743,7 @@ export interface webhooks {
         put?: never;
         /**
          * file.analysis_completed
-         * @description Delivered when file analysis (description, transcript, embedding) completes. Only fired for files uploaded via the API.
+         * @description Delivered when file analysis (display name, description, transcript, embedding) completes. Only fired for files uploaded via the API. The file's display name may be replaced with a short name based on the content and the original filename.
          */
         post: operations["fileAnalysisCompleted"];
         delete?: never;
@@ -1615,6 +1835,71 @@ export interface webhooks {
 }
 export interface components {
     schemas: {
+        BillingAccountResponse: {
+            teamId: string;
+            teamName: string;
+            creditsRemaining: number;
+            /** @enum {string} */
+            currency: "usd";
+            purchaseLimitMinor: number;
+            accessExpiresAtMse: number;
+            canPurchase: boolean;
+            purchaseRestriction?: string | null;
+            creditPack?: {
+                minimumCredits: number;
+                stepCredits: number;
+                maximumCredits: number;
+            };
+        };
+        CreateBillingOrderRequest: {
+            /**
+             * Format: uuid
+             * @description Client-generated UUID. Reuse it for identical quote retries.
+             */
+            orderId: string;
+            credits: number;
+        };
+        CompleteBillingOrderRequest: {
+            revision: number;
+            idempotencyKey: string;
+        };
+        EmptyBillingRequest: Record<string, never>;
+        BillingRefundRequest: {
+            reason: string;
+        };
+        BillingOrder: {
+            /** Format: uuid */
+            orderId: string;
+            /** @enum {string} */
+            state: "requires_approval" | "requires_action" | "processing" | "paid_pending_fulfillment" | "fulfilled" | "failed" | "canceled" | "expired";
+            revision: number;
+            teamId: string;
+            teamName: string;
+            /** @enum {string} */
+            seller: "VideoGen";
+            /** @enum {string} */
+            product: "credits";
+            credits: number;
+            currency: string;
+            subtotalMinor: number;
+            discountMinor: number;
+            taxMinor: number;
+            feesMinor: number;
+            totalMinor: number;
+            expiresAtMse: number;
+            termsVersion: string;
+            refundTerms: string;
+            /** @enum {string} */
+            refundStatus: "none" | "requested" | "processing" | "succeeded" | "failed";
+            /** @description Secure VideoGen verification continuation when required. Sign in as the purchaser on the same team. This is not a checkout link. */
+            verificationUrl?: string | null;
+            receiptUrl: string | null;
+            retryGuidance: string;
+            /** @description Seller payment handler and merchant identity for a compatible native wallet. This does not attest to host acceptance. */
+            paymentHandler: {
+                [key: string]: unknown;
+            };
+        };
         /**
          * @description File type. `TEXT` covers plain-text and editor-interchange documents; `LOTTIE` is a JSON animation.
          * @enum {string}
@@ -1637,7 +1922,7 @@ export interface components {
              * @enum {string}
              */
             scope: "GLOBAL" | "PROJECT" | "EXPORT" | "TEMPORARY" | "ENTITY";
-            /** @description Display name for the file. */
+            /** @description Display name for the file. For an uploaded file, analysis may replace the original filename with a short name based on the content. */
             displayName?: string;
             description?: string | null;
             /** @description Duration in seconds for video and audio files. Null for images. */
@@ -1746,18 +2031,13 @@ export interface components {
         CreateFileUploadRequest: {
             /** @description The type of file to upload. Optional; when omitted, the type is inferred after upload processing completes. */
             type?: components["schemas"]["FileType"];
-            /** @description Display name for the uploaded file. */
+            /** @description Display name for the uploaded file. Analysis may replace this with a short name based on the file content and this original name. */
             displayName: string;
             /**
              * @description When true, the file is temporary. Temporary files are guaranteed to be available for 24 hours, after which they may be archived at any time. Temporary files are not analyzed (no description, transcript, or embedding will be generated), so they will not appear in search results. Defaults to false.
              * @default false
              */
             isTemporary?: boolean;
-            /**
-             * @description When true, the file is hidden from the VideoGen Media page by default. It remains accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
             /** @description Optional pre-computed transcript for an audio or video upload, as timed `words`. When provided, transcription is skipped and caption timing matches your transcript. Ignored for non-audio/video files. */
             transcript?: components["schemas"]["Transcript"] | null;
         };
@@ -1766,6 +2046,29 @@ export interface components {
             fileId: string;
             /** @description Pre-signed URL. PUT the raw file bytes to this URL to complete the upload. */
             uploadUrl: string;
+        };
+        CreateFileUrlImportRequest: {
+            /** @description Public `http://` or `https://` link to a video page or a video file. Private, login-only, and DRM-protected videos cannot be imported. */
+            url: string;
+        };
+        CreateFileUrlImportResponse: {
+            /** @description Opaque file import id (e.g. `vg_fimp_...`). Poll `GET /v1/files/imports/{fileImportId}` for completion. */
+            fileImportId: string;
+        };
+        FileUrlImport: {
+            /** @description Opaque file import id (e.g. `vg_fimp_...`) matching the original request. */
+            fileImportId: string;
+            status: components["schemas"]["JobStatus"];
+            /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
+            progressPercentage: number;
+            /** @description Zero-based index of the current or most recent import attempt. */
+            attemptIndex: number;
+            /** @description Id of the imported video file (e.g. `vg_file_...`). Always present as a field; `null` until `status` is `succeeded`. */
+            fileId: string | null;
+            /** @description Imported file metadata. Always present as a field; `null` until `status` is `succeeded`. */
+            file: components["schemas"]["FileInfo"] | null;
+            /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
+            error: components["schemas"]["ApiError"] | null;
         };
         GetFilesResponse: {
             files: components["schemas"]["FileInfo"][];
@@ -1780,6 +2083,11 @@ export interface components {
             fileId: string;
             /** @description Optional description of the reference. Empty string when not set. */
             description: string;
+            /**
+             * @description What the file is used for. REFERENCE is a regular reference image. BRAND_LOGO is a brand's overlay logo and is never used as a generation reference. BRAND_STYLE_GUIDE is a brand's visual style guide.
+             * @enum {string}
+             */
+            role: "REFERENCE" | "BRAND_LOGO" | "BRAND_STYLE_GUIDE";
             /** @description When true, this is the entity's primary reference (used for its thumbnail). */
             isDefault: boolean;
         };
@@ -1792,21 +2100,32 @@ export interface components {
             /** @description True when the actor has a built-in presenter or image reference that can be used with `actorEntityId` for avatar generation. */
             hasAvatarPresenter: boolean;
         };
-        /** @description A reusable actor, product, visual style, or slideshow theme. Attach its reference images to workflows for consistent characters, looks, and slide designs. */
+        /** @description Visual and writing guidance for a BRAND entity. API requests store these fields but do not generate a style guide; upload and attach a guide with role `BRAND_STYLE_GUIDE` for visual generation. writingStyle guides assistant copy. */
+        EntityBrandConfig: {
+            /** @description Font guidance, such as heading and body font names. */
+            fonts: string;
+            /** @description Color guidance, including hex codes when available. */
+            colors: string;
+            /** @description Voice and tone for spoken and on-screen copy. */
+            writingStyle: string;
+        };
+        /** @description A reusable actor, product, visual style, slideshow theme, brand, location, or prop. Attach its reference images to workflows for consistent characters, looks, places, and slide designs. */
         Entity: {
             /** @description The entity id (e.g. `vg_enti_...`). */
             entityId: string;
             /**
-             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images; SLIDESHOW_THEME is a shared slide design system (fonts, colors, layout) applied to every slide of a slideshow-to-video deck.
+             * @description ACTOR features a consistent character; PRODUCT features a consistent product you sell or promote; VISUAL_STYLE guides the look of generated images; SLIDESHOW_THEME is a shared slide design system (fonts, colors, layout) applied to every slide of a slideshow-to-video deck; BRAND holds a logo, a style guide image, and a writing style; LOCATION features a consistent place or set; PROP features a consistent background object that is not a product.
              * @enum {string}
              */
-            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
+            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME" | "BRAND" | "LOCATION" | "PROP";
             /** @description Display name. */
             name: string;
             /** @description Optional description. Empty string when not set. */
             description: string;
             /** @description Voice and presenter summary for ACTOR entities. Null for non-ACTOR entities. */
             actorConfig?: components["schemas"]["EntityActorConfig"] | null;
+            /** @description Brand guidance for BRAND entities. Null for other entity types. */
+            brandConfig?: components["schemas"]["EntityBrandConfig"] | null;
             /** @description Reference images attached to the entity. */
             references: components["schemas"]["EntityReference"][];
             /** @description Seconds since epoch (Unix timestamp) when the entity was created. */
@@ -1825,14 +2144,16 @@ export interface components {
         };
         CreateEntityRequest: {
             /**
-             * @description ACTOR features a consistent character; PRODUCT features a consistent product or object; VISUAL_STYLE guides the look of generated images; SLIDESHOW_THEME is a shared slide design system (fonts, colors, layout) applied to every slide of a slideshow-to-video deck.
+             * @description ACTOR features a consistent character; PRODUCT features a consistent product you sell or promote; VISUAL_STYLE guides the look of generated images; SLIDESHOW_THEME is a shared slide design system (fonts, colors, layout) applied to every slide of a slideshow-to-video deck; BRAND holds a logo, a style guide image, and a writing style; LOCATION features a consistent place or set; PROP features a consistent background object that is not a product.
              * @enum {string}
              */
-            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
+            entityType: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME" | "BRAND" | "LOCATION" | "PROP";
             /** @description Display name. */
             name: string;
             /** @description Optional description. */
             description?: string;
+            /** @description Optional configuration for BRAND entities. Omit to create a blank brand. */
+            brandConfig?: components["schemas"]["EntityBrandConfig"];
         };
         /** @description At least one field must be provided. */
         UpdateEntityRequest: {
@@ -1840,6 +2161,8 @@ export interface components {
             name?: string | null;
             /** @description New description. Omit to leave unchanged. */
             description?: string | null;
+            /** @description Complete replacement configuration for a BRAND entity. Omit to leave unchanged. */
+            brandConfig?: components["schemas"]["EntityBrandConfig"];
         };
         EntityArchiveResponse: {
             /** @description The id of the archived entity. */
@@ -1852,6 +2175,12 @@ export interface components {
             fileId: string;
             /** @description Optional description of the reference. */
             description?: string;
+            /**
+             * @description What the file is used for. BRAND_LOGO and BRAND_STYLE_GUIDE are only allowed on BRAND entities, and attaching one replaces the brand's previous logo or style guide. BRAND_LOGO is applied as the video logo overlay and is never used as a generation reference.
+             * @default REFERENCE
+             * @enum {string}
+             */
+            role?: "REFERENCE" | "BRAND_LOGO" | "BRAND_STYLE_GUIDE";
             /**
              * @description When true, make this the entity's primary reference (used for its thumbnail).
              * @default false
@@ -2146,11 +2475,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         /** @description At least one of `prompt`, `startFrameFileId`, `imageFileIds`, `videoFileIds`, `audioFileIds`, or `spokenDialogue` must be provided. */
         GenerateVideoClipRequest: {
@@ -2159,11 +2483,11 @@ export interface components {
              * @example A golden retriever running through a sunlit meadow in slow motion, cinematic
              */
             prompt?: string;
-            /** @description Optional file id of the opening-frame still (e.g. `vg_file_...`). Upload first via `POST /v1/files/upload`. When set, this image is the first frame of the clip. If the same id also appears in `imageFileIds`, it is used only as the opening frame and dropped from the reference list. Can be the only input (prompt optional). */
+            /** @description Optional file id of the opening-frame still (e.g. `vg_file_...`). Upload first via `POST /v1/files/upload`. When set, this image is the first frame of the clip. If the same id also appears in `imageFileIds`, it is used only as the opening frame and dropped from the reference list. Can be the only input (prompt optional). Combining this with `videoFileIds` requires `quality: HIGH` or `quality: MAX`. */
             startFrameFileId?: string;
-            /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the images are used as visual guidance. To animate a specific still as the opening frame, pass it as `startFrameFileId` instead. */
+            /** @description Optional file ids of reference images (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. When provided, the images are used as visual guidance. To animate a specific still as the opening frame, pass it as `startFrameFileId` instead. Combining these with `videoFileIds` requires `quality: HIGH` or `quality: MAX`. */
             imageFileIds?: string[];
-            /** @description Optional file ids of reference videos (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. They are used as motion or style guidance for the generated video. */
+            /** @description Optional file ids of reference videos (e.g. `["vg_file_..."]`). Upload files first via `POST /v1/files/upload`, then pass the returned ids here. They are used as motion or style guidance for the generated video, without guaranteeing exact reproduction. Combining these with `startFrameFileId` or `imageFileIds` requires `quality: HIGH` or `quality: MAX`. */
             videoFileIds?: string[];
             /** @description Optional file ids of reference audio clips (e.g. `["vg_file_..."]`) used for lip-sync from that recording. Upload files first via `POST /v1/files/upload`, then pass the returned ids here. To have the model speak a line it generates itself, pass `spokenDialogue` instead (or in addition). */
             audioFileIds?: string[];
@@ -2199,11 +2523,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         GenerateMotionGraphicRequest: {
             /**
@@ -2236,11 +2555,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         /**
          * @description Access mode for a motion graphic capability. AUTO uses the capability only when it is available on your plan (generated video clips require a paid plan). ENABLED forces the capability on and returns an upgrade error if your plan lacks it. DISABLED prevents the motion graphic from using the capability.
@@ -2283,11 +2597,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         GenerateSoundEffectRequest: {
             /** @description A text description of the sound effect to generate. */
@@ -2306,11 +2615,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         GenerateMusicRequest: {
             /** @description A text description of the music to generate. Include genre, mood, instrumentation, and tempo for best results. */
@@ -2325,11 +2629,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         /** @description Generate a talking-head avatar from an ACTOR entity and audio. */
         GenerateAvatarRequest: {
@@ -2350,11 +2649,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         ImageAssetRequest: {
             /** @description File id of the source image (e.g. `vg_file_...`). Upload a file first via `POST /v1/files/upload`, then pass the returned id here. */
@@ -2370,11 +2664,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         /**
          * @description AI generation quality tier, shared across every generative feature (image, video, text, and so on). `LOW` is fastest and cheapest, `STANDARD` balances quality and cost, `HIGH` is higher quality, and `MAX` is the highest quality.
@@ -2397,11 +2686,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, generated files are hidden from the VideoGen Media page by default. They remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
         };
         /** @description Returned when a tool execution is started. Use `toolExecutionId` to poll for results or cancel. */
         StartToolExecutionResponse: {
@@ -2409,11 +2693,15 @@ export interface components {
             toolExecutionId: string;
         };
         /**
-         * @description Lifecycle status shared by every asynchronous job (tool executions, workflow runs, remix actions, project exports, and timeline interchange jobs). `pending` and `running` are in-progress; `succeeded`, `failed`, and `cancelled` are terminal.
+         * @description Base lifecycle status for asynchronous jobs. `pending` and `running` are in-progress; `succeeded`, `failed`, and `cancelled` are terminal. Workflows and tools additionally support `awaiting_approval` through their specific status schemas.
          * @enum {string}
          */
         JobStatus: "pending" | "running" | "succeeded" | "failed" | "cancelled";
-        /** @description Result for a single generated file. Only appears inside a succeeded execution's `results`, so every field below is always present. */
+        /** @description Tool execution status. `awaiting_approval` means generation completed but applying its retained result would overwrite newer project edits. Review it in the project's Tasks drawer. Stop polling and return control to the caller; this is not success or failure. Standalone asset generation does not require approval. */
+        ToolExecutionStatus: components["schemas"]["JobStatus"] | "awaiting_approval";
+        /** @description Workflow run status. `awaiting_approval` means a retained result needs explicit approval because project content changed. Stop polling and return control to the caller. Approval reuses the result; success is reported only after the requested application and any requested export complete. */
+        WorkflowRunStatus: components["schemas"]["JobStatus"] | "awaiting_approval";
+        /** @description Result for a single generated file, including a retained result awaiting approval to apply to a project. Every field below is always present. */
         ToolSuccessResult: {
             /** @description File id for the generated asset. */
             fileId: string;
@@ -2465,14 +2753,14 @@ export interface components {
         ExecutedTool: {
             /** @description Execution id matching the original request. */
             toolExecutionId: string;
-            status: components["schemas"]["JobStatus"];
+            status: components["schemas"]["ToolExecutionStatus"];
             /** @description Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
             toolType: string;
             /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
             progressPercentage: number;
             /** @description Zero-based index of the current or most recent execution attempt. */
             attemptIndex: number;
-            /** @description One entry per generated result. Always present; empty until `status` is `succeeded`, then one entry per generated file (each with signed URLs and a hydrated `file`). */
+            /** @description One entry per retained generated file (each with signed URLs and a hydrated `file`) when `status` is `succeeded` or `awaiting_approval`. Always present; empty while generation is pending. Asset availability does not mean it has been applied to the project. */
             results: components["schemas"]["ToolSuccessResult"][];
             /** @description Error details. Always present; `null` unless `status` is `failed`. */
             error: components["schemas"]["ApiError"] | null;
@@ -2489,12 +2777,12 @@ export interface components {
          * @description Webhook event types for tool execution lifecycle.
          * @enum {string}
          */
-        ToolExecutionWebhookEventName: "tool_execution.succeeded" | "tool_execution.failed" | "tool_execution.cancelled";
+        ToolExecutionWebhookEventName: "tool_execution.awaiting_approval" | "tool_execution.succeeded" | "tool_execution.failed" | "tool_execution.cancelled";
         /**
          * @description Lifecycle events emitted for workflow runs started via the developer API.
          * @enum {string}
          */
-        WorkflowRunWebhookEventName: "workflow_run.succeeded" | "workflow_run.failed" | "workflow_run.cancelled";
+        WorkflowRunWebhookEventName: "workflow_run.awaiting_approval" | "workflow_run.succeeded" | "workflow_run.failed" | "workflow_run.cancelled";
         /**
          * @description Lifecycle events emitted for project exports started via the developer API (`POST /v1/projects/{projectId}/export`).
          * @enum {string}
@@ -2514,12 +2802,12 @@ export interface components {
          * @description All webhook event types. Use when creating or listing webhook endpoints.
          * @enum {string}
          */
-        WebhookEventName: "tool_execution.succeeded" | "tool_execution.failed" | "tool_execution.cancelled" | "workflow_run.succeeded" | "workflow_run.failed" | "workflow_run.cancelled" | "project_export.succeeded" | "project_export.failed" | "project_export.cancelled" | "assistant_message.succeeded" | "assistant_message.failed" | "assistant_message.cancelled" | "file.upload.completed" | "file.upload.failed" | "file.playback_ready" | "file.download_ready" | "file.analysis_completed" | "file.analysis_failed";
+        WebhookEventName: "tool_execution.awaiting_approval" | "tool_execution.succeeded" | "tool_execution.failed" | "tool_execution.cancelled" | "workflow_run.awaiting_approval" | "workflow_run.succeeded" | "workflow_run.failed" | "workflow_run.cancelled" | "project_export.succeeded" | "project_export.failed" | "project_export.cancelled" | "assistant_message.succeeded" | "assistant_message.failed" | "assistant_message.cancelled" | "file.upload.completed" | "file.upload.failed" | "file.playback_ready" | "file.download_ready" | "file.analysis_completed" | "file.analysis_failed";
         /**
          * @description Workflow type identifier.
          * @enum {string}
          */
-        WorkflowType: "SCRIPT_TO_VIDEO" | "VOICEOVER_TO_VIDEO" | "SLIDESHOW_TO_VIDEO" | "STORYBOARD_TO_VIDEO" | "PROMPT_TO_VIDEO_CLIP";
+        WorkflowType: "SCRIPT_TO_VIDEO" | "VOICEOVER_TO_VIDEO" | "SLIDESHOW_TO_VIDEO" | "STORYBOARD_TO_VIDEO" | "PROMPT_TO_VIDEO_CLIP" | "VIDEO_TO_VIDEO";
         /**
          * @description How quickly visuals change. FAST shows more, shorter shots; SLOW holds each visual longer. Defaults to MEDIUM.
          * @default MEDIUM
@@ -2861,11 +3149,6 @@ export interface components {
              */
             isOutputTemporary?: boolean;
             /**
-             * @description When true, the project is hidden from Home and Projects by default, and generated files are hidden from the Media page. The project and files remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
-            /**
              * @description When true, VideoGen exports an MP4 after the video is built (and after any `remixActions` on this request finish). The workflow run stays `running` until that export succeeds or fails. On success, poll `GET /v1/workflows/runs/{workflowRunId}` and use `downloadUrl`. Defaults to false.
              * @default false
              */
@@ -2928,11 +3211,6 @@ export interface components {
              */
             isOutputTemporary?: boolean;
             /**
-             * @description When true, the project is hidden from Home and Projects by default, and generated files are hidden from the Media page. The project and files remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
-            /**
              * @description When true, VideoGen exports an MP4 after the video is built (and after any `remixActions` on this request finish). The workflow run stays `running` until that export succeeds or fails. On success, poll `GET /v1/workflows/runs/{workflowRunId}` and use `downloadUrl`. Defaults to false.
              * @default false
              */
@@ -2970,11 +3248,6 @@ export interface components {
              */
             isOutputTemporary?: boolean;
             /**
-             * @description When true, the project is hidden from Home and Projects by default, and generated files are hidden from the Media page. The project and files remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
-            /**
              * @description When true, VideoGen exports an MP4 after the video is built (and after any `remixActions` on this request finish). The workflow run stays `running` until that export succeeds or fails. On success, poll `GET /v1/workflows/runs/{workflowRunId}` and use `downloadUrl`. Defaults to false.
              * @default false
              */
@@ -3001,7 +3274,7 @@ export interface components {
             title?: string;
             /** @description Optional per-scene look override. Falls back to the request-level `defaultGeneration` when omitted. */
             generation?: components["schemas"]["SceneGeneration"] | null;
-            /** @description Optional per-scene duration in seconds. Omit or pass null to inherit `defaultDurationSeconds` (which may itself be Auto). When set, must be a whole number between 1 and 20. */
+            /** @description Optional per-scene duration in seconds. Omit or pass null to inherit `defaultDurationSeconds` (which may itself be Auto). When set, must be a whole number between 1 and 30. */
             durationSeconds?: number | null;
             /** @description Optional ids of ACTOR entities (e.g. `vg_enti_...`) to feature in this scene. Each entity's reference images are added so the same characters appear in the generated image or video. A scene can feature multiple actors. */
             actorEntityIds?: string[];
@@ -3009,7 +3282,7 @@ export interface components {
             productEntityIds?: string[];
             /** @description Optional id of a VISUAL_STYLE entity (e.g. `vg_enti_...`) whose reference images guide the look of this scene. */
             visualStyleEntityId?: string | null;
-            /** @description Optional spoken script for this scene. When provided, the generative video clip speaks this exact text natively (lip-synced). Keep it short enough to speak in one clip (at most about 20 seconds). May optionally embed the same `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) mention tokens as `prompt` so named entities match attached reference identity. Prefer structured entity id fields for attachments; mention tokens are optional. */
+            /** @description Optional spoken script for this scene. When provided, the generative video clip speaks this exact text natively (lip-synced). Keep it short enough to speak in one clip (at most about 30 seconds). May optionally embed the same `@[entity:<id>|ACTOR|<name>]` (or `PRODUCT` / `VISUAL_STYLE`) mention tokens as `prompt` so named entities match attached reference identity. Prefer structured entity id fields for attachments; mention tokens are optional. */
             voiceoverScript?: string | null;
         };
         StoryboardToVideoRequest: {
@@ -3021,7 +3294,7 @@ export interface components {
             productEntityIds?: string[];
             /** @description Default look applied to scenes that don't set their own `generation`. Defaults to no extra style. */
             defaultGeneration?: components["schemas"]["SceneGeneration"] | null;
-            /** @description Default per-scene duration in seconds for scenes that don't set their own `durationSeconds`. Omit or pass null for Auto (duration is estimated at generate time so spoken text or the visual beat fits, clamped to model limits). When set, must be a whole number between 1 and 20. */
+            /** @description Default per-scene duration in seconds for scenes that don't set their own `durationSeconds`. Omit or pass null for Auto (duration is estimated at generate time so spoken text or the visual beat fits, clamped to model limits). When set, must be a whole number between 1 and 30. */
             defaultDurationSeconds?: number | null;
             /**
              * @description Image generation quality for scene opening frames. Optional; defaults to `HIGH`. This does not change video generation quality.
@@ -3038,11 +3311,6 @@ export interface components {
              * @default false
              */
             isOutputTemporary?: boolean;
-            /**
-             * @description When true, the project is hidden from Home and Projects by default, and generated files are hidden from the Media page. The project and files remain accessible through the API. Defaults to false.
-             * @default false
-             */
-            hideFromUi?: boolean;
             /**
              * @description When true, VideoGen exports an MP4 after the video is built (and after any `remixActions` on this request finish). The workflow run stays `running` until that export succeeds or fails. On success, poll `GET /v1/workflows/runs/{workflowRunId}` and use `downloadUrl`. Defaults to false.
              * @default false
@@ -3069,10 +3337,46 @@ export interface components {
              */
             isOutputTemporary?: boolean;
             /**
-             * @description When true, the project is hidden from Home and Projects by default, and generated files are hidden from the Media page. The project and files remain accessible through the API. Defaults to false.
+             * @description When true, VideoGen exports an MP4 after the video is built (and after any `remixActions` on this request finish). The workflow run stays `running` until that export succeeds or fails. On success, poll `GET /v1/workflows/runs/{workflowRunId}` and use `downloadUrl`. Defaults to false.
              * @default false
              */
-            hideFromUi?: boolean;
+            autoExport?: boolean;
+            /** @description Export settings used when `autoExport` is true. Ignored when `autoExport` is false. Omitted fields use the same defaults as `POST /v1/projects/{projectId}/export`. */
+            exportOptions?: components["schemas"]["ExportProjectRequest"];
+        };
+        /** @description Creates a project from a video and restyles it from a text prompt. Pass the video as exactly one of `videoFileId` or `videoUrl`. Long videos are split at shot changes and each part is restyled with the same settings, so the output keeps the restyled part's length and timing. */
+        VideoToVideoRequest: {
+            /** @description Id of the video to restyle (e.g. `vg_file_...`), uploaded via `POST /v1/files/upload`. Provide exactly one of `videoFileId` or `videoUrl`. */
+            videoFileId?: string;
+            /** @description Public `http://` or `https://` link to a video page or a video file to restyle. The run imports it before restyling, so you do not need to import it first. Private, login-only, and DRM-protected videos cannot be imported, and an unusable link fails the run. Provide exactly one of `videoFileId` or `videoUrl`. */
+            videoUrl?: string;
+            /** @description Second of the video where the restyled part starts. Optional; defaults to `0`. Must leave at least 2 seconds before the end of the video. */
+            trimStartSeconds?: number;
+            /** @description Second of the video where the restyled part ends. Optional; defaults to `trimStartSeconds` plus 120, capped at the end of the video. The restyled part must be between 2 and 120 seconds long. */
+            trimEndSeconds?: number;
+            /** @description Text prompt describing how the restyled video should look (e.g. `Hand-made claymation with soft studio lighting`). Must be non-empty. */
+            prompt: string;
+            /** @description Optional ids of up to 10 previously uploaded reference images (e.g. `vg_file_...`) that guide the look of the restyle. */
+            imageFileIds?: string[];
+            /** @description Aspect ratio for the output video. With `videoFileId`, defaults to the supported aspect ratio (16:9, 9:16, or 1:1) closest to the source video when omitted. With `videoUrl`, defaults to 16:9, so pass it for vertical or square videos. */
+            aspectRatio?: components["schemas"]["AspectRatio"];
+            /**
+             * @description Restyle quality (`LOW`, `STANDARD`, `HIGH`, or `MAX`). Higher tiers cost more and follow the source more faithfully. Optional; defaults to `HIGH`.
+             * @enum {string}
+             */
+            quality?: "LOW" | "STANDARD" | "HIGH" | "MAX";
+            /**
+             * @description `KEEP_ORIGINAL` keeps the source video's audio under the restyled picture. `GENERATE` uses newly generated audio instead. Optional; defaults to `KEEP_ORIGINAL`.
+             * @enum {string}
+             */
+            audio?: "KEEP_ORIGINAL" | "GENERATE";
+            /** @description Optional edits applied to the project after the video is built, in order. Each action runs asynchronously; the response returns one remix action id per action. See the [Remix actions](/remix-actions) guide. */
+            remixActions?: components["schemas"]["RemixAction"][];
+            /**
+             * @description When true, the generated OUTPUT files (the restyled video clips) are created as temporary: guaranteed available for 24 hours, after which they may be archived and later deleted. Use this when your integration downloads or re-hosts the results itself and does not need VideoGen to retain them. The project and its metadata are unaffected. Defaults to false.
+             * @default false
+             */
+            isOutputTemporary?: boolean;
             /**
              * @description When true, VideoGen exports an MP4 after the video is built (and after any `remixActions` on this request finish). The workflow run stays `running` until that export succeeds or fails. On success, poll `GET /v1/workflows/runs/{workflowRunId}` and use `downloadUrl`. Defaults to false.
              * @default false
@@ -3098,7 +3402,7 @@ export interface components {
         WorkflowRun: {
             /** @description Opaque workflow run id. */
             workflowRunId: string;
-            status: components["schemas"]["JobStatus"];
+            status: components["schemas"]["WorkflowRunStatus"];
             workflowType: components["schemas"]["WorkflowType"];
             /** @description Completion progress for the current attempt (0-100). Always `100` when `status` is `succeeded`. */
             progressPercentage: number;
@@ -3150,12 +3454,12 @@ export interface components {
             /** @description The full assistant message with its terminal `status`. */
             message: components["schemas"]["AssistantMessage"];
         };
-        /** @description Body POSTed to a registered webhook endpoint when a workflow run reaches a terminal state. When the run was started with `autoExport: true`, `workflow_run.succeeded` includes `downloadUrl`. */
+        /** @description Body POSTed when a workflow run completes or its retained result awaits approval. A later successful application has a separate succeeded event. When the run was started with `autoExport: true`, `workflow_run.succeeded` includes `downloadUrl`. */
         WorkflowRunWebhookPayload: {
             event: components["schemas"]["WorkflowRunWebhookEventName"];
             /** @description Opaque workflow run id matching the original request. */
             workflowRunId: string;
-            /** @description Seconds since epoch (Unix timestamp) at which VideoGen observed the terminal state. */
+            /** @description Seconds since epoch (Unix timestamp) when this outcome occurred. */
             occurredAt: number;
             workflowType: components["schemas"]["WorkflowType"];
             /** @description Id of the project created for this workflow run (e.g. `vg_proj_...`). */
@@ -3223,7 +3527,7 @@ export interface components {
              */
             projectUrl: string;
         };
-        /** @description Paginated list of projects, most recently updated first. By default only API-created projects are included; pass `includeUiProjects=true` on the request to also include dashboard-created projects. */
+        /** @description Paginated list of projects, most recently updated first, including projects created in the dashboard. */
         ListProjectsResponse: {
             projects: components["schemas"]["ProjectResponse"][];
             /** @description When true, there are more projects available. Pass `nextCursor` as the `cursor` query param to fetch the next page. */
@@ -3288,7 +3592,7 @@ export interface components {
             exportFileId: string | null;
             /** @description Hydrated export file metadata with signed download URLs. Always present as a field; `null` until `status` is `succeeded`. Its signed URLs follow the same 24-hour validity and automatic re-signing as `downloadUrl`. */
             file: components["schemas"]["FileInfo"] | null;
-            /** @description Error details. Always present as a field; `null` unless `status` is `failed`. */
+            /** @description Error details. Always present as a field; `null` unless `status` is `failed`. An export whose file was deleted after it finished also reports `failed`, with `code` `export_file_unavailable`, because it can no longer return a download URL. Start a new export to get one. */
             error: components["schemas"]["ApiError"] | null;
         };
         ListProjectExportsResponse: {
@@ -3353,16 +3657,16 @@ export interface components {
             /** @description Webhook event names to subscribe to. Must contain at least one event. */
             events: components["schemas"]["WebhookEventName"][];
         };
-        /** @description Delivered to your webhook endpoint when a tool execution reaches a terminal state. The shape mirrors the `ExecutedTool` response with the addition of `event` and `occurredAt`. */
+        /** @description Delivered when a tool execution completes or its retained result awaits approval. A later successful application has a separate succeeded event. The shape mirrors the `ExecutedTool` response with the addition of `event` and `occurredAt`. */
         ToolExecutionWebhookPayload: {
             event: components["schemas"]["ToolExecutionWebhookEventName"];
             /** @description Execution id matching the original request. */
             toolExecutionId: string;
-            /** @description Seconds since epoch (Unix timestamp) when the execution reached a terminal state. */
+            /** @description Seconds since epoch (Unix timestamp) when this outcome occurred. */
             occurredAt: number;
             /** @description Tool name (e.g. `GENERATE_IMAGE`, `TEXT_TO_SPEECH`). */
             toolType: string;
-            /** @description One entry per generated result, each with a hydrated `file`. Present only on `tool_execution.succeeded`. */
+            /** @description One entry per generated result, each with a hydrated `file`. Present on `tool_execution.succeeded` and `tool_execution.awaiting_approval`. */
             results?: components["schemas"]["ToolSuccessResult"][];
             /** @description Present only on `tool_execution.failed`. */
             error?: components["schemas"]["ApiError"] | null;
@@ -3409,8 +3713,6 @@ export interface components {
         PaginationCursor: string;
         /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
         SelfOnlyQuery: boolean;
-        /** @description When true, includes dashboard-created projects in addition to API-created projects. When false (default), returns only API-created projects. */
-        IncludeUiProjectsQuery: boolean;
         /** @description When true, includes export files: the raw output files of your exports (the rendered MP4 you download from an export). When false (default), they are omitted. */
         IncludeExportFilesQuery: boolean;
         /** @description When true, includes project files: the generative files created within a project (e.g. each AI image and text-to-speech file produced inside a script-to-video workflow output). When false (default), they are omitted. */
@@ -3429,12 +3731,14 @@ export interface components {
         ExportIdPath: string;
         /** @description The timeline interchange job id (e.g. `vg_inte_...`) returned by `POST /v1/projects/{projectId}/timeline-interchange`. */
         InterchangeJobIdPath: string;
+        /** @description The file import id (e.g. `vg_fimp_...`) returned by `POST /v1/files/import-url`. */
+        FileImportIdPath: string;
         /** @description The file id (e.g. `vg_file_...`). */
         FileIdPath: string;
         /** @description The entity id (e.g. `vg_enti_...`). */
         EntityIdPath: string;
         /** @description When provided, returns only entities of this type. Omit to return all entities. */
-        EntityTypeQuery: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME";
+        EntityTypeQuery: "ACTOR" | "PRODUCT" | "VISUAL_STYLE" | "SLIDESHOW_THEME" | "BRAND" | "LOCATION" | "PROP";
         /** @description The workflow run id returned when the workflow was started. */
         WorkflowRunIdPath: string;
         /** @description The tool execution id returned when the tool was started. */
@@ -3745,6 +4049,39 @@ export interface operations {
             };
         };
     };
+    videoToVideo: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["VideoToVideoRequest"];
+            };
+        };
+        responses: {
+            /** @description Workflow run accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["StartWorkflowRunResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
     listWorkflowRuns: {
         parameters: {
             query?: {
@@ -3854,8 +4191,6 @@ export interface operations {
                 cursor?: components["parameters"]["PaginationCursor"];
                 /** @description When true, returns only items created by the API key's owner. When false (default), returns all items accessible to the team. */
                 selfOnly?: components["parameters"]["SelfOnlyQuery"];
-                /** @description When true, includes dashboard-created projects in addition to API-created projects. When false (default), returns only API-created projects. */
-                includeUiProjects?: components["parameters"]["IncludeUiProjectsQuery"];
             };
             header?: never;
             path?: never;
@@ -4830,6 +5165,71 @@ export interface operations {
             };
         };
     };
+    createFileUrlImport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateFileUrlImportRequest"];
+            };
+        };
+        responses: {
+            /** @description File import accepted. */
+            202: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["CreateFileUrlImportResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getFileUrlImport: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description The file import id (e.g. `vg_fimp_...`) returned by `POST /v1/files/import-url`. */
+                fileImportId: components["parameters"]["FileImportIdPath"];
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description File import status. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FileUrlImport"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
     hydrateFile: {
         parameters: {
             query?: never;
@@ -5599,6 +5999,229 @@ export interface operations {
             };
         };
     };
+    getBillingAccount: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Current account or order state. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillingAccountResponse"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    createBillingOrder: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CreateBillingOrderRequest"];
+            };
+        };
+        responses: {
+            /** @description Current account or order state. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillingOrder"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    getBillingOrder: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                orderId: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Current account or order state. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillingOrder"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    completeBillingOrder: {
+        parameters: {
+            query?: never;
+            header: {
+                /** @description Scoped card-backed Stripe Shared Payment Token for this exact one-time total. Transport securely; never put it in prompts, URLs, logs or tool content. This native header is not an MPP payment challenge. */
+                "Stripe-Shared-Payment-Token": string;
+            };
+            path: {
+                orderId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["CompleteBillingOrderRequest"];
+            };
+        };
+        responses: {
+            /** @description Current account or order state. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillingOrder"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    cancelBillingOrder: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                orderId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["EmptyBillingRequest"];
+            };
+        };
+        responses: {
+            /** @description Current account or order state. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillingOrder"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    requestBillingRefund: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                orderId: string;
+            };
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["BillingRefundRequest"];
+            };
+        };
+        responses: {
+            /** @description Current account or order state. */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BillingOrder"];
+                };
+            };
+            /** @description Error */
+            default: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ApiError"];
+                };
+            };
+        };
+    };
+    toolExecutionAwaitingApproval: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     toolExecutionSucceeded: {
         parameters: {
             query?: never;
@@ -5653,6 +6276,28 @@ export interface operations {
         requestBody: {
             content: {
                 "application/json": components["schemas"]["ToolExecutionWebhookPayload"];
+            };
+        };
+        responses: {
+            /** @description Acknowledge receipt */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
+    workflowRunAwaitingApproval: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["WorkflowRunWebhookPayload"];
             };
         };
         responses: {

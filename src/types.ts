@@ -14,6 +14,7 @@ export type VoiceoverToVideoRequest = Schemas["VoiceoverToVideoRequest"];
 export type SlideshowToVideoRequest = Schemas["SlideshowToVideoRequest"];
 export type PromptToVideoClipRequest = Schemas["PromptToVideoClipRequest"];
 export type StoryboardToVideoRequest = Schemas["StoryboardToVideoRequest"];
+export type VideoToVideoRequest = Schemas["VideoToVideoRequest"];
 export type StartWorkflowRunResponse = Schemas["StartWorkflowRunResponse"];
 export type WorkflowRun = Schemas["WorkflowRun"];
 export type WorkflowRunListResponse = Schemas["WorkflowRunListResponse"];
@@ -57,8 +58,12 @@ export type SearchFilesResponse = Schemas["SearchFilesResponse"];
 export type FileInfo = Schemas["FileInfo"];
 export type CreateFileUploadRequest = Schemas["CreateFileUploadRequest"];
 export type FileUploadResponse = Schemas["FileUploadResponse"];
+export type CreateFileUrlImportRequest = Schemas["CreateFileUrlImportRequest"];
+export type CreateFileUrlImportResponse = Schemas["CreateFileUrlImportResponse"];
+export type FileUrlImport = Schemas["FileUrlImport"];
 
 export type Entity = Schemas["Entity"];
+export type EntityBrandConfig = Schemas["EntityBrandConfig"];
 export type ListEntitiesResponse = Schemas["ListEntitiesResponse"];
 export type CreateEntityRequest = Schemas["CreateEntityRequest"];
 export type UpdateEntityRequest = Schemas["UpdateEntityRequest"];
@@ -106,10 +111,28 @@ export type WebhookEndpointListResponse =
   Schemas["WebhookEndpointListResponse"];
 
 export type MeResponse = Schemas["MeResponse"];
+export type BillingAccountResponse = Schemas["BillingAccountResponse"];
+export type BillingOrder = Schemas["BillingOrder"];
+export type CreateBillingOrderRequest = Schemas["CreateBillingOrderRequest"];
+export type CompleteBillingOrderRequest = Schemas["CompleteBillingOrderRequest"] & {
+  orderId: string;
+};
+export type GetBillingOrderRequest = {
+  orderId: string;
+};
+export type CancelBillingOrderRequest = GetBillingOrderRequest;
+export type RequestBillingRefundRequest = Schemas["BillingRefundRequest"] & {
+  orderId: string;
+};
 export type ApiError = Schemas["ApiError"];
 
 export type RequestOptions = {
   signal?: AbortSignal;
+};
+
+/** Pass the user-approved token out of band. Never include it in tool content. */
+export type BillingPaymentOptions = RequestOptions & {
+  paymentToken: string;
 };
 
 export type PollOptions = {

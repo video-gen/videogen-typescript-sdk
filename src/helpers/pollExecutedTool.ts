@@ -3,7 +3,12 @@ import { VideoGenError } from "../errors.js";
 import type { ExecutedTool, PollOptions } from "../types.js";
 import { sleep } from "./sleep.js";
 
-const TERMINAL = new Set(["succeeded", "failed", "cancelled"]);
+const POLLING_OUTCOMES = new Set([
+  "succeeded",
+  "failed",
+  "cancelled",
+  "awaiting_approval",
+]);
 
 export type PollExecutedToolParams = {
   client: VideoGen;
@@ -35,7 +40,7 @@ export const pollExecutedTool = async ({
 
     onProgress?.(execution.progressPercentage);
 
-    if (TERMINAL.has(execution.status)) {
+    if (POLLING_OUTCOMES.has(execution.status)) {
       if (
         throwOnFailure &&
         (execution.status === "failed" || execution.status === "cancelled")

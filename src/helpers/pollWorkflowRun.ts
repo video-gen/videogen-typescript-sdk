@@ -3,7 +3,12 @@ import { VideoGenError } from "../errors.js";
 import type { PollOptions, WorkflowRun } from "../types.js";
 import { sleep } from "./sleep.js";
 
-const TERMINAL = new Set(["succeeded", "failed", "cancelled"]);
+const POLLING_OUTCOMES = new Set([
+  "succeeded",
+  "failed",
+  "cancelled",
+  "awaiting_approval",
+]);
 
 export type PollWorkflowRunParams = {
   client: VideoGen;
@@ -35,7 +40,7 @@ export const pollWorkflowRun = async ({
 
     onProgress?.(run.progressPercentage);
 
-    if (TERMINAL.has(run.status)) {
+    if (POLLING_OUTCOMES.has(run.status)) {
       if (throwOnFailure && (run.status === "failed" || run.status === "cancelled")) {
         throw new VideoGenError({
           message: `Workflow run ${run.status}`,

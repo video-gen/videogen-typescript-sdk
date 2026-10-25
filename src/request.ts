@@ -10,6 +10,8 @@ export type ClientRequestArgs = {
   query?: Record<string, QueryValue>;
   body?: unknown;
   signal?: AbortSignal;
+  /** Sensitive payment credential. Sent only through its dedicated header. */
+  paymentToken?: string;
 };
 
 const buildUrl = ({
@@ -64,6 +66,7 @@ export const performRequest = async ({
   query,
   body,
   signal,
+  paymentToken,
 }: {
   apiKey: string;
   baseUrl: string;
@@ -73,6 +76,10 @@ export const performRequest = async ({
     Authorization: `Bearer ${apiKey}`,
     Accept: "application/json",
   };
+
+  if (paymentToken != null) {
+    headers["Stripe-Shared-Payment-Token"] = paymentToken;
+  }
 
   if (clientId != null && clientId.length > 0) {
     // Identifies which first-party client made the call (SDK, CLI, MCP, or an
