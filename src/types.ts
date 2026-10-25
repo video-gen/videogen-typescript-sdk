@@ -111,28 +111,10 @@ export type WebhookEndpointListResponse =
   Schemas["WebhookEndpointListResponse"];
 
 export type MeResponse = Schemas["MeResponse"];
-export type BillingAccountResponse = Schemas["BillingAccountResponse"];
-export type BillingOrder = Schemas["BillingOrder"];
-export type CreateBillingOrderRequest = Schemas["CreateBillingOrderRequest"];
-export type CompleteBillingOrderRequest = Schemas["CompleteBillingOrderRequest"] & {
-  orderId: string;
-};
-export type GetBillingOrderRequest = {
-  orderId: string;
-};
-export type CancelBillingOrderRequest = GetBillingOrderRequest;
-export type RequestBillingRefundRequest = Schemas["BillingRefundRequest"] & {
-  orderId: string;
-};
 export type ApiError = Schemas["ApiError"];
 
 export type RequestOptions = {
   signal?: AbortSignal;
-};
-
-/** Pass the user-approved token out of band. Never include it in tool content. */
-export type BillingPaymentOptions = RequestOptions & {
-  paymentToken: string;
 };
 
 export type PollOptions = {

@@ -51,7 +51,6 @@ Omit `apiKey` to read `VIDEOGEN_API_KEY` from the environment.
 | Area | Client surface | Typical entry points |
 | --- | --- | --- |
 | Account | `vg.account` | `getMe` |
-| Billing | `vg.billing` | `getBillingAccount`, `createBillingOrder`, `getBillingOrder`, `completeBillingOrder`, `cancelBillingOrder`, `requestBillingRefund` |
 | Workflows | `vg.workflows` | `scriptToVideoAndWait`, `promptToVideoClipAndWait`, `voiceoverToVideoAndWait`, `slideshowToVideoAndWait`, `videoToVideoAndWait` |
 | Tools | `vg.tools` | `generateImageAndWait`, `generateVideoClipAndWait`, `textToSpeechAndWait`, … |
 | Files | `vg.files` + helpers | `uploadFile`, `downloadFile`, `createPublicPreview` |
@@ -63,16 +62,6 @@ Omit `apiKey` to read `VIDEOGEN_API_KEY` from the environment.
 | Webhooks | `vg.webhooks` + helper | `createWebhookEndpoint`, `verifyWebhookSignature` |
 
 Prefer `*AndWait` (or the matching `poll*` helper) for anything asynchronous. Thin REST methods match OpenAPI `operationId`s one-to-one; see the [API docs](https://docs.videogen.io).
-
-## Billing
-
-Billing access requires an explicit grant in VideoGen. Read `vg.billing.getBillingAccount()` before preparing a credit purchase. Quote an order with `createBillingOrder({ orderId, credits })`, using a client-generated UUID that you reuse on an identical retry. Show the returned team, credits, total, expiry, and terms to the user before requesting payment approval.
-
-Complete an approved order with `completeBillingOrder({ orderId, revision, idempotencyKey }, { paymentToken, signal })`. A compatible wallet must supply `paymentToken` securely after approval. The SDK sends it only through its dedicated payment header. Keep the token out of prompts, tool arguments, logs, URLs, and JSON bodies. The SDK does not retry billing operations or start generation automatically.
-
-After an uncertain result, use `getBillingOrder({ orderId })` to check the original order. Payment and credit fulfillment are separate states; wait for `fulfilled` before using the purchased credits. `cancelBillingOrder({ orderId })` cancels an unpaid order. `requestBillingRefund({ orderId, reason })` records a support-reviewed request; `requested` does not mean the refund has completed.
-
-If an order returns `requires_action` with a `verificationUrl`, direct the purchaser to that secure VideoGen verification continuation, signed in on the same team. Use it only to complete the required payment verification, then read the original order again. Keep checkout and payment approval in the compatible wallet.
 
 ## Workflows
 

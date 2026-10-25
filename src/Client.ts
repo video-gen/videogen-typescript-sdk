@@ -18,7 +18,6 @@ import {
 } from "./request.js";
 import { AccountResource } from "./resources/account.js";
 import { AssistantResource } from "./resources/assistant.js";
-import { BillingResource } from "./resources/billing.js";
 import { EntitiesResource } from "./resources/entities.js";
 import { FilesResource } from "./resources/files.js";
 import { ProjectsResource } from "./resources/projects.js";
@@ -59,7 +58,6 @@ export class VideoGen {
   readonly resources: ResourcesResource;
   readonly webhooks: WebhooksResource;
   readonly account: AccountResource;
-  readonly billing: BillingResource;
 
   readonly pollExecutedTool = (
     params: Omit<Parameters<typeof pollExecutedTool>[0], "client">,
@@ -134,7 +132,6 @@ export class VideoGen {
     this.resources = new ResourcesResource(this);
     this.webhooks = new WebhooksResource(this);
     this.account = new AccountResource(this);
-    this.billing = new BillingResource(this);
   }
 
   async request<T = unknown>(args: ClientRequestArgs): Promise<T> {
