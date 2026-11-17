@@ -7,17 +7,17 @@ import { pollExecutedTool } from "./helpers/pollExecutedTool.js";
 import { pollFileUrlImport } from "./helpers/pollFileUrlImport.js";
 import { pollProjectExport } from "./helpers/pollProjectExport.js";
 import { pollPublicPreview } from "./helpers/pollPublicPreview.js";
+import { pollVideoEdits } from "./helpers/pollVideoEdits.js";
 import { pollRemixActions } from "./helpers/pollRemixActions.js";
 import { pollTimelineInterchange } from "./helpers/pollTimelineInterchange.js";
 import { pollWorkflowRun } from "./helpers/pollWorkflowRun.js";
 import { uploadFile } from "./helpers/uploadFile.js";
 import { verifyWebhookSignature } from "./helpers/verifyWebhookSignature.js";
-import {
-  type ClientRequestArgs,
-  performRequest,
-} from "./request.js";
+import { type ClientRequestArgs, performRequest } from "./request.js";
 import { AccountResource } from "./resources/account.js";
 import { AssistantResource } from "./resources/assistant.js";
+import { ModelsResource } from "./resources/models.js";
+import { BillingResource } from "./resources/billing.js";
 import { EntitiesResource } from "./resources/entities.js";
 import { FilesResource } from "./resources/files.js";
 import { ProjectsResource } from "./resources/projects.js";
@@ -58,6 +58,8 @@ export class VideoGen {
   readonly resources: ResourcesResource;
   readonly webhooks: WebhooksResource;
   readonly account: AccountResource;
+  readonly billing: BillingResource;
+  readonly models: ModelsResource;
 
   readonly pollExecutedTool = (
     params: Omit<Parameters<typeof pollExecutedTool>[0], "client">,
@@ -83,6 +85,10 @@ export class VideoGen {
     params: Omit<Parameters<typeof pollTimelineInterchange>[0], "client">,
   ) => pollTimelineInterchange({ client: this, ...params });
 
+  readonly pollVideoEdits = (
+    params: Omit<Parameters<typeof pollVideoEdits>[0], "client">,
+  ) => pollVideoEdits({ client: this, ...params });
+
   readonly pollRemixActions = (
     params: Omit<Parameters<typeof pollRemixActions>[0], "client">,
   ) => pollRemixActions({ client: this, ...params });
@@ -91,8 +97,9 @@ export class VideoGen {
     params: Omit<Parameters<typeof pollPublicPreview>[0], "client">,
   ) => pollPublicPreview({ client: this, ...params });
 
-  readonly uploadFile = (params: Omit<Parameters<typeof uploadFile>[0], "client">) =>
-    uploadFile({ client: this, ...params });
+  readonly uploadFile = (
+    params: Omit<Parameters<typeof uploadFile>[0], "client">,
+  ) => uploadFile({ client: this, ...params });
 
   readonly getHydratedFile = (
     params: Omit<Parameters<typeof getHydratedFile>[0], "client">,
@@ -132,6 +139,8 @@ export class VideoGen {
     this.resources = new ResourcesResource(this);
     this.webhooks = new WebhooksResource(this);
     this.account = new AccountResource(this);
+    this.billing = new BillingResource(this);
+    this.models = new ModelsResource(this);
   }
 
   async request<T = unknown>(args: ClientRequestArgs): Promise<T> {

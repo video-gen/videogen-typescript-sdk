@@ -10,6 +10,9 @@ export type ClientRequestArgs = {
   query?: Record<string, QueryValue>;
   body?: unknown;
   signal?: AbortSignal;
+  /** Sensitive payment credential. Sent only through its dedicated header. */
+  paymentToken?: string;
+  idempotencyKey?: string;
 };
 
 const buildUrl = ({
@@ -45,7 +48,13 @@ const parseBody = async (response: Response): Promise<unknown> => {
   }
 };
 
-const getErrorMessage = ({ status, body }: { status: number; body: unknown }): string => {
+const getErrorMessage = ({
+  status,
+  body,
+}: {
+  status: number;
+  body: unknown;
+}): string => {
   if (body != null && typeof body === "object" && "message" in body) {
     const message = (body as { message?: unknown }).message;
     if (typeof message === "string" && message.length > 0) {
@@ -64,6 +73,8 @@ export const performRequest = async ({
   query,
   body,
   signal,
+  paymentToken,
+  idempotencyKey,
 }: {
   apiKey: string;
   baseUrl: string;
@@ -73,6 +84,12 @@ export const performRequest = async ({
     Authorization: `Bearer ${apiKey}`,
     Accept: "application/json",
   };
+
+  if (idempotencyKey != null) headers["Idempotency-Key"] = idempotencyKey;
+
+  if (paymentToken != null) {
+    headers["Stripe-Shared-Payment-Token"] = paymentToken;
+  }
 
   if (clientId != null && clientId.length > 0) {
     // Identifies which first-party client made the call (SDK, CLI, MCP, or an
@@ -103,6 +120,7 @@ export const performRequest = async ({
       status: response.status,
       body: parsed,
       requestId,
+      retryAfter: response.headers.get("retry-after"),
     });
   }
 

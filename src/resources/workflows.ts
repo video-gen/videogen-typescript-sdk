@@ -9,6 +9,7 @@ import type {
   SlideshowToVideoRequest,
   StartWorkflowRunResponse,
   StoryboardToVideoRequest,
+  TranslateVideoRequest,
   VideoToVideoRequest,
   VoiceoverToVideoRequest,
   WorkflowRun,
@@ -171,6 +172,31 @@ export class WorkflowsResource {
     options?: PollOptions,
   ): Promise<WorkflowRun> {
     const started = await this.videoToVideo(request, { signal: options?.signal });
+    return pollWorkflowRun({
+      client: this.client,
+      workflowRunId: started.workflowRunId,
+      ...options,
+    });
+  }
+
+  // @sdk-operation translateVideo
+  async translateVideo(
+    request: TranslateVideoRequest,
+    options?: RequestOptions,
+  ): Promise<StartWorkflowRunResponse> {
+    return this.client.request<StartWorkflowRunResponse>({
+      method: "POST",
+      path: "/v1/workflows/translate-video",
+      body: request,
+      signal: options?.signal,
+    });
+  }
+
+  async translateVideoAndWait(
+    request: TranslateVideoRequest,
+    options?: PollOptions,
+  ): Promise<WorkflowRun> {
+    const started = await this.translateVideo(request, { signal: options?.signal });
     return pollWorkflowRun({
       client: this.client,
       workflowRunId: started.workflowRunId,

@@ -1,28 +1,36 @@
 import type { VideoGen } from "../client.js";
 import { pollProjectExport } from "../helpers/pollProjectExport.js";
+import { pollVideoEdits } from "../helpers/pollVideoEdits.js";
 import { pollRemixActions } from "../helpers/pollRemixActions.js";
 import { pollTimelineInterchange } from "../helpers/pollTimelineInterchange.js";
 import { fillPath, omitFields, pickFields } from "../request.js";
 import type {
+  ApplyProjectEditsRequest,
   CreateTimelineInterchangeRequest,
   CreateTimelineInterchangeResponse,
   ExportProjectRequest,
+  EditVideoCommandsRequest,
   ExportProjectResponse,
   ListProjectExportsResponse,
   ListProjectsResponse,
   ListRemixActionsResponse,
+  ListVideoEditsResponse,
   PollOptions,
   ProjectExport,
+  ProjectEditReceipt,
   ProjectResponse,
   RemixProjectRequest,
   RemixProjectResponse,
   RequestOptions,
+  StartVideoEditsRequest,
+  StartVideoEditsResponse,
+  Schemas,
   TimelineInterchange,
 } from "../types.js";
 
 type ListProjectsRequest = {
-  limit?: number;
-  cursor?: string;
+  limit?: number | undefined;
+  cursor?: string | undefined;
   selfOnly?: boolean;
   /** @deprecated Ignored. The list always includes projects created in the VideoGen app. */
   includeUiProjects?: boolean;
@@ -40,13 +48,13 @@ type GetProjectExportRequest = {
 };
 
 type ListProjectExportsRequest = ProjectIdRequest & {
-  limit?: number;
-  cursor?: string;
+  limit?: number | undefined;
+  cursor?: string | undefined;
 };
 
 type ListProjectRemixActionsRequest = ProjectIdRequest & {
-  limit?: number;
-  cursor?: string;
+  limit?: number | undefined;
+  cursor?: string | undefined;
 };
 
 type CreateTimelineInterchangeMergedRequest = ProjectIdRequest &
@@ -56,10 +64,179 @@ type GetTimelineInterchangeRequest = {
   interchangeJobId: string;
 };
 
+type ListVideoEditsRequest = ProjectIdRequest & {
+  limit?: number | undefined;
+  cursor?: string | undefined;
+  editableVideoId?: string | undefined;
+};
+
+type StartVideoEditsMergedRequest = ProjectIdRequest & StartVideoEditsRequest;
+
 type RemixProjectMergedRequest = ProjectIdRequest & RemixProjectRequest;
 
 export class ProjectsResource {
   constructor(private readonly client: VideoGen) {}
+
+  // @sdk-operation getProjectArtifact
+  async getProjectArtifact(
+    request: ProjectIdRequest & {
+      artifactId: string;
+      textOffset?: number | undefined;
+      textLimit?: number | undefined;
+      itemOffset?: number | undefined;
+      itemLimit?: number | undefined;
+    },
+    options?: RequestOptions,
+  ): Promise<Schemas["GetProjectArtifactResponse"]> {
+    return this.client.request<Schemas["GetProjectArtifactResponse"]>({
+      method: "GET",
+      path: fillPath("/v1/projects/{projectId}/artifacts/{artifactId}", {
+        projectId: request.projectId,
+        artifactId: request.artifactId,
+      }),
+      query: pickFields(request, [
+        "textOffset",
+        "textLimit",
+        "itemOffset",
+        "itemLimit",
+      ]),
+      signal: options?.signal,
+    });
+  }
+  // @sdk-operation applyProjectEdits
+  async applyProjectEdits(
+    request: ProjectIdRequest & ApplyProjectEditsRequest,
+    options?: RequestOptions,
+  ): Promise<ProjectEditReceipt> {
+    return this.client.request<ProjectEditReceipt>({
+      method: "POST",
+      path: fillPath("/v1/projects/{projectId}/mutations", {
+        projectId: request.projectId,
+      }),
+      body: omitFields(request, ["projectId"]),
+      signal: options?.signal,
+    });
+  }
+
+  // @sdk-operation listProjectArtifacts
+  async listProjectArtifacts(
+    request: ProjectIdRequest & {
+      limit?: number | undefined;
+      cursor?: string | undefined;
+    },
+    options?: RequestOptions,
+  ): Promise<Schemas["ListProjectArtifactsResponse"]> {
+    return this.client.request<Schemas["ListProjectArtifactsResponse"]>({
+      method: "GET",
+      path: fillPath("/v1/projects/{projectId}/artifacts", {
+        projectId: request.projectId,
+      }),
+      query: pickFields(request, ["limit", "cursor"]),
+      signal: options?.signal,
+    });
+  }
+
+  // @sdk-operation getProjectEditingCapabilities
+  async getProjectEditingCapabilities(
+    request: ProjectIdRequest,
+    options?: RequestOptions,
+  ): Promise<Schemas["ProjectEditingCapabilities"]> {
+    return this.client.request<Schemas["ProjectEditingCapabilities"]>({
+      method: "GET",
+      path: fillPath("/v1/projects/{projectId}/editing-capabilities", {
+        projectId: request.projectId,
+      }),
+      signal: options?.signal,
+    });
+  }
+
+  // @sdk-operation inspectEditableVideo
+  async inspectEditableVideo(
+    request: ProjectIdRequest & {
+      editableVideoId: string;
+      limit?: number | undefined;
+      offset?: number | undefined;
+      sectionId?: string | undefined;
+      layerId?: string | undefined;
+      assetId?: string | undefined;
+      expectedRevision?: number | undefined;
+      textOffset?: number | undefined;
+    },
+    options?: RequestOptions,
+  ): Promise<Schemas["EditableVideoInspection"]> {
+    return this.client.request<Schemas["EditableVideoInspection"]>({
+      method: "GET",
+      path: fillPath(
+        "/v1/projects/{projectId}/videos/{editableVideoId}/inspection",
+        {
+          projectId: request.projectId,
+          editableVideoId: request.editableVideoId,
+        },
+      ),
+      query: pickFields(request, [
+        "limit",
+        "offset",
+        "sectionId",
+        "layerId",
+        "assetId",
+        "expectedRevision",
+        "textOffset",
+      ]),
+      signal: options?.signal,
+    });
+  }
+
+  // @sdk-operation editVideo
+  async editVideo(
+    request: ProjectIdRequest & {
+      editableVideoId: string;
+    } & EditVideoCommandsRequest,
+    options?: RequestOptions,
+  ): Promise<ProjectEditReceipt> {
+    return this.client.request<ProjectEditReceipt>({
+      method: "POST",
+      path: fillPath(
+        "/v1/projects/{projectId}/videos/{editableVideoId}/edits",
+        {
+          projectId: request.projectId,
+          editableVideoId: request.editableVideoId,
+        },
+      ),
+      body: omitFields(request, ["projectId", "editableVideoId"]),
+      signal: options?.signal,
+    });
+  }
+
+  // @sdk-operation getProjectEdit
+  async getProjectEdit(
+    request: ProjectIdRequest & { mutationId: string },
+    options?: RequestOptions,
+  ): Promise<ProjectEditReceipt> {
+    return this.client.request<ProjectEditReceipt>({
+      method: "GET",
+      path: fillPath("/v1/projects/{projectId}/mutations/{mutationId}", {
+        projectId: request.projectId,
+        mutationId: request.mutationId,
+      }),
+      signal: options?.signal,
+    });
+  }
+
+  // @sdk-operation undoProjectEdit
+  async undoProjectEdit(
+    request: ProjectIdRequest & { mutationId: string; newMutationId: string },
+    options?: RequestOptions,
+  ): Promise<ProjectEditReceipt> {
+    return this.client.request<ProjectEditReceipt>({
+      method: "POST",
+      path: fillPath("/v1/projects/{projectId}/mutations/{mutationId}/undo", {
+        projectId: request.projectId,
+        mutationId: request.mutationId,
+      }),
+      body: { mutationId: request.newMutationId },
+      signal: options?.signal,
+    });
+  }
 
   // @sdk-operation listProjects
   async listProjects(
@@ -81,7 +258,9 @@ export class ProjectsResource {
   ): Promise<ProjectResponse> {
     return this.client.request<ProjectResponse>({
       method: "GET",
-      path: fillPath("/v1/projects/{projectId}", { projectId: request.projectId }),
+      path: fillPath("/v1/projects/{projectId}", {
+        projectId: request.projectId,
+      }),
       signal: options?.signal,
     });
   }
@@ -108,7 +287,9 @@ export class ProjectsResource {
     request: ExportProjectMergedRequest,
     options?: PollOptions,
   ): Promise<ProjectExport> {
-    const started = await this.exportProject(request, { signal: options?.signal });
+    const started = await this.exportProject(request, {
+      signal: options?.signal,
+    });
     return pollProjectExport({
       client: this.client,
       projectId: request.projectId,
@@ -193,6 +374,51 @@ export class ProjectsResource {
     });
   }
 
+  // @sdk-operation startVideoEdits
+  async startVideoEdits(
+    request: StartVideoEditsMergedRequest,
+    options?: RequestOptions,
+  ): Promise<StartVideoEditsResponse> {
+    return this.client.request<StartVideoEditsResponse>({
+      method: "POST",
+      path: fillPath("/v1/projects/{projectId}/video-edits", {
+        projectId: request.projectId,
+      }),
+      body: omitFields(request, ["projectId"]),
+      signal: options?.signal,
+    });
+  }
+
+  async startVideoEditsAndWait(
+    request: StartVideoEditsMergedRequest,
+    options?: PollOptions,
+  ): Promise<ListVideoEditsResponse> {
+    const started = await this.startVideoEdits(request, {
+      signal: options?.signal,
+    });
+    return pollVideoEdits({
+      client: this.client,
+      projectId: started.projectId,
+      ...options,
+      videoEditIds: started.videoEditIds,
+    });
+  }
+
+  // @sdk-operation listVideoEdits
+  async listVideoEdits(
+    request: ListVideoEditsRequest,
+    options?: RequestOptions,
+  ): Promise<ListVideoEditsResponse> {
+    return this.client.request<ListVideoEditsResponse>({
+      method: "GET",
+      path: fillPath("/v1/projects/{projectId}/video-edits", {
+        projectId: request.projectId,
+      }),
+      query: pickFields(request, ["limit", "cursor", "editableVideoId"]),
+      signal: options?.signal,
+    });
+  }
+
   // @sdk-operation remixProject
   async remixProject(
     request: RemixProjectMergedRequest,
@@ -212,7 +438,9 @@ export class ProjectsResource {
     request: RemixProjectMergedRequest,
     options?: PollOptions,
   ): Promise<ListRemixActionsResponse> {
-    const started = await this.remixProject(request, { signal: options?.signal });
+    const started = await this.remixProject(request, {
+      signal: options?.signal,
+    });
     return pollRemixActions({
       client: this.client,
       projectId: started.projectId,

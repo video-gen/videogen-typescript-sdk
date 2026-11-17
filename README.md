@@ -26,11 +26,12 @@ const run = await vg.workflows.scriptToVideoAndWait({
   script: "Stay hydrated for better focus and energy.",
   visualStyle: {
     type: "AI_IMAGE",
-    aiStyle: "Loose watercolor illustration, visible brushstrokes, soft color bleeds, paper texture, muted palette. A clear uncluttered subject centered in the frame, occupying only the middle half of the image, with generous empty margins on all four sides, no background clutter.",
+    aiStyle:
+      "Loose watercolor illustration, visible brushstrokes, soft color bleeds, paper texture, muted palette. A clear uncluttered subject centered in the frame, occupying only the middle half of the image, with generous empty margins on all four sides, no background clutter.",
   },
   quality: "HIGH",
   autoExport: true,
-  remixActions: [
+  videoEdits: [
     { type: "ENABLE_CAPTIONS" },
     {
       type: "CONVERT_IMAGES_TO_VIDEOS",
@@ -41,27 +42,44 @@ const run = await vg.workflows.scriptToVideoAndWait({
   ],
 });
 
+if (run.status !== "succeeded") {
+  throw new Error(`Workflow run ended with status ${run.status}`);
+}
+
 console.log(run.downloadUrl);
 ```
 
 Omit `apiKey` to read `VIDEOGEN_API_KEY` from the environment.
 
+Workflow and tool `*AndWait` wrappers can return `awaiting_approval` without throwing (see [Helpers](#helpers)). Check for `succeeded` before using the outputs.
+
 ## What you can do
 
-| Area | Client surface | Typical entry points |
-| --- | --- | --- |
-| Account | `vg.account` | `getMe` |
-| Workflows | `vg.workflows` | `scriptToVideoAndWait`, `promptToVideoClipAndWait`, `voiceoverToVideoAndWait`, `slideshowToVideoAndWait`, `videoToVideoAndWait` |
-| Tools | `vg.tools` | `generateImageAndWait`, `generateVideoClipAndWait`, `textToSpeechAndWait`, … |
-| Files | `vg.files` + helpers | `uploadFile`, `downloadFile`, `createPublicPreview` |
-| Projects | `vg.projects` | `exportAndWait`, `remixAndWait`, `createTimelineInterchangeAndWait` |
-| Assistant | `vg.assistant` | `startAssistantChatAndWait`, `sendAssistantMessageAndWait` |
-| Entities | `vg.entities` | `createEntity`, `listEntities`, `addEntityReference` |
-| Text | `vg.text` | `generateText` |
-| Catalog | `vg.resources` | `listTtsVoices`, `listLanguages` |
-| Webhooks | `vg.webhooks` + helper | `createWebhookEndpoint`, `verifyWebhookSignature` |
+| Area      | Client surface         | Typical entry points                                                                                                                                     |
+| --------- | ---------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Account   | `vg.account`           | `getMe`                                                                                                                                                  |
+| Billing   | `vg.billing`           | `getBillingAccount`, `createBillingOrder`, `getBillingOrder`, `completeBillingOrder`, `cancelBillingOrder`, `requestBillingRefund`                       |
+| Workflows | `vg.workflows`         | `scriptToVideoAndWait`, `promptToVideoClipAndWait`, `voiceoverToVideoAndWait`, `slideshowToVideoAndWait`, `videoToVideoAndWait`, `translateVideoAndWait` |
+| Tools     | `vg.tools`             | `generateImageAndWait`, `generateVideoClipAndWait`, `textToSpeechAndWait`, …                                                                             |
+| Files     | `vg.files` + helpers   | `uploadFile`, `downloadFile`, `createPublicPreview`                                                                                                      |
+| Projects  | `vg.projects`          | `exportAndWait`, `startVideoEditsAndWait`, `createTimelineInterchangeAndWait`                                                                            |
+| Assistant | `vg.assistant`         | `startAssistantChatAndWait`, `sendAssistantMessageAndWait`                                                                                               |
+| Entities  | `vg.entities`          | `createEntity`, `listEntities`, `addEntityReference`                                                                                                     |
+| Text      | `vg.text`              | `generateText`                                                                                                                                           |
+| Catalog   | `vg.resources`         | `listTtsVoices`, `listLanguages`                                                                                                                         |
+| Webhooks  | `vg.webhooks` + helper | `createWebhookEndpoint`, `verifyWebhookSignature`                                                                                                        |
 
 Prefer `*AndWait` (or the matching `poll*` helper) for anything asynchronous. Thin REST methods match OpenAPI `operationId`s one-to-one; see the [API docs](https://docs.videogen.io).
+
+## Billing
+
+Billing access requires an explicit grant in VideoGen. Read `vg.billing.getBillingAccount()` before preparing a credit purchase. Quote an order with `createBillingOrder({ orderId, credits })`, using a client-generated UUID that you reuse on an identical retry. Show the returned team, credits, total, expiry, and terms to the user before requesting payment approval.
+
+Complete an approved order with `completeBillingOrder({ orderId, revision, idempotencyKey }, { paymentToken, signal })`. A compatible wallet must supply `paymentToken` securely after approval. The SDK sends it only through its dedicated payment header. Keep the token out of prompts, tool arguments, logs, URLs, and JSON bodies. The SDK does not retry billing operations or start generation automatically.
+
+After an uncertain result, use `getBillingOrder({ orderId })` to check the original order. Payment and credit fulfillment are separate states; wait for `fulfilled` before using the purchased credits. `cancelBillingOrder({ orderId })` cancels an unpaid order. `requestBillingRefund({ orderId, reason })` records a support-reviewed request; `requested` does not mean the refund has completed.
+
+If an order returns `requires_action` with a `verificationUrl`, direct the purchaser to that secure VideoGen verification continuation, signed in on the same team. Use it only to complete the required payment verification, then read the original order again. Keep checkout and payment approval in the compatible wallet.
 
 ## Workflows
 
@@ -73,14 +91,19 @@ import { VideoGen } from "@videogen/sdk";
 const vg = new VideoGen({ apiKey: process.env.VIDEOGEN_API_KEY });
 
 const run = await vg.workflows.promptToVideoClipAndWait({
-  prompt: "A glass of water catching morning light on a kitchen counter, slow push-in",
+  prompt:
+    "A glass of water catching morning light on a kitchen counter, slow push-in",
   quality: "HIGH",
 });
+
+if (run.status !== "succeeded") {
+  throw new Error(`Workflow run ended with status ${run.status}`);
+}
 
 console.log(run.downloadUrl);
 ```
 
-Other workflow starters: `voiceoverToVideoAndWait` (uploaded audio `fileId`), `slideshowToVideoAndWait` (deck `fileId`), `videoToVideoAndWait` (restyles an uploaded `videoFileId` or a public `videoUrl` from a `prompt`).
+Other workflow starters: `voiceoverToVideoAndWait` (uploaded audio `fileId`), `slideshowToVideoAndWait` (deck `fileId`), `videoToVideoAndWait` (restyles an uploaded `videoFileId` or a public `videoUrl` from a `prompt`), `translateVideoAndWait` (translates an uploaded `videoFileId` into each of `outputLanguages`, one editable video per language; read each language's `editableVideoId` from the run's `outputs` and pass it to `exportAndWait`).
 
 ## Tools
 
@@ -93,6 +116,10 @@ const execution = await vg.tools.generateImageAndWait({
   prompt: "A sunset over a calm ocean, cinematic lighting",
   quality: "HIGH",
 });
+
+if (execution.status !== "succeeded") {
+  throw new Error(`Tool execution ended with status ${execution.status}`);
+}
 
 const fileId = execution.results[0]?.fileId;
 if (fileId == null) {
@@ -131,7 +158,7 @@ await vg.downloadFile({
 
 ## Projects
 
-Export a finished workflow project, or apply remix actions later:
+Export a finished workflow project, or apply video edits later:
 
 ```ts
 import { VideoGen } from "@videogen/sdk";
@@ -146,11 +173,12 @@ const exported = await vg.projects.exportAndWait({
 });
 console.log(exported.status, exported.exportFileId);
 
-const remix = await vg.projects.remixAndWait({
+const edits = await vg.projects.startVideoEditsAndWait({
   projectId,
-  remixActions: [{ type: "ENABLE_CAPTIONS" }, { type: "ADD_TRANSITIONS" }],
+  editableVideoId: "vg_video_...",
+  videoEdits: [{ type: "ENABLE_CAPTIONS" }, { type: "ADD_TRANSITIONS" }],
 });
-console.log(remix);
+console.log(edits.videoEdits);
 ```
 
 ## Assistant
@@ -228,9 +256,11 @@ Register endpoints with `vg.webhooks.createWebhookEndpoint`. Signatures follow t
 
 Named exports and matching methods on the client (object-parameter style):
 
-- Polling: `pollAssistantMessage`, `pollExecutedTool`, `pollWorkflowRun`, `pollProjectExport`, `pollTimelineInterchange`, `pollRemixActions`, `pollPublicPreview`
+- Polling: `pollAssistantMessage`, `pollExecutedTool`, `pollWorkflowRun`, `pollProjectExport`, `pollTimelineInterchange`, `pollVideoEdits`, `pollPublicPreview`
 - Files: `uploadFile`, `getHydratedFile`, `downloadFile`, `createPublicPreview`
 - Webhooks: `verifyWebhookSignature`
+
+`pollWorkflowRun` and `pollExecutedTool`, including the workflow and tool `*AndWait` wrappers, stop at `succeeded`, `failed`, `cancelled`, or `awaiting_approval`. They return `awaiting_approval` unchanged without throwing, even with the default `throwOnFailure: true`. This status means a retained result needs approval in VideoGen before it changes the project; it is resumable and does not mean the operation succeeded. Check `status === "succeeded"` before consuming successful outputs. Failed and cancelled operations still throw unless you pass `throwOnFailure: false`.
 
 Cancellation: pass `signal: AbortSignal` to poll helpers and `*AndWait` methods.
 

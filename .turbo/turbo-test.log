@@ -1,0 +1,1 @@
+$ tsup --no-dts && node --test "tests/*.test.mjs" --runInBand src/logic/assistant/runtime/getReusableInFlightAssistantActivity.test.ts src/logic/assistant/runtime/AssistantOpaqueResourceRegistry.test.ts src/logic/assistant/runtime/createSupabaseAssistantCheckpointSaver.test.ts

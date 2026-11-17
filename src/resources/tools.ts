@@ -2,6 +2,7 @@ import type { VideoGen } from "../client.js";
 import { pollExecutedTool } from "../helpers/pollExecutedTool.js";
 import { fillPath, pickFields } from "../request.js";
 import type {
+  DubVideoRequest,
   ExecutedTool,
   GenerateAvatarRequest,
   GenerateImageRequest,
@@ -332,6 +333,31 @@ export class ToolsResource {
     options?: PollOptions,
   ): Promise<ExecutedTool> {
     const started = await this.upscaleVideo(request, { signal: options?.signal });
+    return pollExecutedTool({
+      client: this.client,
+      toolExecutionId: started.toolExecutionId,
+      ...options,
+    });
+  }
+
+  // @sdk-operation dubVideo
+  async dubVideo(
+    request: DubVideoRequest,
+    options?: RequestOptions,
+  ): Promise<StartToolExecutionResponse> {
+    return this.client.request<StartToolExecutionResponse>({
+      method: "POST",
+      path: "/v1/tools/dub-video",
+      body: request,
+      signal: options?.signal,
+    });
+  }
+
+  async dubVideoAndWait(
+    request: DubVideoRequest,
+    options?: PollOptions,
+  ): Promise<ExecutedTool> {
+    const started = await this.dubVideo(request, { signal: options?.signal });
     return pollExecutedTool({
       client: this.client,
       toolExecutionId: started.toolExecutionId,
